@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAÍZES — Moda Multimarcas — Pitanga/PR</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cor-preto: #0c0c0c;
+      --cor-branco: #ffffff;
+      --cor-cinza-suave: #f4f4f6;
+      --cor-cinza-texto: #666;
+      --cor-premium-ml: #00a650;
+      --cor-btn-compra: #3483fa;
+      --transicao: all 0.3s ease-in-out;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background-color: var(--cor-cinza-suave); color: var(--cor-preto); scroll-behavior: smooth; }
+
+    /* CABEÇALHO */
+    header { 
+      background: rgba(0, 0, 0, 0.95); 
+      backdrop-filter: blur(5px); 
+      color: white; 
+      padding: 15px 5%; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      position: sticky; 
+      top: 0; 
+      z-index: 1000; 
+      box-shadow: 0 2px 15px rgba(0,0,0,0.2); 
+    }
+    .logo-container .img-logo { max-height: 45px; display: block; filter: brightness(0) invert(1); }
+    .logo-container .logo-texto { font-size: 24px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--cor-branco); text-decoration: none; }
+    nav { display: flex; gap: 15px; }
+    nav a { color: #ddd; text-decoration: none; font-weight: 400; font-size: 14px; position: relative; transition: var(--transicao); cursor: pointer; }
+    nav a:hover { color: #fff; }
+
+    /* BANNER ÚNICO (FOTO DA LOJA) */
+    .banner-loja-container { width: 100%; height: 45vh; min-height: 280px; overflow: hidden; position: relative; background: var(--cor-preto); }
+    .foto-loja { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.75); }
+    .banner-caption { position: absolute; bottom: 30px; left: 5%; right: 5%; color: white; text-transform: uppercase; text-shadow: 0 2px 5px rgba(0,0,0,0.7); }
+    .banner-caption h1 { font-size: 28px; font-weight: 700; letter-spacing: 1.5px; }
+    .banner-caption p { font-size: 14px; font-weight: 300; }
+
+    .container { max-width: 1200px; margin: 30px auto; padding: 0 15px; }
+    section { margin-bottom: 50px; }
+    h2 { font-size: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--cor-preto); margin-bottom: 20px; border-left: 4px solid var(--cor-preto); padding-left: 12px; }
+
+    /* FILTRO DE MARCAS */
+    .filtros-marcas { display: flex; gap: 8px; margin-bottom: 25px; flex-wrap: wrap; justify-content: center; }
+    .btn-marca { background: #fff; border: 1.5px solid #ddd; padding: 10px 18px; border-radius: 20px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--cor-cinza-texto); transition: var(--transicao); }
+    .btn-marca.ativo, .btn-marca:hover { background: var(--cor-preto); color: var(--cor-branco); border-color: var(--cor-preto); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+
+    /* VITRINE GRID */
+    .grid-produtos { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
+    .card-produto { background: var(--cor-branco); border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; transition: var(--transicao); }
+    .card-produto img { width: 100%; height: 180px; object-fit: contain; margin-bottom: 10px; }
+    .card-produto h3 { font-size: 13px; color: #444; height: 38px; overflow: hidden; margin-bottom: 8px; font-weight: 400; line-height: 1.4; }
+    .card-produto .preco { font-size: 17px; color: var(--cor-premium-ml); font-weight: 700; margin-bottom: 12px; }
+    .btn-comprar { background: var(--cor-btn-compra); color: white; text-decoration: none; padding: 10px; border-radius: 8px; font-weight: 600; font-size: 13px; text-transform: uppercase; transition: var(--transicao); display: block; }
+    .btn-comprar:hover { background: #2968c8; }
+
+    /* INFORMAÇÕES DE LOCALIZAÇÃO */
+    .info-box { background: var(--cor-branco); padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; }
+    .info-item-label { font-size: 16px; font-weight: 600; color: #333; margin-bottom: 6px; }
+    .btn-maps {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background-color: var(--cor-preto);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 30px;
+      margin-top: 15px;
+      font-size: 14px;
+      transition: var(--transicao);
+    }
+    .btn-maps:hover {
+      background-color: #333;
+      transform: translateY(-2px);
+    }
+
+    /* POPUP (MODAL DE CONTATO) */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+    .modal-overlay.ativo { opacity: 1; pointer-events: auto; }
+    .modal-content {
+      background: white;
+      padding: 30px 25px;
+      border-radius: 16px;
+      max-width: 380px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transform: translateY(-20px);
+      transition: all 0.3s ease;
+    }
+    .modal-overlay.ativo .modal-content { transform: translateY(0); }
+    .fechar-modal { position: absolute; top: 12px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #888; }
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background-color: #25D366;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 14px 20px;
+      border-radius: 30px;
+      margin-top: 15px;
+      width: 100%;
+      font-size: 15px;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+      transition: transform 0.2s, background-color 0.2s;
+    }
+    .btn-whatsapp:hover { background-color: #20ba5a; transform: scale(1.02); }
+
+    /* RODAPÉ */
+    footer { text-align: center; padding: 30px 15px; background-color: #eee; font-size: 13px; color: var(--cor-cinza-texto); line-height: 1.6; border-top: 1px solid #ddd; }
+    footer strong { color: var(--cor-preto); }
+
+    /* REGRAS PARA COMPUTADOR */
+    @media (min-width: 768px) {
+      header { padding: 20px 8%; }
+      .logo-container .logo-texto { font-size: 28px; }
+      nav a { font-size: 15px; margin-left: 20px; }
+      .banner-loja-container { height: 50vh; }
+      .banner-caption h1 { font-size: 38px; }
+      .banner-caption p { font-size: 18px; }
+      .grid-produtos { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; }
+      .card-produto img { height: 230px; }
+      .card-produto h3 { font-size: 15px; height: 42px; }
+      .card-produto .preco { font-size: 20px; }
+      .btn-comprar { font-size: 14px; padding: 12px; }
+    }
+
+    /* REGRAS PARA CELULAR PEQUENO */
+    @media (max-width: 480px) {
+      header { flex-direction: column; gap: 10px; text-align: center; }
+      nav a { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="RAÍZES" class="img-logo" onerror="this.style.display='none'; document.getElementById('logo-texto').style.display='block';">
+      <a href="#" id="logo-texto" class="logo-texto" style="display:none;">RAÍZES</a>
+    </div>
+    <nav>
+      <a href="#produtos">Produtos</a>
+      <a href="#onde-estamos">Visite-nos</a>
+      <a onclick="abrirContato(event)">Contato</a>
+    </nav>
+  </header>
+
+  <div class="banner-loja-container">
+    <img class="foto-loja" src="foto-loja.jpg" alt="Loja Raizes em Pitanga PR" onerror="this.src='https://picsum.photos/1200/600';">
+    <div class="banner-caption">
+      <h1>Nossa Loja Física</h1>
+      <p>Rua Interventor Manoel Ribas, 186 — Pitanga/PR</p>
+    </div>
+  </div>
+
+  <div class="container">
+    
+    <section id="produtos">
+      <h2>Nossas Peças</h2>
+      
+      <div class="filtros-marcas">
+        <button class="btn-marca ativo" onclick="filtrarMarca('todas')">Todas</button>
+        <button class="btn-marca" onclick="filtrarMarca('Baumgarten')">Baumgarten</button>
+        <button class="btn-marca" onclick="filtrarMarca('Hering')">Hering</button>
+        <button class="btn-marca" onclick="filtrarMarca('SkyWear')">SkyWear</button>
+      </div>
+
+      <div id="grid-produtos" class="grid-produtos">
+        <p style="text-align: center; grid-column: 1/-1;">Carregando produtos...</p>
+      </div>
+    </section>
+
+    <section id="onde-estamos">
+      <h2>Onde Nos Encontrar</h2>
+      <div class="info-box">
+        <div class="info-item-label">📍 Loja Raizes</div>
+        <p style="font-size: 14px; color: #555;">Rua Interventor Manoel Ribas, 186 - Centro — Pitanga / PR</p>
+        
+        <a href="https://maps.google.com/?cid=13322102767222646542&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="btn-maps">
+          🗺️ Abrir no Google Maps
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <div id="modal-contato" class="modal-overlay" onclick="fecharContatoFora(event)">
+    <div class="modal-content">
+      <button class="fechar-modal" onclick="fecharContato()">×</button>
+      <h3 style="font-size: 20px; margin-bottom: 8px;">Fale com a RAÍZES</h3>
+      <p style="font-size: 13px; color: #666; margin-bottom: 15px;">Dúvidas sobre peças ou tamanhos? Chame a gente no Zap!</p>
+      
+      <a href="https://wa.me/5542999839784?text=Olá!%20Vim%20pelo%20site%20da%20RAÍZES." target="_blank" class="btn-whatsapp">
+        💬 Conversar no WhatsApp
+      </a>
+      
+      <p style="font-size: 12px; color: #999; margin-top: 15px;">(42) 99983-9784</p>
+    </div>
+  </div>
+
+  <footer>
+    <p><strong>© 2026 RAÍZES — Todos os direitos reservados.</strong></p>
+    <p>MALDANER & MAZETTO LTDA | CNPJ: 64.860.761/0001-64</p>
+    <p>Rua Interventor Manoel Ribas, 186 - Centro — Pitanga / PR</p>
+  </footer>
+
+  <script>
+    const ID_VENDEDOR_ML = '179571326'; 
+    let produtosCarregados = [];
+
+    async function buscarProdutosML() {
+      try {
+        const res = await fetch(`https://api.mercadolibre.com/sites/MLB/search?seller_id=${ID_VENDEDOR_ML}`);
+        const data = await res.json();
+        
+        produtosCarregados = data.results || [];
+        exibirProdutos(produtosCarregados);
+      } catch (erro) {
+        console.error('Erro ao buscar produtos:', erro);
+        document.getElementById('grid-produtos').innerHTML = '<p style="text-align: center; grid-column: 1/-1;">Cadastre os anúncios no Mercado Livre para ver a vitrine aqui!</p>';
+      }
+    }
+
+    function exibirProdutos(lista) {
+      const container = document.getElementById('grid-produtos');
+      container.innerHTML = '';
+
+      if (lista.length === 0) {
+        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">Nenhum produto encontrado para esta marca.</p>';
+        return;
+      }
+
+      lista.forEach(item => {
+        const fotoUrl = item.thumbnail.replace('I.jpg', 'O.jpg');
+        
+        container.innerHTML += `
+          <div class="card-produto">
+            <img src="${fotoUrl}" alt="${item.title}">
+            <h3>${item.title}</h3>
+            <div class="preco">R$ ${item.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
+            <a href="${item.permalink}" target="_blank" class="btn-comprar">Comprar no ML</a>
+          </div>
+        `;
+      });
+    }
+
+    function filtrarMarca(marca) {
+      document.querySelectorAll('.btn-marca').forEach(btn => btn.classList.remove('ativo'));
+      
+      if (event && event.target) {
+        event.target.classList.add('ativo');
+      }
+
+      if (marca === 'todas') {
+        exibirProdutos(produtosCarregados);
+      } else {
+        const filtrados = produtosCarregados.filter(p => p.title.toLowerCase().includes(marca.toLowerCase()));
+        exibirProdutos(filtrados);
+      }
+    }
+
+    function abrirContato(event) {
+      if (event) event.preventDefault();
+      document.getElementById('modal-contato').classList.add('ativo');
+    }
+
+    function fecharContato() {
+      document.getElementById('modal-contato').classList.remove('ativo');
+    }
+
+    function fecharContatoFora(event) {
+      if (event.target.id === 'modal-contato') {
+        fecharContato();
+      }
+    }
+
+    buscarProdutosML();
+  </script>
+
+</body>
+</html>
