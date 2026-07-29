@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAÍZES — Onde a elegância encontra suas raízes — Pitanga/PR</title>
+  <title>RAÍZES — Moda Multimarcas — Pitanga/PR</title>
   
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -26,7 +26,7 @@
       background: rgba(0, 0, 0, 0.95); 
       backdrop-filter: blur(5px); 
       color: white; 
-      padding: 15px 5%; 
+      padding: 12px 5%; 
       display: flex; 
       justify-content: space-between; 
       align-items: center; 
@@ -35,8 +35,31 @@
       z-index: 1000; 
       box-shadow: 0 2px 15px rgba(0,0,0,0.2); 
     }
-    .logo-container .img-logo { max-height: 45px; display: block; filter: brightness(0) invert(1); }
-    .logo-container .logo-texto { font-size: 24px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--cor-branco); text-decoration: none; }
+    
+    /* BLOCO DA LOGO (IMAGEM + TEXTO LADO A LADO) */
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .logo-container .img-logo { 
+      max-height: 60px; /* Aumentado o tamanho da imagem */
+      width: auto;
+      display: block; 
+      filter: brightness(0) invert(1); /* Torna a imagem branca caso seja preta */
+      object-fit: contain;
+    }
+    .logo-container .logo-texto { 
+      font-family: 'Cinzel', serif; /* Fonte serifada e sofisticada */
+      font-size: 26px; 
+      font-weight: 700; 
+      letter-spacing: 3px; 
+      text-transform: uppercase; 
+      color: var(--cor-branco); 
+      line-height: 1;
+    }
+
     nav { display: flex; gap: 15px; }
     nav a { color: #ddd; text-decoration: none; font-weight: 400; font-size: 14px; position: relative; transition: var(--transicao); cursor: pointer; }
     nav a:hover { color: #fff; }
@@ -146,8 +169,9 @@
 
     /* REGRAS PARA COMPUTADOR */
     @media (min-width: 768px) {
-      header { padding: 20px 8%; }
-      .logo-container .logo-texto { font-size: 28px; }
+      header { padding: 15px 8%; }
+      .logo-container .img-logo { max-height: 70px; } /* Maior no computador */
+      .logo-container .logo-texto { font-size: 32px; }
       nav a { font-size: 15px; margin-left: 20px; }
       .banner-loja-container { height: 50vh; }
       .banner-caption h1 { font-size: 38px; }
@@ -161,18 +185,20 @@
 
     /* REGRAS PARA CELULAR PEQUENO */
     @media (max-width: 480px) {
-      header { flex-direction: column; gap: 10px; text-align: center; }
-      nav a { font-size: 12px; }
+      header { flex-direction: column; gap: 12px; text-align: center; }
+      .logo-container .img-logo { max-height: 50px; }
+      .logo-container .logo-texto { font-size: 22px; }
+      nav a { font-size: 13px; }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="logo-container">
-      <img src="logo.png" alt="RAÍZES" class="img-logo" onerror="this.style.display='none'; document.getElementById('logo-texto').style.display='block';">
-      <a href="#" id="logo-texto" class="logo-texto" style="display:none;">RAÍZES</a>
-    </div>
+    <a href="#" class="logo-container">
+      <img src="logo.png" alt="Símbolo Raízes" class="img-logo" onerror="this.style.display='none';">
+      <span class="logo-texto">RAÍZES</span>
+    </a>
     <nav>
       <a href="#produtos">Produtos</a>
       <a href="#onde-estamos">Visite-nos</a>
@@ -197,9 +223,7 @@
         <button class="btn-marca ativo" onclick="filtrarMarca('todas')">Todas</button>
         <button class="btn-marca" onclick="filtrarMarca('Baumgarten')">Baumgarten</button>
         <button class="btn-marca" onclick="filtrarMarca('Hering')">Hering</button>
-        <button class="btn-marca" onclick="filtrarMarca('SlyWear')">SlyWear</button>
-        <button class="btn-marca" onclick="filtrarMarca('Beagle')">Beagle</button>
-        <button class="btn-marca" onclick="filtrarMarca('Test')">Test</button>
+        <button class="btn-marca" onclick="filtrarMarca('SkyWear')">SkyWear</button>
       </div>
 
       <div id="grid-produtos" class="grid-produtos">
@@ -213,7 +237,7 @@
         <div class="info-item-label">📍 Loja Raizes</div>
         <p style="font-size: 14px; color: #555;">Rua Interventor Manoel Ribas, 186 - Centro — Pitanga / PR</p>
         
-        <a href="https://maps.google.com/?cid=13322102767222646542&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="btn-maps">
+        <a href="https://maps.google.com/?q=Loja+Raizes+Pitanga+PR" target="_blank" class="btn-maps">
           🗺️ Abrir no Google Maps
         </a>
       </div>
