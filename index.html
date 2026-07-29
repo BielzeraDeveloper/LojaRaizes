@@ -21,7 +21,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Poppins', sans-serif; background-color: var(--cor-cinza-suave); color: var(--cor-preto); scroll-behavior: smooth; }
 
-    /* CABEÇALHO COM TRANSIÇÃO SUAVE SEM TREMILIQUES */
+    /* CABEÇALHO */
     header { 
       background: rgba(0, 0, 0, 0.95); 
       backdrop-filter: blur(5px); 
@@ -39,13 +39,11 @@
       will-change: padding, background;
     }
 
-    /* QUANDO ENCOLHER (AO SCROLLAR) */
     header.encolhido {
       padding: 8px 5%; 
       background: rgba(0, 0, 0, 0.98);
     }
     
-    /* BLOCO DA LOGO (IMAGEM + TEXTO) */
     .logo-container {
       display: flex;
       align-items: center;
@@ -71,22 +69,50 @@
       transition: font-size 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
-    /* DIMINUI A LOGO E O TEXTO AO ROLAR */
-    header.encolhido .img-logo {
-      max-height: 36px;
-    }
-    header.encolhido .logo-texto {
-      font-size: 19px;
-    }
+    header.encolhido .img-logo { max-height: 36px; }
+    header.encolhido .logo-texto { font-size: 19px; }
 
     nav { display: flex; gap: 15px; }
     nav a { color: #ddd; text-decoration: none; font-weight: 400; font-size: 14px; position: relative; transition: var(--transicao); cursor: pointer; }
     nav a:hover { color: #fff; }
 
-    /* BANNER ÚNICO (FOTO DA LOJA) */
-    .banner-loja-container { width: 100%; height: 45vh; min-height: 280px; overflow: hidden; position: relative; background: var(--cor-preto); }
-    .foto-loja { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.75); }
-    .banner-caption { position: absolute; bottom: 30px; left: 5%; right: 5%; color: white; text-transform: uppercase; text-shadow: 0 2px 5px rgba(0,0,0,0.7); }
+    /* BANNER PRINCIPAL (COM PROTEÇÃO PARA TELA GRANDE DE PC) */
+    .banner-loja-container { 
+      width: 100%; 
+      height: 45vh; 
+      min-height: 280px; 
+      max-height: 480px; /* Evita que o banner fique gigantesco no PC */
+      overflow: hidden; 
+      position: relative; 
+      background: var(--cor-preto); 
+    }
+    .foto-loja { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      object-position: center; /* Mantém o foco no meio da imagem */
+      filter: brightness(0.70); 
+    }
+    
+    /* DEGRADÊ ESCURO NAS BORDAS DO BANNER NO PC */
+    .banner-loja-container::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.8) 100%);
+      pointer-events: none;
+    }
+
+    .banner-caption { 
+      position: absolute; 
+      bottom: 30px; 
+      left: 5%; 
+      right: 5%; 
+      color: white; 
+      text-transform: uppercase; 
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8); 
+      z-index: 2;
+    }
     .banner-caption h1 { font-size: 28px; font-weight: 700; letter-spacing: 1.5px; }
     .banner-caption p { font-size: 14px; font-weight: 300; }
 
@@ -134,10 +160,8 @@
     /* POPUP (MODAL DE CONTATO) */
     .modal-overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(4px);
       display: flex;
@@ -186,7 +210,7 @@
     footer { text-align: center; padding: 30px 15px; background-color: #eee; font-size: 13px; color: var(--cor-cinza-texto); line-height: 1.6; border-top: 1px solid #ddd; }
     footer strong { color: var(--cor-preto); }
 
-    /* REGRAS PARA COMPUTADOR */
+    /* OTIMIZAÇÕES ESPECÍFICAS PARA COMPUTADOR (PC) */
     @media (min-width: 768px) {
       header { padding: 18px 8%; }
       header.encolhido { padding: 10px 8%; }
@@ -195,9 +219,12 @@
       header.encolhido .img-logo { max-height: 42px; }
       header.encolhido .logo-texto { font-size: 22px; }
       nav a { font-size: 15px; margin-left: 20px; }
+      
+      /* BANNER MAIS ELEGANTE NO PC */
       .banner-loja-container { height: 50vh; }
       .banner-caption h1 { font-size: 38px; }
       .banner-caption p { font-size: 18px; }
+      
       .grid-produtos { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; }
       .card-produto img { height: 230px; }
       .card-produto h3 { font-size: 15px; height: 42px; }
@@ -296,7 +323,6 @@
     const ID_VENDEDOR_ML = '179571326'; 
     let produtosCarregados = [];
 
-    // SCRIPT DE ENCOLHER O CABEÇALHO COM HISTERESE (SEM TREMILIQUES)
     window.addEventListener('scroll', () => {
       const header = document.getElementById('cabecalho');
       const scrollAtual = window.scrollY;
