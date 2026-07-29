@@ -15,18 +15,19 @@
       --cor-cinza-texto: #666;
       --cor-premium-ml: #00a650;
       --cor-btn-compra: #3483fa;
-      --transicao: all 0.3s ease-in-out;
+      --transicao: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Poppins', sans-serif; background-color: var(--cor-cinza-suave); color: var(--cor-preto); scroll-behavior: smooth; }
 
-    /* CABEÇALHO COM TRANSIÇÃO SUAVE */
+    /* CABEÇALHO COM TRANSIÇÃO SUAVE SEM TREMILIQUES */
     header { 
       background: rgba(0, 0, 0, 0.95); 
       backdrop-filter: blur(5px); 
+      -webkit-backdrop-filter: blur(5px);
       color: white; 
-      padding: 18px 5%; /* Altura inicial */
+      padding: 16px 5%; 
       display: flex; 
       justify-content: space-between; 
       align-items: center; 
@@ -35,11 +36,12 @@
       z-index: 1000; 
       box-shadow: 0 2px 15px rgba(0,0,0,0.2); 
       transition: var(--transicao); 
+      will-change: padding, background;
     }
 
     /* QUANDO ENCOLHER (AO SCROLLAR) */
     header.encolhido {
-      padding: 8px 5%; /* Diminui o espaçamento */
+      padding: 8px 5%; 
       background: rgba(0, 0, 0, 0.98);
     }
     
@@ -51,30 +53,30 @@
       text-decoration: none;
     }
     .logo-container .img-logo { 
-      max-height: 55px; 
+      max-height: 52px; 
       width: auto;
       display: block; 
       filter: brightness(0) invert(1);
       object-fit: contain;
-      transition: max-height 0.3s ease-in-out;
+      transition: max-height 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
     .logo-container .logo-texto { 
       font-family: 'Cinzel', serif;
-      font-size: 26px; 
+      font-size: 24px; 
       font-weight: 700; 
       letter-spacing: 3px; 
       text-transform: uppercase; 
       color: var(--cor-branco); 
       line-height: 1;
-      transition: font-size 0.3s ease-in-out;
+      transition: font-size 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
-    /* DIMINUI A LOGO E O TEXTO AO ROLLAR */
+    /* DIMINUI A LOGO E O TEXTO AO ROLAR */
     header.encolhido .img-logo {
-      max-height: 38px;
+      max-height: 36px;
     }
     header.encolhido .logo-texto {
-      font-size: 20px;
+      font-size: 19px;
     }
 
     nav { display: flex; gap: 15px; }
@@ -186,7 +188,7 @@
 
     /* REGRAS PARA COMPUTADOR */
     @media (min-width: 768px) {
-      header { padding: 20px 8%; }
+      header { padding: 18px 8%; }
       header.encolhido { padding: 10px 8%; }
       .logo-container .img-logo { max-height: 65px; }
       .logo-container .logo-texto { font-size: 30px; }
@@ -203,12 +205,14 @@
       .btn-comprar { font-size: 14px; padding: 12px; }
     }
 
-    /* REGRAS PARA CELULAR PEQUENO */
+    /* REGRAS PARA CELULAR */
     @media (max-width: 480px) {
-      header { flex-direction: column; gap: 10px; text-align: center; padding: 15px 5%; }
-      header.encolhido { padding: 8px 5%; }
-      .logo-container .img-logo { max-height: 45px; }
-      .logo-container .logo-texto { font-size: 20px; }
+      header { flex-direction: column; gap: 8px; text-align: center; padding: 12px 5%; }
+      header.encolhido { padding: 6px 5%; gap: 4px; }
+      .logo-container .img-logo { max-height: 42px; }
+      .logo-container .logo-texto { font-size: 18px; }
+      header.encolhido .img-logo { max-height: 32px; }
+      header.encolhido .logo-texto { font-size: 16px; }
       nav a { font-size: 12px; }
     }
   </style>
@@ -292,12 +296,14 @@
     const ID_VENDEDOR_ML = '179571326'; 
     let produtosCarregados = [];
 
-    // SCRIPT DE ENCOLHER O CABEÇALHO AO SCROLLAR
+    // SCRIPT DE ENCOLHER O CABEÇALHO COM HISTERESE (SEM TREMILIQUES)
     window.addEventListener('scroll', () => {
       const header = document.getElementById('cabecalho');
-      if (window.scrollY > 40) {
+      const scrollAtual = window.scrollY;
+
+      if (scrollAtual > 60) {
         header.classList.add('encolhido');
-      } else {
+      } else if (scrollAtual < 20) {
         header.classList.remove('encolhido');
       }
     });
