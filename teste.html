@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow"> <title>RAÍZES — Vitrine de Teste (Sandbox)</title>
+  <meta name="robots" content="noindex, nofollow"> <title>RAÍZES — Vitrine de Testes</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -25,16 +25,16 @@
       background-color: var(--cor-cinza-suave); 
       color: var(--cor-preto); 
       scroll-behavior: smooth;
-      padding-top: 110px; 
+      padding-top: 110px; /* Acomoda o banner de teste + cabeçalho fixo */
     }
 
-    /* BANNER DE AVISO DE TESTE */
+    /* BANNER DISCRETO DE AMBIENTE DE TESTE */
     .banner-teste {
       background-color: #ff9800;
       color: #000;
       text-align: center;
       padding: 6px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -47,44 +47,149 @@
     header { 
       background: rgba(0, 0, 0, 0.95); 
       backdrop-filter: blur(5px); 
+      -webkit-backdrop-filter: blur(5px);
       color: white; 
-      padding: 12px 5%; 
+      padding: 14px 5%; 
       display: flex; 
       justify-content: space-between; 
       align-items: center; 
       position: fixed; 
-      top: 29px; /* Abaixo do banner de teste */
-      left: 0; right: 0;
+      top: 27px; 
+      left: 0;
+      right: 0;
+      width: 100%;
       z-index: 1000; 
       box-shadow: 0 2px 15px rgba(0,0,0,0.2); 
+      transition: var(--transicao); 
     }
 
-    .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    header.encolhido {
+      padding: 8px 5%; 
+      background: rgba(0, 0, 0, 0.98);
+    }
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .logo-container .img-logo { 
+      max-height: 52px; 
+      width: auto;
+      display: block; 
+      filter: brightness(0) invert(1);
+      object-fit: contain;
+      transition: max-height 0.3s ease;
+    }
     .logo-container .logo-texto { 
-      font-family: 'Cinzel', serif; 
-      font-size: 22px; 
+      font-family: 'Cinzel', serif;
+      font-size: 24px; 
       font-weight: 700; 
       letter-spacing: 3px; 
+      text-transform: uppercase; 
       color: var(--cor-branco); 
+      line-height: 1;
     }
+
+    header.encolhido .img-logo { max-height: 36px; }
+
+    nav { display: flex; gap: 15px; }
+    nav a { color: #ddd; text-decoration: none; font-weight: 400; font-size: 14px; transition: var(--transicao); cursor: pointer; }
+    nav a:hover { color: #fff; }
+
+    /* BANNER DA LOJA FÍSICA */
+    .banner-loja-container { 
+      width: 100%; 
+      height: 45vh; 
+      min-height: 280px; 
+      max-height: 480px; 
+      overflow: hidden; 
+      position: relative; 
+      background: var(--cor-preto); 
+    }
+    .foto-loja { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      object-position: center; 
+      filter: brightness(0.70); 
+    }
+    
+    .banner-loja-container::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.8) 100%);
+      pointer-events: none;
+    }
+
+    .banner-caption { 
+      position: absolute; 
+      bottom: 30px; 
+      left: 5%; 
+      right: 5%; 
+      color: white; 
+      text-transform: uppercase; 
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8); 
+      z-index: 2;
+    }
+    .banner-caption h1 { font-size: 28px; font-weight: 700; letter-spacing: 1.5px; }
+    .banner-caption p { font-size: 14px; font-weight: 300; }
 
     .container { max-width: 1200px; margin: 30px auto; padding: 0 15px; }
-    h2 { font-size: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px; border-left: 4px solid var(--cor-preto); padding-left: 12px; }
+    section { margin-bottom: 50px; }
+    h2 { font-size: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--cor-preto); margin-bottom: 20px; border-left: 4px solid var(--cor-preto); padding-left: 12px; }
 
-    /* FILTROS */
-    .filtros-marcas { display: flex; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; justify-content: center; }
+    /* FILTROS DAS MARCAS */
+    .filtros-marcas { 
+      display: flex; 
+      gap: 12px; 
+      margin-bottom: 25px; 
+      flex-wrap: wrap; 
+      justify-content: center; 
+    }
     .btn-marca { 
       position: relative; 
-      display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
-      background: #fff; border: 1.5px solid #ddd; padding: 10px 20px; border-radius: 20px; 
-      cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 13px; 
-      text-transform: uppercase; color: var(--cor-cinza-texto); transition: var(--transicao); line-height: 1.1;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #fff; 
+      border: 1.5px solid #ddd; 
+      padding: 10px 20px; 
+      border-radius: 20px; 
+      cursor: pointer; 
+      font-family: 'Poppins', sans-serif; 
+      font-weight: 700; 
+      font-size: 13px; 
+      text-transform: uppercase; 
+      letter-spacing: 0.5px; 
+      color: var(--cor-cinza-texto); 
+      transition: var(--transicao); 
+      line-height: 1.1;
     }
-    .btn-marca .slogan { font-size: 8px; font-weight: 400; opacity: 0.7; margin-top: 2px; }
+    .btn-marca .slogan {
+      font-size: 8px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      opacity: 0.7;
+      margin-top: 2px;
+      text-transform: uppercase;
+    }
 
     .badge-new {
-      position: absolute; top: -8px; right: -5px; background-color: #ff2a2a; color: white;
-      font-size: 8px; font-weight: 700; padding: 2px 6px; border-radius: 10px;
+      position: absolute;
+      top: -8px;
+      right: -5px;
+      background-color: #ff2a2a;
+      color: white;
+      font-size: 8px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 6px rgba(255, 42, 42, 0.4);
       animation: pulsar 1.5s infinite ease-in-out;
     }
 
@@ -94,100 +199,255 @@
       100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 42, 42, 0); }
     }
 
-    .btn-marca.ativo, .btn-marca:hover { background: var(--cor-preto); color: var(--cor-branco); border-color: var(--cor-preto); }
+    .btn-marca.ativo, .btn-marca:hover { 
+      background: var(--cor-preto); 
+      color: var(--cor-branco); 
+      border-color: var(--cor-preto); 
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
+    }
+    .btn-marca.ativo .slogan, .btn-marca:hover .slogan { opacity: 0.85; color: #ddd; }
 
-    /* GRID VITRINE */
+    /* VITRINE GRID */
     .grid-produtos { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
-    .card-produto { background: var(--cor-branco); border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; }
-    .card-produto img { width: 100%; height: 180px; object-fit: contain; margin-bottom: 10px; }
-    .card-produto h3 { font-size: 13px; color: #444; height: 38px; overflow: hidden; margin-bottom: 8px; font-weight: 400; }
+    .card-produto { background: var(--cor-branco); border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; transition: var(--transicao); }
+    .card-produto img { width: 100%; height: 180px; object-fit: contain; margin-bottom: 10px; border-radius: 6px; }
+    .card-produto h3 { font-size: 13px; color: #444; height: 38px; overflow: hidden; margin-bottom: 8px; font-weight: 400; line-height: 1.4; }
     .card-produto .preco { font-size: 17px; color: var(--cor-premium-ml); font-weight: 700; margin-bottom: 12px; }
-    .btn-comprar { background: var(--cor-btn-compra); color: white; text-decoration: none; padding: 10px; border-radius: 8px; font-weight: 600; font-size: 13px; text-transform: uppercase; display: block; }
+    .btn-comprar { background: var(--cor-btn-compra); color: white; text-decoration: none; padding: 10px; border-radius: 8px; font-weight: 600; font-size: 13px; text-transform: uppercase; transition: var(--transicao); display: block; }
+    .btn-comprar:hover { background: #2968c8; }
 
+    /* INFORMAÇÕES DE LOCALIZAÇÃO */
+    .info-box { background: var(--cor-branco); padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; }
+    .info-item-label { font-size: 16px; font-weight: 600; color: #333; margin-bottom: 6px; }
+    .btn-maps {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      background-color: var(--cor-preto); color: white; text-decoration: none; font-weight: 600;
+      padding: 12px 24px; border-radius: 30px; margin-top: 15px; font-size: 14px; transition: var(--transicao);
+    }
+    .btn-maps:hover { background-color: #333; transform: translateY(-2px); }
+
+    /* MODAL DE CONTATO (POPUP) */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px);
+      display: flex; justify-content: center; align-items: center; z-index: 2000;
+      opacity: 0; pointer-events: none; transition: all 0.3s ease;
+    }
+    .modal-overlay.ativo { opacity: 1; pointer-events: auto; }
+    .modal-content {
+      background: white; padding: 30px 25px; border-radius: 16px; max-width: 380px; width: 90%;
+      text-align: center; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transform: translateY(-20px); transition: all 0.3s ease;
+    }
+    .modal-overlay.ativo .modal-content { transform: translateY(0); }
+    .fechar-modal { position: absolute; top: 12px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #888; }
+    .btn-whatsapp {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      background-color: #25D366; color: white; text-decoration: none; font-weight: 600;
+      padding: 14px 20px; border-radius: 30px; margin-top: 15px; width: 100%; font-size: 15px;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3); transition: transform 0.2s, background-color 0.2s;
+    }
+    .btn-whatsapp:hover { background-color: #20ba5a; transform: scale(1.02); }
+
+    /* RODAPÉ */
+    footer { text-align: center; padding: 30px 15px; background-color: #eee; font-size: 13px; color: var(--cor-cinza-texto); line-height: 1.6; border-top: 1px solid #ddd; }
+    footer strong { color: var(--cor-preto); }
+
+    /* RESPONSIVIDADE */
     @media (min-width: 768px) {
-      .grid-produtos { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
-      .card-produto img { height: 220px; }
+      body { padding-top: 120px; }
+      header { padding: 18px 8%; }
+      .grid-produtos { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; }
+      .card-produto img { height: 230px; }
+      .card-produto h3 { font-size: 15px; height: 42px; }
+      .card-produto .preco { font-size: 20px; }
+      .btn-comprar { font-size: 14px; padding: 12px; }
+    }
+
+    @media (max-width: 480px) {
+      body { padding-top: 135px; }
+      header { flex-direction: column; gap: 8px; text-align: center; padding: 12px 5%; }
+      .logo-container .logo-texto { font-size: 18px; }
+      nav a { font-size: 12px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="banner-teste">⚠️ AMBIENTE DE TESTE — PRODUTOS DEMONSTRATIVOS</div>
+  <div class="banner-teste">🧪 AMBIENTE DE TESTE — VITRINE DE DEMONSTRAÇÃO</div>
 
-  <header>
+  <header id="cabecalho">
     <a href="#" class="logo-container">
-      <span class="logo-texto">RAÍZES [TESTE]</span>
+      <img src="logo.png" alt="Símbolo Raízes" class="img-logo" onerror="this.style.display='none';">
+      <span class="logo-texto">RAÍZES</span>
     </a>
+    <nav>
+      <a href="#produtos">Produtos</a>
+      <a href="#onde-estamos">Visite-nos</a>
+      <a onclick="abrirContato(event)">Contato</a>
+    </nav>
   </header>
 
+  <div class="banner-loja-container">
+    <img class="foto-loja" src="foto-loja.jpg" alt="Loja Raizes em Pitanga PR" onerror="this.src='https://picsum.photos/1200/600';">
+    <div class="banner-caption">
+      <h1>Nossa Loja Física</h1>
+      <p>Rua Interventor Manoel Ribas, 186 — Pitanga/PR</p>
+    </div>
+  </div>
+
   <div class="container">
-    <section>
-      <h2>Vitrine Experimental</h2>
+    
+    <section id="produtos">
+      <h2>Nossas Peças (Modo Teste)</h2>
       
       <div class="filtros-marcas">
-        <button class="btn-marca ativo" onclick="filtrarMarca('todas', event)">Todas</button>
-        <button class="btn-marca" onclick="filtrarMarca('Aurochs', event)"><span class="badge-new">NEW</span>Aurochs<span class="slogan">Country Origins</span></button>
-        <button class="btn-marca" onclick="filtrarMarca('Baumgarten', event)"><span class="badge-new">NEW</span>Baumgarten<span class="slogan">Desde 1978</span></button>
-        <button class="btn-marca" onclick="filtrarMarca('Beagle', event)"><span class="badge-new">NEW</span>Beagle<span class="slogan">Explore the World</span></button>
-        <button class="btn-marca" onclick="filtrarMarca('Sly Wear', event)">Sly Wear<span class="slogan">Casual & Chic</span></button>
-        <button class="btn-marca" onclick="filtrarMarca('Hering', event)">Hering<span class="slogan">O Básico do Brasil</span></button>
+        <button class="btn-marca ativo" onclick="filtrarMarca('todas', event)">
+          Todas
+        </button>
+
+        <button class="btn-marca" onclick="filtrarMarca('Aurochs', event)">
+          <span class="badge-new">NEW</span>
+          Aurochs
+          <span class="slogan">Country Origins</span>
+        </button>
+
+        <button class="btn-marca" onclick="filtrarMarca('Baumgarten', event)">
+          <span class="badge-new">NEW</span>
+          Baumgarten
+          <span class="slogan">Desde 1978</span>
+        </button>
+
+        <button class="btn-marca" onclick="filtrarMarca('Beagle', event)">
+          <span class="badge-new">NEW</span>
+          Beagle
+          <span class="slogan">Explore the World</span>
+        </button>
+
+        <button class="btn-marca" onclick="filtrarMarca('Sly Wear', event)">
+          Sly Wear
+          <span class="slogan">Casual & Chic</span>
+        </button>
+
+        <button class="btn-marca" onclick="filtrarMarca('Hering', event)">
+          Hering
+          <span class="slogan">O Básico do Brasil</span>
+        </button>
       </div>
 
       <div id="grid-produtos" class="grid-produtos"></div>
     </section>
+
+    <section id="onde-estamos">
+      <h2>Onde Nos Encontrar</h2>
+      <div class="info-box">
+        <div class="info-item-label">📍 Loja Raizes</div>
+        <p style="font-size: 14px; color: #555;">Rua Interventor Manoel Ribas, 186 - Centro — Pitanga / PR</p>
+        
+        <a href="https://maps.google.com/?q=Loja+Raizes+Pitanga+PR" target="_blank" class="btn-maps">
+          🗺️ Abrir no Google Maps
+        </a>
+      </div>
+    </section>
+
   </div>
 
+  <div id="modal-contato" class="modal-overlay" onclick="fecharContatoFora(event)">
+    <div class="modal-content">
+      <button class="fechar-modal" onclick="fecharContato()">×</button>
+      <h3 style="font-size: 20px; margin-bottom: 8px;">Fale com a RAÍZES</h3>
+      <p style="font-size: 13px; color: #666; margin-bottom: 15px;">Dúvidas sobre peças ou tamanhos? Chame a gente no Zap!</p>
+      
+      <a href="https://wa.me/5542999839784?text=Olá!%20Vim%20pelo%20site%20da%20RAÍZES." target="_blank" class="btn-whatsapp">
+        💬 Conversar no WhatsApp
+      </a>
+      
+      <p style="font-size: 12px; color: #999; margin-top: 15px;">(42) 99983-9784</p>
+    </div>
+  </div>
+
+  <footer>
+    <p><strong>© 2026 RAÍZES — Todos os direitos reservados.</strong></p>
+    <p>MALDANER & MAZETTO LTDA | CNPJ: 64.860.761/0001-64</p>
+    <p>Rua Interventor Manoel Ribas, 186 - Centro — Pitanga / PR</p>
+  </footer>
+
   <script>
-    // DADOS FAKE PARA TESTAR A VITRINE
-    const produtosFake = [
-      { id: 1, marca: "Aurochs", titulo: "Camiseta Country Aurochs Rust Amarela", preco: 149.90, img: "https://picsum.photos/400/500?random=1" },
-      { id: 2, marca: "Aurochs", titulo: "Boné Aurochs Originais Ajustável", preco: 89.90, img: "https://picsum.photos/400/500?random=2" },
-      { id: 3, marca: "Baumgarten", titulo: "Camisa Social Baumgarten Manga Longa Slim", preco: 289.00, img: "https://picsum.photos/400/500?random=3" },
-      { id: 4, marca: "Baumgarten", titulo: "Polo Baumgarten Algodão Pima Clássica", preco: 199.90, img: "https://picsum.photos/400/500?random=4" },
-      { id: 5, marca: "Beagle", titulo: "Jaqueta Beagle Outdoor Resistente", preco: 459.00, img: "https://picsum.photos/400/500?random=5" },
-      { id: 6, marca: "Beagle", titulo: "Camiseta Beagle Explore Grafite", preco: 119.90, img: "https://picsum.photos/400/500?random=6" },
-      { id: 7, marca: "Sly Wear", titulo: "Vestido Sly Wear Midi Elegance", preco: 329.90, img: "https://picsum.photos/400/500?random=7" },
-      { id: 8, marca: "Sly Wear", titulo: "Blazer Sly Wear Alfaiataria Casual", preco: 389.00, img: "https://picsum.photos/400/500?random=8" },
+    // DADOS SIMULADOS DE PRODUTOS DAS MARCAS (MOCK DATA)
+    const produtosTeste = [
+      { id: 1, marca: "Aurochs", titulo: "Camiseta Aurochs Country Heavy Cotton", preco: 159.90, img: "https://picsum.photos/400/500?random=1" },
+      { id: 2, marca: "Aurochs", titulo: "Boné Aurochs Country Origins Trucker", preco: 99.90, img: "https://picsum.photos/400/500?random=2" },
+      { id: 3, marca: "Baumgarten", titulo: "Camisa Social Baumgarten Linho Fino Slim", preco: 329.00, img: "https://picsum.photos/400/500?random=3" },
+      { id: 4, marca: "Baumgarten", titulo: "Polo Baumgarten Premium Pima", preco: 219.90, img: "https://picsum.photos/400/500?random=4" },
+      { id: 5, marca: "Beagle", titulo: "Jaqueta Beagle Outdoor Aventura", preco: 489.90, img: "https://picsum.photos/400/500?random=5" },
+      { id: 6, marca: "Beagle", titulo: "Camiseta Beagle Explore Casual", preco: 129.90, img: "https://picsum.photos/400/500?random=6" },
+      { id: 7, marca: "Sly Wear", titulo: "Vestido Sly Wear Midi Casual Chic", preco: 299.90, img: "https://picsum.photos/400/500?random=7" },
+      { id: 8, marca: "Sly Wear", titulo: "Blusa Sly Wear Feminina Cetim", preco: 189.00, img: "https://picsum.photos/400/500?random=8" },
       { id: 9, marca: "Hering", titulo: "Camiseta Hering Básica Super Soft", preco: 69.90, img: "https://picsum.photos/400/500?random=9" },
-      { id: 10, marca: "Hering", titulo: "Regata Hering Ribana Algodão", preco: 49.90, img: "https://picsum.photos/400/500?random=10" }
+      { id: 10, marca: "Hering", titulo: "Regata Hering Algodão Ribana", preco: 49.90, img: "https://picsum.photos/400/500?random=10" }
     ];
 
-    function renderizarVitrine(lista) {
-      const grid = document.getElementById('grid-produtos');
-      grid.innerHTML = '';
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('cabecalho');
+      if (window.scrollY > 60) {
+        header.classList.add('encolhido');
+      } else if (window.scrollY < 20) {
+        header.classList.remove('encolhido');
+      }
+    });
+
+    function renderizarProdutos(lista) {
+      const container = document.getElementById('grid-produtos');
+      container.innerHTML = '';
 
       if (lista.length === 0) {
-        grid.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">Nenhum produto cadastrado para esta marca no teste.</p>';
+        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">Nenhum produto cadastrado para esta marca no ambiente de teste.</p>';
         return;
       }
 
       lista.forEach(item => {
-        grid.innerHTML += `
+        container.innerHTML += `
           <div class="card-produto">
             <img src="${item.img}" alt="${item.titulo}">
             <h3>${item.titulo}</h3>
             <div class="preco">R$ ${item.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
-            <a href="#" class="btn-comprar">Simular Compra</a>
+            <a href="#" onclick="alert('Este é um produto demonstrativo de teste!'); return false;" class="btn-comprar">Simular Compra</a>
           </div>
         `;
       });
     }
 
     function filtrarMarca(marca, evt) {
-      document.querySelectorAll('.btn-marca').forEach(b => b.classList.remove('ativo'));
-      if (evt && evt.currentTarget) evt.currentTarget.classList.add('ativo');
+      document.querySelectorAll('.btn-marca').forEach(btn => btn.classList.remove('ativo'));
+      
+      if (evt && evt.currentTarget) {
+        evt.currentTarget.classList.add('ativo');
+      }
 
       if (marca === 'todas') {
-        renderizarVitrine(produtosFake);
+        renderizarProdutos(produtosTeste);
       } else {
-        const filtrados = produtosFake.filter(p => p.marca.toLowerCase() === marca.toLowerCase());
-        renderizarVitrine(filtrados);
+        const filtrados = produtosTeste.filter(p => p.marca.toLowerCase() === marca.toLowerCase());
+        renderizarProdutos(filtrados);
       }
     }
 
-    // Inicializa carregando todos os produtos fakes
-    renderizarVitrine(produtosFake);
+    function abrirContato(event) {
+      if (event) event.preventDefault();
+      document.getElementById('modal-contato').classList.add('ativo');
+    }
+
+    function fecharContato() {
+      document.getElementById('modal-contato').classList.remove('ativo');
+    }
+
+    function fecharContatoFora(event) {
+      if (event.target.id === 'modal-contato') fecharContato();
+    }
+
+    // Carrega a lista completa na inicialização
+    renderizarProdutos(produtosTeste);
   </script>
+
 </body>
 </html>
-
