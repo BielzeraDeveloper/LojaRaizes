@@ -3,34 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow"> <title>RAÍZES — Vitrine de Testes</title>
+  <meta name="robots" content="noindex, nofollow">
+  <title>RAÍZES — Vitrine de Testes (Design Curvo)</title>
   
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --cor-preto: #0c0c0c;
       --cor-branco: #ffffff;
-      --cor-cinza-suave: #f4f4f6;
+      --cor-cinza-fundo: #f0f2f5;
+      --cor-cinza-card: #f8f9fa;
       --cor-cinza-texto: #666;
       --cor-premium-ml: #00a650;
       --cor-btn-compra: #3483fa;
-      --transicao: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --transicao: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
     body { 
       font-family: 'Poppins', sans-serif; 
-      background-color: var(--cor-cinza-suave); 
+      background-color: var(--cor-cinza-fundo); 
       color: var(--cor-preto); 
       scroll-behavior: smooth;
-      padding-top: 110px; /* Acomoda o banner de teste + cabeçalho fixo */
+      padding-top: 115px; 
     }
 
-    /* BANNER DISCRETO DE AMBIENTE DE TESTE */
+    /* BANNER DE TESTE COM BORDAS ARREDONDADAS NAS PONTA */
     .banner-teste {
-      background-color: #ff9800;
+      background: linear-gradient(90deg, #ff9800, #ffb74d);
       color: #000;
       text-align: center;
       padding: 6px;
@@ -43,109 +45,81 @@
       letter-spacing: 1px;
     }
 
-    /* CABEÇALHO FIXO */
+    /* CABEÇALHO ARREDONDADO E FLUTUANTE */
     header { 
-      background: rgba(0, 0, 0, 0.95); 
-      backdrop-filter: blur(5px); 
-      -webkit-backdrop-filter: blur(5px);
+      background: rgba(12, 12, 12, 0.92); 
+      backdrop-filter: blur(10px); 
+      -webkit-backdrop-filter: blur(10px);
       color: white; 
-      padding: 14px 5%; 
+      padding: 12px 6%; 
       display: flex; 
       justify-content: space-between; 
       align-items: center; 
       position: fixed; 
       top: 27px; 
-      left: 0;
-      right: 0;
+      left: 0; right: 0;
       width: 100%;
       z-index: 1000; 
-      box-shadow: 0 2px 15px rgba(0,0,0,0.2); 
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15); 
       transition: var(--transicao); 
     }
 
-    header.encolhido {
-      padding: 8px 5%; 
-      background: rgba(0, 0, 0, 0.98);
-    }
-    
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-    .logo-container .img-logo { 
-      max-height: 52px; 
-      width: auto;
-      display: block; 
-      filter: brightness(0) invert(1);
-      object-fit: contain;
-      transition: max-height 0.3s ease;
-    }
+    .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
     .logo-container .logo-texto { 
       font-family: 'Cinzel', serif;
       font-size: 24px; 
       font-weight: 700; 
       letter-spacing: 3px; 
-      text-transform: uppercase; 
       color: var(--cor-branco); 
-      line-height: 1;
     }
-
-    header.encolhido .img-logo { max-height: 36px; }
 
     nav { display: flex; gap: 15px; }
     nav a { color: #ddd; text-decoration: none; font-weight: 400; font-size: 14px; transition: var(--transicao); cursor: pointer; }
     nav a:hover { color: #fff; }
 
-    /* BANNER DA LOJA FÍSICA */
+    /* BANNER DA LOJA */
     .banner-loja-container { 
-      width: 100%; 
-      height: 45vh; 
-      min-height: 280px; 
-      max-height: 480px; 
+      width: 92%;
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 40vh; 
+      min-height: 260px; 
+      max-height: 420px; 
       overflow: hidden; 
       position: relative; 
       background: var(--cor-preto); 
+      border-radius: 24px; /* Bordas super suaves */
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
     }
     .foto-loja { 
       width: 100%; 
       height: 100%; 
       object-fit: cover; 
       object-position: center; 
-      filter: brightness(0.70); 
+      filter: brightness(0.75); 
     }
-    
-    .banner-loja-container::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.8) 100%);
-      pointer-events: none;
-    }
-
     .banner-caption { 
       position: absolute; 
-      bottom: 30px; 
-      left: 5%; 
-      right: 5%; 
+      bottom: 25px; 
+      left: 6%; 
+      right: 6%; 
       color: white; 
       text-transform: uppercase; 
-      text-shadow: 0 2px 8px rgba(0,0,0,0.8); 
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8); 
       z-index: 2;
     }
-    .banner-caption h1 { font-size: 28px; font-weight: 700; letter-spacing: 1.5px; }
-    .banner-caption p { font-size: 14px; font-weight: 300; }
+    .banner-caption h1 { font-size: 26px; font-weight: 700; letter-spacing: 1px; }
+    .banner-caption p { font-size: 13px; font-weight: 300; }
 
-    .container { max-width: 1200px; margin: 30px auto; padding: 0 15px; }
+    .container { max-width: 1200px; margin: 35px auto; padding: 0 20px; }
     section { margin-bottom: 50px; }
-    h2 { font-size: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--cor-preto); margin-bottom: 20px; border-left: 4px solid var(--cor-preto); padding-left: 12px; }
+    h2 { font-size: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--cor-preto); margin-bottom: 22px; border-left: 4px solid var(--cor-preto); padding-left: 14px; }
 
-    /* FILTROS DAS MARCAS */
+    /* FILTROS FORMATO PÍLULA (ROUNDED-FULL) */
     .filtros-marcas { 
       display: flex; 
       gap: 12px; 
-      margin-bottom: 25px; 
+      margin-bottom: 30px; 
       flex-wrap: wrap; 
       justify-content: center; 
     }
@@ -156,129 +130,183 @@
       align-items: center;
       justify-content: center;
       background: #fff; 
-      border: 1.5px solid #ddd; 
-      padding: 10px 20px; 
-      border-radius: 20px; 
+      border: 1px solid #e0e0e0; 
+      padding: 10px 22px; 
+      border-radius: 30px; /* Formato pílula ultra suave */
       cursor: pointer; 
       font-family: 'Poppins', sans-serif; 
-      font-weight: 700; 
+      font-weight: 600; 
       font-size: 13px; 
       text-transform: uppercase; 
       letter-spacing: 0.5px; 
       color: var(--cor-cinza-texto); 
       transition: var(--transicao); 
-      line-height: 1.1;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
     }
-    .btn-marca .slogan {
-      font-size: 8px;
-      font-weight: 400;
-      letter-spacing: 1px;
-      opacity: 0.7;
-      margin-top: 2px;
-      text-transform: uppercase;
-    }
+    .btn-marca .slogan { font-size: 8px; font-weight: 400; opacity: 0.7; margin-top: 2px; }
 
     .badge-new {
       position: absolute;
-      top: -8px;
-      right: -5px;
+      top: -6px;
+      right: 2px;
       background-color: #ff2a2a;
       color: white;
       font-size: 8px;
       font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 10px;
-      letter-spacing: 0.5px;
-      box-shadow: 0 2px 6px rgba(255, 42, 42, 0.4);
+      padding: 2px 7px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(255, 42, 42, 0.4);
       animation: pulsar 1.5s infinite ease-in-out;
     }
 
     @keyframes pulsar {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 42, 42, 0.7); }
-      70% { transform: scale(1.08); box-shadow: 0 0 0 6px rgba(255, 42, 42, 0); }
-      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 42, 42, 0); }
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
     }
 
     .btn-marca.ativo, .btn-marca:hover { 
       background: var(--cor-preto); 
       color: var(--cor-branco); 
       border-color: var(--cor-preto); 
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15); 
     }
-    .btn-marca.ativo .slogan, .btn-marca:hover .slogan { opacity: 0.85; color: #ddd; }
 
-    /* VITRINE GRID */
-    .grid-produtos { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
-    .card-produto { background: var(--cor-branco); border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; transition: var(--transicao); }
-    .card-produto img { width: 100%; height: 180px; object-fit: contain; margin-bottom: 10px; border-radius: 6px; }
-    .card-produto h3 { font-size: 13px; color: #444; height: 38px; overflow: hidden; margin-bottom: 8px; font-weight: 400; line-height: 1.4; }
-    .card-produto .preco { font-size: 17px; color: var(--cor-premium-ml); font-weight: 700; margin-bottom: 12px; }
-    .btn-comprar { background: var(--cor-btn-compra); color: white; text-decoration: none; padding: 10px; border-radius: 8px; font-weight: 600; font-size: 13px; text-transform: uppercase; transition: var(--transicao); display: block; }
-    .btn-comprar:hover { background: #2968c8; }
+    /* VITRINE GRID — CARDS ULTRA ARREDONDADOS E ORGÂNICOS */
+    .grid-produtos { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 20px; }
+    
+    .card-produto { 
+      background: var(--cor-branco); 
+      border-radius: 20px; /* Curvas elegantes nos cards */
+      padding: 16px; 
+      text-align: center; 
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04); 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: space-between; 
+      transition: var(--transicao); 
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .card-produto:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-produto .img-container {
+      width: 100%;
+      height: 180px;
+      background-color: var(--cor-cinza-card);
+      border-radius: 14px; /* Fotos integradas com curvas */
+      overflow: hidden;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-produto img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      transition: var(--transicao);
+    }
+
+    .card-produto:hover img {
+      transform: scale(1.05); /* Zoom sutil e elegante */
+    }
+
+    .card-produto h3 { 
+      font-size: 13px; 
+      color: #333; 
+      height: 38px; 
+      overflow: hidden; 
+      margin-bottom: 8px; 
+      font-weight: 500; 
+      line-height: 1.4; 
+    }
+
+    .card-produto .preco { 
+      font-size: 18px; 
+      color: var(--cor-premium-ml); 
+      font-weight: 700; 
+      margin-bottom: 14px; 
+    }
+
+    .btn-comprar { 
+      background: #2563eb; 
+      color: white; 
+      text-decoration: none; 
+      padding: 11px; 
+      border-radius: 25px; /* Botão de comprar arredondado */
+      font-weight: 600; 
+      font-size: 12px; 
+      text-transform: uppercase; 
+      letter-spacing: 0.5px;
+      transition: var(--transicao); 
+      display: block; 
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    .btn-comprar:hover { 
+      background: #1d4ed8; 
+      transform: scale(1.02);
+    }
 
     /* INFORMAÇÕES DE LOCALIZAÇÃO */
-    .info-box { background: var(--cor-branco); padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; }
-    .info-item-label { font-size: 16px; font-weight: 600; color: #333; margin-bottom: 6px; }
+    .info-box { 
+      background: var(--cor-branco); 
+      padding: 30px; 
+      border-radius: 24px; 
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04); 
+      text-align: center; 
+    }
     .btn-maps {
       display: inline-flex; align-items: center; justify-content: center; gap: 10px;
       background-color: var(--cor-preto); color: white; text-decoration: none; font-weight: 600;
-      padding: 12px 24px; border-radius: 30px; margin-top: 15px; font-size: 14px; transition: var(--transicao);
+      padding: 13px 28px; border-radius: 30px; margin-top: 15px; font-size: 14px; transition: var(--transicao);
     }
     .btn-maps:hover { background-color: #333; transform: translateY(-2px); }
 
-    /* MODAL DE CONTATO (POPUP) */
+    /* MODAL POPUP */
     .modal-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);
       display: flex; justify-content: center; align-items: center; z-index: 2000;
       opacity: 0; pointer-events: none; transition: all 0.3s ease;
     }
     .modal-overlay.ativo { opacity: 1; pointer-events: auto; }
     .modal-content {
-      background: white; padding: 30px 25px; border-radius: 16px; max-width: 380px; width: 90%;
-      text-align: center; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      background: white; padding: 32px 25px; border-radius: 24px; max-width: 380px; width: 90%;
+      text-align: center; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.15);
       transform: translateY(-20px); transition: all 0.3s ease;
     }
     .modal-overlay.ativo .modal-content { transform: translateY(0); }
-    .fechar-modal { position: absolute; top: 12px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #888; }
+    .fechar-modal { position: absolute; top: 14px; right: 18px; background: none; border: none; font-size: 24px; cursor: pointer; color: #888; }
     .btn-whatsapp {
       display: inline-flex; align-items: center; justify-content: center; gap: 10px;
       background-color: #25D366; color: white; text-decoration: none; font-weight: 600;
       padding: 14px 20px; border-radius: 30px; margin-top: 15px; width: 100%; font-size: 15px;
-      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3); transition: transform 0.2s, background-color 0.2s;
+      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35); transition: transform 0.2s, background-color 0.2s;
     }
-    .btn-whatsapp:hover { background-color: #20ba5a; transform: scale(1.02); }
 
     /* RODAPÉ */
-    footer { text-align: center; padding: 30px 15px; background-color: #eee; font-size: 13px; color: var(--cor-cinza-texto); line-height: 1.6; border-top: 1px solid #ddd; }
-    footer strong { color: var(--cor-preto); }
+    footer { text-align: center; padding: 35px 15px; background-color: #e5e7eb; font-size: 13px; color: var(--cor-cinza-texto); line-height: 1.6; }
 
-    /* RESPONSIVIDADE */
     @media (min-width: 768px) {
-      body { padding-top: 120px; }
-      header { padding: 18px 8%; }
-      .grid-produtos { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; }
-      .card-produto img { height: 230px; }
-      .card-produto h3 { font-size: 15px; height: 42px; }
-      .card-produto .preco { font-size: 20px; }
-      .btn-comprar { font-size: 14px; padding: 12px; }
-    }
-
-    @media (max-width: 480px) {
-      body { padding-top: 135px; }
-      header { flex-direction: column; gap: 8px; text-align: center; padding: 12px 5%; }
-      .logo-container .logo-texto { font-size: 18px; }
-      nav a { font-size: 12px; }
+      .grid-produtos { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 25px; }
+      .card-produto .img-container { height: 220px; }
+      .card-produto h3 { font-size: 14px; height: 42px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="banner-teste">🧪 AMBIENTE DE TESTE — VITRINE DE DEMONSTRAÇÃO</div>
+  <div class="banner-teste">🧪 AMBIENTE DE TESTE — VITRINE CURVA & MODERNA</div>
 
   <header id="cabecalho">
     <a href="#" class="logo-container">
-      <img src="logo.png" alt="Símbolo Raízes" class="img-logo" onerror="this.style.display='none';">
       <span class="logo-texto">RAÍZES</span>
     </a>
     <nav>
@@ -299,40 +327,15 @@
   <div class="container">
     
     <section id="produtos">
-      <h2>Nossas Peças (Modo Teste)</h2>
+      <h2>Nossas Peças</h2>
       
       <div class="filtros-marcas">
-        <button class="btn-marca ativo" onclick="filtrarMarca('todas', event)">
-          Todas
-        </button>
-
-        <button class="btn-marca" onclick="filtrarMarca('Aurochs', event)">
-          <span class="badge-new">NEW</span>
-          Aurochs
-          <span class="slogan">Country Origins</span>
-        </button>
-
-        <button class="btn-marca" onclick="filtrarMarca('Baumgarten', event)">
-          <span class="badge-new">NEW</span>
-          Baumgarten
-          <span class="slogan">Desde 1978</span>
-        </button>
-
-        <button class="btn-marca" onclick="filtrarMarca('Beagle', event)">
-          <span class="badge-new">NEW</span>
-          Beagle
-          <span class="slogan">Explore the World</span>
-        </button>
-
-        <button class="btn-marca" onclick="filtrarMarca('Sly Wear', event)">
-          Sly Wear
-          <span class="slogan">Casual & Chic</span>
-        </button>
-
-        <button class="btn-marca" onclick="filtrarMarca('Hering', event)">
-          Hering
-          <span class="slogan">O Básico do Brasil</span>
-        </button>
+        <button class="btn-marca ativo" onclick="filtrarMarca('todas', event)">Todas</button>
+        <button class="btn-marca" onclick="filtrarMarca('Aurochs', event)"><span class="badge-new">NEW</span>Aurochs<span class="slogan">Country Origins</span></button>
+        <button class="btn-marca" onclick="filtrarMarca('Baumgarten', event)"><span class="badge-new">NEW</span>Baumgarten<span class="slogan">Desde 1978</span></button>
+        <button class="btn-marca" onclick="filtrarMarca('Beagle', event)"><span class="badge-new">NEW</span>Beagle<span class="slogan">Explore the World</span></button>
+        <button class="btn-marca" onclick="filtrarMarca('Sly Wear', event)">Sly Wear<span class="slogan">Casual & Chic</span></button>
+        <button class="btn-marca" onclick="filtrarMarca('Hering', event)">Hering<span class="slogan">O Básico do Brasil</span></button>
       </div>
 
       <div id="grid-produtos" class="grid-produtos"></div>
@@ -343,10 +346,7 @@
       <div class="info-box">
         <div class="info-item-label">📍 Loja Raizes</div>
         <p style="font-size: 14px; color: #555;">Rua Interventor Manoel Ribas, 186 - Centro — Pitanga / PR</p>
-        
-        <a href="https://maps.google.com/?q=Loja+Raizes+Pitanga+PR" target="_blank" class="btn-maps">
-          🗺️ Abrir no Google Maps
-        </a>
+        <a href="https://maps.google.com/?q=Loja+Raizes+Pitanga+PR" target="_blank" class="btn-maps">🗺️ Abrir no Google Maps</a>
       </div>
     </section>
 
@@ -357,23 +357,16 @@
       <button class="fechar-modal" onclick="fecharContato()">×</button>
       <h3 style="font-size: 20px; margin-bottom: 8px;">Fale com a RAÍZES</h3>
       <p style="font-size: 13px; color: #666; margin-bottom: 15px;">Dúvidas sobre peças ou tamanhos? Chame a gente no Zap!</p>
-      
-      <a href="https://wa.me/5542999839784?text=Olá!%20Vim%20pelo%20site%20da%20RAÍZES." target="_blank" class="btn-whatsapp">
-        💬 Conversar no WhatsApp
-      </a>
-      
-      <p style="font-size: 12px; color: #999; margin-top: 15px;">(42) 99983-9784</p>
+      <a href="https://wa.me/5542999839784?text=Olá!%20Vim%20pelo%20site%20da%20RAÍZES." target="_blank" class="btn-whatsapp">💬 Conversar no WhatsApp</a>
     </div>
   </div>
 
   <footer>
     <p><strong>© 2026 RAÍZES — Todos os direitos reservados.</strong></p>
     <p>MALDANER & MAZETTO LTDA | CNPJ: 64.860.761/0001-64</p>
-    <p>Rua Interventor Manoel Ribas, 186 - Centro — Pitanga / PR</p>
   </footer>
 
   <script>
-    // DADOS SIMULADOS DE PRODUTOS DAS MARCAS (MOCK DATA)
     const produtosTeste = [
       { id: 1, marca: "Aurochs", titulo: "Camiseta Aurochs Country Heavy Cotton", preco: 159.90, img: "https://picsum.photos/400/500?random=1" },
       { id: 2, marca: "Aurochs", titulo: "Boné Aurochs Country Origins Trucker", preco: 99.90, img: "https://picsum.photos/400/500?random=2" },
@@ -387,15 +380,6 @@
       { id: 10, marca: "Hering", titulo: "Regata Hering Algodão Ribana", preco: 49.90, img: "https://picsum.photos/400/500?random=10" }
     ];
 
-    window.addEventListener('scroll', () => {
-      const header = document.getElementById('cabecalho');
-      if (window.scrollY > 60) {
-        header.classList.add('encolhido');
-      } else if (window.scrollY < 20) {
-        header.classList.remove('encolhido');
-      }
-    });
-
     function renderizarProdutos(lista) {
       const container = document.getElementById('grid-produtos');
       container.innerHTML = '';
@@ -408,10 +392,12 @@
       lista.forEach(item => {
         container.innerHTML += `
           <div class="card-produto">
-            <img src="${item.img}" alt="${item.titulo}">
+            <div class="img-container">
+              <img src="${item.img}" alt="${item.titulo}">
+            </div>
             <h3>${item.titulo}</h3>
             <div class="preco">R$ ${item.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
-            <a href="#" onclick="alert('Este é um produto demonstrativo de teste!'); return false;" class="btn-comprar">Simular Compra</a>
+            <a href="#" onclick="alert('Produto demonstrativo de teste!'); return false;" class="btn-comprar">Simular Compra</a>
           </div>
         `;
       });
@@ -419,10 +405,7 @@
 
     function filtrarMarca(marca, evt) {
       document.querySelectorAll('.btn-marca').forEach(btn => btn.classList.remove('ativo'));
-      
-      if (evt && evt.currentTarget) {
-        evt.currentTarget.classList.add('ativo');
-      }
+      if (evt && evt.currentTarget) evt.currentTarget.classList.add('ativo');
 
       if (marca === 'todas') {
         renderizarProdutos(produtosTeste);
@@ -432,20 +415,10 @@
       }
     }
 
-    function abrirContato(event) {
-      if (event) event.preventDefault();
-      document.getElementById('modal-contato').classList.add('ativo');
-    }
+    function abrirContato(e) { if(e) e.preventDefault(); document.getElementById('modal-contato').classList.add('ativo'); }
+    function fecharContato() { document.getElementById('modal-contato').classList.remove('ativo'); }
+    function fecharContatoFora(e) { if(e.target.id === 'modal-contato') fecharContato(); }
 
-    function fecharContato() {
-      document.getElementById('modal-contato').classList.remove('ativo');
-    }
-
-    function fecharContatoFora(event) {
-      if (event.target.id === 'modal-contato') fecharContato();
-    }
-
-    // Carrega a lista completa na inicialização
     renderizarProdutos(produtosTeste);
   </script>
 
