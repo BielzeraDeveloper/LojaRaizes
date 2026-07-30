@@ -76,12 +76,12 @@
     nav a { color: #ddd; text-decoration: none; font-weight: 400; font-size: 14px; position: relative; transition: var(--transicao); cursor: pointer; }
     nav a:hover { color: #fff; }
 
-    /* BANNER PRINCIPAL (COM PROTEÇÃO PARA TELA GRANDE DE PC) */
+    /* BANNER PRINCIPAL */
     .banner-loja-container { 
       width: 100%; 
       height: 45vh; 
       min-height: 280px; 
-      max-height: 480px; /* Evita que o banner fique gigantesco no PC */
+      max-height: 480px; 
       overflow: hidden; 
       position: relative; 
       background: var(--cor-preto); 
@@ -90,11 +90,10 @@
       width: 100%; 
       height: 100%; 
       object-fit: cover; 
-      object-position: center; /* Mantém o foco no meio da imagem */
+      object-position: center; 
       filter: brightness(0.70); 
     }
     
-    /* DEGRADÊ ESCURO NAS BORDAS DO BANNER NO PC */
     .banner-loja-container::after {
       content: '';
       position: absolute;
@@ -120,10 +119,51 @@
     section { margin-bottom: 50px; }
     h2 { font-size: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--cor-preto); margin-bottom: 20px; border-left: 4px solid var(--cor-preto); padding-left: 12px; }
 
-    /* FILTRO DE MARCAS */
-    .filtros-marcas { display: flex; gap: 8px; margin-bottom: 25px; flex-wrap: wrap; justify-content: center; }
-    .btn-marca { background: #fff; border: 1.5px solid #ddd; padding: 10px 18px; border-radius: 20px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--cor-cinza-texto); transition: var(--transicao); }
-    .btn-marca.ativo, .btn-marca:hover { background: var(--cor-preto); color: var(--cor-branco); border-color: var(--cor-preto); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+    /* FILTRO DE MARCAS COM SLOGANS */
+    .filtros-marcas { 
+      display: flex; 
+      gap: 10px; 
+      margin-bottom: 25px; 
+      flex-wrap: wrap; 
+      justify-content: center; 
+    }
+    .btn-marca { 
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #fff; 
+      border: 1.5px solid #ddd; 
+      padding: 8px 18px; 
+      border-radius: 20px; 
+      cursor: pointer; 
+      font-family: 'Poppins', sans-serif; 
+      font-weight: 700; 
+      font-size: 13px; 
+      text-transform: uppercase; 
+      letter-spacing: 0.5px; 
+      color: var(--cor-cinza-texto); 
+      transition: var(--transicao); 
+      line-height: 1.1;
+    }
+    .btn-marca .slogan {
+      font-size: 8px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      opacity: 0.7;
+      margin-top: 2px;
+      text-transform: uppercase;
+    }
+    .btn-marca.ativo, .btn-marca:hover { 
+      background: var(--cor-preto); 
+      color: var(--cor-branco); 
+      border-color: var(--cor-preto); 
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
+    }
+    .btn-marca.ativo .slogan, .btn-marca:hover .slogan {
+      opacity: 0.85;
+      color: #ddd;
+    }
 
     /* VITRINE GRID */
     .grid-produtos { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
@@ -210,7 +250,7 @@
     footer { text-align: center; padding: 30px 15px; background-color: #eee; font-size: 13px; color: var(--cor-cinza-texto); line-height: 1.6; border-top: 1px solid #ddd; }
     footer strong { color: var(--cor-preto); }
 
-    /* OTIMIZAÇÕES ESPECÍFICAS PARA COMPUTADOR (PC) */
+    /* REGRAS PARA COMPUTADOR */
     @media (min-width: 768px) {
       header { padding: 18px 8%; }
       header.encolhido { padding: 10px 8%; }
@@ -220,7 +260,6 @@
       header.encolhido .logo-texto { font-size: 22px; }
       nav a { font-size: 15px; margin-left: 20px; }
       
-      /* BANNER MAIS ELEGANTE NO PC */
       .banner-loja-container { height: 50vh; }
       .banner-caption h1 { font-size: 38px; }
       .banner-caption p { font-size: 18px; }
@@ -272,12 +311,29 @@
       <h2>Nossas Peças</h2>
       
       <div class="filtros-marcas">
-        <button class="btn-marca ativo" onclick="filtrarMarca('todas')">Todas</button>
-        <button class="btn-marca" onclick="filtrarMarca('Baumgarten')">Baumgarten</button>
-        <button class="btn-marca" onclick="filtrarMarca('Hering')">Hering</button>
-        <button class="btn-marca" onclick="filtrarMarca('SlyWear')">SlyWear</button>
-        <button class="btn-marca" onclick="filtrarMarca('Beagle')">Beagle</button>
-        <button class="btn-marca" onclick="filtrarMarca('Auroch')">Auroch</button>
+        <button class="btn-marca ativo" onclick="filtrarMarca('todas')">
+          Todas
+        </button>
+        <button class="btn-marca" onclick="filtrarMarca('Auroch')">
+          Aurochs
+          <span class="slogan">Country Origins</span>
+        </button>
+        <button class="btn-marca" onclick="filtrarMarca('Baumgarten')">
+          Baumgarten
+          <span class="slogan">Desde 1978</span>
+        </button>
+        <button class="btn-marca" onclick="filtrarMarca('Beagle')">
+          Beagle
+          <span class="slogan">Explore the World</span>
+        </button>
+        <button class="btn-marca" onclick="filtrarMarca('SlyWear')">
+          Sly Wear
+          <span class="slogan">Casual & Chic</span>
+        </button>
+        <button class="btn-marca" onclick="filtrarMarca('Hering')">
+          Hering
+          <span class="slogan">O Básico do Brasil</span>
+        </button>
       </div>
 
       <div id="grid-produtos" class="grid-produtos">
@@ -373,8 +429,8 @@
     function filtrarMarca(marca) {
       document.querySelectorAll('.btn-marca').forEach(btn => btn.classList.remove('ativo'));
       
-      if (event && event.target) {
-        event.target.classList.add('ativo');
+      if (event && event.currentTarget) {
+        event.currentTarget.classList.add('ativo');
       }
 
       if (marca === 'todas') {
