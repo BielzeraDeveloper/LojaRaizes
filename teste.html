@@ -294,35 +294,36 @@
     let produtosCarregados = [];
 
     async function buscarProdutosML() {
-      const container = document.getElementById('grid-produtos');
-      container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario);">Carregando vitrine...</p>';
+  const container = document.getElementById('grid-produtos');
+  container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario);">Carregando vitrine...</p>';
 
-      try {
-        const urlML = `https://api.mercadolibre.com/sites/MLB/search?seller_id=${ID_VENDEDOR_ML}`;
-        
-        // Uso do AllOrigins (gratuito para domínios públicos como GitHub Pages)
-        const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(urlML)}`);
-        
-        if (!res.ok) {
-          throw new Error(`Erro na requisição (Status: ${res.status})`);
-        }
-
-        const data = await res.json();
-        console.log('Resposta da API Mercado Livre:', data);
-
-        produtosCarregados = data.results || [];
-        exibirProdutos(produtosCarregados);
-
-      } catch (erro) {
-        console.error('Erro ao buscar produtos:', erro);
-        container.innerHTML = `
-          <div style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario);">
-            <p>Não foi possível carregar os produtos no momento.</p>
-            <small style="opacity: 0.7;">Verifique o console (F12) para detalhes.</small>
-          </div>
-        `;
-      }
+  try {
+    const urlML = `https://api.mercadolibre.com/sites/MLB/search?seller_id=${ID_VENDEDOR_ML}`;
+    
+    // Proxy do CodeTabs (gratuito e sem restrições de CORS)
+    const res = await fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(urlML)}`);
+    
+    if (!res.ok) {
+      throw new Error(`Erro na requisição (Status: ${res.status})`);
     }
+
+    const data = await res.json();
+    console.log('Resposta da API Mercado Livre:', data);
+
+    produtosCarregados = data.results || [];
+    exibirProdutos(produtosCarregados);
+
+  } catch (erro) {
+    console.error('Erro ao buscar produtos:', erro);
+    container.innerHTML = `
+      <div style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario);">
+        <p>Não foi possível carregar os produtos no momento.</p>
+        <small style="opacity: 0.7;">Verifique o console (F12) para detalhes.</small>
+      </div>
+    `;
+  }
+}
+
 
     function exibirProdutos(lista) {
       const container = document.getElementById('grid-produtos');
