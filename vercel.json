@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/ml",
+      "destination": "https://api.mercadolibre.com/sites/MLB/search"
+    }
+  ]
+}
+
