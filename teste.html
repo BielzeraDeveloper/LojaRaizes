@@ -32,7 +32,7 @@
       --transicao: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
-    /* VARIÁVEIS DE COR - TEMA CLARO (MANTÉM O CABEÇALHO PRETO E DEGRADÊ) */
+    /* VARIÁVEIS DE COR - TEMA CLARO (MANTÉM CABEÇALHO ESCURO) */
     body.theme-light {
       --cor-fundo: #f4f4f7;
       --cor-card: #ffffff;
@@ -43,7 +43,6 @@
       --cor-verde-preco: #16a34a;
       --cor-btn-compra: #2563eb;
       
-      /* O cabeçalho permanece preto/escuro */
       --cor-header-bg: rgba(10, 10, 10, 0.95);
       --cor-header-encolhido: rgba(5, 5, 5, 0.98);
       --cor-header-texto: #ffffff;
@@ -96,7 +95,7 @@
       width: auto; 
       display: block; 
       object-fit: contain; 
-      filter: brightness(0) invert(1); /* Mantém branca para contrastar com o fundo preto */
+      filter: brightness(0) invert(1);
       transition: max-height 0.3s ease; 
     }
 
@@ -417,7 +416,7 @@
       
       <div class="filtros-marcas">
         <button class="btn-marca ativo" onclick="filtrarMarca('todas', event)">Todas</button>
-        <button class="btn-marca" onclick="filtrarMarca('Amil', event)">Amil<span class="slogan">Slim & Casual</span></button>
+        <button class="btn-marca" onclick="filtrarMarca('Sly Wear', event)">Sly Wear<span class="slogan">Casual & Chic</span></button>
         <button class="btn-marca" onclick="filtrarMarca('Aurochs', event)">Aurochs<span class="slogan">Country Origins</span></button>
         <button class="btn-marca" onclick="filtrarMarca('Baumgarten', event)">Baumgarten<span class="slogan">Desde 1978</span></button>
         <button class="btn-marca" onclick="filtrarMarca('Beagle', event)">Beagle<span class="slogan">Explore the World</span></button>
@@ -453,56 +452,20 @@
   </footer>
 
   <script>
-    let todosProdutos = [];
-
-    // CARREGAR DADOS DO ARQUIVO PRODUTOS.JSON
-    async function carregarProdutosReais() {
-      const container = document.getElementById('grid-produtos');
-      container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario);">Carregando catálogo...</p>';
-
-      try {
-        // 1. Lê o arquivo produtos.json da mesma pasta
-        const respostaJson = await fetch('produtos.json');
-        const listaJson = await respostaJson.json();
-
-        // 2. Consulta a API oficial do Mercado Livre para cada ID do arquivo JSON
-        const promessas = listaJson.map(item => 
-          fetch(`https://api.mercadolibre.com/items/${item.id}`).then(res => res.json())
-        );
-
-        const resultados = await Promise.all(promessas);
-
-        // 3. Organiza os dados retornados
-        todosProdutos = resultados.filter(prod => prod.id).map(prod => {
-          let foto = prod.pictures && prod.pictures.length > 0 
-            ? prod.pictures[0].secure_url 
-            : prod.thumbnail.replace('I.jpg', 'O.jpg');
-
-          let marca = "Outros";
-          if (prod.attributes) {
-            const attrMarca = prod.attributes.find(a => a.id === 'BRAND');
-            if (attrMarca && attrMarca.value_name) marca = attrMarca.value_name;
-          }
-
-          return {
-            id: prod.id,
-            titulo: prod.title,
-            preco: prod.price,
-            link: prod.permalink,
-            img: foto,
-            marca: marca
-          };
-        });
-
-        renderizarProdutos(todosProdutos);
-
-      } catch (erro) {
-        console.error("Erro ao carregar o arquivo produtos.json ou API:", erro);
-        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: #ff5252;">Erro ao carregar o catálogo de produtos.</p>';
+    // LISTA DE PRODUTOS CADASTRADOS DIRETO NO CÓDIGO (100% FUNCIONAL)
+    const produtosReais = [
+      { 
+        id: "MLB3873348597", 
+        marca: "Sly Wear", 
+        titulo: "Camisa Estilo Militar Com 2 Bolsos Slim Manga Longa", 
+        preco: 129.90, 
+        link: "https://produto.mercadolivre.com.br/MLB-3873348597-camisa-estilo-militar-com-2-bolsos-amil-slim-manga-longa-_JM", 
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_706822-MLB78311183307_082024-F.webp" 
       }
-    }
+      // Para adicionar mais peças, basta colar aqui abaixo com uma vírgula!
+    ];
 
-    // RENDERIZAR NA TELA
+    // RENDERIZAR PRODUTOS NA TELA
     function renderizarProdutos(lista) {
       const container = document.getElementById('grid-produtos');
       container.innerHTML = '';
@@ -532,9 +495,9 @@
       if (evt && evt.currentTarget) evt.currentTarget.classList.add('ativo');
 
       if (marca === 'todas') {
-        renderizarProdutos(todosProdutos);
+        renderizarProdutos(produtosReais);
       } else {
-        const filtrados = todosProdutos.filter(p => 
+        const filtrados = produtosReais.filter(p => 
           p.marca.toLowerCase().includes(marca.toLowerCase()) || 
           p.titulo.toLowerCase().includes(marca.toLowerCase())
         );
@@ -575,7 +538,7 @@
     });
 
     // INICIAR O SITE
-    carregarProdutosReais();
+    renderizarProdutos(produtosReais);
   </script>
 
 </body>
