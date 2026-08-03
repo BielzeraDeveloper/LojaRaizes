@@ -298,14 +298,13 @@
       container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario);">Carregando vitrine...</p>';
 
       try {
-        // Endpoint original
         const urlML = `https://api.mercadolibre.com/sites/MLB/search?seller_id=${ID_VENDEDOR_ML}`;
         
-        // Uso de proxy público (corsproxy.io) para evitar o bloqueio 403 / CORS no GitHub Pages
-        const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(urlML)}`);
+        // Uso do AllOrigins (gratuito para domínios públicos como GitHub Pages)
+        const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(urlML)}`);
         
         if (!res.ok) {
-          throw new Error(`Erro na API do Mercado Livre (Status: ${res.status})`);
+          throw new Error(`Erro na requisição (Status: ${res.status})`);
         }
 
         const data = await res.json();
@@ -319,7 +318,7 @@
         container.innerHTML = `
           <div style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario);">
             <p>Não foi possível carregar os produtos no momento.</p>
-            <small style="opacity: 0.7;">Verifique o console do navegador (F12) para detalhes.</small>
+            <small style="opacity: 0.7;">Verifique o console (F12) para detalhes.</small>
           </div>
         `;
       }
@@ -412,7 +411,6 @@
       }
     });
 
-    // Inicializa a busca ao carregar a página
     buscarProdutosML();
   </script>
 
