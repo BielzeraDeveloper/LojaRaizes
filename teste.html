@@ -298,13 +298,11 @@
   container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario);">Carregando vitrine...</p>';
 
   try {
-    const urlML = `https://api.mercadolibre.com/sites/MLB/search?seller_id=${ID_VENDEDOR_ML}`;
-    
-    // Proxy do CodeTabs (gratuito e sem restrições de CORS)
-    const res = await fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(urlML)}`);
+    // Chamada direta para a rota interna da Vercel
+    const res = await fetch(`/api/ml?seller_id=${ID_VENDEDOR_ML}`);
     
     if (!res.ok) {
-      throw new Error(`Erro na requisição (Status: ${res.status})`);
+      throw new Error(`Erro na API do Mercado Livre (Status: ${res.status})`);
     }
 
     const data = await res.json();
