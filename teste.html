@@ -298,16 +298,17 @@
       container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario);">Carregando vitrine...</p>';
 
       try {
-        const res = await fetch(`https://api.mercadolibre.com/sites/MLB/search?seller_id=${ID_VENDEDOR_ML}`);
+        // Endpoint original
+        const urlML = `https://api.mercadolibre.com/sites/MLB/search?seller_id=${ID_VENDEDOR_ML}`;
         
-        // Verifica se a resposta HTTP foi bem-sucedida (status 200-299)
+        // Uso de proxy público (corsproxy.io) para evitar o bloqueio 403 / CORS no GitHub Pages
+        const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(urlML)}`);
+        
         if (!res.ok) {
           throw new Error(`Erro na API do Mercado Livre (Status: ${res.status})`);
         }
 
         const data = await res.json();
-        
-        // Log para te ajudar a debugar no F12 do navegador
         console.log('Resposta da API Mercado Livre:', data);
 
         produtosCarregados = data.results || [];
@@ -318,7 +319,7 @@
         container.innerHTML = `
           <div style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario);">
             <p>Não foi possível carregar os produtos no momento.</p>
-            <small style="opacity: 0.7;">Verifique o console do navegador (F12) para mais detalhes.</small>
+            <small style="opacity: 0.7;">Verifique o console do navegador (F12) para detalhes.</small>
           </div>
         `;
       }
@@ -334,13 +335,9 @@
       }
 
       lista.forEach(item => {
-        // Ajuste para garantir imagem em alta qualidade e HTTPS
         let fotoUrl = item.thumbnail ? item.thumbnail.replace('http://', 'https://') : '';
-        
-        // Substitui sufixos de miniatura para imagens de maior resolução se existirem
         fotoUrl = fotoUrl.replace(/-I\.(jpg|webp)$/i, '-O.$1').replace(/-V\.(jpg|webp)$/i, '-O.$1');
 
-        // Formatação de preço garantida
         const precoFormatado = item.price 
           ? item.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
           : 'Sob consulta';
@@ -421,4 +418,3 @@
 
 </body>
 </html>
-/body>
