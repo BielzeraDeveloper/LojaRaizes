@@ -7,36 +7,60 @@
   <title>RAÍZES — Moda Multimarcas — Pitanga/PR</title>
   
   <link rel="icon" type="image/png" href="logo.png">
+
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* VARIÁVEIS DE COR - TEMA ESCURO (PADRÃO) */
     :root {
-      --cor-fundo-dark: #0a0a0a;
-      --cor-card-dark: #161616;
+      --cor-fundo: #0a0a0a;
+      --cor-card: #161616;
       --cor-card-hover: #222222;
-      --cor-borda-dark: #2a2a2a;
+      --cor-borda: #2a2a2a;
       --cor-texto-principal: #ffffff;
       --cor-texto-secundario: #aaaaaa;
       --cor-verde-preco: #00e676;
       --cor-btn-compra: #2563eb;
+      --cor-header-bg: rgba(10, 10, 10, 0.92);
+      --cor-header-encolhido: rgba(5, 5, 5, 0.98);
+      --cor-badge-bg: #ffffff;
+      --cor-badge-texto: #000000;
       --transicao: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* VARIÁVEIS DE COR - TEMA CLARO */
+    body.theme-light {
+      --cor-fundo: #f4f4f6;
+      --cor-card: #ffffff;
+      --cor-card-hover: #f9f9fb;
+      --cor-borda: #e2e8f0;
+      --cor-texto-principal: #1a1a1a;
+      --cor-texto-secundario: #666666;
+      --cor-verde-preco: #16a34a;
+      --cor-btn-compra: #2563eb;
+      --cor-header-bg: rgba(255, 255, 255, 0.92);
+      --cor-header-encolhido: rgba(245, 245, 247, 0.98);
+      --cor-badge-bg: #1a1a1a;
+      --cor-badge-texto: #ffffff;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
     body { 
       font-family: 'Poppins', sans-serif; 
-      background-color: var(--cor-fundo-dark); 
+      background-color: var(--cor-fundo); 
       color: var(--cor-texto-principal); 
       scroll-behavior: smooth;
       padding-top: 110px; 
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
+    /* CABEÇALHO FIXO */
     header { 
-      background: rgba(10, 10, 10, 0.92); 
+      background: var(--cor-header-bg); 
       backdrop-filter: blur(10px); 
       -webkit-backdrop-filter: blur(10px);
-      color: white; 
+      color: var(--cor-texto-principal); 
       padding: 16px 5%; 
       display: flex; 
       justify-content: space-between; 
@@ -45,26 +69,65 @@
       top: 0; left: 0; right: 0;
       width: 100%;
       z-index: 1000; 
-      border-bottom: 1px solid var(--cor-borda-dark);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.6); 
+      border-bottom: 1px solid var(--cor-borda);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15); 
       transition: var(--transicao); 
     }
 
-    header.encolhido { padding: 8px 5%; background: rgba(5, 5, 5, 0.98); }
+    header.encolhido {
+      padding: 8px 5%; 
+      background: var(--cor-header-encolhido);
+    }
+    
     .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-    .logo-container .img-logo { max-height: 52px; width: auto; display: block; filter: brightness(0) invert(1); object-fit: contain; transition: max-height 0.3s ease; }
-    .logo-container .logo-texto { font-family: 'Cinzel', serif; font-size: 24px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--cor-texto-principal); line-height: 1; transition: font-size 0.3s ease; }
+    .logo-container .img-logo { max-height: 52px; width: auto; display: block; object-fit: contain; transition: max-height 0.3s ease; }
+    
+    /* Inverte a cor da logo no modo escuro caso seja preta */
+    body:not(.theme-light) .logo-container .img-logo {
+      filter: brightness(0) invert(1);
+    }
+
+    .logo-container .logo-texto { 
+      font-family: 'Cinzel', serif; 
+      font-size: 24px; 
+      font-weight: 700; 
+      letter-spacing: 3px; 
+      text-transform: uppercase; 
+      color: var(--cor-texto-principal); 
+      line-height: 1; 
+      transition: font-size 0.3s ease; 
+    }
 
     header.encolhido .img-logo { max-height: 36px; }
     header.encolhido .logo-texto { font-size: 19px; }
 
-    nav { display: flex; gap: 15px; }
-    nav a { color: #888; text-decoration: none; font-weight: 400; font-size: 14px; transition: var(--transicao); cursor: pointer; }
-    nav a:hover { color: #fff; }
+    nav { display: flex; gap: 15px; align-items: center; }
+    nav a { color: var(--cor-texto-secundario); text-decoration: none; font-weight: 500; font-size: 14px; transition: var(--transicao); cursor: pointer; }
+    nav a:hover { color: var(--cor-texto-principal); }
 
+    /* BOTÃO DE ALTERNAR TEMA */
+    .btn-theme-toggle {
+      background: var(--cor-card);
+      border: 1px solid var(--cor-borda);
+      color: var(--cor-texto-principal);
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transicao);
+    }
+    .btn-theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    /* BANNER PRINCIPAL */
     .banner-loja-container { width: 100%; height: 45vh; min-height: 280px; max-height: 480px; overflow: hidden; position: relative; background: #000; }
-    .foto-loja { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(0.55); }
-    .banner-loja-container::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.5) 60%, var(--cor-fundo-dark) 100%); pointer-events: none; }
+    .foto-loja { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(0.65); }
+    .banner-loja-container::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 60%, var(--cor-fundo) 100%); pointer-events: none; }
     .banner-caption { position: absolute; bottom: 30px; left: 5%; right: 5%; color: white; text-transform: uppercase; text-shadow: 0 2px 10px rgba(0,0,0,0.9); z-index: 2; }
     .banner-caption h1 { font-size: 28px; font-weight: 700; letter-spacing: 1.5px; }
     .banner-caption p { font-size: 14px; font-weight: 300; color: #ccc; }
@@ -73,40 +136,45 @@
     section { margin-bottom: 50px; }
     h2 { font-size: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--cor-texto-principal); margin-bottom: 20px; border-left: 4px solid var(--cor-texto-principal); padding-left: 12px; }
 
+    /* FILTROS */
     .filtros-marcas { display: flex; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; justify-content: center; }
-    .btn-marca { position: relative; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; background: var(--cor-card-dark); border: 1px solid var(--cor-borda-dark); padding: 10px 20px; border-radius: 20px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--cor-texto-secundario); transition: var(--transicao); line-height: 1.1; }
-    .btn-marca .slogan { font-size: 8px; font-weight: 400; letter-spacing: 1px; opacity: 0.6; margin-top: 2px; text-transform: uppercase; }
-    .btn-marca.ativo, .btn-marca:hover { background: #ffffff; color: #000000; border-color: #ffffff; box-shadow: 0 0 15px rgba(255,255,255,0.2); }
-    .btn-marca.ativo .slogan, .btn-marca:hover .slogan { opacity: 0.9; color: #333; }
+    .btn-marca { position: relative; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; background: var(--cor-card); border: 1px solid var(--cor-borda); padding: 10px 20px; border-radius: 20px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--cor-texto-secundario); transition: var(--transicao); line-height: 1.1; }
+    .btn-marca .slogan { font-size: 8px; font-weight: 400; letter-spacing: 1px; opacity: 0.7; margin-top: 2px; text-transform: uppercase; }
+    .btn-marca.ativo, .btn-marca:hover { background: var(--cor-badge-bg); color: var(--cor-badge-texto); border-color: var(--cor-badge-bg); box-shadow: 0 0 15px rgba(0,0,0,0.1); }
+    .btn-marca.ativo .slogan, .btn-marca:hover .slogan { opacity: 0.9; }
 
+    /* GRID DE PRODUTOS */
     .grid-produtos { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
-    .card-produto { background: var(--cor-card-dark); border: 1px solid var(--cor-borda-dark); border-radius: 14px; padding: 12px; text-align: center; box-shadow: 0 6px 18px rgba(0,0,0,0.4); display: flex; flex-direction: column; justify-content: space-between; transition: var(--transicao); }
-    .card-produto:hover { background: var(--cor-card-hover); transform: translateY(-5px); border-color: #444; box-shadow: 0 10px 25px rgba(0,0,0,0.6); }
+    .card-produto { background: var(--cor-card); border: 1px solid var(--cor-borda); border-radius: 14px; padding: 12px; text-align: center; box-shadow: 0 6px 18px rgba(0,0,0,0.06); display: flex; flex-direction: column; justify-content: space-between; transition: var(--transicao); }
+    .card-produto:hover { background: var(--cor-card-hover); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.12); }
 
-    .card-produto .img-container { width: 100%; aspect-ratio: 3 / 4; background-color: #0d0d0d; border-radius: 10px; overflow: hidden; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.05); }
+    .card-produto .img-container { width: 100%; aspect-ratio: 3 / 4; background-color: rgba(0,0,0,0.03); border-radius: 10px; overflow: hidden; margin-bottom: 12px; border: 1px solid var(--cor-borda); }
     .card-produto img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: var(--transicao); }
     .card-produto:hover img { transform: scale(1.04); }
 
-    .card-produto h3 { font-size: 13px; color: #ddd; height: 38px; overflow: hidden; margin-bottom: 8px; font-weight: 400; line-height: 1.4; }
+    .card-produto h3 { font-size: 13px; color: var(--cor-texto-principal); height: 38px; overflow: hidden; margin-bottom: 8px; font-weight: 500; line-height: 1.4; }
     .card-produto .preco { font-size: 18px; color: var(--cor-verde-preco); font-weight: 700; margin-bottom: 12px; }
     .btn-comprar { background: var(--cor-btn-compra); color: white; text-decoration: none; padding: 11px; border-radius: 8px; font-weight: 600; font-size: 12px; text-transform: uppercase; transition: var(--transicao); display: block; }
-    .btn-comprar:hover { background: #3b82f6; box-shadow: 0 0 12px rgba(37, 99, 235, 0.4); }
+    .btn-comprar:hover { opacity: 0.9; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
 
-    .info-box { background: var(--cor-card-dark); border: 1px solid var(--cor-borda-dark); padding: 28px; border-radius: 16px; box-shadow: 0 6px 20px rgba(0,0,0,0.4); text-align: center; }
-    .info-item-label { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 6px; }
-    .btn-maps { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background-color: #ffffff; color: #000000; text-decoration: none; font-weight: 600; padding: 12px 26px; border-radius: 30px; margin-top: 15px; font-size: 14px; transition: var(--transicao); }
-    .btn-maps:hover { background-color: #e0e0e0; transform: translateY(-2px); }
+    /* INFORMAÇÕES */
+    .info-box { background: var(--cor-card); border: 1px solid var(--cor-borda); padding: 28px; border-radius: 16px; box-shadow: 0 6px 20px rgba(0,0,0,0.06); text-align: center; }
+    .info-item-label { font-size: 16px; font-weight: 600; color: var(--cor-texto-principal); margin-bottom: 6px; }
+    .btn-maps { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background-color: var(--cor-texto-principal); color: var(--cor-fundo); text-decoration: none; font-weight: 600; padding: 12px 26px; border-radius: 30px; margin-top: 15px; font-size: 14px; transition: var(--transicao); }
+    .btn-maps:hover { transform: translateY(-2px); opacity: 0.9; }
 
-    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(6px); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; pointer-events: none; transition: all 0.3s ease; }
+    /* MODAL */
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(6px); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; pointer-events: none; transition: all 0.3s ease; }
     .modal-overlay.ativo { opacity: 1; pointer-events: auto; }
-    .modal-content { background: #141414; border: 1px solid var(--cor-borda-dark); padding: 30px 25px; border-radius: 20px; max-width: 380px; width: 90%; text-align: center; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.8); transform: translateY(-20px); transition: all 0.3s ease; }
+    .modal-content { background: var(--cor-card); border: 1px solid var(--cor-borda); padding: 30px 25px; border-radius: 20px; max-width: 380px; width: 90%; text-align: center; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.3); transform: translateY(-20px); transition: all 0.3s ease; }
     .modal-overlay.ativo .modal-content { transform: translateY(0); }
-    .fechar-modal { position: absolute; top: 12px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #aaa; }
+    .fechar-modal { position: absolute; top: 12px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--cor-texto-secundario); }
     .btn-whatsapp { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background-color: #25D366; color: white; text-decoration: none; font-weight: 600; padding: 14px 20px; border-radius: 30px; margin-top: 15px; width: 100%; font-size: 15px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); transition: transform 0.2s, background-color 0.2s; }
     .btn-whatsapp:hover { background-color: #20ba5a; transform: scale(1.02); }
 
-    footer { text-align: center; padding: 35px 15px; background-color: #050505; font-size: 13px; color: #777; line-height: 1.6; border-top: 1px solid var(--cor-borda-dark); }
-    footer strong { color: #fff; }
+    /* RODAPÉ */
+    footer { text-align: center; padding: 35px 15px; background-color: var(--cor-card); font-size: 13px; color: var(--cor-texto-secundario); line-height: 1.6; border-top: 1px solid var(--cor-borda); }
+    footer strong { color: var(--cor-texto-principal); }
 
     @media (min-width: 768px) {
       body { padding-top: 110px; }
@@ -133,6 +201,10 @@
       <a href="#produtos">Produtos</a>
       <a href="#onde-estamos">Visite-nos</a>
       <a onclick="abrirContato(event)">Contato</a>
+      
+      <button class="btn-theme-toggle" onclick="alternarTema()">
+        <span id="theme-icon">☀️</span> <span id="theme-text">Claro</span>
+      </button>
     </nav>
   </header>
 
@@ -164,7 +236,7 @@
       <h2>Onde Nos Encontrar</h2>
       <div class="info-box">
         <div class="info-item-label">📍 Loja Raizes</div>
-        <p style="font-size: 14px; color: #aaa;">Rua Interventor Manoel Ribas, 186 - Centro — Pitanga / PR</p>
+        <p style="font-size: 14px; color: var(--cor-texto-secundario);">Rua Interventor Manoel Ribas, 186 - Centro — Pitanga / PR</p>
         <a href="https://maps.google.com/?q=Loja+Raizes+Pitanga+PR" target="_blank" class="btn-maps">🗺️ Abrir no Google Maps</a>
       </div>
     </section>
@@ -173,10 +245,10 @@
   <div id="modal-contato" class="modal-overlay" onclick="fecharContatoFora(event)">
     <div class="modal-content">
       <button class="fechar-modal" onclick="fecharContato()">×</button>
-      <h3 style="font-size: 20px; margin-bottom: 8px; color: #fff;">Fale com a RAÍZES</h3>
-      <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">Dúvidas sobre peças ou tamanhos? Chame a gente no Zap!</p>
+      <h3 style="font-size: 20px; margin-bottom: 8px; color: var(--cor-texto-principal);">Fale com a RAÍZES</h3>
+      <p style="font-size: 13px; color: var(--cor-texto-secundario); margin-bottom: 15px;">Dúvidas sobre peças ou tamanhos? Chame a gente no Zap!</p>
       <a href="https://wa.me/5542999839784?text=Olá!%20Vim%20pelo%20site%20da%20RAÍZES." target="_blank" class="btn-whatsapp">💬 Conversar no WhatsApp</a>
-      <p style="font-size: 12px; color: #777; margin-top: 15px;">(42) 99983-9784</p>
+      <p style="font-size: 12px; color: var(--cor-texto-secundario); margin-top: 15px;">(42) 99983-9784</p>
     </div>
   </div>
 
@@ -186,67 +258,24 @@
   </footer>
 
   <script>
-    const SELLER_ID = "SEU_SELLER_ID_AQUI"; // Cole aqui o ID numérico quando conseguir pegar
-
-    // LISTA DE SEGURANÇA (Se a API do Mercado Livre der erro ou travar, exibe estas fotos verticais)
-    const produtosReserva = [
-      { id: "1", marca: "Aurochs", titulo: "Camiseta Aurochs Country Heavy Cotton", preco: 159.90, link: "#", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&auto=format&fit=crop" },
-      { id: "2", marca: "Aurochs", titulo: "Boné Aurochs Country Origins Trucker", preco: 99.90, link: "#", img: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500&auto=format&fit=crop" },
-      { id: "3", marca: "Baumgarten", titulo: "Camisa Social Baumgarten Linho Fino", preco: 329.00, link: "#", img: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500&auto=format&fit=crop" },
-      { id: "4", marca: "Beagle", titulo: "Jaqueta Beagle Outdoor Aventura", preco: 489.90, link: "#", img: "https://images.unsplash.com/photo-1544441893-675973e31985?w=500&auto=format&fit=crop" },
-      { id: "5", marca: "Sly Wear", titulo: "Vestido Sly Wear Midi Casual Chic", preco: 299.90, link: "#", img: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500&auto=format&fit=crop" },
-      { id: "6", marca: "Hering", titulo: "Camiseta Hering Básica Super Soft", preco: 69.90, link: "#", img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500&auto=format&fit=crop" }
+    // CADASTRO DOS PRODUTOS REAIS
+    // Cole aqui os links de cada produto e imagem do seu Mercado Livre
+    const produtosReais = [
+      { id: "1", marca: "Aurochs", titulo: "Camiseta Aurochs Country Heavy Cotton", preco: 159.90, link: "https://produto.mercadolivre.com.br", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&auto=format&fit=crop" },
+      { id: "2", marca: "Aurochs", titulo: "Boné Aurochs Country Origins Trucker", preco: 99.90, link: "https://produto.mercadolivre.com.br", img: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500&auto=format&fit=crop" },
+      { id: "3", marca: "Baumgarten", titulo: "Camisa Social Baumgarten Linho Fino", preco: 329.00, link: "https://produto.mercadolivre.com.br", img: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500&auto=format&fit=crop" },
+      { id: "4", marca: "Beagle", titulo: "Jaqueta Beagle Outdoor Aventura", preco: 489.90, link: "https://produto.mercadolivre.com.br", img: "https://images.unsplash.com/photo-1544441893-675973e31985?w=500&auto=format&fit=crop" },
+      { id: "5", marca: "Sly Wear", titulo: "Vestido Sly Wear Midi Casual Chic", preco: 299.90, link: "https://produto.mercadolivre.com.br", img: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500&auto=format&fit=crop" },
+      { id: "6", marca: "Hering", titulo: "Camiseta Hering Básica Super Soft", preco: 69.90, link: "https://produto.mercadolivre.com.br", img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500&auto=format&fit=crop" }
     ];
 
-    let todosProdutos = [];
-
-    async function buscarProdutos() {
-      // Se não houver Seller ID configurado, usa a lista local de imediato
-      if (!SELLER_ID || SELLER_ID === "SEU_SELLER_ID_AQUI") {
-        todosProdutos = produtosReserva;
-        renderizarProdutos(todosProdutos);
-        return;
-      }
-
-      try {
-        const res = await fetch(`https://api.mercadolibre.com/sites/MLB/search?seller_id=${SELLER_ID}`);
-        if (!res.ok) throw new Error("Falha na API");
-
-        const dados = await res.json();
-        if (dados.results && dados.results.length > 0) {
-          todosProdutos = dados.results.map(prod => ({
-            id: prod.id,
-            titulo: prod.title,
-            preco: prod.price,
-            link: prod.permalink,
-            img: prod.thumbnail ? prod.thumbnail.replace('I.jpg', 'O.jpg') : '',
-            marca: extrairMarca(prod)
-          }));
-        } else {
-          todosProdutos = produtosReserva;
-        }
-      } catch (e) {
-        console.warn("Erro ao buscar no ML, carregando lista local de segurança.", e);
-        todosProdutos = produtosReserva;
-      }
-
-      renderizarProdutos(todosProdutos);
-    }
-
-    function extrairMarca(prod) {
-      if (prod.attributes) {
-        const m = prod.attributes.find(a => a.id === 'BRAND');
-        if (m && m.value_name) return m.value_name;
-      }
-      return "Outros";
-    }
-
+    // RENDERIZAR PRODUTOS NA TELA
     function renderizarProdutos(lista) {
       const container = document.getElementById('grid-produtos');
       container.innerHTML = '';
 
       if (lista.length === 0) {
-        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: #888;">Nenhum produto encontrado.</p>';
+        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario);">Nenhum produto encontrado.</p>';
         return;
       }
 
@@ -258,29 +287,59 @@
             </div>
             <h3>${item.titulo}</h3>
             <div class="preco">R$ ${item.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
-            <a href="${item.link}" target="_blank" class="btn-comprar">${item.link === '#' ? 'Simular Compra' : 'Comprar no ML'}</a>
+            <a href="${item.link}" target="_blank" class="btn-comprar">Comprar no ML</a>
           </div>
         `;
       });
     }
 
+    // FILTRAR POR MARCA
     function filtrarMarca(marca, evt) {
       document.querySelectorAll('.btn-marca').forEach(btn => btn.classList.remove('ativo'));
       if (evt && evt.currentTarget) evt.currentTarget.classList.add('ativo');
 
       if (marca === 'todas') {
-        renderizarProdutos(todosProdutos);
+        renderizarProdutos(produtosReais);
       } else {
-        const filtrados = todosProdutos.filter(p => p.marca.toLowerCase().includes(marca.toLowerCase()) || p.titulo.toLowerCase().includes(marca.toLowerCase()));
+        const filtrados = produtosReais.filter(p => p.marca.toLowerCase().includes(marca.toLowerCase()) || p.titulo.toLowerCase().includes(marca.toLowerCase()));
         renderizarProdutos(filtrados);
       }
     }
 
+    // ALTERNAR TEMA (DARK / LIGHT)
+    function alternarTema() {
+      const body = document.body;
+      const themeIcon = document.getElementById('theme-icon');
+      const themeText = document.getElementById('theme-text');
+
+      body.classList.toggle('theme-light');
+
+      if (body.classList.contains('theme-light')) {
+        themeIcon.textContent = '🌙';
+        themeText.textContent = 'Escuro';
+      } else {
+        themeIcon.textContent = '☀️';
+        themeText.textContent = 'Claro';
+      }
+    }
+
+    // MODAL DE CONTATO
     function abrirContato(e) { if(e) e.preventDefault(); document.getElementById('modal-contato').classList.add('ativo'); }
     function fecharContato() { document.getElementById('modal-contato').classList.remove('ativo'); }
     function fecharContatoFora(e) { if(e.target.id === 'modal-contato') fecharContato(); }
 
-    buscarProdutos();
+    // ROLAGEM DO CABEÇALHO
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('cabecalho');
+      if (window.scrollY > 60) {
+        header.classList.add('encolhido');
+      } else {
+        header.classList.remove('encolhido');
+      }
+    });
+
+    // INICIALIZAR SITE
+    renderizarProdutos(produtosReais);
   </script>
 
 </body>
