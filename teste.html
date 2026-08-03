@@ -7,7 +7,6 @@
   <title>RAÍZES — Moda Multimarcas — Pitanga/PR</title>
   
   <link rel="icon" type="image/png" href="logo.png">
-
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -51,11 +50,7 @@
       transition: var(--transicao); 
     }
 
-    header.encolhido {
-      padding: 8px 5%; 
-      background: rgba(5, 5, 5, 0.98);
-    }
-    
+    header.encolhido { padding: 8px 5%; background: rgba(5, 5, 5, 0.98); }
     .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
     .logo-container .img-logo { max-height: 52px; width: auto; display: block; filter: brightness(0) invert(1); object-fit: contain; transition: max-height 0.3s ease; }
     .logo-container .logo-texto { font-family: 'Cinzel', serif; font-size: 24px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--cor-texto-principal); line-height: 1; transition: font-size 0.3s ease; }
@@ -162,9 +157,7 @@
         <button class="btn-marca" onclick="filtrarMarca('Hering', event)">Hering<span class="slogan">O Básico do Brasil</span></button>
       </div>
 
-      <div id="grid-produtos" class="grid-produtos">
-        <p style="text-align: center; grid-column: 1/-1; color: #888;">Carregando produtos do vendedor...</p>
-      </div>
+      <div id="grid-produtos" class="grid-produtos"></div>
     </section>
 
     <section id="onde-estamos">
@@ -193,55 +186,57 @@
   </footer>
 
   <script>
-    // 1. COLOQUE AQUI O SEU SELLER ID DO MERCADO LIVRE
-    const SELLER_ID = "253A1527642264"; 
+    const SELLER_ID = "SEU_SELLER_ID_AQUI"; // Cole aqui o ID numérico quando conseguir pegar
+
+    // LISTA DE SEGURANÇA (Se a API do Mercado Livre der erro ou travar, exibe estas fotos verticais)
+    const produtosReserva = [
+      { id: "1", marca: "Aurochs", titulo: "Camiseta Aurochs Country Heavy Cotton", preco: 159.90, link: "#", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&auto=format&fit=crop" },
+      { id: "2", marca: "Aurochs", titulo: "Boné Aurochs Country Origins Trucker", preco: 99.90, link: "#", img: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500&auto=format&fit=crop" },
+      { id: "3", marca: "Baumgarten", titulo: "Camisa Social Baumgarten Linho Fino", preco: 329.00, link: "#", img: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500&auto=format&fit=crop" },
+      { id: "4", marca: "Beagle", titulo: "Jaqueta Beagle Outdoor Aventura", preco: 489.90, link: "#", img: "https://images.unsplash.com/photo-1544441893-675973e31985?w=500&auto=format&fit=crop" },
+      { id: "5", marca: "Sly Wear", titulo: "Vestido Sly Wear Midi Casual Chic", preco: 299.90, link: "#", img: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500&auto=format&fit=crop" },
+      { id: "6", marca: "Hering", titulo: "Camiseta Hering Básica Super Soft", preco: 69.90, link: "#", img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500&auto=format&fit=crop" }
+    ];
 
     let todosProdutos = [];
 
-    // BUSCAR TODOS OS ANÚNCIOS DO VENDEDOR
-    async function carregarProdutosVendedorML() {
-      const container = document.getElementById('grid-produtos');
-      
-      if (!SELLER_ID) {
-        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: #888;">ID de Vendedor não informado.</p>';
+    async function buscarProdutos() {
+      // Se não houver Seller ID configurado, usa a lista local de imediato
+      if (!SELLER_ID || SELLER_ID === "SEU_SELLER_ID_AQUI") {
+        todosProdutos = produtosReserva;
+        renderizarProdutos(todosProdutos);
         return;
       }
 
       try {
-        const resposta = await fetch(`https://api.mercadolibre.com/sites/MLB/search?seller_id=${SELLER_ID}`);
-        const dados = await resposta.json();
+        const res = await fetch(`https://api.mercadolibre.com/sites/MLB/search?seller_id=${SELLER_ID}`);
+        if (!res.ok) throw new Error("Falha na API");
 
-        if (!dados.results || dados.results.length === 0) {
-          container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: #888;">Nenhum produto encontrado para este vendedor.</p>';
-          return;
-        }
-
-        todosProdutos = dados.results.map(prod => {
-          // Ajusta a imagem para alta definição
-          let foto = prod.thumbnail ? prod.thumbnail.replace('I.jpg', 'O.jpg') : '';
-
-          return {
+        const dados = await res.json();
+        if (dados.results && dados.results.length > 0) {
+          todosProdutos = dados.results.map(prod => ({
             id: prod.id,
             titulo: prod.title,
             preco: prod.price,
             link: prod.permalink,
-            img: foto,
+            img: prod.thumbnail ? prod.thumbnail.replace('I.jpg', 'O.jpg') : '',
             marca: extrairMarca(prod)
-          };
-        });
-
-        renderizarProdutos(todosProdutos);
-
-      } catch (erro) {
-        console.error("Erro ao carregar produtos do vendedor:", erro);
-        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: #ff5252;">Erro ao carregar produtos do Mercado Livre.</p>';
+          }));
+        } else {
+          todosProdutos = produtosReserva;
+        }
+      } catch (e) {
+        console.warn("Erro ao buscar no ML, carregando lista local de segurança.", e);
+        todosProdutos = produtosReserva;
       }
+
+      renderizarProdutos(todosProdutos);
     }
 
     function extrairMarca(prod) {
       if (prod.attributes) {
-        const attrMarca = prod.attributes.find(a => a.id === 'BRAND');
-        if (attrMarca && attrMarca.value_name) return attrMarca.value_name;
+        const m = prod.attributes.find(a => a.id === 'BRAND');
+        if (m && m.value_name) return m.value_name;
       }
       return "Outros";
     }
@@ -263,7 +258,7 @@
             </div>
             <h3>${item.titulo}</h3>
             <div class="preco">R$ ${item.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
-            <a href="${item.link}" target="_blank" class="btn-comprar">Comprar no ML</a>
+            <a href="${item.link}" target="_blank" class="btn-comprar">${item.link === '#' ? 'Simular Compra' : 'Comprar no ML'}</a>
           </div>
         `;
       });
@@ -285,8 +280,7 @@
     function fecharContato() { document.getElementById('modal-contato').classList.remove('ativo'); }
     function fecharContatoFora(e) { if(e.target.id === 'modal-contato') fecharContato(); }
 
-    // Inicia a busca pelo Seller ID
-    carregarProdutosVendedorML();
+    buscarProdutos();
   </script>
 
 </body>
