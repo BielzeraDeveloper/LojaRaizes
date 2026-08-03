@@ -82,7 +82,6 @@
     .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
     .logo-container .img-logo { max-height: 52px; width: auto; display: block; object-fit: contain; transition: max-height 0.3s ease; }
     
-    /* Inverte a cor da logo no modo escuro caso seja preta */
     body:not(.theme-light) .logo-container .img-logo {
       filter: brightness(0) invert(1);
     }
@@ -222,10 +221,10 @@
       
       <div class="filtros-marcas">
         <button class="btn-marca ativo" onclick="filtrarMarca('todas', event)">Todas</button>
+        <button class="btn-marca" onclick="filtrarMarca('Amil', event)">Amil<span class="slogan">Slim & Casual</span></button>
         <button class="btn-marca" onclick="filtrarMarca('Aurochs', event)">Aurochs<span class="slogan">Country Origins</span></button>
         <button class="btn-marca" onclick="filtrarMarca('Baumgarten', event)">Baumgarten<span class="slogan">Desde 1978</span></button>
         <button class="btn-marca" onclick="filtrarMarca('Beagle', event)">Beagle<span class="slogan">Explore the World</span></button>
-        <button class="btn-marca" onclick="filtrarMarca('Sly Wear', event)">Sly Wear<span class="slogan">Casual & Chic</span></button>
         <button class="btn-marca" onclick="filtrarMarca('Hering', event)">Hering<span class="slogan">O Básico do Brasil</span></button>
       </div>
 
@@ -258,15 +257,17 @@
   </footer>
 
   <script>
-    // CADASTRO DOS PRODUTOS REAIS
-    // Cole aqui os links de cada produto e imagem do seu Mercado Livre
+    // LISTA DE PRODUTOS CADASTRADOS DA SUA LOJA
     const produtosReais = [
-      { id: "1", marca: "Aurochs", titulo: "Camiseta Aurochs Country Heavy Cotton", preco: 159.90, link: "https://produto.mercadolivre.com.br", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&auto=format&fit=crop" },
-      { id: "2", marca: "Aurochs", titulo: "Boné Aurochs Country Origins Trucker", preco: 99.90, link: "https://produto.mercadolivre.com.br", img: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500&auto=format&fit=crop" },
-      { id: "3", marca: "Baumgarten", titulo: "Camisa Social Baumgarten Linho Fino", preco: 329.00, link: "https://produto.mercadolivre.com.br", img: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500&auto=format&fit=crop" },
-      { id: "4", marca: "Beagle", titulo: "Jaqueta Beagle Outdoor Aventura", preco: 489.90, link: "https://produto.mercadolivre.com.br", img: "https://images.unsplash.com/photo-1544441893-675973e31985?w=500&auto=format&fit=crop" },
-      { id: "5", marca: "Sly Wear", titulo: "Vestido Sly Wear Midi Casual Chic", preco: 299.90, link: "https://produto.mercadolivre.com.br", img: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500&auto=format&fit=crop" },
-      { id: "6", marca: "Hering", titulo: "Camiseta Hering Básica Super Soft", preco: 69.90, link: "https://produto.mercadolivre.com.br", img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500&auto=format&fit=crop" }
+      { 
+        id: "MLB3873348597", 
+        marca: "Amil", 
+        titulo: "Camisa Estilo Militar Com 2 Bolsos Amil Slim Manga Longa", 
+        preco: 129.90, 
+        link: "https://produto.mercadolivre.com.br/MLB-3873348597-camisa-estilo-militar-com-2-bolsos-amil-slim-manga-longa-_JM", 
+        img: "https://http2.mlstatic.com/D_NQ_NP_2X_706822-MLB78311183307_082024-F.webp" 
+      }
+      // Basta adicionar mais vírgulas e colar os novos produtos aqui!
     ];
 
     // RENDERIZAR PRODUTOS NA TELA
@@ -283,7 +284,7 @@
         container.innerHTML += `
           <div class="card-produto">
             <div class="img-container">
-              <img src="${item.img}" alt="${item.titulo}">
+              <img src="${item.img}" alt="${item.titulo}" onerror="this.src='https://via.placeholder.com/400x533?text=Foto+Produto'">
             </div>
             <h3>${item.titulo}</h3>
             <div class="preco">R$ ${item.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
