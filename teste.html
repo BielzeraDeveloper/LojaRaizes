@@ -163,7 +163,7 @@
       </div>
 
       <div id="grid-produtos" class="grid-produtos">
-        <p style="text-align: center; grid-column: 1/-1; color: #888;">Carregando produtos do Mercado Livre...</p>
+        <p style="text-align: center; grid-column: 1/-1; color: #888;">Carregando produtos do vendedor...</p>
       </div>
     </section>
 
@@ -193,54 +193,48 @@
   </footer>
 
   <script>
-    // 1. ADICIONE AQUI OS SEUS IDS DO MERCADO LIVRE (Exemplo: "MLB1234567890")
-    const listaIdsML = [
-      "MLB3692492288", 
-      "MLB3589234102"
-    ];
+    // 1. COLOQUE AQUI O SEU SELLER ID DO MERCADO LIVRE
+    const SELLER_ID = "336585223"; 
 
     let todosProdutos = [];
 
-    // BUSCAR DADOS NA API DO MERCADO LIVRE
-    async function carregarProdutosML() {
+    // BUSCAR TODOS OS ANÚNCIOS DO VENDEDOR
+    async function carregarProdutosVendedorML() {
       const container = document.getElementById('grid-produtos');
       
-      if (!listaIdsML || listaIdsML.length === 0) {
-        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: #888;">Nenhum ID do Mercado Livre foi cadastrado no código.</p>';
+      if (!SELLER_ID) {
+        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: #888;">ID de Vendedor não informado.</p>';
         return;
       }
 
       try {
-        const idsQuery = listaIdsML.join(',');
-        const resposta = await fetch(`https://api.mercadolibre.com/items?ids=${idsQuery}`);
+        const resposta = await fetch(`https://api.mercadolibre.com/sites/MLB/search?seller_id=${SELLER_ID}`);
         const dados = await resposta.json();
 
-        todosProdutos = dados.map(item => {
-          if (item.code === 200) {
-            const prod = item.body;
-            // Pega a imagem de alta resolução se possível
-            let foto = prod.thumbnail ? prod.thumbnail.replace('I.jpg', 'O.jpg') : '';
-            if (prod.pictures && prod.pictures.length > 0) {
-              foto = prod.pictures[0].secure_url || prod.pictures[0].url;
-            }
+        if (!dados.results || dados.results.length === 0) {
+          container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: #888;">Nenhum produto encontrado para este vendedor.</p>';
+          return;
+        }
 
-            return {
-              id: prod.id,
-              titulo: prod.title,
-              preco: prod.price,
-              link: prod.permalink,
-              img: foto,
-              marca: extrairMarca(prod)
-            };
-          }
-          return null;
-        }).filter(p => p !== null);
+        todosProdutos = dados.results.map(prod => {
+          // Ajusta a imagem para alta definição
+          let foto = prod.thumbnail ? prod.thumbnail.replace('I.jpg', 'O.jpg') : '';
+
+          return {
+            id: prod.id,
+            titulo: prod.title,
+            preco: prod.price,
+            link: prod.permalink,
+            img: foto,
+            marca: extrairMarca(prod)
+          };
+        });
 
         renderizarProdutos(todosProdutos);
 
       } catch (erro) {
-        console.error("Erro ao carregar produtos:", erro);
-        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: #ff5252;">Erro ao carregar produtos do Mercado Livre. Verifique sua conexão ou os IDs.</p>';
+        console.error("Erro ao carregar produtos do vendedor:", erro);
+        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: #ff5252;">Erro ao carregar produtos do Mercado Livre.</p>';
       }
     }
 
@@ -291,8 +285,8 @@
     function fecharContato() { document.getElementById('modal-contato').classList.remove('ativo'); }
     function fecharContatoFora(e) { if(e.target.id === 'modal-contato') fecharContato(); }
 
-    // Iniciar a busca ao carregar a página
-    carregarProdutosML();
+    // Inicia a busca pelo Seller ID
+    carregarProdutosVendedorML();
   </script>
 
 </body>
