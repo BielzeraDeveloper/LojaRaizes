@@ -299,13 +299,28 @@
 
       try {
         const res = await fetch(`https://api.mercadolibre.com/sites/MLB/search?seller_id=${ID_VENDEDOR_ML}`);
+        
+        // Verifica se a resposta HTTP foi bem-sucedida (status 200-299)
+        if (!res.ok) {
+          throw new Error(`Erro na API do Mercado Livre (Status: ${res.status})`);
+        }
+
         const data = await res.json();
         
+        // Log para te ajudar a debugar no F12 do navegador
+        console.log('Resposta da API Mercado Livre:', data);
+
         produtosCarregados = data.results || [];
         exibirProdutos(produtosCarregados);
+
       } catch (erro) {
         console.error('Erro ao buscar produtos:', erro);
-        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario);">Não foi possível carregar os produtos do Mercado Livre no momento.</p>';
+        container.innerHTML = `
+          <div style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario);">
+            <p>Não foi possível carregar os produtos no momento.</p>
+            <small style="opacity: 0.7;">Verifique o console do navegador (F12) para mais detalhes.</small>
+          </div>
+        `;
       }
     }
 
@@ -313,23 +328,31 @@
       const container = document.getElementById('grid-produtos');
       container.innerHTML = '';
 
-      if (lista.length === 0) {
-        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario);">Nenhum produto encontrado para esta marca.</p>';
+      if (!lista || lista.length === 0) {
+        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario);">Nenhum produto encontrado.</p>';
         return;
       }
 
       lista.forEach(item => {
-        // Substitui a miniatura por imagem em alta definição (-O.jpg)
-        const fotoUrl = item.thumbnail ? item.thumbnail.replace('http://', 'https://').replace('-I.jpg', '-O.jpg') : '';
+        // Ajuste para garantir imagem em alta qualidade e HTTPS
+        let fotoUrl = item.thumbnail ? item.thumbnail.replace('http://', 'https://') : '';
         
+        // Substitui sufixos de miniatura para imagens de maior resolução se existirem
+        fotoUrl = fotoUrl.replace(/-I\.(jpg|webp)$/i, '-O.$1').replace(/-V\.(jpg|webp)$/i, '-O.$1');
+
+        // Formatação de preço garantida
+        const precoFormatado = item.price 
+          ? item.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+          : 'Sob consulta';
+
         container.innerHTML += `
           <div class="card-produto">
             <div class="img-container">
-              <img src="${fotoUrl}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/400x533?text=Imagem+Indisponivel'">
+              <img src="${fotoUrl}" alt="${item.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x533?text=Sem+Imagem'">
             </div>
             <h3>${item.title}</h3>
-            <div class="preco">R$ ${item.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
-            <a href="${item.permalink}" target="_blank" class="btn-comprar">Comprar no ML</a>
+            <div class="preco">${precoFormatado}</div>
+            <a href="${item.permalink}" target="_blank" rel="noopener noreferrer" class="btn-comprar">Comprar no ML</a>
           </div>
         `;
       });
@@ -345,7 +368,9 @@
       if (marca === 'todas') {
         exibirProdutos(produtosCarregados);
       } else {
-        const filtrados = produtosCarregados.filter(p => p.title.toLowerCase().includes(marca.toLowerCase()));
+        const filtrados = produtosCarregados.filter(p => 
+          p.title.toLowerCase().includes(marca.toLowerCase())
+        );
         exibirProdutos(filtrados);
       }
     }
@@ -390,8 +415,10 @@
       }
     });
 
+    // Inicializa a busca ao carregar a página
     buscarProdutosML();
   </script>
 
 </body>
 </html>
+/body>
