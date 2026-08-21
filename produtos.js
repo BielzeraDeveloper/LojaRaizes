@@ -1,9 +1,8 @@
 const listaProdutos = [
   {
     id: 1,
-    titulo: "Camiseta Masculina Manga Curta Algodão Pima",
+    titulo: "Camiseta Manga Curta Algodão Pima",
     marca: "Baumgarten",
-    categoria: "Masculino",
     preco: 259.10,
     tamanhos: ["P", "M", "G", "GG", "XGG"],
     cores: ["Preta", "Verde", "Azul", "Branca"],
@@ -11,9 +10,8 @@ const listaProdutos = [
   },
   {
     id: 2,
-    titulo: "Camisa Polo Piquet Classic",
+    titulo: "Camisa Polo Classic Piquet",
     marca: "Baumgarten",
-    categoria: "Masculino",
     preco: 289.90,
     tamanhos: ["M", "G", "GG"],
     cores: ["Marinho", "Branca"],
@@ -23,9 +21,8 @@ const listaProdutos = [
     id: 3,
     titulo: "Jaqueta Jeans Masculina",
     marca: "Beagle",
-    categoria: "Masculino",
     preco: 429.00,
-    tamanhos: ["P", "M", "G", "GG"],
+    tamanhos: ["P", "M", "G"],
     cores: ["Jeans Escuro"],
     imagem: "imagens/jaqueta-beagle.jpg"
   },
@@ -33,7 +30,6 @@ const listaProdutos = [
     id: 4,
     titulo: "Vestido Curto Estampado",
     marca: "Farm Rio",
-    categoria: "Feminino",
     preco: 349.90,
     tamanhos: ["P", "M", "G"],
     cores: ["Estampado"],
