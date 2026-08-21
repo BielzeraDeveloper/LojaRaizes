@@ -4,33 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- TÍTULO ATUALIZADO DO SITE -->
+  <!-- SEO E TÍTULO -->
   <title>RAÍZES — Moda Masculina & Feminina — Pitanga/PR</title>
+  <meta name="description" content="Loja Raízes em Pitanga/PR. Moda Masculina & Feminina Multimarcas: Beagle, Baumgarten, Aurochs, Farm Rio, Soul, Sly Wear e Hering.">
 
-  <!-- DESCRIÇÃO DE SEO -->
-  <meta name="description" content="Loja Raízes em Pitanga/PR. Moda Masculina & Feminina Multimarcas: Beagle, Baumgarten, Aurochs, Sly Wear, Hering, Farm Rio e Soul. Venha nos visitar na Rua Interventor Manoel Ribas, 186.">
-
-  <!-- CONFIGURAÇÕES DO FAVICON -->
+  <!-- FAVICON -->
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="shortcut icon" href="logo.png" type="image/x-icon">
-  <link rel="apple-touch-icon" href="logo.png">
 
-  <!-- REDES SOCIAIS E WHATSAPP -->
+  <!-- OPEN GRAPH / SOCIAL -->
   <meta property="og:title" content="RAÍZES — Moda Masculina & Feminina — Pitanga/PR">
   <meta property="og:description" content="Moda Masculina & Feminina Multimarcas em Pitanga/PR. Venha conferir nossa coleção!">
   <meta property="og:image" content="https://lojaraizes.vercel.app/logo.png">
   <meta property="og:url" content="https://lojaraizes.vercel.app">
-  <meta property="og:type" content="website">
 
-  <!-- FONTE DO GOOGLE -->
+  <!-- FONTES COM PRECONNECT (EVITA CARREGAMENTO INFINITO) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* VARIÁVEIS DE COR E ESTILO */
     :root {
       --cor-fundo: #0a0a0a;
       --cor-card: #161616;
-      --cor-card-hover: #222222;
+      --cor-card-hover: #202020;
       --cor-borda: #2a2a2a;
       --cor-texto-principal: #ffffff;
       --cor-texto-secundario: #aaaaaa;
@@ -40,7 +37,7 @@
       --cor-header-texto: #ffffff;
       --cor-badge-bg: #ffffff;
       --cor-badge-texto: #000000;
-      --transicao: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --transicao: all 0.25s ease-in-out;
     }
 
     body.theme-light {
@@ -52,7 +49,8 @@
       --cor-texto-secundario: #555555;
       --cor-verde-preco: #16a34a;
       --cor-btn-interesse: #128c7e;
-      --cor-header-bg: rgba(10, 10, 10, 0.95);
+      --cor-header-bg: rgba(255, 255, 255, 0.95);
+      --cor-header-texto: #111111;
       --cor-badge-bg: #111111;
       --cor-badge-texto: #ffffff;
     }
@@ -64,7 +62,7 @@
       background-color: var(--cor-fundo); 
       color: var(--cor-texto-principal); 
       scroll-behavior: smooth;
-      padding-top: 110px; 
+      padding-top: 100px; 
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
@@ -72,41 +70,43 @@
       background: var(--cor-header-bg); 
       backdrop-filter: blur(10px); 
       color: var(--cor-header-texto); 
-      padding: 16px 5%; 
+      padding: 14px 5%; 
       display: flex; 
       justify-content: space-between; 
       align-items: center; 
       position: fixed; 
       top: 0; left: 0; right: 0;
       z-index: 1000; 
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4); 
+      border-bottom: 1px solid var(--cor-borda);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3); 
       transition: var(--transicao); 
     }
 
     header.encolhido { padding: 8px 5%; }
     
     .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-    .logo-container .img-logo { max-height: 52px; width: auto; filter: brightness(0) invert(1); transition: max-height 0.3s ease; }
+    .logo-container .img-logo { max-height: 48px; width: auto; transition: var(--transicao); }
+    body:not(.theme-light) .logo-container .img-logo { filter: brightness(0) invert(1); }
     .logo-container .logo-texto { font-family: 'Cinzel', serif; font-size: 24px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--cor-header-texto); }
 
     nav { display: flex; gap: 15px; align-items: center; }
-    nav a { color: #aaa; text-decoration: none; font-weight: 500; font-size: 14px; transition: var(--transicao); }
-    nav a:hover { color: #fff; }
+    nav a { color: var(--cor-texto-secundario); text-decoration: none; font-weight: 500; font-size: 14px; transition: var(--transicao); }
+    nav a:hover { color: var(--cor-texto-principal); }
 
     .btn-theme-toggle {
       background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #ffffff;
-      padding: 6px 12px;
+      border: 1px solid var(--cor-borda);
+      color: var(--cor-texto-principal);
+      padding: 6px 14px;
       border-radius: 20px;
       cursor: pointer;
       font-size: 13px;
       font-weight: 600;
+      transition: var(--transicao);
     }
 
     .banner-loja-container { width: 100%; height: 35vh; min-height: 220px; overflow: hidden; position: relative; background: #000; }
-    .foto-loja { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6); }
+    .foto-loja { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.65); }
     .banner-caption { position: absolute; bottom: 25px; left: 5%; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
     .banner-caption h1 { font-size: 28px; font-weight: 700; }
 
@@ -114,12 +114,12 @@
     section { margin-bottom: 50px; }
     h2 { font-size: 20px; font-weight: 600; text-transform: uppercase; border-left: 4px solid var(--cor-texto-principal); padding-left: 12px; margin-bottom: 20px; }
 
-    /* FILTROS DE MARCAS */
-    .filtros-marcas { display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; justify-content: center; }
+    /* FILTROS */
+    .filtros-marcas { display: flex; gap: 8px; margin-bottom: 25px; flex-wrap: wrap; justify-content: center; }
     .btn-marca { 
       position: relative; display: inline-flex; flex-direction: column; align-items: center; 
-      background: var(--cor-card); border: 1px solid var(--cor-borda); padding: 10px 18px; border-radius: 20px; 
-      cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; 
+      background: var(--cor-card); border: 1px solid var(--cor-borda); padding: 9px 16px; border-radius: 20px; 
+      cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; 
       color: var(--cor-texto-secundario); transition: var(--transicao); 
     }
     .btn-marca .slogan { font-size: 8px; opacity: 0.7; margin-top: 2px; }
@@ -127,12 +127,7 @@
 
     .badge-new {
       position: absolute; top: -6px; right: -5px; background-color: #ff2a2a; color: white;
-      font-size: 8px; font-weight: 700; padding: 2px 6px; border-radius: 10px; animation: pulsar 1.5s infinite ease-in-out;
-    }
-    @keyframes pulsar {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
+      font-size: 8px; font-weight: 700; padding: 2px 6px; border-radius: 10px;
     }
 
     /* GRID DE PRODUTOS */
@@ -141,38 +136,30 @@
       background: var(--cor-card); border: 1px solid var(--cor-borda); border-radius: 14px; padding: 14px; 
       text-align: center; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transicao); 
     }
-    .card-produto:hover { background: var(--cor-card-hover); transform: translateY(-4px); }
+    .card-produto:hover { background: var(--cor-card-hover); transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
 
-    .card-produto .img-container { width: 100%; aspect-ratio: 3 / 4; background-color: rgba(0,0,0,0.05); border-radius: 10px; overflow: hidden; margin-bottom: 12px; border: 1px solid var(--cor-borda); }
+    .card-produto .img-container { 
+      width: 100%; aspect-ratio: 3 / 4; background-color: rgba(0,0,0,0.05); border-radius: 10px; 
+      overflow: hidden; margin-bottom: 12px; border: 1px solid var(--cor-borda); cursor: pointer; position: relative;
+    }
     .card-produto img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: var(--transicao); }
-    .card-produto:hover img { transform: scale(1.04); }
+    .card-produto:hover img { transform: scale(1.05); }
 
     .card-produto .marca-label { font-size: 11px; font-weight: 700; color: var(--cor-texto-secundario); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
     .card-produto h3 { font-size: 14px; color: var(--cor-texto-principal); height: 38px; overflow: hidden; margin-bottom: 8px; font-weight: 500; line-height: 1.3; }
     .card-produto .preco { font-size: 19px; color: var(--cor-verde-preco); font-weight: 700; margin-bottom: 12px; }
     
-    /* SELEÇÃO DE TAMANHO NO CARD */
+    /* SELEÇÃO DE TAMANHO */
     .secao-tamanhos { margin-bottom: 14px; }
     .secao-tamanhos .label-tam { font-size: 10px; color: var(--cor-texto-secundario); text-transform: uppercase; margin-bottom: 6px; font-weight: 600; display: block; }
     .grupo-tamanhos { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
     
     .btn-tam {
-      background: transparent;
-      border: 1px solid var(--cor-borda);
-      color: var(--cor-texto-principal);
-      font-size: 11px;
-      font-weight: 600;
-      padding: 5px 9px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: var(--transicao);
+      background: transparent; border: 1px solid var(--cor-borda); color: var(--cor-texto-principal);
+      font-size: 11px; font-weight: 600; padding: 5px 9px; border-radius: 6px; cursor: pointer; transition: var(--transicao);
     }
     .btn-tam:hover { border-color: var(--cor-texto-principal); }
-    .btn-tam.selecionado {
-      background: var(--cor-texto-principal);
-      color: var(--cor-fundo);
-      border-color: var(--cor-texto-principal);
-    }
+    .btn-tam.selecionado { background: var(--cor-texto-principal); color: var(--cor-fundo); border-color: var(--cor-texto-principal); }
 
     .btn-interesse { 
       background: var(--cor-btn-interesse); color: #ffffff; text-decoration: none; padding: 11px; border-radius: 8px; 
@@ -181,13 +168,23 @@
     }
     .btn-interesse:hover { opacity: 0.9; transform: scale(1.02); }
 
+    /* MODAL DE FOTO AMPLIADA */
+    .modal-foto {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 2000;
+      justify-content: center; align-items: center; padding: 20px;
+    }
+    .modal-foto.ativo { display: flex; }
+    .modal-conteudo { max-width: 90%; max-height: 85vh; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .fechar-modal { position: absolute; top: 20px; right: 25px; color: #fff; font-size: 32px; font-weight: bold; cursor: pointer; }
+
     .info-box { background: var(--cor-card); border: 1px solid var(--cor-borda); padding: 25px; border-radius: 16px; text-align: center; }
     .btn-maps { display: inline-block; background-color: var(--cor-texto-principal); color: var(--cor-fundo); text-decoration: none; font-weight: 600; padding: 10px 22px; border-radius: 30px; margin-top: 15px; font-size: 13px; }
 
-    footer { text-align: center; padding: 30px 15px; background-color: #050505; font-size: 12px; color: #777; border-top: 1px solid rgba(255,255,255,0.1); }
+    footer { text-align: center; padding: 30px 15px; background-color: #050505; font-size: 12px; color: #777; border-top: 1px solid var(--cor-borda); }
 
     @media (max-width: 480px) {
-      body { padding-top: 125px; }
+      body { padding-top: 115px; }
       header { flex-direction: column; gap: 8px; text-align: center; }
       .grid-produtos { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
       .btn-tam { padding: 4px 7px; font-size: 10px; }
@@ -198,7 +195,7 @@
 
   <header id="cabecalho">
     <a href="#" class="logo-container">
-      <img src="logo.png" alt="Logo Raízes" class="img-logo" onerror="this.style.display='none';">
+      <img src="logo.png" alt="Logo Raízes" class="img-logo" loading="eager" onerror="this.style.display='none';">
       <span class="logo-texto">RAÍZES</span>
     </a>
     <nav>
@@ -211,7 +208,7 @@
   </header>
 
   <div class="banner-loja-container">
-    <img class="foto-loja" src="foto-loja.jpg" alt="Loja Raízes em Pitanga PR" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200';">
+    <img class="foto-loja" src="foto-loja.jpg" alt="Loja Raízes em Pitanga PR" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800';">
     <div class="banner-caption">
       <h1>Nossa Loja Física</h1>
       <p>Rua Interventor Manoel Ribas, 186 — Pitanga/PR</p>
@@ -222,7 +219,6 @@
     <section id="produtos">
       <h2>Coleção em Destaque</h2>
       
-      <!-- LISTA COMPLETA DE MARCAS ATUALIZADA -->
       <div class="filtros-marcas">
         <button class="btn-marca ativo" onclick="filtrarMarca('todas', event)">Todas</button>
         <button class="btn-marca" onclick="filtrarMarca('Aurochs', event)"><span class="badge-new">NEW</span>Aurochs<span class="slogan">Country Origins</span></button>
@@ -242,9 +238,15 @@
       <div class="info-box">
         <p style="font-size: 15px; font-weight: 600;">📍 Loja Raízes</p>
         <p style="font-size: 14px; color: var(--cor-texto-secundario); margin-top: 4px;">Rua Interventor Manoel Ribas, 186 - Centro — Pitanga / PR</p>
-        <a href="https://maps.google.com/?q=Loja+Raizes+Pitanga+PR" target="_blank" class="btn-maps">🗺️ Abrir no Google Maps</a>
+        <a href="https://maps.google.com/?q=Loja+Raizes+Pitanga+PR" target="_blank" rel="noopener" class="btn-maps">🗺️ Abrir no Google Maps</a>
       </div>
     </section>
+  </div>
+
+  <!-- MODAL DE ZOOM DA IMAGEM -->
+  <div id="modalFoto" class="modal-foto" onclick="fecharModalFoto()">
+    <span class="fechar-modal">&times;</span>
+    <img id="imgModal" class="modal-conteudo" src="" alt="Foto Ampliada">
   </div>
 
   <footer>
@@ -252,13 +254,10 @@
     <p>MALDANER & MAZETTO LTDA | CNPJ: 64.860.761/0001-64</p>
   </footer>
 
-  <!-- IMPORTAÇÃO DO ARQUIVO EXTERNO DE PRODUTOS -->
   <script src="produtos.js"></script>
 
-  <!-- LÓGICA DE INTERAÇÃO E WHATSAPP -->
   <script>
     const NUMERO_WHATSAPP = '5542999839784';
-    
     const tamanhoSelecionadoPorProduto = {};
 
     function renderizarVitrine(produtos) {
@@ -285,8 +284,8 @@
 
         container.innerHTML += `
           <div class="card-produto">
-            <div class="img-container">
-              <img src="${item.imagem}" alt="${item.titulo}" onerror="this.src='https://via.placeholder.com/400x533?text=Foto+Indisponivel'">
+            <div class="img-container" onclick="abrirFotoModal('${item.imagem}')">
+              <img src="${item.imagem}" alt="${item.titulo}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x533?text=Foto+Indisponivel'">
             </div>
             <div class="marca-label">${item.marca}</div>
             <h3>${item.titulo}</h3>
@@ -307,12 +306,21 @@
       });
     }
 
+    function abrirFotoModal(url) {
+      const modal = document.getElementById('modalFoto');
+      const img = document.getElementById('imgModal');
+      img.src = url;
+      modal.classList.add('ativo');
+    }
+
+    function fecharModalFoto() {
+      document.getElementById('modalFoto').classList.remove('ativo');
+    }
+
     function selecionarTamanho(idProduto, tamanho, botao) {
       tamanhoSelecionadoPorProduto[idProduto] = tamanho;
-
       const card = botao.closest('.card-produto');
       card.querySelectorAll('.btn-tam').forEach(btn => btn.classList.remove('selecionado'));
-
       botao.classList.add('selecionado');
     }
 
