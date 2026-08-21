@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* VARIÁVEIS DE COR */
+    /* VARIÁVEIS DE COR E ESTILO */
     :root {
       --cor-fundo: #0a0a0a;
       --cor-card: #161616;
@@ -97,6 +97,7 @@
     section { margin-bottom: 50px; }
     h2 { font-size: 20px; font-weight: 600; text-transform: uppercase; border-left: 4px solid var(--cor-texto-principal); padding-left: 12px; margin-bottom: 20px; }
 
+    /* FILTROS DE MARCAS */
     .filtros-marcas { display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; justify-content: center; }
     .btn-marca { 
       position: relative; display: inline-flex; flex-direction: column; align-items: center; 
@@ -117,9 +118,10 @@
       100% { transform: scale(1); }
     }
 
-    .grid-produtos { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 18px; }
+    /* GRID DE PRODUTOS */
+    .grid-produtos { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 20px; }
     .card-produto { 
-      background: var(--cor-card); border: 1px solid var(--cor-borda); border-radius: 14px; padding: 12px; 
+      background: var(--cor-card); border: 1px solid var(--cor-borda); border-radius: 14px; padding: 14px; 
       text-align: center; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transicao); 
     }
     .card-produto:hover { background: var(--cor-card-hover); transform: translateY(-4px); }
@@ -128,10 +130,33 @@
     .card-produto img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: var(--transicao); }
     .card-produto:hover img { transform: scale(1.04); }
 
-    .card-produto h3 { font-size: 14px; color: var(--cor-texto-principal); height: 40px; overflow: hidden; margin-bottom: 6px; font-weight: 500; line-height: 1.3; }
-    .card-produto .detalhes { font-size: 11px; color: var(--cor-texto-secundario); margin-bottom: 8px; }
-    .card-produto .preco { font-size: 18px; color: var(--cor-verde-preco); font-weight: 700; margin-bottom: 12px; }
+    .card-produto .marca-label { font-size: 11px; font-weight: 700; color: var(--cor-texto-secundario); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+    .card-produto h3 { font-size: 14px; color: var(--cor-texto-principal); height: 38px; overflow: hidden; margin-bottom: 8px; font-weight: 500; line-height: 1.3; }
+    .card-produto .preco { font-size: 19px; color: var(--cor-verde-preco); font-weight: 700; margin-bottom: 12px; }
     
+    /* SELEÇÃO DE TAMANHO NO CARD */
+    .secao-tamanhos { margin-bottom: 14px; }
+    .secao-tamanhos .label-tam { font-size: 10px; color: var(--cor-texto-secundario); text-transform: uppercase; margin-bottom: 6px; font-weight: 600; display: block; }
+    .grupo-tamanhos { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+    
+    .btn-tam {
+      background: transparent;
+      border: 1px solid var(--cor-borda);
+      color: var(--cor-texto-principal);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 9px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: var(--transicao);
+    }
+    .btn-tam:hover { border-color: var(--cor-texto-principal); }
+    .btn-tam.selecionado {
+      background: var(--cor-texto-principal);
+      color: var(--cor-fundo);
+      border-color: var(--cor-texto-principal);
+    }
+
     .btn-interesse { 
       background: var(--cor-btn-interesse); color: #ffffff; text-decoration: none; padding: 11px; border-radius: 8px; 
       font-weight: 600; font-size: 12px; text-transform: uppercase; transition: var(--transicao); display: flex; 
@@ -147,7 +172,8 @@
     @media (max-width: 480px) {
       body { padding-top: 125px; }
       header { flex-direction: column; gap: 8px; text-align: center; }
-      .grid-produtos { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+      .grid-produtos { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+      .btn-tam { padding: 4px 7px; font-size: 10px; }
     }
   </style>
 </head>
@@ -209,9 +235,12 @@
   <!-- 1. IMPORTAÇÃO DO CADASTRO DE PRODUTOS -->
   <script src="produtos.js"></script>
 
-  <!-- 2. LÓGICA DE FUNCIONAMENTO DO SITE -->
+  <!-- 2. LÓGICA DE FUNCIONAMENTO DA LOJA -->
   <script>
     const NUMERO_WHATSAPP = '5542999839784';
+    
+    // Objeto para guardar qual tamanho está selecionado em cada produto
+    const tamanhoSelecionadoPorProduto = {};
 
     function renderizarVitrine(produtos) {
       const container = document.getElementById('grid-produtos');
@@ -223,15 +252,36 @@
       }
 
       produtos.forEach(item => {
+        // Gera as pílulas/botões de cada tamanho disponível
+        let htmlTamanhos = '';
+        if (Array.isArray(item.tamanhos)) {
+          htmlTamanhos = item.tamanhos.map(tam => `
+            <button class="btn-tam ${tamanhoSelecionadoPorProduto[item.id] === tam ? 'selecionado' : ''}" 
+                    onclick="selecionarTamanho(${item.id}, '${tam}', this)">
+              ${tam}
+            </button>
+          `).join('');
+        } else {
+          // Garante compatibilidade caso no produtos.js esteja em texto simples
+          htmlTamanhos = `<span style="font-size: 11px; color: var(--cor-texto-secundario);">${item.tamanhos}</span>`;
+        }
+
         container.innerHTML += `
           <div class="card-produto">
             <div class="img-container">
               <img src="${item.imagem}" alt="${item.titulo}" onerror="this.src='https://via.placeholder.com/400x533?text=Foto+Indisponivel'">
             </div>
+            <div class="marca-label">${item.marca}</div>
             <h3>${item.titulo}</h3>
-            <div class="detalhes">${item.marca} • Tam: ${item.tamanhos}</div>
             <div class="preco">R$ ${item.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
             
+            <div class="secao-tamanhos">
+              <span class="label-tam">Selecione o tamanho:</span>
+              <div class="grupo-tamanhos">
+                ${htmlTamanhos}
+              </div>
+            </div>
+
             <button class="btn-interesse" onclick="solicitarNoZap(${item.id})">
               💬 Tenho Interesse
             </button>
@@ -240,20 +290,40 @@
       });
     }
 
+    function selecionarTamanho(idProduto, tamanho, botao) {
+      // Guarda o tamanho escolhido para este produto específico
+      tamanhoSelecionadoPorProduto[idProduto] = tamanho;
+
+      // Remove o destaque dos outros botões de tamanho do mesmo card
+      const card = botao.closest('.card-produto');
+      card.querySelectorAll('.btn-tam').forEach(btn => btn.classList.remove('selecionado'));
+
+      // Destaca o botão clicado
+      botao.classList.add('selecionado');
+    }
+
     function solicitarNoZap(idProduto) {
-      // Procura o item dentro do array que veio do arquivo produtos.js
       const produto = listaProdutos.find(p => p.id === idProduto);
       if (!produto) return;
 
+      const tamanhoEscolhido = tamanhoSelecionadoPorProduto[idProduto];
+
+      // Se o produto possui lista de tamanhos e o cliente não escolheu nenhum ainda
+      if (Array.isArray(produto.tamanhos) && !tamanhoEscolhido) {
+        alert('Por favor, selecione um tamanho antes de prosseguir!');
+        return;
+      }
+
       const linkFoto = produto.imagem.startsWith('http') ? `\n\n🖼️ Foto: ${produto.imagem}` : '';
+      const textoTamanho = tamanhoEscolhido ? `\n📏 *Tamanho Selecionado:* ${tamanhoEscolhido}` : `\n📏 *Tamanhos:* ${produto.tamanhos}`;
 
       const mensagem = `Olá! Gostaria de consultar a disponibilidade desta peça:` +
                        `\n\n📌 *${produto.titulo}*` +
                        `\n🏷️ *Marca:* ${produto.marca}` +
-                       `\n📏 *Tamanhos:* ${produto.tamanhos}` +
+                       `${textoTamanho}` +
                        `\n💰 *Valor:* R$ ${produto.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` +
                        `${linkFoto}` +
-                       `\n\nAinda têm no estoque?`;
+                       `\n\nAinda têm esse tamanho disponível na loja física?`;
 
       window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(mensagem)}`, '_blank');
     }
@@ -285,7 +355,6 @@
       header.classList.toggle('encolhido', window.scrollY > 60);
     });
 
-    // Inicia a vitrine assim que o arquivo produtos.js for lido
     if (typeof listaProdutos !== 'undefined') {
       renderizarVitrine(listaProdutos);
     }
