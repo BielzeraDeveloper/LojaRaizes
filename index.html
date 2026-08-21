@@ -57,7 +57,7 @@
       background-color: var(--cor-fundo); 
       color: var(--cor-texto-principal); 
       scroll-behavior: smooth;
-      padding-top: 100px; 
+      padding-top: 90px; 
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
@@ -65,7 +65,7 @@
       background: var(--cor-header-bg); 
       backdrop-filter: blur(10px); 
       color: var(--cor-header-texto); 
-      padding: 14px 5%; 
+      padding: 12px 5%; 
       display: flex; 
       justify-content: space-between; 
       align-items: center; 
@@ -79,10 +79,10 @@
 
     header.encolhido { padding: 8px 5%; }
     
-    .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-    .logo-container .img-logo { max-height: 48px; width: auto; transition: var(--transicao); }
+    .logo-container { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-container .img-logo { max-height: 40px; width: auto; transition: var(--transicao); }
     body:not(.theme-light) .logo-container .img-logo { filter: brightness(0) invert(1); }
-    .logo-container .logo-texto { font-family: 'Cinzel', serif; font-size: 24px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--cor-header-texto); }
+    .logo-container .logo-texto { font-family: 'Cinzel', serif; font-size: 22px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--cor-header-texto); }
 
     nav { display: flex; gap: 15px; align-items: center; }
     nav a { color: var(--cor-texto-secundario); text-decoration: none; font-weight: 500; font-size: 14px; transition: var(--transicao); }
@@ -95,58 +95,116 @@
       padding: 6px 14px;
       border-radius: 20px;
       cursor: pointer;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       transition: var(--transicao);
     }
 
     .banner-loja-container { 
       width: 100%; 
-      height: 35vh; 
-      min-height: 220px; 
-      aspect-ratio: 16 / 9;
+      height: 30vh; 
+      min-height: 200px; 
       overflow: hidden; 
       position: relative; 
       background: #111; 
     }
     .foto-loja { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.65); }
-    .banner-caption { position: absolute; bottom: 25px; left: 5%; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-    .banner-caption h1 { font-size: 28px; font-weight: 700; }
+    .banner-caption { position: absolute; bottom: 20px; left: 5%; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+    .banner-caption h1 { font-size: 26px; font-weight: 700; }
 
-    .container { max-width: 1200px; margin: 30px auto; padding: 0 15px; }
-    section { margin-bottom: 50px; }
-    h2 { font-size: 20px; font-weight: 600; text-transform: uppercase; border-left: 4px solid var(--cor-texto-principal); padding-left: 12px; margin-bottom: 20px; }
+    .container { max-width: 1200px; margin: 25px auto; padding: 0 15px; }
+    section { margin-bottom: 40px; }
+    h2 { font-size: 18px; font-weight: 600; text-transform: uppercase; border-left: 4px solid var(--cor-texto-principal); padding-left: 10px; margin-bottom: 20px; }
 
     /* FILTROS POR GÊNERO */
-    .filtros-genero { display: flex; gap: 10px; justify-content: center; margin-bottom: 15px; }
-    .btn-genero {
-      background: transparent; border: 2px solid var(--cor-borda); color: var(--cor-texto-principal);
-      padding: 8px 20px; border-radius: 25px; font-weight: 700; font-size: 13px; text-transform: uppercase;
-      cursor: pointer; transition: var(--transicao);
+    .filtros-genero { 
+      display: flex; 
+      gap: 8px; 
+      justify-content: center; 
+      margin-bottom: 15px; 
     }
-    .btn-genero.ativo, .btn-genero:hover { background: var(--cor-texto-principal); color: var(--cor-fundo); border-color: var(--cor-texto-principal); }
 
-    /* FILTROS DE MARCAS */
-    .filtros-marcas { display: flex; gap: 8px; margin-bottom: 25px; flex-wrap: wrap; justify-content: center; }
-    .btn-marca { 
-      position: relative; display: inline-flex; flex-direction: column; align-items: center; 
-      background: var(--cor-card); border: 1px solid var(--cor-borda); padding: 9px 16px; border-radius: 20px; 
-      cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; 
-      color: var(--cor-texto-secundario); transition: var(--transicao); 
+    .btn-genero {
+      background: var(--cor-card); 
+      border: 1px solid var(--cor-borda); 
+      color: var(--cor-texto-secundario);
+      padding: 8px 20px; 
+      border-radius: 20px; 
+      font-weight: 600; 
+      font-size: 12px; 
+      text-transform: uppercase;
+      cursor: pointer; 
+      transition: var(--transicao);
     }
-    .btn-marca .slogan { font-size: 8px; opacity: 0.7; margin-top: 2px; }
-    .btn-marca.ativo, .btn-marca:hover { background: var(--cor-badge-bg); color: var(--cor-badge-texto); border-color: var(--cor-badge-bg); }
+
+    .btn-genero.ativo, .btn-genero:hover { 
+      background: var(--cor-texto-principal); 
+      color: var(--cor-fundo); 
+      border-color: var(--cor-texto-principal); 
+    }
+
+    /* FILTROS DE MARCAS - CARROSSEL DESLIZANTE NO MOBILE */
+    .filtros-marcas { 
+      display: flex; 
+      gap: 8px; 
+      margin-bottom: 25px; 
+      overflow-x: auto; 
+      padding-bottom: 8px;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .filtros-marcas::-webkit-scrollbar { display: none; }
+    .filtros-marcas { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .btn-marca { 
+      flex: 0 0 auto;
+      position: relative; 
+      background: var(--cor-card); 
+      border: 1px solid var(--cor-borda); 
+      padding: 8px 16px; 
+      border-radius: 20px; 
+      cursor: pointer; 
+      font-family: 'Poppins', sans-serif; 
+      font-weight: 600; 
+      font-size: 12px; 
+      text-transform: uppercase; 
+      color: var(--cor-texto-secundario); 
+      transition: var(--transicao); 
+      white-space: nowrap;
+    }
+
+    .btn-marca.ativo, .btn-marca:hover { 
+      background: var(--cor-badge-bg); 
+      color: var(--cor-badge-texto); 
+      border-color: var(--cor-badge-bg); 
+    }
 
     .badge-new {
-      position: absolute; top: -6px; right: -5px; background-color: #ff2a2a; color: white;
-      font-size: 8px; font-weight: 700; padding: 2px 6px; border-radius: 10px;
+      position: absolute; 
+      top: -4px; 
+      right: -2px; 
+      background-color: #ff2a2a; 
+      color: white;
+      font-size: 7px; 
+      font-weight: 700; 
+      padding: 1px 5px; 
+      border-radius: 10px;
     }
 
     /* GRID DE PRODUTOS */
-    .grid-produtos { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 20px; }
+    .grid-produtos { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+    
     .card-produto { 
-      background: var(--cor-card); border: 1px solid var(--cor-borda); border-radius: 14px; padding: 14px; 
-      text-align: center; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transicao); 
+      background: var(--cor-card); 
+      border: 1px solid var(--cor-borda); 
+      border-radius: 14px; 
+      padding: 14px; 
+      text-align: center; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: space-between; 
+      transition: var(--transicao); 
     }
     .card-produto:hover { background: var(--cor-card-hover); transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
 
@@ -166,24 +224,45 @@
 
     .card-produto .marca-label { font-size: 11px; font-weight: 700; color: var(--cor-texto-secundario); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
     .card-produto h3 { font-size: 14px; color: var(--cor-texto-principal); height: 38px; overflow: hidden; margin-bottom: 8px; font-weight: 500; line-height: 1.3; }
-    .card-produto .preco { font-size: 19px; color: var(--cor-verde-preco); font-weight: 700; margin-bottom: 12px; }
+    .card-produto .preco { font-size: 18px; color: var(--cor-verde-preco); font-weight: 700; margin-bottom: 12px; }
     
-    /* OPÇÕES DE SELEÇÃO (TAMANHO E COR) */
+    /* SELEÇÃO DE TAMANHO E COR */
     .secao-opcao { margin-bottom: 10px; }
     .secao-opcao .label-opcao { font-size: 10px; color: var(--cor-texto-secundario); text-transform: uppercase; margin-bottom: 4px; font-weight: 600; display: block; }
     .grupo-opcoes { display: flex; gap: 5px; justify-content: center; flex-wrap: wrap; }
     
     .btn-opcao {
-      background: transparent; border: 1px solid var(--cor-borda); color: var(--cor-texto-principal);
-      font-size: 10px; font-weight: 600; padding: 4px 8px; border-radius: 6px; cursor: pointer; transition: var(--transicao);
+      background: transparent; 
+      border: 1px solid var(--cor-borda); 
+      color: var(--cor-texto-principal);
+      font-size: 10px; 
+      font-weight: 600; 
+      padding: 4px 8px; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      transition: var(--transicao);
     }
     .btn-opcao:hover { border-color: var(--cor-texto-principal); }
     .btn-opcao.selecionado { background: var(--cor-texto-principal); color: var(--cor-fundo); border-color: var(--cor-texto-principal); }
 
     .btn-interesse { 
-      background: var(--cor-btn-interesse); color: #ffffff; text-decoration: none; padding: 11px; border-radius: 8px; 
-      font-weight: 600; font-size: 12px; text-transform: uppercase; transition: var(--transicao); display: flex; 
-      align-items: center; justify-content: center; gap: 6px; cursor: pointer; border: none; width: 100%; margin-top: 8px;
+      background: var(--cor-btn-interesse); 
+      color: #ffffff; 
+      text-decoration: none; 
+      padding: 11px; 
+      border-radius: 8px; 
+      font-weight: 600; 
+      font-size: 12px; 
+      text-transform: uppercase; 
+      transition: var(--transicao); 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 6px; 
+      cursor: pointer; 
+      border: none; 
+      width: 100%; 
+      margin-top: 8px;
     }
     .btn-interesse:hover { opacity: 0.9; transform: scale(1.02); }
 
@@ -203,7 +282,7 @@
     footer { text-align: center; padding: 30px 15px; background-color: #050505; font-size: 12px; color: #777; border-top: 1px solid var(--cor-borda); }
 
     @media (max-width: 480px) {
-      body { padding-top: 115px; }
+      body { padding-top: 100px; }
       header { flex-direction: column; gap: 8px; text-align: center; }
       .grid-produtos { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
       .btn-opcao { padding: 3px 6px; font-size: 9px; }
@@ -245,16 +324,16 @@
         <button class="btn-genero" onclick="filtrarGenero('Masculino', event)">Masculino</button>
       </div>
 
-      <!-- FILTRO DE MARCAS -->
+      <!-- FILTRO DE MARCAS (DESLIZANTE E LIMPO) -->
       <div class="filtros-marcas">
-        <button class="btn-marca ativo" onclick="filtrarMarca('todas', event)">Todas as Marcas</button>
-        <button class="btn-marca" onclick="filtrarMarca('Aurochs', event)"><span class="badge-new">NEW</span>Aurochs<span class="slogan">Country Origins</span></button>
-        <button class="btn-marca" onclick="filtrarMarca('Baumgarten', event)"><span class="badge-new">NEW</span>Baumgarten<span class="slogan">Desde 1978</span></button>
-        <button class="btn-marca" onclick="filtrarMarca('Beagle', event)"><span class="badge-new">NEW</span>Beagle<span class="slogan">Explore the World</span></button>
-        <button class="btn-marca" onclick="filtrarMarca('Farm Rio', event)"><span class="badge-new">NEW</span>Farm Rio<span class="slogan">Cores & Estampas</span></button>
-        <button class="btn-marca" onclick="filtrarMarca('Soul', event)"><span class="badge-new">NEW</span>Soul<span class="slogan">Style & Comfort</span></button>
-        <button class="btn-marca" onclick="filtrarMarca('Sly Wear', event)">Sly Wear<span class="slogan">Casual & Chic</span></button>
-        <button class="btn-marca" onclick="filtrarMarca('Hering', event)">Hering<span class="slogan">O Básico do Brasil</span></button>
+        <button class="btn-marca ativo" onclick="filtrarMarca('todas', event)">Todas</button>
+        <button class="btn-marca" onclick="filtrarMarca('Aurochs', event)"><span class="badge-new">NEW</span>Aurochs</button>
+        <button class="btn-marca" onclick="filtrarMarca('Baumgarten', event)"><span class="badge-new">NEW</span>Baumgarten</button>
+        <button class="btn-marca" onclick="filtrarMarca('Beagle', event)"><span class="badge-new">NEW</span>Beagle</button>
+        <button class="btn-marca" onclick="filtrarMarca('Farm Rio', event)"><span class="badge-new">NEW</span>Farm Rio</button>
+        <button class="btn-marca" onclick="filtrarMarca('Soul', event)"><span class="badge-new">NEW</span>Soul</button>
+        <button class="btn-marca" onclick="filtrarMarca('Sly Wear', event)">Sly Wear</button>
+        <button class="btn-marca" onclick="filtrarMarca('Hering', event)">Hering</button>
       </div>
 
       <div id="grid-produtos" class="grid-produtos"></div>
@@ -285,7 +364,7 @@
 
   <script>
     const NUMERO_WHATSAPP = '5542999839784';
-    const selecoesDoUsuario = {}; // Guarda { idProduto: { tamanho: '', cor: '' } }
+    const selecoesDoUsuario = {};
 
     let generoAtual = 'todos';
     let marcaAtual = 'todas';
@@ -295,7 +374,7 @@
       container.innerHTML = '';
 
       if (!produtos || produtos.length === 0) {
-        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario);">Nenhuma peça encontrada para os filtros selecionados.</p>';
+        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario); padding: 30px 0;">Nenhuma peça encontrada para os filtros selecionados.</p>';
         return;
       }
 
@@ -306,7 +385,7 @@
 
         // Renderiza botões de tamanho
         let htmlTamanhos = '';
-        if (Array.isArray(item.tamanhos)) {
+        if (Array.isArray(item.tamanhos) && item.tamanhos.length > 0) {
           htmlTamanhos = item.tamanhos.map(tam => `
             <button class="btn-opcao ${selecoesDoUsuario[item.id].tamanho === tam ? 'selecionado' : ''}" 
                     onclick="selecionarOpcao(${item.id}, 'tamanho', '${tam}', this)">
@@ -317,7 +396,7 @@
 
         // Renderiza botões de cor
         let htmlCores = '';
-        if (Array.isArray(item.cores)) {
+        if (Array.isArray(item.cores) && item.cores.length > 0) {
           htmlCores = item.cores.map(cor => `
             <button class="btn-opcao ${selecoesDoUsuario[item.id].cor === cor ? 'selecionado' : ''}" 
                     onclick="selecionarOpcao(${item.id}, 'cor', '${cor}', this)">
@@ -329,7 +408,7 @@
         container.innerHTML += `
           <div class="card-produto">
             <div class="img-container" onclick="abrirFotoModal('${item.imagem}')">
-              <img src="${item.imagem}" alt="${item.titulo}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x533?text=Foto+Indisponivel'">
+              <img src="${item.imagem}" alt="${item.titulo}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&auto=format&fit=crop';">
             </div>
             <div class="marca-label">${item.marca}</div>
             <h3>${item.titulo}</h3>
@@ -370,12 +449,12 @@
 
       const selecao = selecoesDoUsuario[idProduto] || {};
 
-      if (Array.isArray(produto.tamanhos) && !selecao.tamanho) {
+      if (Array.isArray(produto.tamanhos) && produto.tamanhos.length > 0 && !selecao.tamanho) {
         alert('Por favor, selecione um TAMANHO antes de prosseguir!');
         return;
       }
 
-      if (Array.isArray(produto.cores) && !selecao.cor) {
+      if (Array.isArray(produto.cores) && produto.cores.length > 0 && !selecao.cor) {
         alert('Por favor, selecione uma COR antes de prosseguir!');
         return;
       }
@@ -431,15 +510,4 @@
       modal.classList.add('ativo');
     }
 
-    function fecharModalFoto() {
-      document.getElementById('modalFoto').classList.remove('ativo');
-    }
-
-    function alternarTema() {
-      const body = document.body;
-      const themeIcon = document.getElementById('theme-icon');
-      const themeText = document.getElementById('theme-text');
-
-      body.classList.toggle('theme-light');
-      themeIcon.textContent = body.classList.contains('theme-light') ? '🌙' : '☀️';
-   
+    function fecharMo
