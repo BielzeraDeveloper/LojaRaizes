@@ -7,6 +7,6 @@ const listaProdutos = [
     preco: 259.10,
     tamanhos: ["P", "M", "G", "GG", "XGG"],
     cores: ["Preta", "Verde", "Azul", "Branca"],
-    imagem: "foto-camiseta-pima.jpg"
+    imagem: "imagens/camiseta-masculina-manga-curta-algodao-pima-preta.jpeg"
   }
 ];
