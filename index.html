@@ -143,12 +143,13 @@
       border-color: var(--cor-texto-principal); 
     }
 
-    /* FILTROS DE MARCAS - CARROSSEL DESLIZANTE NO MOBILE */
+    /* FILTROS DE MARCAS - CARROSSEL COM BADGE VISÍVEL */
     .filtros-marcas { 
       display: flex; 
-      gap: 8px; 
+      gap: 10px; 
       margin-bottom: 25px; 
       overflow-x: auto; 
+      padding-top: 14px; /* Espaço superior para a badge não cortar */
       padding-bottom: 8px;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
@@ -160,6 +161,7 @@
     .btn-marca { 
       flex: 0 0 auto;
       position: relative; 
+      overflow: visible !important;
       background: var(--cor-card); 
       border: 1px solid var(--cor-borda); 
       padding: 8px 16px; 
@@ -182,14 +184,15 @@
 
     .badge-new {
       position: absolute; 
-      top: -4px; 
+      top: -10px; 
       right: -2px; 
       background-color: #ff2a2a; 
-      color: white;
-      font-size: 7px; 
+      color: #ffffff;
+      font-size: 8px; 
       font-weight: 700; 
-      padding: 1px 5px; 
+      padding: 2px 6px; 
       border-radius: 10px;
+      z-index: 10;
     }
 
     /* GRID DE PRODUTOS */
@@ -324,7 +327,7 @@
         <button class="btn-genero" onclick="filtrarGenero('Masculino', event)">Masculino</button>
       </div>
 
-      <!-- FILTRO DE MARCAS (DESLIZANTE E LIMPO) -->
+      <!-- FILTRO DE MARCAS -->
       <div class="filtros-marcas">
         <button class="btn-marca ativo" onclick="filtrarMarca('todas', event)">Todas</button>
         <button class="btn-marca" onclick="filtrarMarca('Aurochs', event)"><span class="badge-new">NEW</span>Aurochs</button>
@@ -383,7 +386,6 @@
           selecoesDoUsuario[item.id] = { tamanho: '', cor: '' };
         }
 
-        // Renderiza botões de tamanho
         let htmlTamanhos = '';
         if (Array.isArray(item.tamanhos) && item.tamanhos.length > 0) {
           htmlTamanhos = item.tamanhos.map(tam => `
@@ -394,7 +396,6 @@
           `).join('');
         }
 
-        // Renderiza botões de cor
         let htmlCores = '';
         if (Array.isArray(item.cores) && item.cores.length > 0) {
           htmlCores = item.cores.map(cor => `
@@ -476,14 +477,14 @@
     }
 
     function aplicarFiltros() {
-      let resultado = listaProdutos;
+      let resultado = typeof listaProdutos !== 'undefined' ? listaProdutos : [];
 
       if (generoAtual !== 'todos') {
-        resultado = resultado.filter(p => p.categoria && p.categoria.toLowerCase() === generoAtual.toLowerCase());
+        resultado = resultado.filter(p => p.categoria && p.categoria.toLowerCase().trim() === generoAtual.toLowerCase().trim());
       }
 
       if (marcaAtual !== 'todas') {
-        resultado = resultado.filter(p => p.marca.toLowerCase() === marcaAtual.toLowerCase());
+        resultado = resultado.filter(p => p.marca && p.marca.toLowerCase().trim() === marcaAtual.toLowerCase().trim());
       }
 
       renderizarVitrine(resultado);
@@ -505,9 +506,4 @@
 
     function abrirFotoModal(url) {
       const modal = document.getElementById('modalFoto');
-      const img = document.getElementById('imgModal');
-      img.src = url;
-      modal.classList.add('ativo');
-    }
-
-    function fecharMo
+      const img = documen
