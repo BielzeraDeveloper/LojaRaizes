@@ -3,9 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- TÍTULO ATUALIZADO DO SITE -->
   <title>RAÍZES — Moda Masculina & Feminina — Pitanga/PR</title>
-  
+
+  <!-- DESCRIÇÃO DE SEO -->
+  <meta name="description" content="Loja Raízes em Pitanga/PR. Moda Masculina & Feminina Multimarcas: Beagle, Baumgarten, Aurochs, Sly Wear, Hering, Farm Rio e Soul. Venha nos visitar na Rua Interventor Manoel Ribas, 186.">
+
+  <!-- CONFIGURAÇÕES DO FAVICON -->
   <link rel="icon" type="image/png" href="logo.png">
+  <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="logo.png">
+
+  <!-- REDES SOCIAIS E WHATSAPP -->
+  <meta property="og:title" content="RAÍZES — Moda Masculina & Feminina — Pitanga/PR">
+  <meta property="og:description" content="Moda Masculina & Feminina Multimarcas em Pitanga/PR. Venha conferir nossa coleção!">
+  <meta property="og:image" content="https://lojaraizes.vercel.app/logo.png">
+  <meta property="og:url" content="https://lojaraizes.vercel.app">
+  <meta property="og:type" content="website">
+
+  <!-- FONTE DO GOOGLE -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -181,7 +198,7 @@
 
   <header id="cabecalho">
     <a href="#" class="logo-container">
-      <img src="logo.png" alt="Símbolo Raízes" class="img-logo" onerror="this.style.display='none';">
+      <img src="logo.png" alt="Logo Raízes" class="img-logo" onerror="this.style.display='none';">
       <span class="logo-texto">RAÍZES</span>
     </a>
     <nav>
@@ -194,7 +211,7 @@
   </header>
 
   <div class="banner-loja-container">
-    <img class="foto-loja" src="foto-loja.jpg" alt="Loja Raizes em Pitanga PR" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200';">
+    <img class="foto-loja" src="foto-loja.jpg" alt="Loja Raízes em Pitanga PR" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200';">
     <div class="banner-caption">
       <h1>Nossa Loja Física</h1>
       <p>Rua Interventor Manoel Ribas, 186 — Pitanga/PR</p>
@@ -205,11 +222,14 @@
     <section id="produtos">
       <h2>Coleção em Destaque</h2>
       
+      <!-- LISTA COMPLETA DE MARCAS ATUALIZADA -->
       <div class="filtros-marcas">
         <button class="btn-marca ativo" onclick="filtrarMarca('todas', event)">Todas</button>
         <button class="btn-marca" onclick="filtrarMarca('Aurochs', event)"><span class="badge-new">NEW</span>Aurochs<span class="slogan">Country Origins</span></button>
         <button class="btn-marca" onclick="filtrarMarca('Baumgarten', event)"><span class="badge-new">NEW</span>Baumgarten<span class="slogan">Desde 1978</span></button>
         <button class="btn-marca" onclick="filtrarMarca('Beagle', event)"><span class="badge-new">NEW</span>Beagle<span class="slogan">Explore the World</span></button>
+        <button class="btn-marca" onclick="filtrarMarca('Farm Rio', event)"><span class="badge-new">NEW</span>Farm Rio<span class="slogan">Cores & Estampas</span></button>
+        <button class="btn-marca" onclick="filtrarMarca('Soul', event)"><span class="badge-new">NEW</span>Soul<span class="slogan">Style & Comfort</span></button>
         <button class="btn-marca" onclick="filtrarMarca('Sly Wear', event)">Sly Wear<span class="slogan">Casual & Chic</span></button>
         <button class="btn-marca" onclick="filtrarMarca('Hering', event)">Hering<span class="slogan">O Básico do Brasil</span></button>
       </div>
@@ -232,14 +252,13 @@
     <p>MALDANER & MAZETTO LTDA | CNPJ: 64.860.761/0001-64</p>
   </footer>
 
-  <!-- 1. IMPORTAÇÃO DO CADASTRO DE PRODUTOS -->
+  <!-- IMPORTAÇÃO DO ARQUIVO EXTERNO DE PRODUTOS -->
   <script src="produtos.js"></script>
 
-  <!-- 2. LÓGICA DE FUNCIONAMENTO DA LOJA -->
+  <!-- LÓGICA DE INTERAÇÃO E WHATSAPP -->
   <script>
     const NUMERO_WHATSAPP = '5542999839784';
     
-    // Objeto para guardar qual tamanho está selecionado em cada produto
     const tamanhoSelecionadoPorProduto = {};
 
     function renderizarVitrine(produtos) {
@@ -252,7 +271,6 @@
       }
 
       produtos.forEach(item => {
-        // Gera as pílulas/botões de cada tamanho disponível
         let htmlTamanhos = '';
         if (Array.isArray(item.tamanhos)) {
           htmlTamanhos = item.tamanhos.map(tam => `
@@ -262,7 +280,6 @@
             </button>
           `).join('');
         } else {
-          // Garante compatibilidade caso no produtos.js esteja em texto simples
           htmlTamanhos = `<span style="font-size: 11px; color: var(--cor-texto-secundario);">${item.tamanhos}</span>`;
         }
 
@@ -291,14 +308,11 @@
     }
 
     function selecionarTamanho(idProduto, tamanho, botao) {
-      // Guarda o tamanho escolhido para este produto específico
       tamanhoSelecionadoPorProduto[idProduto] = tamanho;
 
-      // Remove o destaque dos outros botões de tamanho do mesmo card
       const card = botao.closest('.card-produto');
       card.querySelectorAll('.btn-tam').forEach(btn => btn.classList.remove('selecionado'));
 
-      // Destaca o botão clicado
       botao.classList.add('selecionado');
     }
 
@@ -308,7 +322,6 @@
 
       const tamanhoEscolhido = tamanhoSelecionadoPorProduto[idProduto];
 
-      // Se o produto possui lista de tamanhos e o cliente não escolheu nenhum ainda
       if (Array.isArray(produto.tamanhos) && !tamanhoEscolhido) {
         alert('Por favor, selecione um tamanho antes de prosseguir!');
         return;
