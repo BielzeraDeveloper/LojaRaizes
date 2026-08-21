@@ -12,16 +12,17 @@
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="shortcut icon" href="logo.png" type="image/x-icon">
 
-  <!-- OPEN GRAPH / SOCIAL -->
+  <!-- PRECARREGAMENTO DE RECURSOS CRÍTICOS (MELHORA O DESEMPENHO) -->
+  <link rel="preload" href="foto-loja.jpg" as="image" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- OPEN GRAPH / REDES SOCIAIS -->
   <meta property="og:title" content="RAÍZES — Moda Masculina & Feminina — Pitanga/PR">
   <meta property="og:description" content="Moda Masculina & Feminina Multimarcas em Pitanga/PR. Venha conferir nossa coleção!">
   <meta property="og:image" content="https://lojaraizes.vercel.app/logo.png">
   <meta property="og:url" content="https://lojaraizes.vercel.app">
-
-  <!-- FONTES COM PRECONNECT (EVITA CARREGAMENTO INFINITO) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -105,7 +106,16 @@
       transition: var(--transicao);
     }
 
-    .banner-loja-container { width: 100%; height: 35vh; min-height: 220px; overflow: hidden; position: relative; background: #000; }
+    /* OTIMIZAÇÃO DE BANNER (PREVINE CLS) */
+    .banner-loja-container { 
+      width: 100%; 
+      height: 35vh; 
+      min-height: 220px; 
+      aspect-ratio: 16 / 9;
+      overflow: hidden; 
+      position: relative; 
+      background: #111; 
+    }
     .foto-loja { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.65); }
     .banner-caption { position: absolute; bottom: 25px; left: 5%; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
     .banner-caption h1 { font-size: 28px; font-weight: 700; }
@@ -139,8 +149,15 @@
     .card-produto:hover { background: var(--cor-card-hover); transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
 
     .card-produto .img-container { 
-      width: 100%; aspect-ratio: 3 / 4; background-color: rgba(0,0,0,0.05); border-radius: 10px; 
-      overflow: hidden; margin-bottom: 12px; border: 1px solid var(--cor-borda); cursor: pointer; position: relative;
+      width: 100%; 
+      aspect-ratio: 3 / 4; 
+      background-color: #1a1a1a; 
+      border-radius: 10px; 
+      overflow: hidden; 
+      margin-bottom: 12px; 
+      border: 1px solid var(--cor-borda); 
+      cursor: pointer; 
+      position: relative;
     }
     .card-produto img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: var(--transicao); }
     .card-produto:hover img { transform: scale(1.05); }
@@ -195,7 +212,7 @@
 
   <header id="cabecalho">
     <a href="#" class="logo-container">
-      <img src="logo.png" alt="Logo Raízes" class="img-logo" loading="eager" onerror="this.style.display='none';">
+      <img src="logo.png" alt="Logo Raízes" class="img-logo" fetchpriority="high" onerror="this.style.display='none';">
       <span class="logo-texto">RAÍZES</span>
     </a>
     <nav>
@@ -208,7 +225,7 @@
   </header>
 
   <div class="banner-loja-container">
-    <img class="foto-loja" src="foto-loja.jpg" alt="Loja Raízes em Pitanga PR" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800';">
+    <img class="foto-loja" src="foto-loja.jpg" alt="Loja Raízes em Pitanga PR" fetchpriority="high" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800';">
     <div class="banner-caption">
       <h1>Nossa Loja Física</h1>
       <p>Rua Interventor Manoel Ribas, 186 — Pitanga/PR</p>
