@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta name="google-site-verification" content="qiZ3JhccBeqUdqBWht4Xf_cQ27OC04fgV6O5RNMDb4k" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,17 +12,11 @@
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="shortcut icon" href="logo.png" type="image/x-icon">
 
-  <!-- PRECARREGAMENTO DE RECURSOS CRÍTICOS (MELHORA O DESEMPENHO) -->
+  <!-- PRECARREGAMENTO DE RECURSOS CRÍTICOS -->
   <link rel="preload" href="foto-loja.jpg" as="image" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <!-- OPEN GRAPH / REDES SOCIAIS -->
-  <meta property="og:title" content="RAÍZES — Moda Masculina & Feminina — Pitanga/PR">
-  <meta property="og:description" content="Moda Masculina & Feminina Multimarcas em Pitanga/PR. Venha conferir nossa coleção!">
-  <meta property="og:image" content="https://lojaraizes.vercel.app/logo.png">
-  <meta property="og:url" content="https://lojaraizes.vercel.app">
 
   <style>
     :root {
@@ -107,7 +100,6 @@
       transition: var(--transicao);
     }
 
-    /* OTIMIZAÇÃO DE BANNER (PREVINE CLS) */
     .banner-loja-container { 
       width: 100%; 
       height: 35vh; 
@@ -125,7 +117,16 @@
     section { margin-bottom: 50px; }
     h2 { font-size: 20px; font-weight: 600; text-transform: uppercase; border-left: 4px solid var(--cor-texto-principal); padding-left: 12px; margin-bottom: 20px; }
 
-    /* FILTROS */
+    /* FILTROS POR GÊNERO */
+    .filtros-genero { display: flex; gap: 10px; justify-content: center; margin-bottom: 15px; }
+    .btn-genero {
+      background: transparent; border: 2px solid var(--cor-borda); color: var(--cor-texto-principal);
+      padding: 8px 20px; border-radius: 25px; font-weight: 700; font-size: 13px; text-transform: uppercase;
+      cursor: pointer; transition: var(--transicao);
+    }
+    .btn-genero.ativo, .btn-genero:hover { background: var(--cor-texto-principal); color: var(--cor-fundo); border-color: var(--cor-texto-principal); }
+
+    /* FILTROS DE MARCAS */
     .filtros-marcas { display: flex; gap: 8px; margin-bottom: 25px; flex-wrap: wrap; justify-content: center; }
     .btn-marca { 
       position: relative; display: inline-flex; flex-direction: column; align-items: center; 
@@ -167,22 +168,22 @@
     .card-produto h3 { font-size: 14px; color: var(--cor-texto-principal); height: 38px; overflow: hidden; margin-bottom: 8px; font-weight: 500; line-height: 1.3; }
     .card-produto .preco { font-size: 19px; color: var(--cor-verde-preco); font-weight: 700; margin-bottom: 12px; }
     
-    /* SELEÇÃO DE TAMANHO */
-    .secao-tamanhos { margin-bottom: 14px; }
-    .secao-tamanhos .label-tam { font-size: 10px; color: var(--cor-texto-secundario); text-transform: uppercase; margin-bottom: 6px; font-weight: 600; display: block; }
-    .grupo-tamanhos { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+    /* OPÇÕES DE SELEÇÃO (TAMANHO E COR) */
+    .secao-opcao { margin-bottom: 10px; }
+    .secao-opcao .label-opcao { font-size: 10px; color: var(--cor-texto-secundario); text-transform: uppercase; margin-bottom: 4px; font-weight: 600; display: block; }
+    .grupo-opcoes { display: flex; gap: 5px; justify-content: center; flex-wrap: wrap; }
     
-    .btn-tam {
+    .btn-opcao {
       background: transparent; border: 1px solid var(--cor-borda); color: var(--cor-texto-principal);
-      font-size: 11px; font-weight: 600; padding: 5px 9px; border-radius: 6px; cursor: pointer; transition: var(--transicao);
+      font-size: 10px; font-weight: 600; padding: 4px 8px; border-radius: 6px; cursor: pointer; transition: var(--transicao);
     }
-    .btn-tam:hover { border-color: var(--cor-texto-principal); }
-    .btn-tam.selecionado { background: var(--cor-texto-principal); color: var(--cor-fundo); border-color: var(--cor-texto-principal); }
+    .btn-opcao:hover { border-color: var(--cor-texto-principal); }
+    .btn-opcao.selecionado { background: var(--cor-texto-principal); color: var(--cor-fundo); border-color: var(--cor-texto-principal); }
 
     .btn-interesse { 
       background: var(--cor-btn-interesse); color: #ffffff; text-decoration: none; padding: 11px; border-radius: 8px; 
       font-weight: 600; font-size: 12px; text-transform: uppercase; transition: var(--transicao); display: flex; 
-      align-items: center; justify-content: center; gap: 6px; cursor: pointer; border: none; width: 100%;
+      align-items: center; justify-content: center; gap: 6px; cursor: pointer; border: none; width: 100%; margin-top: 8px;
     }
     .btn-interesse:hover { opacity: 0.9; transform: scale(1.02); }
 
@@ -205,7 +206,7 @@
       body { padding-top: 115px; }
       header { flex-direction: column; gap: 8px; text-align: center; }
       .grid-produtos { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
-      .btn-tam { padding: 4px 7px; font-size: 10px; }
+      .btn-opcao { padding: 3px 6px; font-size: 9px; }
     }
   </style>
 </head>
@@ -237,8 +238,16 @@
     <section id="produtos">
       <h2>Coleção em Destaque</h2>
       
+      <!-- FILTRO FEMININO / MASCULINO -->
+      <div class="filtros-genero">
+        <button class="btn-genero ativo" onclick="filtrarGenero('todos', event)">Todos</button>
+        <button class="btn-genero" onclick="filtrarGenero('Feminino', event)">Feminino</button>
+        <button class="btn-genero" onclick="filtrarGenero('Masculino', event)">Masculino</button>
+      </div>
+
+      <!-- FILTRO DE MARCAS -->
       <div class="filtros-marcas">
-        <button class="btn-marca ativo" onclick="filtrarMarca('todas', event)">Todas</button>
+        <button class="btn-marca ativo" onclick="filtrarMarca('todas', event)">Todas as Marcas</button>
         <button class="btn-marca" onclick="filtrarMarca('Aurochs', event)"><span class="badge-new">NEW</span>Aurochs<span class="slogan">Country Origins</span></button>
         <button class="btn-marca" onclick="filtrarMarca('Baumgarten', event)"><span class="badge-new">NEW</span>Baumgarten<span class="slogan">Desde 1978</span></button>
         <button class="btn-marca" onclick="filtrarMarca('Beagle', event)"><span class="badge-new">NEW</span>Beagle<span class="slogan">Explore the World</span></button>
@@ -276,28 +285,45 @@
 
   <script>
     const NUMERO_WHATSAPP = '5542999839784';
-    const tamanhoSelecionadoPorProduto = {};
+    const selecoesDoUsuario = {}; // Guarda { idProduto: { tamanho: '', cor: '' } }
+
+    let generoAtual = 'todos';
+    let marcaAtual = 'todas';
 
     function renderizarVitrine(produtos) {
       const container = document.getElementById('grid-produtos');
       container.innerHTML = '';
 
       if (!produtos || produtos.length === 0) {
-        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario);">Nenhuma peça encontrada nessa categoria.</p>';
+        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario);">Nenhuma peça encontrada para os filtros selecionados.</p>';
         return;
       }
 
       produtos.forEach(item => {
+        if (!selecoesDoUsuario[item.id]) {
+          selecoesDoUsuario[item.id] = { tamanho: '', cor: '' };
+        }
+
+        // Renderiza botões de tamanho
         let htmlTamanhos = '';
         if (Array.isArray(item.tamanhos)) {
           htmlTamanhos = item.tamanhos.map(tam => `
-            <button class="btn-tam ${tamanhoSelecionadoPorProduto[item.id] === tam ? 'selecionado' : ''}" 
-                    onclick="selecionarTamanho(${item.id}, '${tam}', this)">
+            <button class="btn-opcao ${selecoesDoUsuario[item.id].tamanho === tam ? 'selecionado' : ''}" 
+                    onclick="selecionarOpcao(${item.id}, 'tamanho', '${tam}', this)">
               ${tam}
             </button>
           `).join('');
-        } else {
-          htmlTamanhos = `<span style="font-size: 11px; color: var(--cor-texto-secundario);">${item.tamanhos}</span>`;
+        }
+
+        // Renderiza botões de cor
+        let htmlCores = '';
+        if (Array.isArray(item.cores)) {
+          htmlCores = item.cores.map(cor => `
+            <button class="btn-opcao ${selecoesDoUsuario[item.id].cor === cor ? 'selecionado' : ''}" 
+                    onclick="selecionarOpcao(${item.id}, 'cor', '${cor}', this)">
+              ${cor}
+            </button>
+          `).join('');
         }
 
         container.innerHTML += `
@@ -309,12 +335,17 @@
             <h3>${item.titulo}</h3>
             <div class="preco">R$ ${item.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
             
-            <div class="secao-tamanhos">
-              <span class="label-tam">Selecione o tamanho:</span>
-              <div class="grupo-tamanhos">
-                ${htmlTamanhos}
-              </div>
-            </div>
+            ${htmlTamanhos ? `
+              <div class="secao-opcao">
+                <span class="label-opcao">Tamanho:</span>
+                <div class="grupo-opcoes">${htmlTamanhos}</div>
+              </div>` : ''}
+
+            ${htmlCores ? `
+              <div class="secao-opcao">
+                <span class="label-opcao">Cor:</span>
+                <div class="grupo-opcoes">${htmlCores}</div>
+              </div>` : ''}
 
             <button class="btn-interesse" onclick="solicitarNoZap(${item.id})">
               💬 Tenho Interesse
@@ -322,6 +353,75 @@
           </div>
         `;
       });
+    }
+
+    function selecionarOpcao(idProduto, tipo, valor, botao) {
+      if (!selecoesDoUsuario[idProduto]) selecoesDoUsuario[idProduto] = {};
+      selecoesDoUsuario[idProduto][tipo] = valor;
+
+      const secao = botao.closest('.secao-opcao');
+      secao.querySelectorAll('.btn-opcao').forEach(btn => btn.classList.remove('selecionado'));
+      botao.classList.add('selecionado');
+    }
+
+    function solicitarNoZap(idProduto) {
+      const produto = listaProdutos.find(p => p.id === idProduto);
+      if (!produto) return;
+
+      const selecao = selecoesDoUsuario[idProduto] || {};
+
+      if (Array.isArray(produto.tamanhos) && !selecao.tamanho) {
+        alert('Por favor, selecione um TAMANHO antes de prosseguir!');
+        return;
+      }
+
+      if (Array.isArray(produto.cores) && !selecao.cor) {
+        alert('Por favor, selecione uma COR antes de prosseguir!');
+        return;
+      }
+
+      const textoTamanho = selecao.tamanho ? `\n📏 *Tamanho:* ${selecao.tamanho}` : '';
+      const textoCor = selecao.cor ? `\n🎨 *Cor:* ${selecao.cor}` : '';
+      const linkFoto = produto.imagem.startsWith('http') ? `\n\n🖼️ Foto: ${produto.imagem}` : '';
+
+      const mensagem = `Olá! Gostaria de consultar a disponibilidade desta peça:` +
+                       `\n\n📌 *${produto.titulo}*` +
+                       `\n🏷️ *Marca:* ${produto.marca}` +
+                       `${textoTamanho}` +
+                       `${textoCor}` +
+                       `\n💰 *Valor:* R$ ${produto.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` +
+                       `${linkFoto}` +
+                       `\n\nAinda está disponível na loja física?`;
+
+      window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(mensagem)}`, '_blank');
+    }
+
+    function aplicarFiltros() {
+      let resultado = listaProdutos;
+
+      if (generoAtual !== 'todos') {
+        resultado = resultado.filter(p => p.categoria && p.categoria.toLowerCase() === generoAtual.toLowerCase());
+      }
+
+      if (marcaAtual !== 'todas') {
+        resultado = resultado.filter(p => p.marca.toLowerCase() === marcaAtual.toLowerCase());
+      }
+
+      renderizarVitrine(resultado);
+    }
+
+    function filtrarGenero(genero, event) {
+      generoAtual = genero;
+      document.querySelectorAll('.btn-genero').forEach(btn => btn.classList.remove('ativo'));
+      if (event && event.currentTarget) event.currentTarget.classList.add('ativo');
+      aplicarFiltros();
+    }
+
+    function filtrarMarca(marca, event) {
+      marcaAtual = marca;
+      document.querySelectorAll('.btn-marca').forEach(btn => btn.classList.remove('ativo'));
+      if (event && event.currentTarget) event.currentTarget.classList.add('ativo');
+      aplicarFiltros();
     }
 
     function abrirFotoModal(url) {
@@ -335,50 +435,6 @@
       document.getElementById('modalFoto').classList.remove('ativo');
     }
 
-    function selecionarTamanho(idProduto, tamanho, botao) {
-      tamanhoSelecionadoPorProduto[idProduto] = tamanho;
-      const card = botao.closest('.card-produto');
-      card.querySelectorAll('.btn-tam').forEach(btn => btn.classList.remove('selecionado'));
-      botao.classList.add('selecionado');
-    }
-
-    function solicitarNoZap(idProduto) {
-      const produto = listaProdutos.find(p => p.id === idProduto);
-      if (!produto) return;
-
-      const tamanhoEscolhido = tamanhoSelecionadoPorProduto[idProduto];
-
-      if (Array.isArray(produto.tamanhos) && !tamanhoEscolhido) {
-        alert('Por favor, selecione um tamanho antes de prosseguir!');
-        return;
-      }
-
-      const linkFoto = produto.imagem.startsWith('http') ? `\n\n🖼️ Foto: ${produto.imagem}` : '';
-      const textoTamanho = tamanhoEscolhido ? `\n📏 *Tamanho Selecionado:* ${tamanhoEscolhido}` : `\n📏 *Tamanhos:* ${produto.tamanhos}`;
-
-      const mensagem = `Olá! Gostaria de consultar a disponibilidade desta peça:` +
-                       `\n\n📌 *${produto.titulo}*` +
-                       `\n🏷️ *Marca:* ${produto.marca}` +
-                       `${textoTamanho}` +
-                       `\n💰 *Valor:* R$ ${produto.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` +
-                       `${linkFoto}` +
-                       `\n\nAinda têm esse tamanho disponível na loja física?`;
-
-      window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(mensagem)}`, '_blank');
-    }
-
-    function filtrarMarca(marca, event) {
-      document.querySelectorAll('.btn-marca').forEach(btn => btn.classList.remove('ativo'));
-      if (event && event.currentTarget) event.currentTarget.classList.add('ativo');
-
-      if (marca === 'todas') {
-        renderizarVitrine(listaProdutos);
-      } else {
-        const filtrados = listaProdutos.filter(p => p.marca.toLowerCase() === marca.toLowerCase());
-        renderizarVitrine(filtrados);
-      }
-    }
-
     function alternarTema() {
       const body = document.body;
       const themeIcon = document.getElementById('theme-icon');
@@ -386,18 +442,4 @@
 
       body.classList.toggle('theme-light');
       themeIcon.textContent = body.classList.contains('theme-light') ? '🌙' : '☀️';
-      themeText.textContent = body.classList.contains('theme-light') ? 'Escuro' : 'Claro';
-    }
-
-    window.addEventListener('scroll', () => {
-      const header = document.getElementById('cabecalho');
-      header.classList.toggle('encolhido', window.scrollY > 60);
-    });
-
-    if (typeof listaProdutos !== 'undefined') {
-      renderizarVitrine(listaProdutos);
-    }
-  </script>
-
-</body>
-</html>
+   
