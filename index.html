@@ -3,317 +3,151 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAÍZES — Pitanga/PR</title>
+  <title>RAÍZES — Moda Masculina & Feminina — Pitanga/PR</title>
   
+  <link rel="icon" type="image/png" href="logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* VARIÁVEIS DE COR */
     :root {
-      --cor-preto: #0c0c0c;
-      --cor-branco: #ffffff;
-      --cor-cinza-suave: #f4f4f6;
-      --cor-cinza-texto: #666;
-      --cor-premium-ml: #00a650;
-      --cor-btn-compra: #3483fa;
+      --cor-fundo: #0a0a0a;
+      --cor-card: #161616;
+      --cor-card-hover: #222222;
+      --cor-borda: #2a2a2a;
+      --cor-texto-principal: #ffffff;
+      --cor-texto-secundario: #aaaaaa;
+      --cor-verde-preco: #00e676;
+      --cor-btn-interesse: #25d366;
+      --cor-header-bg: rgba(10, 10, 10, 0.92);
+      --cor-header-texto: #ffffff;
+      --cor-badge-bg: #ffffff;
+      --cor-badge-texto: #000000;
       --transicao: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Poppins', sans-serif; background-color: var(--cor-cinza-suave); color: var(--cor-preto); scroll-behavior: smooth; }
+    body.theme-light {
+      --cor-fundo: #f4f4f7;
+      --cor-card: #ffffff;
+      --cor-card-hover: #ffffff;
+      --cor-borda: #e2e8f0;
+      --cor-texto-principal: #111111;
+      --cor-texto-secundario: #555555;
+      --cor-verde-preco: #16a34a;
+      --cor-btn-interesse: #128c7e;
+      --cor-header-bg: rgba(10, 10, 10, 0.95);
+      --cor-badge-bg: #111111;
+      --cor-badge-texto: #ffffff;
+    }
 
-    /* CABEÇALHO */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      background-color: var(--cor-fundo); 
+      color: var(--cor-texto-principal); 
+      scroll-behavior: smooth;
+      padding-top: 110px; 
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
     header { 
-      background: rgba(0, 0, 0, 0.95); 
-      backdrop-filter: blur(5px); 
-      -webkit-backdrop-filter: blur(5px);
-      color: white; 
+      background: var(--cor-header-bg); 
+      backdrop-filter: blur(10px); 
+      color: var(--cor-header-texto); 
       padding: 16px 5%; 
       display: flex; 
       justify-content: space-between; 
       align-items: center; 
-      position: sticky; 
-      top: 0; 
+      position: fixed; 
+      top: 0; left: 0; right: 0;
       z-index: 1000; 
-      box-shadow: 0 2px 15px rgba(0,0,0,0.2); 
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4); 
       transition: var(--transicao); 
-      will-change: padding, background;
     }
 
-    header.encolhido {
-      padding: 8px 5%; 
-      background: rgba(0, 0, 0, 0.98);
-    }
+    header.encolhido { padding: 8px 5%; }
     
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-    .logo-container .img-logo { 
-      max-height: 52px; 
-      width: auto;
-      display: block; 
-      filter: brightness(0) invert(1);
-      object-fit: contain;
-      transition: max-height 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    }
-    .logo-container .logo-texto { 
-      font-family: 'Cinzel', serif;
-      font-size: 24px; 
-      font-weight: 700; 
-      letter-spacing: 3px; 
-      text-transform: uppercase; 
-      color: var(--cor-branco); 
-      line-height: 1;
-      transition: font-size 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    }
+    .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo-container .img-logo { max-height: 52px; width: auto; filter: brightness(0) invert(1); transition: max-height 0.3s ease; }
+    .logo-container .logo-texto { font-family: 'Cinzel', serif; font-size: 24px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--cor-header-texto); }
 
-    header.encolhido .img-logo { max-height: 36px; }
-    header.encolhido .logo-texto { font-size: 19px; }
-
-    nav { display: flex; gap: 15px; }
-    nav a { color: #ddd; text-decoration: none; font-weight: 400; font-size: 14px; position: relative; transition: var(--transicao); cursor: pointer; }
+    nav { display: flex; gap: 15px; align-items: center; }
+    nav a { color: #aaa; text-decoration: none; font-weight: 500; font-size: 14px; transition: var(--transicao); }
     nav a:hover { color: #fff; }
 
-    /* BANNER PRINCIPAL */
-    .banner-loja-container { 
-      width: 100%; 
-      height: 45vh; 
-      min-height: 280px; 
-      max-height: 480px; 
-      overflow: hidden; 
-      position: relative; 
-      background: var(--cor-preto); 
-    }
-    .foto-loja { 
-      width: 100%; 
-      height: 100%; 
-      object-fit: cover; 
-      object-position: center; 
-      filter: brightness(0.70); 
-    }
-    
-    .banner-loja-container::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.8) 100%);
-      pointer-events: none;
+    .btn-theme-toggle {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
     }
 
-    .banner-caption { 
-      position: absolute; 
-      bottom: 30px; 
-      left: 5%; 
-      right: 5%; 
-      color: white; 
-      text-transform: uppercase; 
-      text-shadow: 0 2px 8px rgba(0,0,0,0.8); 
-      z-index: 2;
-    }
-    .banner-caption h1 { font-size: 28px; font-weight: 700; letter-spacing: 1.5px; }
-    .banner-caption p { font-size: 14px; font-weight: 300; }
+    .banner-loja-container { width: 100%; height: 35vh; min-height: 220px; overflow: hidden; position: relative; background: #000; }
+    .foto-loja { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6); }
+    .banner-caption { position: absolute; bottom: 25px; left: 5%; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+    .banner-caption h1 { font-size: 28px; font-weight: 700; }
 
     .container { max-width: 1200px; margin: 30px auto; padding: 0 15px; }
     section { margin-bottom: 50px; }
-    h2 { font-size: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--cor-preto); margin-bottom: 20px; border-left: 4px solid var(--cor-preto); padding-left: 12px; }
+    h2 { font-size: 20px; font-weight: 600; text-transform: uppercase; border-left: 4px solid var(--cor-texto-principal); padding-left: 12px; margin-bottom: 20px; }
 
-    /* FILTRO DE MARCAS COM SLOGANS E BADGE NEW */
-    .filtros-marcas { 
-      display: flex; 
-      gap: 12px; 
-      margin-bottom: 25px; 
-      flex-wrap: wrap; 
-      justify-content: center; 
-    }
+    .filtros-marcas { display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; justify-content: center; }
     .btn-marca { 
-      position: relative; /* Para segurar a tag NEW na posição certa */
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: #fff; 
-      border: 1.5px solid #ddd; 
-      padding: 10px 20px; 
-      border-radius: 20px; 
-      cursor: pointer; 
-      font-family: 'Poppins', sans-serif; 
-      font-weight: 700; 
-      font-size: 13px; 
-      text-transform: uppercase; 
-      letter-spacing: 0.5px; 
-      color: var(--cor-cinza-texto); 
-      transition: var(--transicao); 
-      line-height: 1.1;
+      position: relative; display: inline-flex; flex-direction: column; align-items: center; 
+      background: var(--cor-card); border: 1px solid var(--cor-borda); padding: 10px 18px; border-radius: 20px; 
+      cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; 
+      color: var(--cor-texto-secundario); transition: var(--transicao); 
     }
-    .btn-marca .slogan {
-      font-size: 8px;
-      font-weight: 400;
-      letter-spacing: 1px;
-      opacity: 0.7;
-      margin-top: 2px;
-      text-transform: uppercase;
-    }
+    .btn-marca .slogan { font-size: 8px; opacity: 0.7; margin-top: 2px; }
+    .btn-marca.ativo, .btn-marca:hover { background: var(--cor-badge-bg); color: var(--cor-badge-texto); border-color: var(--cor-badge-bg); }
 
-    /* BADGE NEW VERMELHO PULSANTE */
     .badge-new {
-      position: absolute;
-      top: -8px;
-      right: -5px;
-      background-color: #ff2a2a;
-      color: white;
-      font-size: 8px;
-      font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 10px;
-      letter-spacing: 0.5px;
-      box-shadow: 0 2px 6px rgba(255, 42, 42, 0.4);
-      animation: pulsar 1.5s infinite ease-in-out;
+      position: absolute; top: -6px; right: -5px; background-color: #ff2a2a; color: white;
+      font-size: 8px; font-weight: 700; padding: 2px 6px; border-radius: 10px; animation: pulsar 1.5s infinite ease-in-out;
     }
-
-    /* ANIMAÇÃO DE PULSO */
     @keyframes pulsar {
-      0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(255, 42, 42, 0.7);
-      }
-      70% {
-        transform: scale(1.08);
-        box-shadow: 0 0 0 6px rgba(255, 42, 42, 0);
-      }
-      100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(255, 42, 42, 0);
-      }
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
     }
 
-    .btn-marca.ativo, .btn-marca:hover { 
-      background: var(--cor-preto); 
-      color: var(--cor-branco); 
-      border-color: var(--cor-preto); 
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
+    .grid-produtos { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 18px; }
+    .card-produto { 
+      background: var(--cor-card); border: 1px solid var(--cor-borda); border-radius: 14px; padding: 12px; 
+      text-align: center; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transicao); 
     }
-    .btn-marca.ativo .slogan, .btn-marca:hover .slogan {
-      opacity: 0.85;
-      color: #ddd;
-    }
+    .card-produto:hover { background: var(--cor-card-hover); transform: translateY(-4px); }
 
-    /* VITRINE GRID */
-    .grid-produtos { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
-    .card-produto { background: var(--cor-branco); border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; transition: var(--transicao); }
-    .card-produto img { width: 100%; height: 180px; object-fit: contain; margin-bottom: 10px; }
-    .card-produto h3 { font-size: 13px; color: #444; height: 38px; overflow: hidden; margin-bottom: 8px; font-weight: 400; line-height: 1.4; }
-    .card-produto .preco { font-size: 17px; color: var(--cor-premium-ml); font-weight: 700; margin-bottom: 12px; }
-    .btn-comprar { background: var(--cor-btn-compra); color: white; text-decoration: none; padding: 10px; border-radius: 8px; font-weight: 600; font-size: 13px; text-transform: uppercase; transition: var(--transicao); display: block; }
-    .btn-comprar:hover { background: #2968c8; }
+    .card-produto .img-container { width: 100%; aspect-ratio: 3 / 4; background-color: rgba(0,0,0,0.05); border-radius: 10px; overflow: hidden; margin-bottom: 12px; border: 1px solid var(--cor-borda); }
+    .card-produto img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: var(--transicao); }
+    .card-produto:hover img { transform: scale(1.04); }
 
-    /* INFORMAÇÕES DE LOCALIZAÇÃO */
-    .info-box { background: var(--cor-branco); padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; }
-    .info-item-label { font-size: 16px; font-weight: 600; color: #333; margin-bottom: 6px; }
-    .btn-maps {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background-color: var(--cor-preto);
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      padding: 12px 24px;
-      border-radius: 30px;
-      margin-top: 15px;
-      font-size: 14px;
-      transition: var(--transicao);
+    .card-produto h3 { font-size: 14px; color: var(--cor-texto-principal); height: 40px; overflow: hidden; margin-bottom: 6px; font-weight: 500; line-height: 1.3; }
+    .card-produto .detalhes { font-size: 11px; color: var(--cor-texto-secundario); margin-bottom: 8px; }
+    .card-produto .preco { font-size: 18px; color: var(--cor-verde-preco); font-weight: 700; margin-bottom: 12px; }
+    
+    .btn-interesse { 
+      background: var(--cor-btn-interesse); color: #ffffff; text-decoration: none; padding: 11px; border-radius: 8px; 
+      font-weight: 600; font-size: 12px; text-transform: uppercase; transition: var(--transicao); display: flex; 
+      align-items: center; justify-content: center; gap: 6px; cursor: pointer; border: none; width: 100%;
     }
-    .btn-maps:hover {
-      background-color: #333;
-      transform: translateY(-2px);
-    }
+    .btn-interesse:hover { opacity: 0.9; transform: scale(1.02); }
 
-    /* POPUP (MODAL DE CONTATO) */
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(4px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.3s ease;
-    }
-    .modal-overlay.ativo { opacity: 1; pointer-events: auto; }
-    .modal-content {
-      background: white;
-      padding: 30px 25px;
-      border-radius: 16px;
-      max-width: 380px;
-      width: 90%;
-      text-align: center;
-      position: relative;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      transform: translateY(-20px);
-      transition: all 0.3s ease;
-    }
-    .modal-overlay.ativo .modal-content { transform: translateY(0); }
-    .fechar-modal { position: absolute; top: 12px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #888; }
-    .btn-whatsapp {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background-color: #25D366;
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      padding: 14px 20px;
-      border-radius: 30px;
-      margin-top: 15px;
-      width: 100%;
-      font-size: 15px;
-      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-      transition: transform 0.2s, background-color 0.2s;
-    }
-    .btn-whatsapp:hover { background-color: #20ba5a; transform: scale(1.02); }
+    .info-box { background: var(--cor-card); border: 1px solid var(--cor-borda); padding: 25px; border-radius: 16px; text-align: center; }
+    .btn-maps { display: inline-block; background-color: var(--cor-texto-principal); color: var(--cor-fundo); text-decoration: none; font-weight: 600; padding: 10px 22px; border-radius: 30px; margin-top: 15px; font-size: 13px; }
 
-    /* RODAPÉ */
-    footer { text-align: center; padding: 30px 15px; background-color: #eee; font-size: 13px; color: var(--cor-cinza-texto); line-height: 1.6; border-top: 1px solid #ddd; }
-    footer strong { color: var(--cor-preto); }
+    footer { text-align: center; padding: 30px 15px; background-color: #050505; font-size: 12px; color: #777; border-top: 1px solid rgba(255,255,255,0.1); }
 
-    /* REGRAS PARA COMPUTADOR */
-    @media (min-width: 768px) {
-      header { padding: 18px 8%; }
-      header.encolhido { padding: 10px 8%; }
-      .logo-container .img-logo { max-height: 65px; }
-      .logo-container .logo-texto { font-size: 30px; }
-      header.encolhido .img-logo { max-height: 42px; }
-      header.encolhido .logo-texto { font-size: 22px; }
-      nav a { font-size: 15px; margin-left: 20px; }
-      
-      .banner-loja-container { height: 50vh; }
-      .banner-caption h1 { font-size: 38px; }
-      .banner-caption p { font-size: 18px; }
-      
-      .grid-produtos { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; }
-      .card-produto img { height: 230px; }
-      .card-produto h3 { font-size: 15px; height: 42px; }
-      .card-produto .preco { font-size: 20px; }
-      .btn-comprar { font-size: 14px; padding: 12px; }
-    }
-
-    /* REGRAS PARA CELULAR */
     @media (max-width: 480px) {
-      header { flex-direction: column; gap: 8px; text-align: center; padding: 12px 5%; }
-      header.encolhido { padding: 6px 5%; gap: 4px; }
-      .logo-container .img-logo { max-height: 42px; }
-      .logo-container .logo-texto { font-size: 18px; }
-      header.encolhido .img-logo { max-height: 32px; }
-      header.encolhido .logo-texto { font-size: 16px; }
-      nav a { font-size: 12px; }
+      body { padding-top: 125px; }
+      header { flex-direction: column; gap: 8px; text-align: center; }
+      .grid-produtos { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
     }
   </style>
 </head>
@@ -325,14 +159,16 @@
       <span class="logo-texto">RAÍZES</span>
     </a>
     <nav>
-      <a href="#produtos">Produtos</a>
+      <a href="#produtos">Vitrine</a>
       <a href="#onde-estamos">Visite-nos</a>
-      <a onclick="abrirContato(event)">Contato</a>
+      <button class="btn-theme-toggle" onclick="alternarTema()">
+        <span id="theme-icon">☀️</span> <span id="theme-text">Claro</span>
+      </button>
     </nav>
   </header>
 
   <div class="banner-loja-container">
-    <img class="foto-loja" src="foto-loja.jpg" alt="Loja Raizes em Pitanga PR" onerror="this.src='https://picsum.photos/1200/600';">
+    <img class="foto-loja" src="foto-loja.jpg" alt="Loja Raizes em Pitanga PR" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200';">
     <div class="banner-caption">
       <h1>Nossa Loja Física</h1>
       <p>Rua Interventor Manoel Ribas, 186 — Pitanga/PR</p>
@@ -340,171 +176,119 @@
   </div>
 
   <div class="container">
-    
     <section id="produtos">
-      <h2>Nossas Peças</h2>
+      <h2>Coleção em Destaque</h2>
       
       <div class="filtros-marcas">
-        <button class="btn-marca ativo" onclick="filtrarMarca('todas')">
-          Todas
-        </button>
-
-        <button class="btn-marca" onclick="filtrarMarca('Auroch')">
-          <span class="badge-new">NEW</span>
-          Aurochs
-          <span class="slogan">Country Origins</span>
-        </button>
-
-        <button class="btn-marca" onclick="filtrarMarca('Baumgarten')">
-          <span class="badge-new">NEW</span>
-          Baumgarten
-          <span class="slogan">Desde 1978</span>
-        </button>
-
-        <button class="btn-marca" onclick="filtrarMarca('Beagle')">
-          <span class="badge-new">NEW</span>
-          Beagle
-          <span class="slogan">Explore the World</span>
-        </button>
-
-        <button class="btn-marca" onclick="filtrarMarca('SlyWear')">
-          Sly Wear
-          <span class="slogan">Casual & Chic</span>
-        </button>
-
-         <button class="btn-marca" onclick="filtrarMarca('FarmRio')">
-           <span class="badge-new">NEW</span>
-          FARM RIO
-          <span class="slogan">Dress in Happiness</span>
-        </button>
-
-        <button class="btn-marca" onclick="filtrarMarca('Hering')">
-          Hering
-          <span class="slogan">O Básico do Brasil</span>
-        </button>
+        <button class="btn-marca ativo" onclick="filtrarMarca('todas', event)">Todas</button>
+        <button class="btn-marca" onclick="filtrarMarca('Aurochs', event)"><span class="badge-new">NEW</span>Aurochs<span class="slogan">Country Origins</span></button>
+        <button class="btn-marca" onclick="filtrarMarca('Baumgarten', event)"><span class="badge-new">NEW</span>Baumgarten<span class="slogan">Desde 1978</span></button>
+        <button class="btn-marca" onclick="filtrarMarca('Beagle', event)"><span class="badge-new">NEW</span>Beagle<span class="slogan">Explore the World</span></button>
+        <button class="btn-marca" onclick="filtrarMarca('Sly Wear', event)">Sly Wear<span class="slogan">Casual & Chic</span></button>
+        <button class="btn-marca" onclick="filtrarMarca('Hering', event)">Hering<span class="slogan">O Básico do Brasil</span></button>
       </div>
 
-      <div id="grid-produtos" class="grid-produtos">
-        <p style="text-align: center; grid-column: 1/-1;">Carregando produtos...</p>
-      </div>
+      <div id="grid-produtos" class="grid-produtos"></div>
     </section>
 
     <section id="onde-estamos">
       <h2>Onde Nos Encontrar</h2>
       <div class="info-box">
-        <div class="info-item-label">📍 Loja Raizes</div>
-        <p style="font-size: 14px; color: #555;">Rua Interventor Manoel Ribas, 186 - Centro — Pitanga / PR</p>
-        
-        <a href="https://maps.google.com/?q=Loja+Raizes+Pitanga+PR" target="_blank" class="btn-maps">
-          🗺️ Abrir no Google Maps
-        </a>
+        <p style="font-size: 15px; font-weight: 600;">📍 Loja Raízes</p>
+        <p style="font-size: 14px; color: var(--cor-texto-secundario); margin-top: 4px;">Rua Interventor Manoel Ribas, 186 - Centro — Pitanga / PR</p>
+        <a href="https://maps.google.com/?q=Loja+Raizes+Pitanga+PR" target="_blank" class="btn-maps">🗺️ Abrir no Google Maps</a>
       </div>
     </section>
-
-  </div>
-
-  <div id="modal-contato" class="modal-overlay" onclick="fecharContatoFora(event)">
-    <div class="modal-content">
-      <button class="fechar-modal" onclick="fecharContato()">×</button>
-      <h3 style="font-size: 20px; margin-bottom: 8px;">Fale com a RAÍZES</h3>
-      <p style="font-size: 13px; color: #666; margin-bottom: 15px;">Dúvidas sobre peças ou tamanhos? Chame a gente no Zap!</p>
-      
-      <a href="https://wa.me/5542999839784?text=Olá!%20Vim%20pelo%20site%20da%20RAÍZES." target="_blank" class="btn-whatsapp">
-        💬 Conversar no WhatsApp
-      </a>
-      
-      <p style="font-size: 12px; color: #999; margin-top: 15px;">(42) 99983-9784</p>
-    </div>
   </div>
 
   <footer>
     <p><strong>© 2026 RAÍZES — Todos os direitos reservados.</strong></p>
     <p>MALDANER & MAZETTO LTDA | CNPJ: 64.860.761/0001-64</p>
-    <p>Rua Interventor Manoel Ribas, 186 - Centro — Pitanga / PR</p>
   </footer>
 
+  <!-- 1. IMPORTAÇÃO DO CADASTRO DE PRODUTOS -->
+  <script src="produtos.js"></script>
+
+  <!-- 2. LÓGICA DE FUNCIONAMENTO DO SITE -->
   <script>
-    const ID_VENDEDOR_ML = '179571326'; 
-    let produtosCarregados = [];
+    const NUMERO_WHATSAPP = '5542999839784';
 
-    window.addEventListener('scroll', () => {
-      const header = document.getElementById('cabecalho');
-      const scrollAtual = window.scrollY;
-
-      if (scrollAtual > 60) {
-        header.classList.add('encolhido');
-      } else if (scrollAtual < 20) {
-        header.classList.remove('encolhido');
-      }
-    });
-
-    async function buscarProdutosML() {
-      try {
-        const res = await fetch(`https://api.mercadolibre.com/sites/MLB/search?seller_id=${ID_VENDEDOR_ML}`);
-        const data = await res.json();
-        
-        produtosCarregados = data.results || [];
-        exibirProdutos(produtosCarregados);
-      } catch (erro) {
-        console.error('Erro ao buscar produtos:', erro);
-        document.getElementById('grid-produtos').innerHTML = '<p style="text-align: center; grid-column: 1/-1;">Cadastre os anúncios no Mercado Livre para ver a vitrine aqui!</p>';
-      }
-    }
-
-    function exibirProdutos(lista) {
+    function renderizarVitrine(produtos) {
       const container = document.getElementById('grid-produtos');
       container.innerHTML = '';
 
-      if (lista.length === 0) {
-        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">Nenhum produto encontrado para esta marca.</p>';
+      if (!produtos || produtos.length === 0) {
+        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario);">Nenhuma peça encontrada nessa categoria.</p>';
         return;
       }
 
-      lista.forEach(item => {
-        const fotoUrl = item.thumbnail.replace('I.jpg', 'O.jpg');
-        
+      produtos.forEach(item => {
         container.innerHTML += `
           <div class="card-produto">
-            <img src="${fotoUrl}" alt="${item.title}">
-            <h3>${item.title}</h3>
-            <div class="preco">R$ ${item.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
-            <a href="${item.permalink}" target="_blank" class="btn-comprar">Comprar no ML</a>
+            <div class="img-container">
+              <img src="${item.imagem}" alt="${item.titulo}" onerror="this.src='https://via.placeholder.com/400x533?text=Foto+Indisponivel'">
+            </div>
+            <h3>${item.titulo}</h3>
+            <div class="detalhes">${item.marca} • Tam: ${item.tamanhos}</div>
+            <div class="preco">R$ ${item.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
+            
+            <button class="btn-interesse" onclick="solicitarNoZap(${item.id})">
+              💬 Tenho Interesse
+            </button>
           </div>
         `;
       });
     }
 
-    function filtrarMarca(marca) {
+    function solicitarNoZap(idProduto) {
+      // Procura o item dentro do array que veio do arquivo produtos.js
+      const produto = listaProdutos.find(p => p.id === idProduto);
+      if (!produto) return;
+
+      const linkFoto = produto.imagem.startsWith('http') ? `\n\n🖼️ Foto: ${produto.imagem}` : '';
+
+      const mensagem = `Olá! Gostaria de consultar a disponibilidade desta peça:` +
+                       `\n\n📌 *${produto.titulo}*` +
+                       `\n🏷️ *Marca:* ${produto.marca}` +
+                       `\n📏 *Tamanhos:* ${produto.tamanhos}` +
+                       `\n💰 *Valor:* R$ ${produto.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` +
+                       `${linkFoto}` +
+                       `\n\nAinda têm no estoque?`;
+
+      window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(mensagem)}`, '_blank');
+    }
+
+    function filtrarMarca(marca, event) {
       document.querySelectorAll('.btn-marca').forEach(btn => btn.classList.remove('ativo'));
-      
-      if (event && event.currentTarget) {
-        event.currentTarget.classList.add('ativo');
-      }
+      if (event && event.currentTarget) event.currentTarget.classList.add('ativo');
 
       if (marca === 'todas') {
-        exibirProdutos(produtosCarregados);
+        renderizarVitrine(listaProdutos);
       } else {
-        const filtrados = produtosCarregados.filter(p => p.title.toLowerCase().includes(marca.toLowerCase()));
-        exibirProdutos(filtrados);
+        const filtrados = listaProdutos.filter(p => p.marca.toLowerCase() === marca.toLowerCase());
+        renderizarVitrine(filtrados);
       }
     }
 
-    function abrirContato(event) {
-      if (event) event.preventDefault();
-      document.getElementById('modal-contato').classList.add('ativo');
+    function alternarTema() {
+      const body = document.body;
+      const themeIcon = document.getElementById('theme-icon');
+      const themeText = document.getElementById('theme-text');
+
+      body.classList.toggle('theme-light');
+      themeIcon.textContent = body.classList.contains('theme-light') ? '🌙' : '☀️';
+      themeText.textContent = body.classList.contains('theme-light') ? 'Escuro' : 'Claro';
     }
 
-    function fecharContato() {
-      document.getElementById('modal-contato').classList.remove('ativo');
-    }
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('cabecalho');
+      header.classList.toggle('encolhido', window.scrollY > 60);
+    });
 
-    function fecharContatoFora(event) {
-      if (event.target.id === 'modal-contato') {
-        fecharContato();
-      }
+    // Inicia a vitrine assim que o arquivo produtos.js for lido
+    if (typeof listaProdutos !== 'undefined') {
+      renderizarVitrine(listaProdutos);
     }
-
-    buscarProdutosML();
   </script>
 
 </body>
