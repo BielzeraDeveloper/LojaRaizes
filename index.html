@@ -3,17 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAÍZES — Moda Multimarcas — Pitanga/PR</title>
+  <meta name="description" content="Loja Raízes em Pitanga/PR. Moda Multimarcas: Beagle, Baumgarten, Aurochs, Farm Rio, Soul, Sly Wear e Hering.">
 
-  <!-- SEO E TÍTULO -->
-  <title>RAÍZES — Moda Masculina & Feminina — Pitanga/PR</title>
-  <meta name="description" content="Loja Raízes em Pitanga/PR. Moda Masculina & Feminina Multimarcas: Beagle, Baumgarten, Aurochs, Farm Rio, Soul, Sly Wear e Hering.">
-
-  <!-- FAVICON -->
   <link rel="icon" type="image/png" href="logo.png">
-  <link rel="shortcut icon" href="logo.png" type="image/x-icon">
-
-  <!-- PRECARREGAMENTO DE RECURSOS CRÍTICOS -->
-  <link rel="preload" href="foto-loja.jpg" as="image" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -74,13 +67,10 @@
       z-index: 1000; 
       border-bottom: 1px solid var(--cor-borda);
       box-shadow: 0 4px 20px rgba(0,0,0,0.3); 
-      transition: var(--transicao); 
     }
 
-    header.encolhido { padding: 8px 5%; }
-    
     .logo-container { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .logo-container .img-logo { max-height: 40px; width: auto; transition: var(--transicao); }
+    .logo-container .img-logo { max-height: 40px; width: auto; }
     body:not(.theme-light) .logo-container .img-logo { filter: brightness(0) invert(1); }
     .logo-container .logo-texto { font-family: 'Cinzel', serif; font-size: 22px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--cor-header-texto); }
 
@@ -102,55 +92,27 @@
 
     .banner-loja-container { 
       width: 100%; 
-      height: 30vh; 
-      min-height: 200px; 
+      height: 25vh; 
+      min-height: 180px; 
       overflow: hidden; 
       position: relative; 
       background: #111; 
     }
     .foto-loja { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.65); }
     .banner-caption { position: absolute; bottom: 20px; left: 5%; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-    .banner-caption h1 { font-size: 26px; font-weight: 700; }
+    .banner-caption h1 { font-size: 24px; font-weight: 700; }
 
     .container { max-width: 1200px; margin: 25px auto; padding: 0 15px; }
     section { margin-bottom: 40px; }
     h2 { font-size: 18px; font-weight: 600; text-transform: uppercase; border-left: 4px solid var(--cor-texto-principal); padding-left: 10px; margin-bottom: 20px; }
 
-    /* FILTROS POR GÊNERO */
-    .filtros-genero { 
-      display: flex; 
-      gap: 8px; 
-      justify-content: center; 
-      margin-bottom: 15px; 
-    }
-
-    .btn-genero {
-      background: var(--cor-card); 
-      border: 1px solid var(--cor-borda); 
-      color: var(--cor-texto-secundario);
-      padding: 8px 20px; 
-      border-radius: 20px; 
-      font-weight: 600; 
-      font-size: 12px; 
-      text-transform: uppercase;
-      cursor: pointer; 
-      transition: var(--transicao);
-    }
-
-    .btn-genero.ativo, .btn-genero:hover { 
-      background: var(--cor-texto-principal); 
-      color: var(--cor-fundo); 
-      border-color: var(--cor-texto-principal); 
-    }
-
-    /* FILTROS DE MARCAS - CARROSSEL COM BADGE VISÍVEL */
     .filtros-marcas { 
       display: flex; 
       gap: 10px; 
       margin-bottom: 25px; 
       overflow-x: auto; 
-      padding-top: 14px; /* Espaço superior para a badge não cortar */
-      padding-bottom: 8px;
+      padding-top: 14px; 
+      padding-bottom: 10px;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
     }
@@ -161,7 +123,6 @@
     .btn-marca { 
       flex: 0 0 auto;
       position: relative; 
-      overflow: visible !important;
       background: var(--cor-card); 
       border: 1px solid var(--cor-borda); 
       padding: 8px 16px; 
@@ -182,20 +143,6 @@
       border-color: var(--cor-badge-bg); 
     }
 
-    .badge-new {
-      position: absolute; 
-      top: -10px; 
-      right: -2px; 
-      background-color: #ff2a2a; 
-      color: #ffffff;
-      font-size: 8px; 
-      font-weight: 700; 
-      padding: 2px 6px; 
-      border-radius: 10px;
-      z-index: 10;
-    }
-
-    /* GRID DE PRODUTOS */
     .grid-produtos { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
     
     .card-produto { 
@@ -209,27 +156,27 @@
       justify-content: space-between; 
       transition: var(--transicao); 
     }
-    .card-produto:hover { background: var(--cor-card-hover); transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+    .card-produto:hover { background: var(--cor-card-hover); transform: translateY(-4px); }
 
     .card-produto .img-container { 
       width: 100%; 
       aspect-ratio: 3 / 4; 
-      background-color: #1a1a1a; 
+      background-color: #1f1f1f; 
       border-radius: 10px; 
       overflow: hidden; 
       margin-bottom: 12px; 
       border: 1px solid var(--cor-borda); 
       cursor: pointer; 
-      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .card-produto img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: var(--transicao); }
-    .card-produto:hover img { transform: scale(1.05); }
+    .card-produto img { width: 100%; height: 100%; object-fit: cover; }
 
     .card-produto .marca-label { font-size: 11px; font-weight: 700; color: var(--cor-texto-secundario); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
     .card-produto h3 { font-size: 14px; color: var(--cor-texto-principal); height: 38px; overflow: hidden; margin-bottom: 8px; font-weight: 500; line-height: 1.3; }
     .card-produto .preco { font-size: 18px; color: var(--cor-verde-preco); font-weight: 700; margin-bottom: 12px; }
     
-    /* SELEÇÃO DE TAMANHO E COR */
     .secao-opcao { margin-bottom: 10px; }
     .secao-opcao .label-opcao { font-size: 10px; color: var(--cor-texto-secundario); text-transform: uppercase; margin-bottom: 4px; font-weight: 600; display: block; }
     .grupo-opcoes { display: flex; gap: 5px; justify-content: center; flex-wrap: wrap; }
@@ -245,7 +192,6 @@
       cursor: pointer; 
       transition: var(--transicao);
     }
-    .btn-opcao:hover { border-color: var(--cor-texto-principal); }
     .btn-opcao.selecionado { background: var(--cor-texto-principal); color: var(--cor-fundo); border-color: var(--cor-texto-principal); }
 
     .btn-interesse { 
@@ -267,16 +213,14 @@
       width: 100%; 
       margin-top: 8px;
     }
-    .btn-interesse:hover { opacity: 0.9; transform: scale(1.02); }
 
-    /* MODAL DE FOTO AMPLIADA */
     .modal-foto {
       display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 2000;
       justify-content: center; align-items: center; padding: 20px;
     }
     .modal-foto.ativo { display: flex; }
-    .modal-conteudo { max-width: 90%; max-height: 85vh; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .modal-conteudo { max-width: 90%; max-height: 85vh; border-radius: 12px; }
     .fechar-modal { position: absolute; top: 20px; right: 25px; color: #fff; font-size: 32px; font-weight: bold; cursor: pointer; }
 
     .info-box { background: var(--cor-card); border: 1px solid var(--cor-borda); padding: 25px; border-radius: 16px; text-align: center; }
@@ -288,7 +232,6 @@
       body { padding-top: 100px; }
       header { flex-direction: column; gap: 8px; text-align: center; }
       .grid-produtos { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
-      .btn-opcao { padding: 3px 6px; font-size: 9px; }
     }
   </style>
 </head>
@@ -296,7 +239,7 @@
 
   <header id="cabecalho">
     <a href="#" class="logo-container">
-      <img src="logo.png" alt="Logo Raízes" class="img-logo" fetchpriority="high" onerror="this.style.display='none';">
+      <img src="logo.png" alt="Logo Raízes" class="img-logo" onerror="this.style.display='none';">
       <span class="logo-texto">RAÍZES</span>
     </a>
     <nav>
@@ -309,7 +252,7 @@
   </header>
 
   <div class="banner-loja-container">
-    <img class="foto-loja" src="foto-loja.jpg" alt="Loja Raízes em Pitanga PR" fetchpriority="high" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800';">
+    <img class="foto-loja" src="foto-loja.jpg" alt="Loja Raízes em Pitanga PR" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800';">
     <div class="banner-caption">
       <h1>Nossa Loja Física</h1>
       <p>Rua Interventor Manoel Ribas, 186 — Pitanga/PR</p>
@@ -319,22 +262,14 @@
   <div class="container">
     <section id="produtos">
       <h2>Coleção em Destaque</h2>
-      
-      <!-- FILTRO FEMININO / MASCULINO -->
-      <div class="filtros-genero">
-        <button class="btn-genero ativo" onclick="filtrarGenero('todos', event)">Todos</button>
-        <button class="btn-genero" onclick="filtrarGenero('Feminino', event)">Feminino</button>
-        <button class="btn-genero" onclick="filtrarGenero('Masculino', event)">Masculino</button>
-      </div>
 
-      <!-- FILTRO DE MARCAS -->
       <div class="filtros-marcas">
         <button class="btn-marca ativo" onclick="filtrarMarca('todas', event)">Todas</button>
-        <button class="btn-marca" onclick="filtrarMarca('Aurochs', event)"><span class="badge-new">NEW</span>Aurochs</button>
-        <button class="btn-marca" onclick="filtrarMarca('Baumgarten', event)"><span class="badge-new">NEW</span>Baumgarten</button>
-        <button class="btn-marca" onclick="filtrarMarca('Beagle', event)"><span class="badge-new">NEW</span>Beagle</button>
-        <button class="btn-marca" onclick="filtrarMarca('Farm Rio', event)"><span class="badge-new">NEW</span>Farm Rio</button>
-        <button class="btn-marca" onclick="filtrarMarca('Soul', event)"><span class="badge-new">NEW</span>Soul</button>
+        <button class="btn-marca" onclick="filtrarMarca('Aurochs', event)">Aurochs</button>
+        <button class="btn-marca" onclick="filtrarMarca('Baumgarten', event)">Baumgarten</button>
+        <button class="btn-marca" onclick="filtrarMarca('Beagle', event)">Beagle</button>
+        <button class="btn-marca" onclick="filtrarMarca('Farm Rio', event)">Farm Rio</button>
+        <button class="btn-marca" onclick="filtrarMarca('Soul', event)">Soul</button>
         <button class="btn-marca" onclick="filtrarMarca('Sly Wear', event)">Sly Wear</button>
         <button class="btn-marca" onclick="filtrarMarca('Hering', event)">Hering</button>
       </div>
@@ -352,7 +287,6 @@
     </section>
   </div>
 
-  <!-- MODAL DE ZOOM DA IMAGEM -->
   <div id="modalFoto" class="modal-foto" onclick="fecharModalFoto()">
     <span class="fechar-modal">&times;</span>
     <img id="imgModal" class="modal-conteudo" src="" alt="Foto Ampliada">
@@ -368,23 +302,30 @@
   <script>
     const NUMERO_WHATSAPP = '5542999839784';
     const selecoesDoUsuario = {};
-
-    let generoAtual = 'todos';
     let marcaAtual = 'todas';
+
+    const FOTO_PADRAO = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400"><rect width="100%" height="100%" fill="%231a1a1a"/><text x="50%" y="50%" fill="%23666666" font-family="sans-serif" font-size="16" text-anchor="middle">Sem Imagem</text></svg>';
 
     function renderizarVitrine(produtos) {
       const container = document.getElementById('grid-produtos');
-      container.innerHTML = '';
 
-      if (!produtos || produtos.length === 0) {
-        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario); padding: 30px 0;">Nenhuma peça encontrada para os filtros selecionados.</p>';
+      if (!produtos || !Array.isArray(produtos) || produtos.length === 0) {
+        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario); padding: 30px 0;">Nenhuma peça encontrada para esta marca.</p>';
         return;
       }
+
+      let htmlFinal = '';
 
       produtos.forEach(item => {
         if (!selecoesDoUsuario[item.id]) {
           selecoesDoUsuario[item.id] = { tamanho: '', cor: '' };
         }
+
+        const precoFormatado = (typeof item.preco === 'number') 
+          ? item.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) 
+          : '0,00';
+
+        const imgUrl = item.imagem ? item.imagem : FOTO_PADRAO;
 
         let htmlTamanhos = '';
         if (Array.isArray(item.tamanhos) && item.tamanhos.length > 0) {
@@ -406,14 +347,14 @@
           `).join('');
         }
 
-        container.innerHTML += `
+        htmlFinal += `
           <div class="card-produto">
-            <div class="img-container" onclick="abrirFotoModal('${item.imagem}')">
-              <img src="${item.imagem}" alt="${item.titulo}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&auto=format&fit=crop';">
+            <div class="img-container" onclick="abrirFotoModal('${imgUrl}')">
+              <img src="${imgUrl}" alt="${item.titulo || 'Produto'}" loading="lazy" onerror="this.onerror=null; this.src='${FOTO_PADRAO}';">
             </div>
-            <div class="marca-label">${item.marca}</div>
-            <h3>${item.titulo}</h3>
-            <div class="preco">R$ ${item.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
+            <div class="marca-label">${item.marca || 'RAÍZES'}</div>
+            <h3>${item.titulo || 'Produto Sem Nome'}</h3>
+            <div class="preco">R$ ${precoFormatado}</div>
             
             ${htmlTamanhos ? `
               <div class="secao-opcao">
@@ -433,6 +374,8 @@
           </div>
         `;
       });
+
+      container.innerHTML = htmlFinal;
     }
 
     function selecionarOpcao(idProduto, tipo, valor, botao) {
@@ -445,65 +388,80 @@
     }
 
     function solicitarNoZap(idProduto) {
-      const produto = listaProdutos.find(p => p.id === idProduto);
+      const lista = (typeof listaProdutos !== 'undefined' && Array.isArray(listaProdutos)) ? listaProdutos : [];
+      const produto = lista.find(p => p.id === idProduto);
       if (!produto) return;
 
       const selecao = selecoesDoUsuario[idProduto] || {};
 
       if (Array.isArray(produto.tamanhos) && produto.tamanhos.length > 0 && !selecao.tamanho) {
-        alert('Por favor, selecione um TAMANHO antes de prosseguir!');
+        alert('Por favor, selecione um TAMANHO!');
         return;
       }
 
       if (Array.isArray(produto.cores) && produto.cores.length > 0 && !selecao.cor) {
-        alert('Por favor, selecione uma COR antes de prosseguir!');
+        alert('Por favor, selecione uma COR!');
         return;
       }
 
       const textoTamanho = selecao.tamanho ? `\n📏 *Tamanho:* ${selecao.tamanho}` : '';
       const textoCor = selecao.cor ? `\n🎨 *Cor:* ${selecao.cor}` : '';
-      const linkFoto = produto.imagem.startsWith('http') ? `\n\n🖼️ Foto: ${produto.imagem}` : '';
 
       const mensagem = `Olá! Gostaria de consultar a disponibilidade desta peça:` +
                        `\n\n📌 *${produto.titulo}*` +
                        `\n🏷️ *Marca:* ${produto.marca}` +
                        `${textoTamanho}` +
                        `${textoCor}` +
-                       `\n💰 *Valor:* R$ ${produto.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` +
-                       `${linkFoto}` +
+                       `\n💰 *Valor:* R$ ${(produto.preco || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` +
                        `\n\nAinda está disponível na loja física?`;
 
       window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(mensagem)}`, '_blank');
-    }
-
-    function aplicarFiltros() {
-      let resultado = typeof listaProdutos !== 'undefined' ? listaProdutos : [];
-
-      if (generoAtual !== 'todos') {
-        resultado = resultado.filter(p => p.categoria && p.categoria.toLowerCase().trim() === generoAtual.toLowerCase().trim());
-      }
-
-      if (marcaAtual !== 'todas') {
-        resultado = resultado.filter(p => p.marca && p.marca.toLowerCase().trim() === marcaAtual.toLowerCase().trim());
-      }
-
-      renderizarVitrine(resultado);
-    }
-
-    function filtrarGenero(genero, event) {
-      generoAtual = genero;
-      document.querySelectorAll('.btn-genero').forEach(btn => btn.classList.remove('ativo'));
-      if (event && event.currentTarget) event.currentTarget.classList.add('ativo');
-      aplicarFiltros();
     }
 
     function filtrarMarca(marca, event) {
       marcaAtual = marca;
       document.querySelectorAll('.btn-marca').forEach(btn => btn.classList.remove('ativo'));
       if (event && event.currentTarget) event.currentTarget.classList.add('ativo');
-      aplicarFiltros();
+
+      const lista = (typeof listaProdutos !== 'undefined' && Array.isArray(listaProdutos)) ? listaProdutos : [];
+
+      if (marcaAtual === 'todas') {
+        renderizarVitrine(lista);
+      } else {
+        const filtrados = lista.filter(p => p.marca && p.marca.toString().toLowerCase().trim() === marcaAtual.toLowerCase().trim());
+        renderizarVitrine(filtrados);
+      }
     }
 
     function abrirFotoModal(url) {
       const modal = document.getElementById('modalFoto');
-      const img = documen
+      const img = document.getElementById('imgModal');
+      if (modal && img) {
+        img.src = url;
+        modal.classList.add('ativo');
+      }
+    }
+
+    function fecharModalFoto() {
+      const modal = document.getElementById('modalFoto');
+      if (modal) modal.classList.remove('ativo');
+    }
+
+    function alternarTema() {
+      const body = document.body;
+      const themeIcon = document.getElementById('theme-icon');
+      const themeText = document.getElementById('theme-text');
+
+      body.classList.toggle('theme-light');
+      themeIcon.textContent = body.classList.contains('theme-light') ? '🌙' : '☀️';
+      themeText.textContent = body.classList.contains('theme-light') ? 'Escuro' : 'Claro';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const lista = (typeof listaProdutos !== 'undefined' && Array.isArray(listaProdutos)) ? listaProdutos : [];
+      renderizarVitrine(lista);
+    });
+  </script>
+</body>
+</html>
+we
