@@ -82,14 +82,39 @@
 
     .form-grupo { display: flex; flex-direction: column; gap: 10px; }
 
+    .campo-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .campo-item label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #aaa;
+      text-transform: uppercase;
+    }
+
     input {
       background: #222;
       border: 1px solid var(--cor-borda);
-      padding: 12px;
+      padding: 10px 12px;
       color: #fff;
       border-radius: 6px;
       font-family: inherit;
       font-size: 14px;
+      width: 100%;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--cor-verde);
+    }
+
+    .input-preco {
+      font-weight: 700;
+      color: #00e676;
+      font-size: 16px;
     }
 
     .btn {
@@ -112,8 +137,8 @@
 
   <div id="login-screen" class="login-box">
     <h2>🔐 Acesso Restrito</h2>
-    <p style="font-size: 12px; color: #aaa; margin-bottom: 15px;">Digite a senha para acessar a câmera</p>
-    <input type="password" id="senha-input" placeholder="Sua Senha" style="width: 100%; margin-bottom: 12px;">
+    <p style="font-size: 12px; color: #aaa; margin-bottom: 15px;">Digite a senha para acessar o painel</p>
+    <input type="password" id="senha-input" placeholder="Sua Senha" style="margin-bottom: 12px;">
     <button class="btn" style="width: 100%;" onclick="verificarSenha()">Entrar</button>
   </div>
 
@@ -124,9 +149,18 @@
     </div>
 
     <div class="config-github">
-      <input type="text" id="gh-user" placeholder="Usuário GitHub" onchange="salvarCredenciais()">
-      <input type="text" id="gh-repo" placeholder="Nome Repositório" onchange="salvarCredenciais()">
-      <input type="password" id="gh-token" placeholder="Token GitHub (ghp_...)" onchange="salvarCredenciais()">
+      <div class="campo-item">
+        <label>Usuário GitHub</label>
+        <input type="text" id="gh-user" placeholder="seu-usuario" onchange="salvarCredenciais()">
+      </div>
+      <div class="campo-item">
+        <label>Repositório</label>
+        <input type="text" id="gh-repo" placeholder="nome-do-repo" onchange="salvarCredenciais()">
+      </div>
+      <div class="campo-item">
+        <label>Token de Acesso</label>
+        <input type="password" id="gh-token" placeholder="ghp_..." onchange="salvarCredenciais()">
+      </div>
     </div>
 
     <div class="camera-grid">
@@ -139,13 +173,32 @@
       <div class="form-grupo">
         <img id="foto-preview" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'><rect width='100%' height='100%' fill='%23111'/><text x='50%' y='50%' fill='%23666' font-size='16' text-anchor='middle'>Aguardando Foto...</text></svg>" alt="Preview">
         
-        <input type="text" id="prod-codigo" placeholder="Código" readonly>
-        <input type="text" id="prod-titulo" placeholder="Nome da Peça">
-        <input type="text" id="prod-marca" placeholder="Marca (ex: Beagle)">
-        <input type="number" id="prod-preco" placeholder="Preço (ex: 129.90)" step="0.01">
-        <input type="text" id="prod-tamanhos" placeholder="Tamanhos (ex: P, M, G)">
+        <div class="campo-item">
+          <label>Código Gerado</label>
+          <input type="text" id="prod-codigo" readonly>
+        </div>
+
+        <div class="campo-item">
+          <label>Nome do Produto</label>
+          <input type="text" id="prod-titulo" placeholder="Ex: Camiseta Linho">
+        </div>
+
+        <div class="campo-item">
+          <label>Marca</label>
+          <input type="text" id="prod-marca" placeholder="Ex: Beagle">
+        </div>
+
+        <div class="campo-item">
+          <label>Preço de Venda (R$)</label>
+          <input type="text" id="prod-preco" class="input-preco" placeholder="189,90">
+        </div>
+
+        <div class="campo-item">
+          <label>Tamanhos Disponíveis</label>
+          <input type="text" id="prod-tamanhos" placeholder="P, M, G">
+        </div>
         
-        <button class="btn" onclick="cadastrarEEnviarParaGithub()">🚀 Publicar no GitHub</button>
+        <button class="btn" style="margin-top: 10px;" onclick="cadastrarEEnviarParaGithub()">🚀 Publicar Produto</button>
       </div>
     </div>
   </div>
@@ -247,12 +300,16 @@
       const codigo = document.getElementById('prod-codigo').value;
       const titulo = document.getElementById('prod-titulo').value || 'Produto Raízes';
       const marca = document.getElementById('prod-marca').value || 'RAÍZES';
-      const preco = parseFloat(document.getElementById('prod-preco').value) || 0.00;
+      
+      // Tratamento do preço para aceitar vírgula ou ponto
+      const precoInput = document.getElementById('prod-preco').value.replace(',', '.');
+      const preco = parseFloat(precoInput) || 0.00;
+
       const tamanhosBrutos = document.getElementById('prod-tamanhos').value;
       const tamanhos = tamanhosBrutos ? tamanhosBrutos.split(',').map(t => t.trim()) : ["P", "M", "G"];
 
       if (!user || !repo || !token) {
-        alert('Preencha os dados do seu GitHub!');
+        alert('Preencha os dados do seu GitHub no topo do painel!');
         return;
       }
 
@@ -261,7 +318,7 @@
         return;
       }
 
-      alert('Enviando para o GitHub...');
+      alert('Enviando foto e preço para o GitHub...');
 
       const fotoPura = imagemBase64.replace(/^data:image\/(png|jpeg|jpg);base64,/, "");
       const caminhoFoto = `imagens/${codigo}.jpg`;
@@ -269,7 +326,7 @@
       const fotoEnviada = await salvarArquivoGithub(user, repo, token, caminhoFoto, fotoPura, `Upload foto ${codigo}`);
 
       if (!fotoEnviada) {
-        alert('Erro ao enviar foto. Verifique seu Token e permissões do repositório.');
+        alert('Erro ao enviar a foto. Verifique seu Token e o nome do repositório.');
         return;
       }
 
@@ -291,16 +348,18 @@
       const conteudoProdutosJS = `const listaProdutos = ${JSON.stringify(listaAtual, null, 2)};`;
       const jsBase64 = btoa(unescape(encodeURIComponent(conteudoProdutosJS)));
 
-      const jsEnviado = await salvarArquivoGithub(user, repo, token, 'produtos.js', jsBase64, `Adiciona produto ${codigo}`);
+      const jsEnviado = await salvarArquivoGithub(user, repo, token, 'produtos.js', jsBase64, `Adiciona ${codigo} com preço R$ ${preco}`);
 
       if (jsEnviado) {
-        alert('Sucesso! O produto foi salvo e aparecerá no site.');
+        alert(`Sucesso! O produto ${codigo} com o valor de R$ ${preco.toFixed(2)} foi salvo e publicado.`);
+        document.getElementById('prod-titulo').value = '';
+        document.getElementById('prod-preco').value = '';
+        document.getElementById('prod-tamanhos').value = '';
         gerarNovoCodigo();
       } else {
-        alert('Foto salva, mas houve falha ao atualizar o arquivo produtos.js.');
+        alert('A foto foi enviada, mas falhou ao gravar o preço no produtos.js.');
       }
     }
   </script>
 </body>
 </html>
-
