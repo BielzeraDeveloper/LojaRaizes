@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Admin — RAÍZES</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cor-fundo: #0a0a0a;
+      --cor-card: #161616;
+      --cor-borda: #2a2a2a;
+      --cor-texto: #ffffff;
+      --cor-verde: #25d366;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--cor-fundo);
+      color: var(--cor-texto);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .login-box {
+      background: var(--cor-card);
+      border: 1px solid var(--cor-borda);
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 350px;
+      width: 100%;
+    }
+
+    .login-box h2 { margin-bottom: 15px; font-size: 20px; }
+
+    .painel-container {
+      display: none;
+      width: 100%;
+      max-width: 900px;
+      background: var(--cor-card);
+      border: 1px solid var(--cor-borda);
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .config-github {
+      background: #111;
+      border: 1px dashed var(--cor-borda);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+    }
+
+    .camera-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 768px) { .camera-grid { grid-template-columns: 1fr; } }
+
+    video, canvas, #foto-preview {
+      width: 100%;
+      height: 280px;
+      border-radius: 8px;
+      background: #000;
+      object-fit: cover;
+    }
+
+    .form-grupo { display: flex; flex-direction: column; gap: 10px; }
+
+    input {
+      background: #222;
+      border: 1px solid var(--cor-borda);
+      padding: 12px;
+      color: #fff;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    .btn {
+      background: var(--cor-verde);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+
+    .btn-foto { background: #ffffff; color: #000000; margin-top: 8px; }
+    .btn:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+
+  <div id="login-screen" class="login-box">
+    <h2>🔐 Acesso Restrito</h2>
+    <p style="font-size: 12px; color: #aaa; margin-bottom: 15px;">Digite a senha para acessar a câmera</p>
+    <input type="password" id="senha-input" placeholder="Sua Senha" style="width: 100%; margin-bottom: 12px;">
+    <button class="btn" style="width: 100%;" onclick="verificarSenha()">Entrar</button>
+  </div>
+
+  <div id="admin-panel" class="painel-container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <h2>📷 Cadastrar Produto (GitHub)</h2>
+      <button onclick="sair()" style="background:none; border:none; color:#ff4444; cursor:pointer; font-weight:600;">Sair</button>
+    </div>
+
+    <div class="config-github">
+      <input type="text" id="gh-user" placeholder="Usuário GitHub" onchange="salvarCredenciais()">
+      <input type="text" id="gh-repo" placeholder="Nome Repositório" onchange="salvarCredenciais()">
+      <input type="password" id="gh-token" placeholder="Token GitHub (ghp_...)" onchange="salvarCredenciais()">
+    </div>
+
+    <div class="camera-grid">
+      <div>
+        <video id="webcam" autoplay playsinline></video>
+        <button class="btn btn-foto" style="width: 100%;" onclick="tirarFoto()">📸 Tirar Foto</button>
+        <canvas id="canvas" style="display:none;"></canvas>
+      </div>
+
+      <div class="form-grupo">
+        <img id="foto-preview" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'><rect width='100%' height='100%' fill='%23111'/><text x='50%' y='50%' fill='%23666' font-size='16' text-anchor='middle'>Aguardando Foto...</text></svg>" alt="Preview">
+        
+        <input type="text" id="prod-codigo" placeholder="Código" readonly>
+        <input type="text" id="prod-titulo" placeholder="Nome da Peça">
+        <input type="text" id="prod-marca" placeholder="Marca (ex: Beagle)">
+        <input type="number" id="prod-preco" placeholder="Preço (ex: 129.90)" step="0.01">
+        <input type="text" id="prod-tamanhos" placeholder="Tamanhos (ex: P, M, G)">
+        
+        <button class="btn" onclick="cadastrarEEnviarParaGithub()">🚀 Publicar no GitHub</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="produtos.js"></script>
+
+  <script>
+    const SENHA_CORRETA = "raizes123"; 
+
+    let imagemBase64 = '';
+    let streamCamera = null;
+
+    function verificarSenha() {
+      const senhaDigitada = document.getElementById('senha-input').value;
+      if (senhaDigitada === SENHA_CORRETA) {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('admin-panel').style.display = 'block';
+        carregarCredenciais();
+        iniciarCamera();
+        gerarNovoCodigo();
+      } else {
+        alert('Senha incorreta!');
+      }
+    }
+
+    function sair() {
+      location.reload();
+    }
+
+    function salvarCredenciais() {
+      localStorage.setItem('gh_user', document.getElementById('gh-user').value);
+      localStorage.setItem('gh_repo', document.getElementById('gh-repo').value);
+      localStorage.setItem('gh_token', document.getElementById('gh-token').value);
+    }
+
+    function carregarCredenciais() {
+      document.getElementById('gh-user').value = localStorage.getItem('gh_user') || '';
+      document.getElementById('gh-repo').value = localStorage.getItem('gh_repo') || '';
+      document.getElementById('gh-token').value = localStorage.getItem('gh_token') || '';
+    }
+
+    async function iniciarCamera() {
+      try {
+        const video = document.getElementById('webcam');
+        streamCamera = await navigator.mediaDevices.getUserMedia({ 
+          video: { facingMode: "environment", width: { ideal: 1080 }, height: { ideal: 1440 } } 
+        });
+        video.srcObject = streamCamera;
+      } catch (err) {
+        alert("Erro ao acessar a câmera: " + err.message);
+      }
+    }
+
+    function gerarNovoCodigo() {
+      document.getElementById('prod-codigo').value = 'RAIZ-' + Math.floor(1000 + Math.random() * 9000);
+    }
+
+    function tirarFoto() {
+      const video = document.getElementById('webcam');
+      const canvas = document.getElementById('canvas');
+      const preview = document.getElementById('foto-preview');
+
+      canvas.width = video.videoWidth || 600;
+      canvas.height = video.videoHeight || 800;
+      
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      imagemBase64 = canvas.toDataURL('image/jpeg', 0.85);
+      preview.src = imagemBase64;
+    }
+
+    async function salvarArquivoGithub(user, repo, token, caminho, conteudoBase64, mensagemCommit) {
+      const url = `https://api.github.com/repos/${user}/${repo}/contents/${caminho}`;
+      
+      let sha = undefined;
+      try {
+        const checagem = await fetch(url, { headers: { 'Authorization': `bearer ${token}` } });
+        if (checagem.ok) {
+          const dados = await checagem.json();
+          sha = dados.sha;
+        }
+      } catch (e) {}
+
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: { 'Authorization': `bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: mensagemCommit, content: conteudoBase64, sha: sha })
+      });
+
+      return response.ok;
+    }
+
+    async function cadastrarEEnviarParaGithub() {
+      const user = document.getElementById('gh-user').value.trim();
+      const repo = document.getElementById('gh-repo').value.trim();
+      const token = document.getElementById('gh-token').value.trim();
+
+      const codigo = document.getElementById('prod-codigo').value;
+      const titulo = document.getElementById('prod-titulo').value || 'Produto Raízes';
+      const marca = document.getElementById('prod-marca').value || 'RAÍZES';
+      const preco = parseFloat(document.getElementById('prod-preco').value) || 0.00;
+      const tamanhosBrutos = document.getElementById('prod-tamanhos').value;
+      const tamanhos = tamanhosBrutos ? tamanhosBrutos.split(',').map(t => t.trim()) : ["P", "M", "G"];
+
+      if (!user || !repo || !token) {
+        alert('Preencha os dados do seu GitHub!');
+        return;
+      }
+
+      if (!imagemBase64) {
+        alert('Tire a foto da peça primeiro!');
+        return;
+      }
+
+      alert('Enviando para o GitHub...');
+
+      const fotoPura = imagemBase64.replace(/^data:image\/(png|jpeg|jpg);base64,/, "");
+      const caminhoFoto = `imagens/${codigo}.jpg`;
+
+      const fotoEnviada = await salvarArquivoGithub(user, repo, token, caminhoFoto, fotoPura, `Upload foto ${codigo}`);
+
+      if (!fotoEnviada) {
+        alert('Erro ao enviar foto. Verifique seu Token e permissões do repositório.');
+        return;
+      }
+
+      const listaAtual = (typeof listaProdutos !== 'undefined' && Array.isArray(listaProdutos)) ? listaProdutos : [];
+      
+      const novoProduto = {
+        id: Date.now(),
+        codigo: codigo,
+        titulo: titulo,
+        marca: marca,
+        preco: preco,
+        imagem: caminhoFoto,
+        tamanhos: tamanhos,
+        cores: ["Padrão"]
+      };
+
+      listaAtual.unshift(novoProduto);
+
+      const conteudoProdutosJS = `const listaProdutos = ${JSON.stringify(listaAtual, null, 2)};`;
+      const jsBase64 = btoa(unescape(encodeURIComponent(conteudoProdutosJS)));
+
+      const jsEnviado = await salvarArquivoGithub(user, repo, token, 'produtos.js', jsBase64, `Adiciona produto ${codigo}`);
+
+      if (jsEnviado) {
+        alert('Sucesso! O produto foi salvo e aparecerá no site.');
+        gerarNovoCodigo();
+      } else {
+        alert('Foto salva, mas houve falha ao atualizar o arquivo produtos.js.');
+      }
+    }
+  </script>
+</body>
+</html>
+
