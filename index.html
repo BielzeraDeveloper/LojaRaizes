@@ -5,163 +5,222 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RAÍZES — Boutique Multimarcas</title>
 
-  <!-- Google Fonts: Playfair Display (Luxo) + Plus Jakarta Sans (Moda/UI) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ==========================================================================
-       PALETA DE CORES & VARIÁVEIS "RAÍZES" (Elegância Botânica de Luxo)
-       ========================================================================== */
     :root {
-      /* Marca & Destaques Nobres */
-      --esmeralda-profundo: #0f281e;
-      --esmeralda-medio: #1b4332;
-      --esmeralda-vibrante: #2d6a4f;
+      --esmeralda-profundo: #091712;
+      --esmeralda-medio: #143326;
+      --esmeralda-vibrante: #1e4a38;
       --dourado-champagne: #d4af37;
       --dourado-suave: #c5a059;
-      --dourado-gradiente: linear-gradient(135deg, #e6ca65 0%, #b88e28 100%);
-      --terracota: #c86d51;
-      --farm-coral: #e76f51;
+      --dourado-gradiente: linear-gradient(135deg, #ebd47a 0%, #b88e28 100%);
 
-      /* Fontes */
       --font-titulo: 'Playfair Display', serif;
       --font-corpo: 'Plus Jakarta Sans', sans-serif;
-
-      /* Transições & Sombras */
-      --transicao: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-      --raio-card: 16px;
-      --raio-btn: 8px;
+      --transicao: all 0.25s ease;
+      --raio-card: 12px;
+      --raio-btn: 6px;
     }
 
-    /* TEMA ESCURO (Padrão - Escuro Botânico/Charcoal Quente) */
+    /* TEMA ESCURO (Fundo Mais Escuro e Nobre) */
     [data-theme="dark"] {
-      --bg-principal: #0b100d;
-      --bg-card: #131a16;
-      --bg-input: #1a241f;
-      --borda-suave: rgba(197, 160, 89, 0.15);
-      --borda-forte: rgba(197, 160, 89, 0.35);
-      --texto-primario: #f4f1ea;
-      --texto-secundario: #a3b1a8;
-      --sombra-card: 0 12px 32px rgba(0, 0, 0, 0.45);
-      --sombra-hover: 0 20px 40px rgba(0, 0, 0, 0.6);
-      --badge-bg: rgba(212, 175, 55, 0.12);
-      --badge-texto: #e6ca65;
+      --bg-principal: #050806;
+      --bg-card: #0d120f;
+      --bg-input: #141b16;
+      --borda-suave: rgba(197, 160, 89, 0.12);
+      --borda-forte: rgba(197, 160, 89, 0.3);
+      --texto-primario: #f5f3ef;
+      --texto-secundario: #8e9e94;
+      --sombra-card: 0 8px 24px rgba(0, 0, 0, 0.6);
+      --badge-bg: rgba(212, 175, 55, 0.15);
+      --badge-texto: #ebd47a;
     }
 
-    /* TEMA CLARO (Areia / Off-White de Alto Padrão) */
+    /* TEMA CLARO (Areia Nobre) */
     [data-theme="light"] {
-      --bg-principal: #fbf9f5;
+      --bg-principal: #f9f7f2;
       --bg-card: #ffffff;
-      --bg-input: #f2eee5;
-      --borda-suave: rgba(27, 67, 50, 0.12);
-      --borda-forte: rgba(27, 67, 50, 0.25);
-      --texto-primario: #121c17;
-      --texto-secundario: #526358;
-      --sombra-card: 0 10px 28px rgba(15, 40, 30, 0.06);
-      --sombra-hover: 0 18px 36px rgba(15, 40, 30, 0.12);
-      --badge-bg: #1b4332;
-      --badge-texto: #f4f1ea;
+      --bg-input: #f0ebe1;
+      --borda-suave: rgba(20, 51, 38, 0.12);
+      --borda-forte: rgba(20, 51, 38, 0.25);
+      --texto-primario: #0d1410;
+      --texto-secundario: #546459;
+      --sombra-card: 0 6px 20px rgba(13, 20, 16, 0.07);
+      --badge-bg: #143326;
+      --badge-texto: #f5f3ef;
     }
 
-    /* ==========================================================================
-       RESET & BASE
-       ========================================================================== */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
     body {
       font-family: var(--font-corpo);
       background-color: var(--bg-principal);
       color: var(--texto-primario);
-      line-height: 1.5;
-      transition: background-color 0.4s ease, color 0.4s ease;
-      min-height: 100vh;
-      padding-bottom: 60px;
+      line-height: 1.4;
+      padding-bottom: 40px;
     }
 
-    /* ==========================================================================
-       HEADER & CABEÇALHO
-       ========================================================================== */
+    /* HEADER COMPACTO COM LOGO ORIGINAL E BOTÕES */
     header {
       position: sticky;
       top: 0;
       z-index: 100;
       background: var(--bg-principal);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--borda-suave);
-      padding: 16px 24px;
+      padding: 10px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-top {
+      width: 100%;
+      max-width: 1200px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: var(--transicao);
     }
 
+    /* LOGO ORIGINAL DA ÁRVORE */
     .logo-container {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
+    }
+
+    .logo-arvore {
+      width: 28px;
+      height: 28px;
+      fill: var(--dourado-suave);
     }
 
     .logo-marca {
       font-family: var(--font-titulo);
-      font-size: 26px;
+      font-size: 20px;
       font-weight: 700;
-      letter-spacing: 4px;
+      letter-spacing: 3px;
       text-transform: uppercase;
       background: var(--dourado-gradiente);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
+    /* BOTÕES DE NAVEGAÇÃO SUPERIORES */
+    .header-nav {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-nav {
+      background: none;
+      border: none;
+      color: var(--texto-secundario);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 4px 8px;
+      transition: var(--transicao);
+      text-decoration: none;
+    }
+
+    .btn-nav.ativo, .btn-nav:hover {
+      color: var(--dourado-champagne);
+    }
+
     .theme-toggle-btn {
       background: var(--bg-card);
-      border: 1px solid var(--borda-forte);
+      border: 1px solid var(--borda-suave);
       color: var(--texto-primario);
-      padding: 8px 16px;
-      border-radius: 30px;
+      padding: 5px 12px;
+      border-radius: 20px;
       cursor: pointer;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 8px;
-      transition: var(--transicao);
+      gap: 5px;
     }
 
-    .theme-toggle-btn:hover {
-      border-color: var(--dourado-champagne);
-      transform: translateY(-1px);
+    /* BANNER / FOTO DA LOJA (VISITE-NOS) */
+    .secao-loja {
+      max-width: 1200px;
+      margin: 16px auto 8px auto;
+      padding: 0 12px;
     }
 
-    /* ==========================================================================
-       FILTRO DE MARCAS (Estilo Magazine / Boutique)
-       ========================================================================== */
+    .banner-loja {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      border-radius: var(--raio-card);
+      overflow: hidden;
+      border: 1px solid var(--borda-suave);
+    }
+
+    .banner-loja img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.6);
+    }
+
+    .banner-conteudo {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 16px;
+      background: linear-gradient(to top, rgba(5,8,6,0.85), transparent);
+    }
+
+    .banner-titulo {
+      font-family: var(--font-titulo);
+      font-size: 22px;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .banner-sub {
+      font-size: 12px;
+      color: var(--dourado-suave);
+      letter-spacing: 1px;
+    }
+
+    /* FILTRO DE MARCAS COMPACTO */
     .container-filtros {
-      padding: 24px 20px 10px 20px;
-      max-width: 1300px;
+      padding: 12px;
+      max-width: 1200px;
       margin: 0 auto;
       overflow-x: auto;
       white-space: nowrap;
-      scrollbar-width: none; /* Firefox */
+      scrollbar-width: none;
     }
 
-    .container-filtros::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+    .container-filtros::-webkit-scrollbar { display: none; }
 
     .filtros-wrapper {
       display: inline-flex;
-      gap: 10px;
+      gap: 8px;
     }
 
     .btn-filtro {
       background: var(--bg-card);
       border: 1px solid var(--borda-suave);
       color: var(--texto-secundario);
-      padding: 10px 22px;
-      border-radius: 40px;
-      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 11px;
       font-weight: 600;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
       text-transform: uppercase;
       cursor: pointer;
       transition: var(--transicao);
@@ -171,24 +230,28 @@
       background: var(--esmeralda-medio);
       color: #ffffff;
       border-color: var(--dourado-champagne);
-      box-shadow: 0 4px 14px rgba(27, 67, 50, 0.3);
     }
 
-    /* ==========================================================================
-       GRID DE PRODUTOS
-       ========================================================================== */
+    /* GRID DE PRODUTOS AJUSTADO (2 COLUNAS COMPACTAS NO CELULAR) */
     .grid-produtos {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 28px;
-      max-width: 1300px;
-      margin: 20px auto;
-      padding: 0 20px;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 14px;
+      max-width: 1200px;
+      margin: 8px auto;
+      padding: 0 12px;
     }
 
-    /* ==========================================================================
-       CARD DO PRODUTO (REESTILIZADO & CORRIGIDO)
-       ========================================================================== */
+    @media (max-width: 600px) {
+      .grid-produtos {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 0 8px;
+      }
+      .banner-loja { height: 140px; }
+    }
+
+    /* CARD DO PRODUTO COMPACTO */
     .card-produto {
       background: var(--bg-card);
       border: 1px solid var(--borda-suave);
@@ -201,13 +264,6 @@
       transition: var(--transicao);
     }
 
-    .card-produto:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--sombra-hover);
-      border-color: var(--borda-forte);
-    }
-
-    /* Container de Imagem Proporcional sem Vazamento */
     .card-foto-wrapper {
       position: relative;
       width: 100%;
@@ -220,13 +276,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center;
-      transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
       display: block;
-    }
-
-    .card-produto:hover .card-foto-wrapper img {
-      transform: scale(1.05);
     }
 
     .sem-imagem-placeholder {
@@ -236,151 +286,165 @@
       align-items: center;
       justify-content: center;
       color: var(--texto-secundario);
-      font-size: 13px;
-      letter-spacing: 1px;
+      font-size: 11px;
       text-transform: uppercase;
-      background: var(--bg-input);
     }
 
-    /* Etiqueta / Badge de Grife */
     .badge-marca {
       position: absolute;
-      top: 14px;
-      left: 14px;
+      top: 8px;
+      left: 8px;
       background: var(--badge-bg);
       color: var(--badge-texto);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(6px);
       border: 1px solid var(--borda-forte);
-      padding: 5px 12px;
-      border-radius: 30px;
-      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 9px;
       font-weight: 700;
-      letter-spacing: 1.5px;
+      letter-spacing: 1px;
       text-transform: uppercase;
       z-index: 2;
     }
 
-    /* Conteúdo do Card */
+    /* CONTEÚDO ENHANCED & COMPACTO */
     .card-info {
-      padding: 20px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
       justify-content: space-between;
     }
 
-    .card-header-detalhes {
-      margin-bottom: 12px;
-    }
-
     .produto-titulo {
-      font-family: var(--font-titulo);
-      font-size: 18px;
+      font-family: var(--font-corpo);
+      font-size: 13px;
       font-weight: 600;
       color: var(--texto-primario);
-      margin-bottom: 6px;
-      line-height: 1.3;
+      margin-bottom: 4px;
+      line-height: 1.2;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .produto-preco {
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 700;
-      color: var(--dourado-suave);
-      letter-spacing: 0.5px;
-      margin-top: 4px;
+      color: #25d366;
+      letter-spacing: 0.3px;
+      margin-bottom: 8px;
     }
 
-    /* SELETORES DE OPÇÕES (Tamanhos e Cores) */
     .secao-opcoes {
-      margin: 14px 0;
+      margin: 6px 0;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 6px;
     }
 
     .label-opcao {
-      font-size: 11px;
+      font-size: 9px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
       color: var(--texto-secundario);
     }
 
     .lista-pills {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 4px;
     }
 
     .pill-opcao {
       background: var(--bg-input);
       border: 1px solid var(--borda-suave);
       color: var(--texto-primario);
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 12px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 10px;
       font-weight: 600;
       cursor: pointer;
-      transition: var(--transicao);
     }
 
-    .pill-opcao:hover, .pill-opcao.selecionado {
+    .pill-opcao.selecionado {
       background: var(--esmeralda-medio);
       color: #ffffff;
       border-color: var(--dourado-champagne);
     }
 
-    /* BOTÃO WHATSAPP / TENHO INTERESSE (Elegante & Nobre) */
     .btn-interesse {
       width: 100%;
-      background: linear-gradient(135deg, var(--esmeralda-medio) 0%, var(--esmeralda-profundo) 100%);
-      color: #ffffff;
-      border: 1px solid var(--dourado-suave);
-      padding: 14px;
+      background: #25d366;
+      color: #000000;
+      border: none;
+      padding: 10px;
       border-radius: var(--raio-btn);
       font-family: var(--font-corpo);
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 1.5px;
+      letter-spacing: 0.5px;
       text-transform: uppercase;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      margin-top: 10px;
+      gap: 6px;
+      margin-top: 8px;
       transition: var(--transicao);
-      box-shadow: 0 4px 12px rgba(15, 40, 30, 0.2);
     }
 
     .btn-interesse:hover {
-      background: linear-gradient(135deg, var(--esmeralda-vibrante) 0%, var(--esmeralda-medio) 100%);
-      border-color: var(--dourado-champagne);
-      box-shadow: 0 6px 18px rgba(45, 106, 79, 0.35);
-      transform: translateY(-2px);
+      background: #20ba5a;
+      transform: translateY(-1px);
     }
 
     .btn-interesse svg {
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
       fill: currentColor;
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
+  <!-- HEADER COMPACTO -->
   <header>
-    <div class="logo-container">
-      <span class="logo-marca">RAÍZES</span>
+    <div class="header-top">
+      <div class="logo-container">
+        <!-- Ícone Árvore Original em SVG -->
+        <svg class="logo-arvore" viewBox="0 0 24 24">
+          <path d="M12 2L8 8h3v4H8l5 7h-2v3h2v-2h2v2h2v-3h-2l5-7h-3V8h3l-4-6zm0 3.5L14.5 8H13v4h2.5L12 16.5 8.5 12H11V8H9.5L12 5.5z"/>
+        </svg>
+        <span class="logo-marca">RAÍZES</span>
+      </div>
+
+      <div class="header-nav">
+        <a href="#vitrine" class="btn-nav ativo">Vitrine</a>
+        <a href="#visite-nos" class="btn-nav">Visite-nos</a>
+      </div>
+
+      <button class="theme-toggle-btn" id="btn-tema" onclick="alternarTema()">
+        ☀️ <span id="label-tema">Claro</span>
+      </button>
     </div>
-    <button class="theme-toggle-btn" id="btn-tema" onclick="alternarTema()">
-      🌙 <span id="label-tema">Escuro</span>
-    </button>
   </header>
 
-  <!-- FILTRO DE MARCAS -->
-  <div class="container-filtros">
+  <!-- BANNER DA LOJA / VISITE-NOS -->
+  <section class="secao-loja" id="visite-nos">
+    <div class="banner-loja">
+      <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1000&auto=format&fit=crop" alt="Loja Raízes">
+      <div class="banner-conteudo">
+        <h2 class="banner-titulo">Nossa Boutique</h2>
+        <p class="banner-sub">Moda Feminina & Masculina Multimarcas</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTRO DE MARCAS COMPACTO -->
+  <div class="container-filtros" id="vitrine">
     <div class="filtros-wrapper" id="filtro-marcas">
       <button class="btn-filtro ativo" onclick="filtrarMarca('TODAS')">Todas</button>
       <button class="btn-filtro" onclick="filtrarMarca('FARM RIO')">Farm Rio</button>
@@ -390,33 +454,30 @@
     </div>
   </div>
 
-  <!-- VITRINE DE PRODUTOS -->
+  <!-- VITRINE DE PRODUTOS COMPACTA -->
   <main class="grid-produtos" id="grid-vitrine">
-    <!-- Cards inseridos dinamicamente via JS -->
+    <!-- Cards renderizados dinamicamente -->
   </main>
 
-  <!-- ARQUIVO DE PRODUTOS DA LOJA -->
-  <script src="produtos.js?v=2.0"></script>
+  <script src="produtos.js?v=2.1"></script>
 
   <script>
-    const NUMERO_WHATSAPP = "5542999999999"; // Substitua pelo seu WhatsApp oficial (DDI+DDD+Numero)
+    const NUMERO_WHATSAPP = "5542999999999"; 
     let marcaAtiva = 'TODAS';
 
-    // Alternar Tema Escuro / Claro
     function alternarTema() {
       const html = document.documentElement;
       const btnLabel = document.getElementById('label-tema');
       
       if (html.getAttribute('data-theme') === 'dark') {
         html.setAttribute('data-theme', 'light');
-        btnLabel.textContent = 'Claro';
+        btnLabel.textContent = 'Escuro';
       } else {
         html.setAttribute('data-theme', 'dark');
-        btnLabel.textContent = 'Escuro';
+        btnLabel.textContent = 'Claro';
       }
     }
 
-    // Filtro por marca
     function filtrarMarca(marca) {
       marcaAtiva = marca;
       document.querySelectorAll('.btn-filtro').forEach(btn => {
@@ -425,19 +486,16 @@
       renderizarVitrine();
     }
 
-    // Seleção visual de Tamanho / Cor no Card
     function selecionarOpcao(btn, classeGrupo) {
       const parent = btn.closest('.' + classeGrupo);
       parent.querySelectorAll('.pill-opcao').forEach(b => b.classList.remove('selecionado'));
       btn.classList.add('selecionado');
     }
 
-    // Formatação de Preço para Real R$
     function formatarPreco(valor) {
       return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     }
 
-    // Gerar Link do WhatsApp
     function enviarWhatsApp(idProduto) {
       const card = document.getElementById(`prod-card-${idProduto}`);
       const produto = listaProdutos.find(p => p.id === idProduto);
@@ -461,7 +519,6 @@
       window.open(url, '_blank');
     }
 
-    // Renderizar Cards da Vitrine
     function renderizarVitrine() {
       const grid = document.getElementById('grid-vitrine');
       grid.innerHTML = '';
@@ -474,7 +531,7 @@
       });
 
       if (filtrados.length === 0) {
-        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--texto-secundario); padding: 40px 0;">Nenhum produto disponível no momento nesta categoria.</p>`;
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--texto-secundario); padding: 30px 0; font-size: 13px;">Nenhum produto nesta categoria.</p>`;
         return;
       }
 
@@ -483,18 +540,15 @@
         card.className = 'card-produto';
         card.id = `prod-card-${prod.id}`;
 
-        // Trata imagem para evitar overflow
         const imgMarkup = prod.imagem 
           ? `<img src="${prod.imagem}" alt="${prod.titulo}" loading="lazy">`
-          : `<div class="sem-imagem-placeholder">Foto Indisponível</div>`;
+          : `<div class="sem-imagem-placeholder">Sem Imagem</div>`;
 
-        // Renderiza botões de tamanhos
         const tamanhosList = prod.tamanhos || ['P', 'M', 'G'];
         const tamanhosMarkup = tamanhosList.map((t, idx) => 
           `<button class="pill-opcao ${idx === 0 ? 'selecionado' : ''}" onclick="selecionarOpcao(this, 'grupo-tamanhos')">${t}</button>`
         ).join('');
 
-        // Renderiza botões de cores
         const coresList = prod.cores || ['Padrão'];
         const coresMarkup = coresList.map((c, idx) => 
           `<button class="pill-opcao ${idx === 0 ? 'selecionado' : ''}" onclick="selecionarOpcao(this, 'grupo-cores')">${c}</button>`
@@ -502,27 +556,27 @@
 
         card.innerHTML = `
           <div class="card-foto-wrapper">
-            <span class="badge-marca">${prod.marca || 'RAÍZES'}</span>
+            <span class="badge-marca">${prod.marca || 'BEAGLE'}</span>
             ${imgMarkup}
           </div>
 
           <div class="card-info">
-            <div class="card-header-detalhes">
+            <div>
               <h3 class="produto-titulo">${prod.titulo}</h3>
               <div class="produto-preco">${formatarPreco(prod.preco)}</div>
             </div>
 
             <div class="secao-opcoes">
               <div>
-                <span class="label-opcao">Tamanho</span>
-                <div class="lista-pills grupo-tamanhos" style="margin-top: 4px;">
+                <span class="label-opcao">Tamanho:</span>
+                <div class="lista-pills grupo-tamanhos">
                   ${tamanhosMarkup}
                 </div>
               </div>
 
               <div>
-                <span class="label-opcao">Cor</span>
-                <div class="lista-pills grupo-cores" style="margin-top: 4px;">
+                <span class="label-opcao">Cor:</span>
+                <div class="lista-pills grupo-cores">
                   ${coresMarkup}
                 </div>
               </div>
@@ -539,7 +593,6 @@
       });
     }
 
-    // Inicialização ao carregar a página
     document.addEventListener('DOMContentLoaded', () => {
       renderizarVitrine();
     });
