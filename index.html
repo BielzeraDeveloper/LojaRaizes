@@ -87,18 +87,22 @@
       align-items: center;
     }
 
-    /* LOGO COM ÁRVORE DOURADA */
+    /* LOGO OFICIAL DA LOJA (COM TOM DOURADO APLICADO) */
     .logo-container {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       text-decoration: none;
     }
 
-    .logo-arvore {
-      width: 26px;
-      height: 26px;
-      fill: var(--dourado-suave);
+    .logo-img {
+      height: 32px;
+      width: 32px;
+      object-fit: contain;
+      border-radius: 50%;
+      /* Filtro CSS para deixar a logo branca em tom dourado */
+      filter: sepia(1) saturate(3) hue-rotate(5deg) brightness(1.1);
+      transition: var(--transicao);
     }
 
     .logo-marca {
@@ -112,12 +116,12 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* BOTÕES DE NAVEGAÇÃO */
+    /* BOTÕES DE NAVEGAÇÃO AJUSTADOS */
     .header-nav {
       display: flex;
-      gap: 4px; /* Aproximou "Vitrine" de "Visite-nos" */
+      gap: 4px; /* Vitrine e Visite-nos bem próximos */
       align-items: center;
-      margin-left: 20px; /* Afastou "Vitrine" do nome RAÍZES */
+      margin-left: 20px; /* Afastou da logo RAÍZES */
     }
 
     .btn-nav {
@@ -136,18 +140,25 @@
       color: var(--dourado-champagne);
     }
 
+    /* BOTÃO DE TEMA DISCRETO (ÍCONE CIRCULAR) */
     .theme-toggle-btn {
-      background: var(--bg-card);
+      background: transparent;
       border: 1px solid var(--borda-suave);
       color: var(--texto-primario);
-      padding: 5px 12px;
-      border-radius: 20px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
       cursor: pointer;
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 13px;
       display: flex;
       align-items: center;
-      gap: 5px;
+      justify-content: center;
+      transition: var(--transicao);
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--dourado-champagne);
+      background: var(--bg-card);
     }
 
     /* BANNER COM foto-loja.jpg */
@@ -427,10 +438,8 @@
   <header>
     <div class="header-top">
       <a href="#" class="logo-container">
-        <!-- Árvore Dourada SVG -->
-        <svg class="logo-arvore" viewBox="0 0 24 24">
-          <path d="M12 2L8 8h3v4H8l5 7h-2v3h2v-2h2v2h2v-3h-2l5-7h-3V8h3l-4-6zm0 3.5L14.5 8H13v4h2.5L12 16.5 8.5 12H11V8H9.5L12 5.5z"/>
-        </svg>
+        <!-- Árvore Real da Marca (logo.png) com filtro dourado -->
+        <img src="logo.png" alt="Logo Raízes" class="logo-img">
         <span class="logo-marca">RAÍZES</span>
       </a>
 
@@ -439,8 +448,9 @@
         <a href="#visite-nos" class="btn-nav">Visite-nos</a>
       </div>
 
-      <button class="theme-toggle-btn" id="btn-tema" onclick="alternarTema()">
-        ☀️ <span id="label-tema">Claro</span>
+      <!-- BOTÃO DE TEMA DISCRETO -->
+      <button class="theme-toggle-btn" id="btn-tema" onclick="alternarTema()" title="Alternar Tema">
+        <span id="icone-tema">☀️</span>
       </button>
     </div>
   </header>
@@ -489,14 +499,14 @@
 
     function alternarTema() {
       const html = document.documentElement;
-      const btnLabel = document.getElementById('label-tema');
+      const icone = document.getElementById('icone-tema');
       
       if (html.getAttribute('data-theme') === 'dark') {
         html.setAttribute('data-theme', 'light');
-        btnLabel.textContent = 'Escuro';
+        icone.textContent = '🌙';
       } else {
         html.setAttribute('data-theme', 'dark');
-        btnLabel.textContent = 'Claro';
+        icone.textContent = '☀️';
       }
     }
 
