@@ -9,51 +9,49 @@
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --esmeralda-profundo: #08140f;
-      --esmeralda-medio: #122b20;
-      --esmeralda-vibrante: #1a4232;
+      --esmeralda-profundo: #091712;
+      --esmeralda-medio: #143326;
+      --esmeralda-vibrante: #1e4a38;
       --dourado-champagne: #d4af37;
       --dourado-suave: #c5a059;
       --dourado-gradiente: linear-gradient(135deg, #ebd47a 0%, #b88e28 100%);
 
-      --font-titulo: 'Cinzel', serif;
+      --font-titulo: 'Playfair Display', serif;
       --font-corpo: 'Plus Jakarta Sans', sans-serif;
-      --transicao: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --transicao: all 0.25s ease;
       --raio-card: 12px;
       --raio-btn: 6px;
     }
 
-    /* TEMA ESCURO (Fundo Escuro Botânico de Luxo) */
+    /* TEMA ESCURO */
     [data-theme="dark"] {
       --bg-principal: #050806;
-      --bg-card: #0e1410;
-      --bg-input: #151d18;
-      --borda-suave: rgba(197, 160, 89, 0.14);
-      --borda-forte: rgba(197, 160, 89, 0.32);
+      --bg-card: #0d120f;
+      --bg-input: #141b16;
+      --borda-suave: rgba(197, 160, 89, 0.12);
+      --borda-forte: rgba(197, 160, 89, 0.3);
       --texto-primario: #f5f3ef;
       --texto-secundario: #8e9e94;
-      --verde-preco: #25d366;
-      --sombra-card: 0 8px 24px rgba(0, 0, 0, 0.65);
+      --sombra-card: 0 8px 24px rgba(0, 0, 0, 0.6);
       --badge-bg: rgba(212, 175, 55, 0.15);
       --badge-texto: #ebd47a;
     }
 
-    /* TEMA CLARO (Areia Nobre / Off-White) */
+    /* TEMA CLARO */
     [data-theme="light"] {
-      --bg-principal: #f8f6f0;
+      --bg-principal: #f9f7f2;
       --bg-card: #ffffff;
-      --bg-input: #eee9df;
-      --borda-suave: rgba(18, 43, 32, 0.12);
-      --borda-forte: rgba(18, 43, 32, 0.25);
-      --texto-primario: #0e1410;
+      --bg-input: #f0ebe1;
+      --borda-suave: rgba(20, 51, 38, 0.12);
+      --borda-forte: rgba(20, 51, 38, 0.25);
+      --texto-primario: #0d1410;
       --texto-secundario: #546459;
-      --verde-preco: #128c7e;
-      --sombra-card: 0 6px 20px rgba(14, 20, 16, 0.08);
-      --badge-bg: #122b20;
+      --sombra-card: 0 6px 20px rgba(13, 20, 16, 0.07);
+      --badge-bg: #143326;
       --badge-texto: #f5f3ef;
     }
 
@@ -65,75 +63,86 @@
       color: var(--texto-primario);
       line-height: 1.4;
       padding-bottom: 40px;
-      scroll-behavior: smooth;
     }
 
     /* HEADER COMPACTO */
     header {
       position: sticky;
       top: 0;
-      z-index: 1000;
+      z-index: 100;
       background: var(--bg-principal);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--borda-suave);
       padding: 10px 16px;
       display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-top {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
 
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    /* LOGO OFICIAL COM IMAGEM */
+    /* LOGO COM IMAGEM E SVG */
     .logo-container {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       text-decoration: none;
     }
 
-    .logo-container .img-logo {
-      height: 32px;
+    .logo-img {
+      height: 28px;
       width: auto;
       object-fit: contain;
     }
 
-    [data-theme="dark"] .logo-container .img-logo {
+    [data-theme="dark"] .logo-img {
       filter: brightness(0) invert(1);
+    }
+
+    .logo-arvore {
+      width: 24px;
+      height: 24px;
+      fill: var(--dourado-suave);
     }
 
     .logo-marca {
       font-family: var(--font-titulo);
       font-size: 20px;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       text-transform: uppercase;
       background: var(--dourado-gradiente);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    /* NAVEGAÇÃO */
-    nav {
+    /* BOTÕES DE NAVEGAÇÃO */
+    .header-nav {
       display: flex;
       gap: 12px;
       align-items: center;
     }
 
-    nav a {
+    .btn-nav {
+      background: none;
+      border: none;
       color: var(--texto-secundario);
-      text-decoration: none;
       font-size: 13px;
       font-weight: 600;
+      cursor: pointer;
+      padding: 4px 8px;
       transition: var(--transicao);
+      text-decoration: none;
     }
 
-    nav a:hover {
+    .btn-nav.ativo, .btn-nav:hover {
       color: var(--dourado-champagne);
     }
 
@@ -149,20 +158,19 @@
       display: flex;
       align-items: center;
       gap: 5px;
-      transition: var(--transicao);
     }
 
-    /* BANNER FOTO DA LOJA */
+    /* BANNER COM foto-loja.jpg */
     .secao-loja {
       max-width: 1200px;
-      margin: 12px auto 6px auto;
+      margin: 16px auto 8px auto;
       padding: 0 12px;
     }
 
     .banner-loja {
       position: relative;
       width: 100%;
-      height: 160px;
+      height: 180px;
       border-radius: var(--raio-card);
       overflow: hidden;
       border: 1px solid var(--borda-suave);
@@ -172,7 +180,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: brightness(0.55);
+      filter: brightness(0.6);
     }
 
     .banner-conteudo {
@@ -191,19 +199,18 @@
       font-family: var(--font-titulo);
       font-size: 22px;
       color: #ffffff;
-      margin-bottom: 2px;
-      letter-spacing: 1px;
+      margin-bottom: 4px;
     }
 
     .banner-sub {
       font-size: 12px;
       color: var(--dourado-suave);
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
     }
 
     /* FILTRO DE MARCAS COMPACTO */
     .container-filtros {
-      padding: 10px 12px;
+      padding: 12px;
       max-width: 1200px;
       margin: 0 auto;
       overflow-x: auto;
@@ -236,33 +243,25 @@
       background: var(--esmeralda-medio);
       color: #ffffff;
       border-color: var(--dourado-champagne);
-      box-shadow: 0 2px 10px rgba(18, 43, 32, 0.4);
     }
 
-    /* GRID COMPACTA (2 COLUNAS NO CELULAR) */
-    .container-principal {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 12px;
-    }
-
+    /* GRID DE PRODUTOS COMPACTA */
     .grid-produtos {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
       gap: 14px;
-      margin: 10px 0 30px 0;
+      max-width: 1200px;
+      margin: 8px auto;
+      padding: 0 12px;
     }
 
     @media (max-width: 600px) {
-      header { padding: 8px 12px; }
-      .logo-marca { font-size: 17px; }
-      .logo-container .img-logo { height: 26px; }
-      .banner-loja { height: 130px; }
-      .banner-titulo { font-size: 18px; }
       .grid-produtos {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
+        padding: 0 8px;
       }
+      .banner-loja { height: 140px; }
     }
 
     /* CARD DO PRODUTO */
@@ -278,18 +277,12 @@
       transition: var(--transicao);
     }
 
-    .card-produto:hover {
-      transform: translateY(-3px);
-      border-color: var(--borda-forte);
-    }
-
     .card-foto-wrapper {
       position: relative;
       width: 100%;
       aspect-ratio: 3 / 4;
       background: var(--bg-input);
       overflow: hidden;
-      cursor: pointer;
     }
 
     .card-foto-wrapper img {
@@ -297,11 +290,6 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.4s ease;
-    }
-
-    .card-produto:hover .card-foto-wrapper img {
-      transform: scale(1.04);
     }
 
     .sem-imagem-placeholder {
@@ -313,7 +301,6 @@
       color: var(--texto-secundario);
       font-size: 11px;
       text-transform: uppercase;
-      background: var(--bg-input);
     }
 
     .badge-marca {
@@ -333,9 +320,8 @@
       z-index: 2;
     }
 
-    /* DETALHES DO CARD */
     .card-info {
-      padding: 10px 12px 12px 12px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
@@ -343,28 +329,28 @@
     }
 
     .produto-titulo {
+      font-family: var(--font-corpo);
       font-size: 13px;
       font-weight: 600;
       color: var(--texto-primario);
       margin-bottom: 4px;
-      line-height: 1.25;
+      line-height: 1.2;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      height: 33px;
     }
 
     .produto-preco {
       font-size: 16px;
       font-weight: 700;
-      color: var(--verde-preco);
+      color: #25d366;
       letter-spacing: 0.3px;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .secao-opcoes {
-      margin: 4px 0 8px 0;
+      margin: 6px 0;
       display: flex;
       flex-direction: column;
       gap: 6px;
@@ -388,12 +374,11 @@
       background: var(--bg-input);
       border: 1px solid var(--borda-suave);
       color: var(--texto-primario);
-      padding: 3px 7px;
+      padding: 3px 8px;
       border-radius: 4px;
       font-size: 10px;
       font-weight: 600;
       cursor: pointer;
-      transition: var(--transicao);
     }
 
     .pill-opcao.selecionado {
@@ -404,10 +389,10 @@
 
     .btn-interesse {
       width: 100%;
-      background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
-      color: #ffffff;
+      background: #25d366;
+      color: #000000;
       border: none;
-      padding: 9px;
+      padding: 10px;
       border-radius: var(--raio-btn);
       font-family: var(--font-corpo);
       font-size: 11px;
@@ -419,68 +404,22 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
+      margin-top: 8px;
       transition: var(--transicao);
     }
 
     .btn-interesse:hover {
-      filter: brightness(1.1);
+      background: #20ba5a;
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
     }
 
     .btn-interesse svg {
-      width: 13px;
-      height: 13px;
+      width: 14px;
+      height: 14px;
       fill: currentColor;
     }
 
-    /* INFORMAÇÕES DE ENDEREÇO */
-    .info-box {
-      background: var(--bg-card);
-      border: 1px solid var(--borda-suave);
-      padding: 20px;
-      border-radius: var(--raio-card);
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .btn-maps {
-      display: inline-block;
-      background: var(--esmeralda-medio);
-      color: #ffffff;
-      border: 1px solid var(--dourado-suave);
-      text-decoration: none;
-      font-weight: 600;
-      padding: 8px 20px;
-      border-radius: 20px;
-      margin-top: 12px;
-      font-size: 12px;
-      transition: var(--transicao);
-    }
-
-    .btn-maps:hover {
-      background: var(--esmeralda-vibrante);
-      border-color: var(--dourado-champagne);
-    }
-
-    /* MODAL FOTO */
-    .modal-foto {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.88);
-      backdrop-filter: blur(6px);
-      z-index: 2000;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .modal-foto.ativo { display: flex; }
-    .modal-conteudo { max-width: 90%; max-height: 85vh; border-radius: 12px; object-fit: contain; }
-    .fechar-modal { position: absolute; top: 20px; right: 25px; color: #fff; font-size: 32px; font-weight: bold; cursor: pointer; }
-
-    /* FOOTER */
+    /* FOOTER COM DADOS EMPRESARIAIS */
     footer {
       text-align: center;
       padding: 25px 15px;
@@ -488,176 +427,208 @@
       font-size: 12px;
       color: var(--texto-secundario);
       border-top: 1px solid var(--borda-suave);
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
+  <!-- HEADER COMPACTO -->
   <header>
-    <div class="header-left">
+    <div class="header-top">
       <a href="#" class="logo-container">
-        <img src="logo.png" alt="Logo Raízes" class="img-logo" onerror="this.style.display='none';">
+        <img src="logo.png" alt="Logo Raízes" class="logo-img" onerror="this.style.display='none';">
+        <svg class="logo-arvore" viewBox="0 0 24 24">
+          <path d="M12 2L8 8h3v4H8l5 7h-2v3h2v-2h2v2h2v-3h-2l5-7h-3V8h3l-4-6zm0 3.5L14.5 8H13v4h2.5L12 16.5 8.5 12H11V8H9.5L12 5.5z"/>
+        </svg>
         <span class="logo-marca">RAÍZES</span>
       </a>
-    </div>
 
-    <nav>
-      <a href="#produtos">Vitrine</a>
-      <a href="#onde-estamos">Visite-nos</a>
-      <button class="theme-toggle-btn" onclick="alternarTema()">
-        <span id="theme-icon">☀️</span> <span id="theme-text">Claro</span>
+      <div class="header-nav">
+        <a href="#vitrine" class="btn-nav ativo">Vitrine</a>
+        <a href="#visite-nos" class="btn-nav">Visite-nos</a>
+      </div>
+
+      <button class="theme-toggle-btn" id="btn-tema" onclick="alternarTema()">
+        ☀️ <span id="label-tema">Claro</span>
       </button>
-    </nav>
+    </div>
   </header>
 
-  <!-- BANNER FOTO DA LOJA -->
-  <section class="secao-loja">
+  <!-- BANNER DA LOJA / FOTO DA LOJA -->
+  <section class="secao-loja" id="visite-nos">
     <div class="banner-loja">
-      <img src="foto-loja.jpg" alt="Loja Raízes em Pitanga PR" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800';">
+      <img src="foto-loja.jpg" alt="Loja Raízes em Pitanga PR" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1000&auto=format&fit=crop'">
       <div class="banner-conteudo">
-        <h1 class="banner-titulo">Nossa Loja Física</h1>
-        <p class="banner-sub">Rua Interventor Manoel Ribas, 186 — Pitanga/PR</p>
+        <h2 class="banner-titulo">Nossa Boutique</h2>
+        <p class="banner-sub">Rua Interventor Manoel Ribas, 186 — Pitanga / PR</p>
       </div>
     </div>
   </section>
 
-  <!-- CONTAINER CONTEÚDO -->
-  <div class="container-principal">
-    
-    <!-- FILTRO DE MARCAS -->
-    <div class="container-filtros" id="produtos">
-      <div class="filtros-wrapper">
-        <button class="btn-filtro ativo" onclick="filtrarMarca('todas', event)">Todas</button>
-        <button class="btn-filtro" onclick="filtrarMarca('Aurochs', event)">Aurochs</button>
-        <button class="btn-filtro" onclick="filtrarMarca('Baumgarten', event)">Baumgarten</button>
-        <button class="btn-filtro" onclick="filtrarMarca('Beagle', event)">Beagle</button>
-        <button class="btn-filtro" onclick="filtrarMarca('Farm Rio', event)">Farm Rio</button>
-        <button class="btn-filtro" onclick="filtrarMarca('Soul', event)">Soul</button>
-        <button class="btn-filtro" onclick="filtrarMarca('Sly Wear', event)">Sly Wear</button>
-        <button class="btn-filtro" onclick="filtrarMarca('Hering', event)">Hering</button>
-      </div>
+  <!-- FILTRO DE MARCAS COMPACTO -->
+  <div class="container-filtros" id="vitrine">
+    <div class="filtros-wrapper" id="filtro-marcas">
+      <button class="btn-filtro ativo" onclick="filtrarMarca('TODAS')">Todas</button>
+      <button class="btn-filtro" onclick="filtrarMarca('AUROCHS')">Aurochs</button>
+      <button class="btn-filtro" onclick="filtrarMarca('BAUMGARTEN')">Baumgarten</button>
+      <button class="btn-filtro" onclick="filtrarMarca('BEAGLE')">Beagle</button>
+      <button class="btn-filtro" onclick="filtrarMarca('FARM RIO')">Farm Rio</button>
+      <button class="btn-filtro" onclick="filtrarMarca('SOUL')">Soul</button>
+      <button class="btn-filtro" onclick="filtrarMarca('SLY WEAR')">Sly Wear</button>
+      <button class="btn-filtro" onclick="filtrarMarca('HERING')">Hering</button>
     </div>
-
-    <!-- VITRINE DE PRODUTOS -->
-    <main id="grid-produtos" class="grid-produtos"></main>
-
-    <!-- ONDE ESTAMOS -->
-    <section id="onde-estamos">
-      <div class="info-box">
-        <p style="font-size: 15px; font-weight: 600;">📍 Loja Raízes</p>
-        <p style="font-size: 13px; color: var(--texto-secundario); margin-top: 4px;">Rua Interventor Manoel Ribas, 186 - Centro — Pitanga / PR</p>
-        <a href="https://maps.google.com/?q=Loja+Raizes+Pitanga+PR" target="_blank" rel="noopener" class="btn-maps">🗺️ Abrir no Google Maps</a>
-      </div>
-    </section>
   </div>
 
-  <!-- MODAL PARA EXPANDIR FOTO -->
-  <div id="modalFoto" class="modal-foto" onclick="fecharModalFoto()">
-    <span class="fechar-modal">&times;</span>
-    <img id="imgModal" class="modal-conteudo" src="" alt="Foto Ampliada">
-  </div>
+  <!-- VITRINE DE PRODUTOS COMPACTA -->
+  <main class="grid-produtos" id="grid-vitrine">
+    <!-- Cards renderizados dinamicamente -->
+  </main>
 
-  <!-- FOOTER -->
+  <!-- FOOTER INFORMATIVO -->
   <footer>
     <p><strong>© 2026 RAÍZES — Todos os direitos reservados.</strong></p>
     <p style="margin-top: 4px;">MALDANER & MAZETTO LTDA | CNPJ: 64.860.761/0001-64</p>
   </footer>
 
-  <script src="produtos.js"></script>
+  <script src="produtos.js?v=2.1"></script>
 
   <script>
-    const NUMERO_WHATSAPP = '5542999839784';
-    const selecoesDoUsuario = {};
-    let marcaAtual = 'todas';
+    const NUMERO_WHATSAPP = "5542999839784"; 
+    let marcaAtiva = 'TODAS';
 
-    const FOTO_PADRAO = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400"><rect width="100%" height="100%" fill="%23151d18"/><text x="50%" y="50%" fill="%238e9e94" font-family="sans-serif" font-size="14" text-anchor="middle">Sem Imagem</text></svg>';
+    function alternarTema() {
+      const html = document.documentElement;
+      const btnLabel = document.getElementById('label-tema');
+      
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        btnLabel.textContent = 'Escuro';
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        btnLabel.textContent = 'Claro';
+      }
+    }
 
-    function renderizarVitrine(produtos) {
-      const container = document.getElementById('grid-produtos');
+    function filtrarMarca(marca) {
+      marcaAtiva = marca;
+      document.querySelectorAll('.btn-filtro').forEach(btn => {
+        btn.classList.toggle('ativo', btn.innerText.toUpperCase() === marca.toUpperCase() || (marca === 'TODAS' && btn.innerText === 'Todas'));
+      });
+      renderizarVitrine();
+    }
 
-      if (!produtos || !Array.isArray(produtos) || produtos.length === 0) {
-        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--texto-secundario); padding: 30px 0; font-size: 13px;">Nenhuma peça encontrada para esta marca.</p>';
+    function selecionarOpcao(btn, classeGrupo) {
+      const parent = btn.closest('.' + classeGrupo);
+      parent.querySelectorAll('.pill-opcao').forEach(b => b.classList.remove('selecionado'));
+      btn.classList.add('selecionado');
+    }
+
+    function formatarPreco(valor) {
+      return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function enviarWhatsApp(idProduto) {
+      const card = document.getElementById(`prod-card-${idProduto}`);
+      const produto = listaProdutos.find(p => p.id === idProduto);
+
+      if (!produto) return;
+
+      const tamEl = card.querySelector('.grupo-tamanhos .pill-opcao.selecionado');
+      const corEl = card.querySelector('.grupo-cores .pill-opcao.selecionado');
+
+      const tamanho = tamEl ? tamEl.innerText : 'Não informado';
+      const cor = corEl ? corEl.innerText : 'Padrão';
+
+      const textoMsg = `Olá! Tenho interesse na peça da *RAÍZES*:\n\n` +
+                       `📌 *${produto.titulo}*${produto.codigo ? ` (${produto.codigo})` : ''}\n` +
+                       `🏷️ Marca: ${produto.marca}\n` +
+                       `💰 Valor: ${formatarPreco(produto.preco)}\n` +
+                       `📏 Tamanho: ${tamanho}\n` +
+                       `🎨 Cor: ${cor}\n\n` +
+                       `Ainda está disponível na loja física?`;
+
+      const url = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(textoMsg)}`;
+      window.open(url, '_blank');
+    }
+
+    function renderizarVitrine() {
+      const grid = document.getElementById('grid-vitrine');
+      grid.innerHTML = '';
+
+      const produtosExibidos = (typeof listaProdutos !== 'undefined' && Array.isArray(listaProdutos)) ? listaProdutos : [];
+
+      const filtrados = produtosExibidos.filter(p => {
+        if (marcaAtiva === 'TODAS') return true;
+        return p.marca && p.marca.toUpperCase() === marcaAtiva.toUpperCase();
+      });
+
+      if (filtrados.length === 0) {
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--texto-secundario); padding: 30px 0; font-size: 13px;">Nenhum produto nesta categoria.</p>`;
         return;
       }
 
-      let htmlFinal = '';
+      filtrados.forEach(prod => {
+        const card = document.createElement('article');
+        card.className = 'card-produto';
+        card.id = `prod-card-${prod.id}`;
 
-      produtos.forEach(item => {
-        if (!selecoesDoUsuario[item.id]) {
-          selecoesDoUsuario[item.id] = { tamanho: '', cor: '' };
-        }
+        const imgMarkup = prod.imagem 
+          ? `<img src="${prod.imagem}" alt="${prod.titulo}" loading="lazy">`
+          : `<div class="sem-imagem-placeholder">Sem Imagem</div>`;
 
-        const precoFormatado = (typeof item.preco === 'number') 
-          ? item.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) 
-          : '0,00';
+        const tamanhosList = prod.tamanhos || ['P', 'M', 'G'];
+        const tamanhosMarkup = tamanhosList.map((t, idx) => 
+          `<button class="pill-opcao ${idx === 0 ? 'selecionado' : ''}" onclick="selecionarOpcao(this, 'grupo-tamanhos')">${t}</button>`
+        ).join('');
 
-        const imgUrl = item.imagem ? item.imagem : FOTO_PADRAO;
+        const coresList = prod.cores || ['Padrão'];
+        const coresMarkup = coresList.map((c, idx) => 
+          `<button class="pill-opcao ${idx === 0 ? 'selecionado' : ''}" onclick="selecionarOpcao(this, 'grupo-cores')">${c}</button>`
+        ).join('');
 
-        let htmlTamanhos = '';
-        if (Array.isArray(item.tamanhos) && item.tamanhos.length > 0) {
-          htmlTamanhos = item.tamanhos.map((tam, idx) => `
-            <button class="pill-opcao ${selecoesDoUsuario[item.id].tamanho === tam || (!selecoesDoUsuario[item.id].tamanho && idx === 0) ? 'selecionado' : ''}" 
-                    onclick="selecionarOpcao(${item.id}, 'tamanho', '${tam}', this)">
-              ${tam}
-            </button>
-          `).join('');
-          if (!selecoesDoUsuario[item.id].tamanho) selecoesDoUsuario[item.id].tamanho = item.tamanhos[0];
-        }
+        card.innerHTML = `
+          <div class="card-foto-wrapper">
+            <span class="badge-marca">${prod.marca || 'RAÍZES'}</span>
+            ${imgMarkup}
+          </div>
 
-        let htmlCores = '';
-        if (Array.isArray(item.cores) && item.cores.length > 0) {
-          htmlCores = item.cores.map((cor, idx) => `
-            <button class="pill-opcao ${selecoesDoUsuario[item.id].cor === cor || (!selecoesDoUsuario[item.id].cor && idx === 0) ? 'selecionado' : ''}" 
-                    onclick="selecionarOpcao(${item.id}, 'cor', '${cor}', this)">
-              ${cor}
-            </button>
-          `).join('');
-          if (!selecoesDoUsuario[item.id].cor) selecoesDoUsuario[item.id].cor = item.cores[0];
-        }
-
-        htmlFinal += `
-          <article class="card-produto" id="prod-card-${item.id}">
-            <div class="card-foto-wrapper" onclick="abrirFotoModal('${imgUrl}')">
-              <span class="badge-marca">${item.marca || 'RAÍZES'}</span>
-              <img src="${imgUrl}" alt="${item.titulo || 'Produto'}" loading="lazy" onerror="this.onerror=null; this.src='${FOTO_PADRAO}';">
+          <div class="card-info">
+            <div>
+              <h3 class="produto-titulo">${prod.titulo}</h3>
+              <div class="produto-preco">${formatarPreco(prod.preco)}</div>
             </div>
 
-            <div class="card-info">
+            <div class="secao-opcoes">
               <div>
-                <h3 class="produto-titulo">${item.titulo || 'Produto Sem Nome'}</h3>
-                <div class="produto-preco">R$ ${precoFormatado}</div>
-              </div>
-              
-              <div class="secao-opcoes">
-                ${htmlTamanhos ? `
-                  <div>
-                    <span class="label-opcao">Tamanho:</span>
-                    <div class="lista-pills grupo-tamanhos" style="margin-top: 3px;">${htmlTamanhos}</div>
-                  </div>` : ''}
-
-                ${htmlCores ? `
-                  <div>
-                    <span class="label-opcao">Cor:</span>
-                    <div class="lista-pills grupo-cores" style="margin-top: 3px;">${htmlCores}</div>
-                  </div>` : ''}
+                <span class="label-opcao">Tamanho:</span>
+                <div class="lista-pills grupo-tamanhos">
+                  ${tamanhosMarkup}
+                </div>
               </div>
 
-              <button class="btn-interesse" onclick="solicitarNoZap(${item.id})">
-                <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.705 1.758zm6.637-3.935l.391.232c1.363.81 2.932 1.238 4.531 1.239 5.022 0 9.112-4.089 9.113-9.113-.001-2.433-.948-4.722-2.67-6.444-1.722-1.722-4.011-2.668-6.444-2.668-5.021 0-9.11 4.089-9.112 9.112-.001 1.666.448 3.292 1.3 4.707l.254.419-1.003 3.663 3.743-.982z"/></svg>
-                Tenho Interesse
-              </button>
+              <div>
+                <span class="label-opcao">Cor:</span>
+                <div class="lista-pills grupo-cores">
+                  ${coresMarkup}
+                </div>
+              </div>
             </div>
-          </article>
-        `;
-      });
 
-      container.innerHTML = htmlFinal;
+            <button class="btn-interesse" onclick="enviarWhatsApp(${prod.id})">
+              <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.705 1.758zm6.637-3.935l.391.232c1.363.81 2.932 1.238 4.531 1.239 5.022 0 9.112-4.089 9.113-9.113-.001-2.433-.948-4.722-2.67-6.444-1.722-1.722-4.011-2.668-6.444-2.668-5.021 0-9.11 4.089-9.112 9.112-.001 1.666.448 3.292 1.3 4.707l.254.419-1.003 3.663 3.743-.982z"/></svg>
+              Tenho Interesse
+            </button>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
     }
 
-    function selecionarOpcao(idProduto, tipo, valor, botao) {
-      if (!selecoesDoUsuario[idProduto]) selecoesDoUsuario[idProduto] = {};
-      selecoesDoUsuario[idProduto][tipo] = valor;
-
-      const secao = botao.parentElement;
-      secao.querySelectorAll('.pill-opcao').
+    document.addEventListener('DOMContentLoaded', () => {
+      renderizarVitrine();
+    });
+  </script>
+</body>
+</html>
