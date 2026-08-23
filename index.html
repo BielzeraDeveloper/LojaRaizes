@@ -1,467 +1,548 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAÍZES — Moda Multimarcas — Pitanga/PR</title>
-  <meta name="description" content="Loja Raízes em Pitanga/PR. Moda Multimarcas: Beagle, Baumgarten, Aurochs, Farm Rio, Soul, Sly Wear e Hering.">
+  <title>RAÍZES — Boutique Multimarcas</title>
 
-  <link rel="icon" type="image/png" href="logo.png">
+  <!-- Google Fonts: Playfair Display (Luxo) + Plus Jakarta Sans (Moda/UI) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* ==========================================================================
+       PALETA DE CORES & VARIÁVEIS "RAÍZES" (Elegância Botânica de Luxo)
+       ========================================================================== */
     :root {
-      --cor-fundo: #0a0a0a;
-      --cor-card: #161616;
-      --cor-card-hover: #202020;
-      --cor-borda: #2a2a2a;
-      --cor-texto-principal: #ffffff;
-      --cor-texto-secundario: #aaaaaa;
-      --cor-verde-preco: #00e676;
-      --cor-btn-interesse: #25d366;
-      --cor-header-bg: rgba(10, 10, 10, 0.92);
-      --cor-header-texto: #ffffff;
-      --cor-badge-bg: #ffffff;
-      --cor-badge-texto: #000000;
-      --transicao: all 0.25s ease-in-out;
+      /* Marca & Destaques Nobres */
+      --esmeralda-profundo: #0f281e;
+      --esmeralda-medio: #1b4332;
+      --esmeralda-vibrante: #2d6a4f;
+      --dourado-champagne: #d4af37;
+      --dourado-suave: #c5a059;
+      --dourado-gradiente: linear-gradient(135deg, #e6ca65 0%, #b88e28 100%);
+      --terracota: #c86d51;
+      --farm-coral: #e76f51;
+
+      /* Fontes */
+      --font-titulo: 'Playfair Display', serif;
+      --font-corpo: 'Plus Jakarta Sans', sans-serif;
+
+      /* Transições & Sombras */
+      --transicao: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --raio-card: 16px;
+      --raio-btn: 8px;
     }
 
-    body.theme-light {
-      --cor-fundo: #f4f4f7;
-      --cor-card: #ffffff;
-      --cor-card-hover: #ffffff;
-      --cor-borda: #e2e8f0;
-      --cor-texto-principal: #111111;
-      --cor-texto-secundario: #555555;
-      --cor-verde-preco: #16a34a;
-      --cor-btn-interesse: #128c7e;
-      --cor-header-bg: rgba(255, 255, 255, 0.95);
-      --cor-header-texto: #111111;
-      --cor-badge-bg: #111111;
-      --cor-badge-texto: #ffffff;
+    /* TEMA ESCURO (Padrão - Escuro Botânico/Charcoal Quente) */
+    [data-theme="dark"] {
+      --bg-principal: #0b100d;
+      --bg-card: #131a16;
+      --bg-input: #1a241f;
+      --borda-suave: rgba(197, 160, 89, 0.15);
+      --borda-forte: rgba(197, 160, 89, 0.35);
+      --texto-primario: #f4f1ea;
+      --texto-secundario: #a3b1a8;
+      --sombra-card: 0 12px 32px rgba(0, 0, 0, 0.45);
+      --sombra-hover: 0 20px 40px rgba(0, 0, 0, 0.6);
+      --badge-bg: rgba(212, 175, 55, 0.12);
+      --badge-texto: #e6ca65;
     }
 
+    /* TEMA CLARO (Areia / Off-White de Alto Padrão) */
+    [data-theme="light"] {
+      --bg-principal: #fbf9f5;
+      --bg-card: #ffffff;
+      --bg-input: #f2eee5;
+      --borda-suave: rgba(27, 67, 50, 0.12);
+      --borda-forte: rgba(27, 67, 50, 0.25);
+      --texto-primario: #121c17;
+      --texto-secundario: #526358;
+      --sombra-card: 0 10px 28px rgba(15, 40, 30, 0.06);
+      --sombra-hover: 0 18px 36px rgba(15, 40, 30, 0.12);
+      --badge-bg: #1b4332;
+      --badge-texto: #f4f1ea;
+    }
+
+    /* ==========================================================================
+       RESET & BASE
+       ========================================================================== */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
-    body { 
-      font-family: 'Poppins', sans-serif; 
-      background-color: var(--cor-fundo); 
-      color: var(--cor-texto-principal); 
-      scroll-behavior: smooth;
-      padding-top: 90px; 
-      transition: background-color 0.3s ease, color 0.3s ease;
+    body {
+      font-family: var(--font-corpo);
+      background-color: var(--bg-principal);
+      color: var(--texto-primario);
+      line-height: 1.5;
+      transition: background-color 0.4s ease, color 0.4s ease;
+      min-height: 100vh;
+      padding-bottom: 60px;
     }
 
-    header { 
-      background: var(--cor-header-bg); 
-      backdrop-filter: blur(10px); 
-      color: var(--cor-header-texto); 
-      padding: 12px 5%; 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      position: fixed; 
-      top: 0; left: 0; right: 0;
-      z-index: 1000; 
-      border-bottom: 1px solid var(--cor-borda);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3); 
-    }
-
-    .logo-container { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .logo-container .img-logo { max-height: 40px; width: auto; }
-    body:not(.theme-light) .logo-container .img-logo { filter: brightness(0) invert(1); }
-    .logo-container .logo-texto { font-family: 'Cinzel', serif; font-size: 22px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--cor-header-texto); }
-
-    nav { display: flex; gap: 15px; align-items: center; }
-    nav a { color: var(--cor-texto-secundario); text-decoration: none; font-weight: 500; font-size: 14px; transition: var(--transicao); }
-    nav a:hover { color: var(--cor-texto-principal); }
-
-    .btn-theme-toggle {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid var(--cor-borda);
-      color: var(--cor-texto-principal);
-      padding: 6px 14px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 600;
+    /* ==========================================================================
+       HEADER & CABEÇALHO
+       ========================================================================== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-principal);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--borda-suave);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       transition: var(--transicao);
     }
 
-    .banner-loja-container { 
-      width: 100%; 
-      height: 25vh; 
-      min-height: 180px; 
-      overflow: hidden; 
-      position: relative; 
-      background: #111; 
-    }
-    .foto-loja { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.65); }
-    .banner-caption { position: absolute; bottom: 20px; left: 5%; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-    .banner-caption h1 { font-size: 24px; font-weight: 700; }
-
-    .container { max-width: 1200px; margin: 25px auto; padding: 0 15px; }
-    section { margin-bottom: 40px; }
-    h2 { font-size: 18px; font-weight: 600; text-transform: uppercase; border-left: 4px solid var(--cor-texto-principal); padding-left: 10px; margin-bottom: 20px; }
-
-    .filtros-marcas { 
-      display: flex; 
-      gap: 10px; 
-      margin-bottom: 25px; 
-      overflow-x: auto; 
-      padding-top: 14px; 
-      padding-bottom: 10px;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    .filtros-marcas::-webkit-scrollbar { display: none; }
-    .filtros-marcas { -ms-overflow-style: none; scrollbar-width: none; }
+    .logo-marca {
+      font-family: var(--font-titulo);
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      background: var(--dourado-gradiente);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-    .btn-marca { 
-      flex: 0 0 auto;
-      position: relative; 
-      background: var(--cor-card); 
-      border: 1px solid var(--cor-borda); 
-      padding: 8px 16px; 
-      border-radius: 20px; 
-      cursor: pointer; 
-      font-family: 'Poppins', sans-serif; 
-      font-weight: 600; 
-      font-size: 12px; 
-      text-transform: uppercase; 
-      color: var(--cor-texto-secundario); 
-      transition: var(--transicao); 
+    .theme-toggle-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--borda-forte);
+      color: var(--texto-primario);
+      padding: 8px 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transicao);
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--dourado-champagne);
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================================================
+       FILTRO DE MARCAS (Estilo Magazine / Boutique)
+       ========================================================================== */
+    .container-filtros {
+      padding: 24px 20px 10px 20px;
+      max-width: 1300px;
+      margin: 0 auto;
+      overflow-x: auto;
       white-space: nowrap;
+      scrollbar-width: none; /* Firefox */
     }
 
-    .btn-marca.ativo, .btn-marca:hover { 
-      background: var(--cor-badge-bg); 
-      color: var(--cor-badge-texto); 
-      border-color: var(--cor-badge-bg); 
+    .container-filtros::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+    .filtros-wrapper {
+      display: inline-flex;
+      gap: 10px;
     }
 
-    .grid-produtos { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
-    
-    .card-produto { 
-      background: var(--cor-card); 
-      border: 1px solid var(--cor-borda); 
-      border-radius: 14px; 
-      padding: 14px; 
-      text-align: center; 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: space-between; 
-      transition: var(--transicao); 
+    .btn-filtro {
+      background: var(--bg-card);
+      border: 1px solid var(--borda-suave);
+      color: var(--texto-secundario);
+      padding: 10px 22px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--transicao);
     }
-    .card-produto:hover { background: var(--cor-card-hover); transform: translateY(-4px); }
 
-    .card-produto .img-container { 
-      width: 100%; 
-      aspect-ratio: 3 / 4; 
-      background-color: #1f1f1f; 
-      border-radius: 10px; 
-      overflow: hidden; 
-      margin-bottom: 12px; 
-      border: 1px solid var(--cor-borda); 
-      cursor: pointer; 
+    .btn-filtro:hover, .btn-filtro.ativo {
+      background: var(--esmeralda-medio);
+      color: #ffffff;
+      border-color: var(--dourado-champagne);
+      box-shadow: 0 4px 14px rgba(27, 67, 50, 0.3);
+    }
+
+    /* ==========================================================================
+       GRID DE PRODUTOS
+       ========================================================================== */
+    .grid-produtos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px;
+      max-width: 1300px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    /* ==========================================================================
+       CARD DO PRODUTO (REESTILIZADO & CORRIGIDO)
+       ========================================================================== */
+    .card-produto {
+      background: var(--bg-card);
+      border: 1px solid var(--borda-suave);
+      border-radius: var(--raio-card);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: var(--sombra-card);
+      transition: var(--transicao);
+    }
+
+    .card-produto:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--sombra-hover);
+      border-color: var(--borda-forte);
+    }
+
+    /* Container de Imagem Proporcional sem Vazamento */
+    .card-foto-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      background: var(--bg-input);
+      overflow: hidden;
+    }
+
+    .card-foto-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+      display: block;
+    }
+
+    .card-produto:hover .card-foto-wrapper img {
+      transform: scale(1.05);
+    }
+
+    .sem-imagem-placeholder {
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
+      color: var(--texto-secundario);
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: var(--bg-input);
     }
-    .card-produto img { width: 100%; height: 100%; object-fit: cover; }
 
-    .card-produto .marca-label { font-size: 11px; font-weight: 700; color: var(--cor-texto-secundario); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
-    .card-produto h3 { font-size: 14px; color: var(--cor-texto-principal); height: 38px; overflow: hidden; margin-bottom: 8px; font-weight: 500; line-height: 1.3; }
-    .card-produto .preco { font-size: 18px; color: var(--cor-verde-preco); font-weight: 700; margin-bottom: 12px; }
-    
-    .secao-opcao { margin-bottom: 10px; }
-    .secao-opcao .label-opcao { font-size: 10px; color: var(--cor-texto-secundario); text-transform: uppercase; margin-bottom: 4px; font-weight: 600; display: block; }
-    .grupo-opcoes { display: flex; gap: 5px; justify-content: center; flex-wrap: wrap; }
-    
-    .btn-opcao {
-      background: transparent; 
-      border: 1px solid var(--cor-borda); 
-      color: var(--cor-texto-principal);
-      font-size: 10px; 
-      font-weight: 600; 
-      padding: 4px 8px; 
-      border-radius: 6px; 
-      cursor: pointer; 
+    /* Etiqueta / Badge de Grife */
+    .badge-marca {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: var(--badge-bg);
+      color: var(--badge-texto);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--borda-forte);
+      padding: 5px 12px;
+      border-radius: 30px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    /* Conteúdo do Card */
+    .card-info {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    .card-header-detalhes {
+      margin-bottom: 12px;
+    }
+
+    .produto-titulo {
+      font-family: var(--font-titulo);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--texto-primario);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .produto-preco {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dourado-suave);
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    /* SELETORES DE OPÇÕES (Tamanhos e Cores) */
+    .secao-opcoes {
+      margin: 14px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .label-opcao {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--texto-secundario);
+    }
+
+    .lista-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pill-opcao {
+      background: var(--bg-input);
+      border: 1px solid var(--borda-suave);
+      color: var(--texto-primario);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
       transition: var(--transicao);
     }
-    .btn-opcao.selecionado { background: var(--cor-texto-principal); color: var(--cor-fundo); border-color: var(--cor-texto-principal); }
 
-    .btn-interesse { 
-      background: var(--cor-btn-interesse); 
-      color: #ffffff; 
-      text-decoration: none; 
-      padding: 11px; 
-      border-radius: 8px; 
-      font-weight: 600; 
-      font-size: 12px; 
-      text-transform: uppercase; 
-      transition: var(--transicao); 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      gap: 6px; 
-      cursor: pointer; 
-      border: none; 
-      width: 100%; 
-      margin-top: 8px;
+    .pill-opcao:hover, .pill-opcao.selecionado {
+      background: var(--esmeralda-medio);
+      color: #ffffff;
+      border-color: var(--dourado-champagne);
     }
 
-    .modal-foto {
-      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 2000;
-      justify-content: center; align-items: center; padding: 20px;
+    /* BOTÃO WHATSAPP / TENHO INTERESSE (Elegante & Nobre) */
+    .btn-interesse {
+      width: 100%;
+      background: linear-gradient(135deg, var(--esmeralda-medio) 0%, var(--esmeralda-profundo) 100%);
+      color: #ffffff;
+      border: 1px solid var(--dourado-suave);
+      padding: 14px;
+      border-radius: var(--raio-btn);
+      font-family: var(--font-corpo);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+      transition: var(--transicao);
+      box-shadow: 0 4px 12px rgba(15, 40, 30, 0.2);
     }
-    .modal-foto.ativo { display: flex; }
-    .modal-conteudo { max-width: 90%; max-height: 85vh; border-radius: 12px; }
-    .fechar-modal { position: absolute; top: 20px; right: 25px; color: #fff; font-size: 32px; font-weight: bold; cursor: pointer; }
 
-    .info-box { background: var(--cor-card); border: 1px solid var(--cor-borda); padding: 25px; border-radius: 16px; text-align: center; }
-    .btn-maps { display: inline-block; background-color: var(--cor-texto-principal); color: var(--cor-fundo); text-decoration: none; font-weight: 600; padding: 10px 22px; border-radius: 30px; margin-top: 15px; font-size: 13px; }
+    .btn-interesse:hover {
+      background: linear-gradient(135deg, var(--esmeralda-vibrante) 0%, var(--esmeralda-medio) 100%);
+      border-color: var(--dourado-champagne);
+      box-shadow: 0 6px 18px rgba(45, 106, 79, 0.35);
+      transform: translateY(-2px);
+    }
 
-    footer { text-align: center; padding: 30px 15px; background-color: #050505; font-size: 12px; color: #777; border-top: 1px solid var(--cor-borda); }
-
-    @media (max-width: 480px) {
-      body { padding-top: 100px; }
-      header { flex-direction: column; gap: 8px; text-align: center; }
-      .grid-produtos { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+    .btn-interesse svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
     }
   </style>
 </head>
 <body>
 
-  <header id="cabecalho">
-    <a href="#" class="logo-container">
-      <img src="logo.png" alt="Logo Raízes" class="img-logo" onerror="this.style.display='none';">
-      <span class="logo-texto">RAÍZES</span>
-    </a>
-    <nav>
-      <a href="#produtos">Vitrine</a>
-      <a href="#onde-estamos">Visite-nos</a>
-      <button class="btn-theme-toggle" onclick="alternarTema()">
-        <span id="theme-icon">☀️</span> <span id="theme-text">Claro</span>
-      </button>
-    </nav>
+  <!-- HEADER -->
+  <header>
+    <div class="logo-container">
+      <span class="logo-marca">RAÍZES</span>
+    </div>
+    <button class="theme-toggle-btn" id="btn-tema" onclick="alternarTema()">
+      🌙 <span id="label-tema">Escuro</span>
+    </button>
   </header>
 
-  <div class="banner-loja-container">
-    <img class="foto-loja" src="foto-loja.jpg" alt="Loja Raízes em Pitanga PR" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800';">
-    <div class="banner-caption">
-      <h1>Nossa Loja Física</h1>
-      <p>Rua Interventor Manoel Ribas, 186 — Pitanga/PR</p>
+  <!-- FILTRO DE MARCAS -->
+  <div class="container-filtros">
+    <div class="filtros-wrapper" id="filtro-marcas">
+      <button class="btn-filtro ativo" onclick="filtrarMarca('TODAS')">Todas</button>
+      <button class="btn-filtro" onclick="filtrarMarca('FARM RIO')">Farm Rio</button>
+      <button class="btn-filtro" onclick="filtrarMarca('BEAGLE')">Beagle</button>
+      <button class="btn-filtro" onclick="filtrarMarca('BAUMGARTEN')">Baumgarten</button>
+      <button class="btn-filtro" onclick="filtrarMarca('SOUL')">Soul</button>
     </div>
   </div>
 
-  <div class="container">
-    <section id="produtos">
-      <h2>Coleção em Destaque</h2>
+  <!-- VITRINE DE PRODUTOS -->
+  <main class="grid-produtos" id="grid-vitrine">
+    <!-- Cards inseridos dinamicamente via JS -->
+  </main>
 
-      <div class="filtros-marcas">
-        <button class="btn-marca ativo" onclick="filtrarMarca('todas', event)">Todas</button>
-        <button class="btn-marca" onclick="filtrarMarca('Aurochs', event)">Aurochs</button>
-        <button class="btn-marca" onclick="filtrarMarca('Baumgarten', event)">Baumgarten</button>
-        <button class="btn-marca" onclick="filtrarMarca('Beagle', event)">Beagle</button>
-        <button class="btn-marca" onclick="filtrarMarca('Farm Rio', event)">Farm Rio</button>
-        <button class="btn-marca" onclick="filtrarMarca('Soul', event)">Soul</button>
-        <button class="btn-marca" onclick="filtrarMarca('Sly Wear', event)">Sly Wear</button>
-        <button class="btn-marca" onclick="filtrarMarca('Hering', event)">Hering</button>
-      </div>
-
-      <div id="grid-produtos" class="grid-produtos"></div>
-    </section>
-
-    <section id="onde-estamos">
-      <h2>Onde Nos Encontrar</h2>
-      <div class="info-box">
-        <p style="font-size: 15px; font-weight: 600;">📍 Loja Raízes</p>
-        <p style="font-size: 14px; color: var(--cor-texto-secundario); margin-top: 4px;">Rua Interventor Manoel Ribas, 186 - Centro — Pitanga / PR</p>
-        <a href="https://maps.google.com/?q=Loja+Raizes+Pitanga+PR" target="_blank" rel="noopener" class="btn-maps">🗺️ Abrir no Google Maps</a>
-      </div>
-    </section>
-  </div>
-
-  <div id="modalFoto" class="modal-foto" onclick="fecharModalFoto()">
-    <span class="fechar-modal">&times;</span>
-    <img id="imgModal" class="modal-conteudo" src="" alt="Foto Ampliada">
-  </div>
-
-  <footer>
-    <p><strong>© 2026 RAÍZES — Todos os direitos reservados.</strong></p>
-    <p>MALDANER & MAZETTO LTDA | CNPJ: 64.860.761/0001-64</p>
-  </footer>
-
-  <script src="produtos.js"></script>
+  <!-- ARQUIVO DE PRODUTOS DA LOJA -->
+  <script src="produtos.js?v=2.0"></script>
 
   <script>
-    const NUMERO_WHATSAPP = '5542999839784';
-    const selecoesDoUsuario = {};
-    let marcaAtual = 'todas';
+    const NUMERO_WHATSAPP = "5542999999999"; // Substitua pelo seu WhatsApp oficial (DDI+DDD+Numero)
+    let marcaAtiva = 'TODAS';
 
-    const FOTO_PADRAO = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400"><rect width="100%" height="100%" fill="%231a1a1a"/><text x="50%" y="50%" fill="%23666666" font-family="sans-serif" font-size="16" text-anchor="middle">Sem Imagem</text></svg>';
+    // Alternar Tema Escuro / Claro
+    function alternarTema() {
+      const html = document.documentElement;
+      const btnLabel = document.getElementById('label-tema');
+      
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        btnLabel.textContent = 'Claro';
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        btnLabel.textContent = 'Escuro';
+      }
+    }
 
-    function renderizarVitrine(produtos) {
-      const container = document.getElementById('grid-produtos');
+    // Filtro por marca
+    function filtrarMarca(marca) {
+      marcaAtiva = marca;
+      document.querySelectorAll('.btn-filtro').forEach(btn => {
+        btn.classList.toggle('ativo', btn.innerText.toUpperCase() === marca.toUpperCase() || (marca === 'TODAS' && btn.innerText === 'Todas'));
+      });
+      renderizarVitrine();
+    }
 
-      if (!produtos || !Array.isArray(produtos) || produtos.length === 0) {
-        container.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--cor-texto-secundario); padding: 30px 0;">Nenhuma peça encontrada para esta marca.</p>';
+    // Seleção visual de Tamanho / Cor no Card
+    function selecionarOpcao(btn, classeGrupo) {
+      const parent = btn.closest('.' + classeGrupo);
+      parent.querySelectorAll('.pill-opcao').forEach(b => b.classList.remove('selecionado'));
+      btn.classList.add('selecionado');
+    }
+
+    // Formatação de Preço para Real R$
+    function formatarPreco(valor) {
+      return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    // Gerar Link do WhatsApp
+    function enviarWhatsApp(idProduto) {
+      const card = document.getElementById(`prod-card-${idProduto}`);
+      const produto = listaProdutos.find(p => p.id === idProduto);
+
+      if (!produto) return;
+
+      const tamEl = card.querySelector('.grupo-tamanhos .pill-opcao.selecionado');
+      const corEl = card.querySelector('.grupo-cores .pill-opcao.selecionado');
+
+      const tamanho = tamEl ? tamEl.innerText : 'Não informado';
+      const cor = corEl ? corEl.innerText : 'Padrão';
+
+      const textoMsg = `Olá! Tenho interesse na peça da *RAÍZES*:\n\n` +
+                       `📌 *${produto.titulo}* (${produto.codigo})\n` +
+                       `🏷️ Marca: ${produto.marca}\n` +
+                       `💰 Valor: ${formatarPreco(produto.preco)}\n` +
+                       `📏 Tamanho: ${tamanho}\n` +
+                       `🎨 Cor: ${cor}`;
+
+      const url = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(textoMsg)}`;
+      window.open(url, '_blank');
+    }
+
+    // Renderizar Cards da Vitrine
+    function renderizarVitrine() {
+      const grid = document.getElementById('grid-vitrine');
+      grid.innerHTML = '';
+
+      const produtosExibidos = (typeof listaProdutos !== 'undefined' && Array.isArray(listaProdutos)) ? listaProdutos : [];
+
+      const filtrados = produtosExibidos.filter(p => {
+        if (marcaAtiva === 'TODAS') return true;
+        return p.marca && p.marca.toUpperCase() === marcaAtiva.toUpperCase();
+      });
+
+      if (filtrados.length === 0) {
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--texto-secundario); padding: 40px 0;">Nenhum produto disponível no momento nesta categoria.</p>`;
         return;
       }
 
-      let htmlFinal = '';
+      filtrados.forEach(prod => {
+        const card = document.createElement('article');
+        card.className = 'card-produto';
+        card.id = `prod-card-${prod.id}`;
 
-      produtos.forEach(item => {
-        if (!selecoesDoUsuario[item.id]) {
-          selecoesDoUsuario[item.id] = { tamanho: '', cor: '' };
-        }
+        // Trata imagem para evitar overflow
+        const imgMarkup = prod.imagem 
+          ? `<img src="${prod.imagem}" alt="${prod.titulo}" loading="lazy">`
+          : `<div class="sem-imagem-placeholder">Foto Indisponível</div>`;
 
-        const precoFormatado = (typeof item.preco === 'number') 
-          ? item.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) 
-          : '0,00';
+        // Renderiza botões de tamanhos
+        const tamanhosList = prod.tamanhos || ['P', 'M', 'G'];
+        const tamanhosMarkup = tamanhosList.map((t, idx) => 
+          `<button class="pill-opcao ${idx === 0 ? 'selecionado' : ''}" onclick="selecionarOpcao(this, 'grupo-tamanhos')">${t}</button>`
+        ).join('');
 
-        const imgUrl = item.imagem ? item.imagem : FOTO_PADRAO;
+        // Renderiza botões de cores
+        const coresList = prod.cores || ['Padrão'];
+        const coresMarkup = coresList.map((c, idx) => 
+          `<button class="pill-opcao ${idx === 0 ? 'selecionado' : ''}" onclick="selecionarOpcao(this, 'grupo-cores')">${c}</button>`
+        ).join('');
 
-        let htmlTamanhos = '';
-        if (Array.isArray(item.tamanhos) && item.tamanhos.length > 0) {
-          htmlTamanhos = item.tamanhos.map(tam => `
-            <button class="btn-opcao ${selecoesDoUsuario[item.id].tamanho === tam ? 'selecionado' : ''}" 
-                    onclick="selecionarOpcao(${item.id}, 'tamanho', '${tam}', this)">
-              ${tam}
-            </button>
-          `).join('');
-        }
+        card.innerHTML = `
+          <div class="card-foto-wrapper">
+            <span class="badge-marca">${prod.marca || 'RAÍZES'}</span>
+            ${imgMarkup}
+          </div>
 
-        let htmlCores = '';
-        if (Array.isArray(item.cores) && item.cores.length > 0) {
-          htmlCores = item.cores.map(cor => `
-            <button class="btn-opcao ${selecoesDoUsuario[item.id].cor === cor ? 'selecionado' : ''}" 
-                    onclick="selecionarOpcao(${item.id}, 'cor', '${cor}', this)">
-              ${cor}
-            </button>
-          `).join('');
-        }
-
-        htmlFinal += `
-          <div class="card-produto">
-            <div class="img-container" onclick="abrirFotoModal('${imgUrl}')">
-              <img src="${imgUrl}" alt="${item.titulo || 'Produto'}" loading="lazy" onerror="this.onerror=null; this.src='${FOTO_PADRAO}';">
+          <div class="card-info">
+            <div class="card-header-detalhes">
+              <h3 class="produto-titulo">${prod.titulo}</h3>
+              <div class="produto-preco">${formatarPreco(prod.preco)}</div>
             </div>
-            <div class="marca-label">${item.marca || 'RAÍZES'}</div>
-            <h3>${item.titulo || 'Produto Sem Nome'}</h3>
-            <div class="preco">R$ ${precoFormatado}</div>
-            
-            ${htmlTamanhos ? `
-              <div class="secao-opcao">
-                <span class="label-opcao">Tamanho:</span>
-                <div class="grupo-opcoes">${htmlTamanhos}</div>
-              </div>` : ''}
 
-            ${htmlCores ? `
-              <div class="secao-opcao">
-                <span class="label-opcao">Cor:</span>
-                <div class="grupo-opcoes">${htmlCores}</div>
-              </div>` : ''}
+            <div class="secao-opcoes">
+              <div>
+                <span class="label-opcao">Tamanho</span>
+                <div class="lista-pills grupo-tamanhos" style="margin-top: 4px;">
+                  ${tamanhosMarkup}
+                </div>
+              </div>
 
-            <button class="btn-interesse" onclick="solicitarNoZap(${item.id})">
-              💬 Tenho Interesse
+              <div>
+                <span class="label-opcao">Cor</span>
+                <div class="lista-pills grupo-cores" style="margin-top: 4px;">
+                  ${coresMarkup}
+                </div>
+              </div>
+            </div>
+
+            <button class="btn-interesse" onclick="enviarWhatsApp(${prod.id})">
+              <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.705 1.758zm6.637-3.935l.391.232c1.363.81 2.932 1.238 4.531 1.239 5.022 0 9.112-4.089 9.113-9.113-.001-2.433-.948-4.722-2.67-6.444-1.722-1.722-4.011-2.668-6.444-2.668-5.021 0-9.11 4.089-9.112 9.112-.001 1.666.448 3.292 1.3 4.707l.254.419-1.003 3.663 3.743-.982z"/></svg>
+              Tenho Interesse
             </button>
           </div>
         `;
+
+        grid.appendChild(card);
       });
-
-      container.innerHTML = htmlFinal;
     }
 
-    function selecionarOpcao(idProduto, tipo, valor, botao) {
-      if (!selecoesDoUsuario[idProduto]) selecoesDoUsuario[idProduto] = {};
-      selecoesDoUsuario[idProduto][tipo] = valor;
-
-      const secao = botao.closest('.secao-opcao');
-      secao.querySelectorAll('.btn-opcao').forEach(btn => btn.classList.remove('selecionado'));
-      botao.classList.add('selecionado');
-    }
-
-    function solicitarNoZap(idProduto) {
-      const lista = (typeof listaProdutos !== 'undefined' && Array.isArray(listaProdutos)) ? listaProdutos : [];
-      const produto = lista.find(p => p.id === idProduto);
-      if (!produto) return;
-
-      const selecao = selecoesDoUsuario[idProduto] || {};
-
-      if (Array.isArray(produto.tamanhos) && produto.tamanhos.length > 0 && !selecao.tamanho) {
-        alert('Por favor, selecione um TAMANHO!');
-        return;
-      }
-
-      if (Array.isArray(produto.cores) && produto.cores.length > 0 && !selecao.cor) {
-        alert('Por favor, selecione uma COR!');
-        return;
-      }
-
-      const textoTamanho = selecao.tamanho ? `\n📏 *Tamanho:* ${selecao.tamanho}` : '';
-      const textoCor = selecao.cor ? `\n🎨 *Cor:* ${selecao.cor}` : '';
-
-      const mensagem = `Olá! Gostaria de consultar a disponibilidade desta peça:` +
-                       `\n\n📌 *${produto.titulo}*` +
-                       `\n🏷️ *Marca:* ${produto.marca}` +
-                       `${textoTamanho}` +
-                       `${textoCor}` +
-                       `\n💰 *Valor:* R$ ${(produto.preco || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` +
-                       `\n\nAinda está disponível na loja física?`;
-
-      window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(mensagem)}`, '_blank');
-    }
-
-    function filtrarMarca(marca, event) {
-      marcaAtual = marca;
-      document.querySelectorAll('.btn-marca').forEach(btn => btn.classList.remove('ativo'));
-      if (event && event.currentTarget) event.currentTarget.classList.add('ativo');
-
-      const lista = (typeof listaProdutos !== 'undefined' && Array.isArray(listaProdutos)) ? listaProdutos : [];
-
-      if (marcaAtual === 'todas') {
-        renderizarVitrine(lista);
-      } else {
-        const filtrados = lista.filter(p => p.marca && p.marca.toString().toLowerCase().trim() === marcaAtual.toLowerCase().trim());
-        renderizarVitrine(filtrados);
-      }
-    }
-
-    function abrirFotoModal(url) {
-      const modal = document.getElementById('modalFoto');
-      const img = document.getElementById('imgModal');
-      if (modal && img) {
-        img.src = url;
-        modal.classList.add('ativo');
-      }
-    }
-
-    function fecharModalFoto() {
-      const modal = document.getElementById('modalFoto');
-      if (modal) modal.classList.remove('ativo');
-    }
-
-    function alternarTema() {
-      const body = document.body;
-      const themeIcon = document.getElementById('theme-icon');
-      const themeText = document.getElementById('theme-text');
-
-      body.classList.toggle('theme-light');
-      themeIcon.textContent = body.classList.contains('theme-light') ? '🌙' : '☀️';
-      themeText.textContent = body.classList.contains('theme-light') ? 'Escuro' : 'Claro';
-    }
-
+    // Inicialização ao carregar a página
     document.addEventListener('DOMContentLoaded', () => {
-      const lista = (typeof listaProdutos !== 'undefined' && Array.isArray(listaProdutos)) ? listaProdutos : [];
-      renderizarVitrine(lista);
+      renderizarVitrine();
     });
   </script>
 </body>
 </html>
-we
