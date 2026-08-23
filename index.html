@@ -6,7 +6,6 @@
   <title>RAÍZES — Moda Multimarcas — Pitanga/PR</title>
   <meta name="description" content="Loja Raízes em Pitanga/PR. Moda Multimarcas: Beagle, Baumgarten, Aurochs, Farm Rio, Soul, Sly Wear e Hering.">
 
-  <link rel="icon" type="image/png" href="logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -88,7 +87,7 @@
       align-items: center;
     }
 
-    /* LOGO COM IMAGEM E SVG */
+    /* LOGO COM ÁRVORE DOURADA */
     .logo-container {
       display: flex;
       align-items: center;
@@ -96,19 +95,9 @@
       text-decoration: none;
     }
 
-    .logo-img {
-      height: 28px;
-      width: auto;
-      object-fit: contain;
-    }
-
-    [data-theme="dark"] .logo-img {
-      filter: brightness(0) invert(1);
-    }
-
     .logo-arvore {
-      width: 24px;
-      height: 24px;
+      width: 26px;
+      height: 26px;
       fill: var(--dourado-suave);
     }
 
@@ -126,8 +115,9 @@
     /* BOTÕES DE NAVEGAÇÃO */
     .header-nav {
       display: flex;
-      gap: 12px;
+      gap: 4px; /* Aproximou "Vitrine" de "Visite-nos" */
       align-items: center;
+      margin-left: 20px; /* Afastou "Vitrine" do nome RAÍZES */
     }
 
     .btn-nav {
@@ -137,7 +127,7 @@
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-      padding: 4px 8px;
+      padding: 4px 6px;
       transition: var(--transicao);
       text-decoration: none;
     }
@@ -419,7 +409,7 @@
       fill: currentColor;
     }
 
-    /* FOOTER COM DADOS EMPRESARIAIS */
+    /* FOOTER INFORMATIVO */
     footer {
       text-align: center;
       padding: 25px 15px;
@@ -437,7 +427,7 @@
   <header>
     <div class="header-top">
       <a href="#" class="logo-container">
-        <img src="logo.png" alt="Logo Raízes" class="logo-img" onerror="this.style.display='none';">
+        <!-- Árvore Dourada SVG -->
         <svg class="logo-arvore" viewBox="0 0 24 24">
           <path d="M12 2L8 8h3v4H8l5 7h-2v3h2v-2h2v2h2v-3h-2l5-7h-3V8h3l-4-6zm0 3.5L14.5 8H13v4h2.5L12 16.5 8.5 12H11V8H9.5L12 5.5z"/>
         </svg>
