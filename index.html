@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RAÍZES — Moda Masculina & Feminina — Pitanga/PR</title>
-  <meta name="description" content="Loja Raízes em Pitanga/PR. Style for every occasion: Beagle, Baumgarten, Aurochs, Farm Rio, Soul, Sly Wear e Hering.">
+  <meta name="description" content="Loja Raízes em Pitanga/PR. Moda Masculina & Feminina: Beagle, Baumgarten, Aurochs, Farm Rio, Soul, Sly Wear e Hering.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -87,7 +87,7 @@
       align-items: center;
     }
 
-    /* LOGO OFICIAL DA LOJA (COM TOM DOURADO APLICADO) */
+    /* LOGO OFICIAL */
     .logo-container {
       display: flex;
       align-items: center;
@@ -100,7 +100,6 @@
       width: 32px;
       object-fit: contain;
       border-radius: 50%;
-      /* Filtro CSS para deixar a logo branca em tom dourado */
       filter: sepia(1) saturate(3) hue-rotate(5deg) brightness(1.1);
       transition: var(--transicao);
     }
@@ -116,12 +115,12 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* BOTÕES DE NAVEGAÇÃO AJUSTADOS */
+    /* BOTÕES DE NAVEGAÇÃO */
     .header-nav {
       display: flex;
-      gap: 4px; /* Vitrine e Visite-nos bem próximos */
+      gap: 4px;
       align-items: center;
-      margin-left: 20px; /* Afastou da logo RAÍZES */
+      margin-left: 20px;
     }
 
     .btn-nav {
@@ -140,7 +139,7 @@
       color: var(--dourado-champagne);
     }
 
-    /* BOTÃO DE TEMA DISCRETO (ÍCONE CIRCULAR) */
+    /* BOTÃO DE TEMA DISCRETO */
     .theme-toggle-btn {
       background: transparent;
       border: 1px solid var(--borda-suave);
@@ -161,7 +160,7 @@
       background: var(--bg-card);
     }
 
-    /* BANNER COM foto-loja.jpg */
+    /* BANNER COM LINK PARA O MAPS */
     .secao-loja {
       max-width: 1200px;
       margin: 16px auto 8px auto;
@@ -175,6 +174,8 @@
       border-radius: var(--raio-card);
       overflow: hidden;
       border: 1px solid var(--borda-suave);
+      display: block;
+      text-decoration: none;
     }
 
     .banner-loja img {
@@ -182,6 +183,11 @@
       height: 100%;
       object-fit: cover;
       filter: brightness(0.6);
+      transition: transform 0.3s ease;
+    }
+
+    .banner-loja:hover img {
+      transform: scale(1.02);
     }
 
     .banner-conteudo {
@@ -209,7 +215,7 @@
       letter-spacing: 1px;
     }
 
-    /* FILTRO DE MARCAS COMPACTO */
+    /* FILTRO DE MARCAS */
     .container-filtros {
       padding: 12px;
       max-width: 1200px;
@@ -246,7 +252,7 @@
       border-color: var(--dourado-champagne);
     }
 
-    /* GRID DE PRODUTOS COMPACTA */
+    /* GRID DE PRODUTOS */
     .grid-produtos {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
@@ -420,6 +426,36 @@
       fill: currentColor;
     }
 
+    /* BOTÃO WHATSAPP FLUTUANTE FIXO */
+    .btn-whatsapp-flutuante {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+      color: #ffffff;
+      border-radius: 50px;
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      z-index: 1000;
+      text-decoration: none;
+      transition: transform 0.25s ease, background-color 0.25s ease;
+    }
+
+    .btn-whatsapp-flutuante:hover {
+      transform: scale(1.08);
+      background-color: #20ba5a;
+    }
+
+    .btn-whatsapp-flutuante svg {
+      width: 28px;
+      height: 28px;
+      fill: #ffffff;
+    }
+
     /* FOOTER INFORMATIVO */
     footer {
       text-align: center;
@@ -438,35 +474,34 @@
   <header>
     <div class="header-top">
       <a href="#" class="logo-container">
-        <!-- Árvore Real da Marca (logo.png) com filtro dourado -->
         <img src="logo.png" alt="Logo Raízes" class="logo-img">
         <span class="logo-marca">RAÍZES</span>
       </a>
 
       <div class="header-nav">
         <a href="#vitrine" class="btn-nav ativo">Vitrine</a>
-        <a href="#visite-nos" class="btn-nav">Visite-nos</a>
+        <!-- LINK DIRETO PARA O GOOGLE MAPS DA LOJA -->
+        <a href="https://www.google.com/maps/search/?api=1&query=Av.+Interventor+Manoel+Ribas,+186,+Pitanga+-+PR" target="_blank" rel="noopener" class="btn-nav">Visite-nos</a>
       </div>
 
-      <!-- BOTÃO DE TEMA DISCRETO -->
       <button class="theme-toggle-btn" id="btn-tema" onclick="alternarTema()" title="Alternar Tema">
         <span id="icone-tema">☀️</span>
       </button>
     </div>
   </header>
 
-  <!-- BANNER DA LOJA / FOTO DA LOJA -->
+  <!-- BANNER DA LOJA (CLICÁVEL PARA MAPS) -->
   <section class="secao-loja" id="visite-nos">
-    <div class="banner-loja">
+    <a href="https://www.google.com/maps/search/?api=1&query=Av.+Interventor+Manoel+Ribas,+186,+Pitanga+-+PR" target="_blank" rel="noopener" class="banner-loja" title="Ver localização no Google Maps">
       <img src="foto-loja.jpg" alt="Loja Raízes em Pitanga PR" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1000&auto=format&fit=crop'">
       <div class="banner-conteudo">
         <h2 class="banner-titulo">Nossa Boutique</h2>
-        <p class="banner-sub">Av. Interventor Manoel Ribas, 186 — Pitanga / PR</p>
+        <p class="banner-sub">Av. Interventor Manoel Ribas, 186 — Pitanga / PR 📍</p>
       </div>
-    </div>
+    </a>
   </section>
 
-  <!-- FILTRO DE MARCAS COMPACTO -->
+  <!-- FILTRO DE MARCAS -->
   <div class="container-filtros" id="vitrine">
     <div class="filtros-wrapper" id="filtro-marcas">
       <button class="btn-filtro ativo" onclick="filtrarMarca('TODAS')">Todas</button>
@@ -480,14 +515,19 @@
     </div>
   </div>
 
-  <!-- VITRINE DE PRODUTOS COMPACTA -->
+  <!-- VITRINE DE PRODUTOS -->
   <main class="grid-produtos" id="grid-vitrine">
     <!-- Cards renderizados dinamicamente -->
   </main>
 
+  <!-- BOTÃO FLUTUANTE DE WHATSAPP -->
+  <a href="https://wa.me/5542999839784?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20RA%C3%8DZES%20e%20gostaria%20de%20falar%20com%20o%20atendimento." class="btn-whatsapp-flutuante" target="_blank" rel="noopener" title="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.705 1.758zm6.637-3.935l.391.232c1.363.81 2.932 1.238 4.531 1.239 5.022 0 9.112-4.089 9.113-9.113-.001-2.433-.948-4.722-2.67-6.444-1.722-1.722-4.011-2.668-6.444-2.668-5.021 0-9.11 4.089-9.112 9.112-.001 1.666.448 3.292 1.3 4.707l.254.419-1.003 3.663 3.743-.982z"/></svg>
+  </a>
+
   <!-- FOOTER INFORMATIVO -->
   <footer>
-    <p><strong>© 2026 RAÍZES — Todos os direitos reservados.</strong></p>
+    <p><strong>© 2026 RAÍZES — Moda Masculina & Feminina</strong></p>
     <p style="margin-top: 4px;">MALDANER & MAZETTO LTDA | CNPJ: 64.860.761/0001-64</p>
   </footer>
 
@@ -616,19 +656,4 @@
             </div>
 
             <button class="btn-interesse" onclick="enviarWhatsApp(${prod.id})">
-              <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.705 1.758zm6.637-3.935l.391.232c1.363.81 2.932 1.238 4.531 1.239 5.022 0 9.112-4.089 9.113-9.113-.001-2.433-.948-4.722-2.67-6.444-1.722-1.722-4.011-2.668-6.444-2.668-5.021 0-9.11 4.089-9.112 9.112-.001 1.666.448 3.292 1.3 4.707l.254.419-1.003 3.663 3.743-.982z"/></svg>
-              Tenho Interesse
-            </button>
-          </div>
-        `;
-
-        grid.appendChild(card);
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      renderizarVitrine();
-    });
-  </script>
-</body>
-</html>
+              <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.705 1.758zm6.637-3.935l.391.232c1.363.81 2.932 1.238 4.531 1.239 5.022 0 9.112-4.089 9.113-9.113-.001-2.433-.948-4.722-2.67-6.444-1.722-1.722-4.011-2.668-6.444-2.668-5
