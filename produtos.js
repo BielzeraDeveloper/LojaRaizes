@@ -1,5 +1,21 @@
 const listaProdutos = [
   {
+    "id": 1787672483665,
+    "codigo": "RAIZ-3563",
+    "titulo": "Camiseta Masculina- preta",
+    "marca": "Beagle",
+    "preco": 219.99,
+    "imagem": "imagens/RAIZ-3563.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1787671721327,
     "codigo": "RAIZ-8367",
     "titulo": "Camiseta",
