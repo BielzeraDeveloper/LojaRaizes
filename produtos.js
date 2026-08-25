@@ -1,11 +1,11 @@
 const listaProdutos = [
   {
-    "id": 1787673863844,
-    "codigo": "RAIZ-8451",
+    "id": 1787673997174,
+    "codigo": "RAIZ-2623",
     "titulo": "Camiseta Masculina",
-    "marca": "Soul",
-    "preco": 197.99,
-    "imagem": "imagens/RAIZ-8451.jpg",
+    "marca": "Beagle",
+    "preco": 219.99,
+    "imagem": "imagens/RAIZ-2623.jpg",
     "tamanhos": [
       "P",
       "M",
