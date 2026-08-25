@@ -1,11 +1,11 @@
 const listaProdutos = [
   {
-    "id": 1787672683521,
-    "codigo": "RAIZ-1479",
-    "titulo": "Camiseta Feminina- Marrom",
-    "marca": "Baugarten ",
-    "preco": 165.99,
-    "imagem": "imagens/RAIZ-1479.jpg",
+    "id": 1787672777584,
+    "codigo": "RAIZ-5105",
+    "titulo": "Camiseta Masculina ",
+    "marca": "Soul",
+    "preco": 197.99,
+    "imagem": "imagens/RAIZ-5105.jpg",
     "tamanhos": [
       "P",
       "M",
