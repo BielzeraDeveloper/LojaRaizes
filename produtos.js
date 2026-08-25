@@ -1,11 +1,11 @@
 const listaProdutos = [
   {
-    "id": 1787672483665,
-    "codigo": "RAIZ-3563",
-    "titulo": "Camiseta Masculina- preta",
-    "marca": "Beagle",
-    "preco": 219.99,
-    "imagem": "imagens/RAIZ-3563.jpg",
+    "id": 1787672683521,
+    "codigo": "RAIZ-1479",
+    "titulo": "Camiseta Feminina- Marrom",
+    "marca": "Baugarten ",
+    "preco": 165.99,
+    "imagem": "imagens/RAIZ-1479.jpg",
     "tamanhos": [
       "P",
       "M",
