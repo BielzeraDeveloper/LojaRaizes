@@ -287,6 +287,11 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .card-produto:hover .card-foto-wrapper img {
+      transform: scale(1.08);
     }
 
     .sem-imagem-placeholder {
@@ -304,17 +309,18 @@
       position: absolute;
       top: 8px;
       left: 8px;
-      background: var(--badge-bg);
-      color: var(--badge-texto);
+      background: rgba(5, 8, 6, 0.85);
+      color: #ebd47a;
       backdrop-filter: blur(6px);
-      border: 1px solid var(--borda-forte);
-      padding: 3px 8px;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      padding: 4px 8px;
       border-radius: 12px;
-      font-size: 9px;
+      font-size: 10px;
       font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
       z-index: 2;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
     }
 
     .card-info {
