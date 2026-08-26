@@ -1,5 +1,21 @@
 const listaProdutos = [
   {
+    "id": 1787757509210,
+    "codigo": "RAIZ-8930",
+    "titulo": "Produto Raízes",
+    "marca": "RAÍZES",
+    "preco": 0,
+    "imagem": "imagens/RAIZ-8930.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1787673997101,
     "codigo": "BB",
     "titulo": "Boné",
