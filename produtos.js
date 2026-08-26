@@ -123,6 +123,22 @@ const listaProdutos = [
       "Cores"
     ]
   },
+   {
+    "id": 1787673997108,
+    "codigo": "CSAM",
+    "titulo": "Camisa Masculina",
+    "marca": "Aurochs",
+    "preco": 279,99,
+    "imagem": "imagens/csam.png",
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Cores"
+    ]
+  },
   {
     "id": 1787673997109,
     "codigo": "CMS",
