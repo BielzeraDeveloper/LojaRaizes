@@ -7,9 +7,7 @@ const listaProdutos = [
     "preco": 139.99,
     "imagem": "imagens/bb.jpg",
     "tamanhos": [
-      "P",
-      "M",
-      "G"
+      "ÚNICO"
     ],
     "cores": [
       "Cores"
@@ -23,9 +21,7 @@ const listaProdutos = [
     "preco": 109.99,
     "imagem": "imagens/bb2.jpg",
     "tamanhos": [
-      "P",
-      "M",
-      "G"
+      "ÚNICO"
     ],
     "cores": [
       "Cores"
