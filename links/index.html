@@ -10,8 +10,6 @@
     
     <style>
         :root {
-            --bg-color: #0d120f;
-            --card-bg: #151d18;
             --gold: #c5a059;
             --gold-hover: #dfbc71;
             --text-color: #f4f4f4;
@@ -26,44 +24,79 @@
         }
         
         body {
-            background-color: var(--bg-color);
+            background-color: #0d120f;
             color: var(--text-color);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Fundo com a foto da loja e efeito Blur */
+        .bg-loja {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Salve a foto da loja na mesma pasta com o nome "foto-loja.jpg" */
+            background-image: url('foto-loja.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px);
+            transform: scale(1.1); /* Evita bordas brancas causadas pelo blur */
+            z-index: 1;
+        }
+
+        /* Camada escura com tom de verde militar para manter a leitura perfeita */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, rgba(13, 18, 15, 0.88), rgba(8, 12, 10, 0.92));
+            z-index: 2;
         }
         
         .container {
+            position: relative;
+            z-index: 3;
             width: 100%;
             max-width: 440px;
             text-align: center;
-            background: linear-gradient(145deg, #121915, #0a0e0c);
-            border: 1px solid rgba(197, 160, 89, 0.25);
+            background: rgba(18, 25, 21, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(197, 160, 89, 0.3);
             border-radius: 20px;
             padding: 40px 24px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
         }
         
         .logo-container {
-            width: 96px;
-            height: 96px;
+            width: 100px;
+            height: 100px;
             margin: 0 auto 20px;
             border: 2px solid var(--gold);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--card-bg);
+            background-color: #151d18;
             overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
         .logo-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            /* 'contain' garante que a logo inteira apareça sem cortar, ideal para PNG */
+            object-fit: contain; 
+            padding: 4px;
         }
         
         h1 {
@@ -92,12 +125,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--card-bg);
+            background-color: #151d18;
             color: var(--text-color);
             text-decoration: none;
             padding: 16px 20px;
             border-radius: 10px;
-            border: 1px solid rgba(197, 160, 89, 0.3);
+            border: 1px solid rgba(197, 160, 89, 0.35);
             font-weight: 600;
             font-size: 1.05rem;
             letter-spacing: 0.5px;
@@ -110,7 +143,7 @@
             color: #0d120f;
             border-color: var(--gold);
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(197, 160, 89, 0.25);
+            box-shadow: 0 6px 15px rgba(197, 160, 89, 0.3);
         }
         
         footer {
@@ -129,6 +162,9 @@
     </style>
 </head>
 <body>
+    <div class="bg-loja"></div>
+    <div class="overlay"></div>
+
     <div class="container">
         <div class="logo-container">
             <img src="logo.png" alt="Loja Raízes">
