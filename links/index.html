@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loja Raízes - Links</title>
+    <!-- Importando a fonte Bodoni Moda -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap" rel="stylesheet">
@@ -42,16 +43,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* Salve a foto da loja na mesma pasta com o nome "foto-loja.jpg" */
             background-image: url('foto-loja.jpg');
             background-size: cover;
             background-position: center;
             filter: blur(8px);
-            transform: scale(1.1); /* Evita bordas brancas causadas pelo blur */
+            transform: scale(1.1);
             z-index: 1;
         }
 
-        /* Camada escura com tom de verde militar para manter a leitura perfeita */
+        /* Camada escura com tom de verde militar */
         .overlay {
             position: absolute;
             top: 0;
@@ -94,7 +94,6 @@
         .logo-container img {
             width: 100%;
             height: 100%;
-            /* 'contain' garante que a logo inteira apareça sem cortar, ideal para PNG */
             object-fit: contain; 
             padding: 4px;
         }
@@ -162,16 +161,18 @@
     </style>
 </head>
 <body>
+    <!-- Fundo desfocado com a foto da loja -->
     <div class="bg-loja"></div>
     <div class="overlay"></div>
 
     <div class="container">
+        <!-- Logo em PNG -->
         <div class="logo-container">
             <img src="logo.png" alt="Loja Raízes">
         </div>
         
         <h1>LOJA RAÍZES</h1>
-        <p class="subtitle">Essência, estilo e autenticidade</p>
+        <p class="subtitle">Moda que conecta gerações</p>
         
         <div class="links-list">
             <a href="https://wa.me/5542999839784" target="_blank" class="link-btn">
@@ -189,7 +190,8 @@
             &copy; Loja Raízes. Todos os direitos reservados.
             <div class="cnpj-info">
                 MALDANER & MAZETTO LTDA<br>
-                CNPJ: 64.860.761/0001-04
+                CNPJ: 64.860.761/0001-04<br>
+                Av. Interventor Manoel Ribas, 186
             </div>
         </footer>
     </div>
