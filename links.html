@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Raízes - Links</title>
+    <style>
+        :root {
+            --bg-color: #0d120f;
+            --card-bg: #151d18;
+            --gold: #c5a059;
+            --gold-hover: #dfbc71;
+            --text-color: #f4f4f4;
+            --text-muted: #9ca3af;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 440px;
+            text-align: center;
+            background: linear-gradient(145deg, #121915, #0a0e0c);
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            border-radius: 20px;
+            padding: 40px 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+        
+        .logo-container {
+            width: 96px;
+            height: 96px;
+            margin: 0 auto 20px;
+            border: 2px dashed var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            background-color: rgba(197, 160, 89, 0.04);
+            overflow: hidden;
+        }
+        
+        /* Instrução para colocar a logo por imagem: 
+           Substitua o conteúdo da div .logo-container por: 
+           <img src="caminho-da-sua-logo.png" alt="Loja Raízes" style="width: 100%; height: 100%; object-fit: cover;"> 
+        */
+        
+        h1 {
+            font-size: 1.6rem;
+            color: var(--gold);
+            margin-bottom: 6px;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+        
+        p.subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            letter-spacing: 0.5px;
+        }
+        
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 16px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .link-btn:hover {
+            background-color: var(--gold);
+            color: #0d120f;
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(197, 160, 89, 0.25);
+        }
+        
+        footer {
+            margin-top: 36px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            line-height: 1.5;
+        }
+
+        .cnpj-info {
+            margin-top: 8px;
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Espaço reservado para a logo -->
+        <div class="logo-container">
+            LOGO
+        </div>
+        
+        <h1>LOJA RAÍZES</h1>
+        <p class="subtitle">Essência, estilo e autenticidade</p>
+        
+        <div class="links-list">
+            <a href="https://wa.me/5542999839784" target="_blank" class="link-btn">
+                Fale Conosco via WhatsApp
+            </a>
+            <a href="https://lojaraizes.vercel.app" target="_blank" class="link-btn">
+                Nosso Catálogo / Site
+            </a>
+            <a href="https://instagram.com/SUAPAGINA" target="_blank" class="link-btn">
+                Instagram
+            </a>
+        </div>
+        
+        <footer>
+            &copy; Loja Raízes. Todos os direitos reservados.
+            <div class="cnpj-info">
+                MALDANER & MAZETTO LTDA<br>
+                CNPJ: 64.860.761/0001-04
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
