@@ -1,5 +1,21 @@
 const listaProdutos = [
   {
+    "id": 1788263702613,
+    "codigo": "RAIZ-5566",
+    "titulo": "Chinelo Estampado Masculino",
+    "marca": "Beagle",
+    "preco": 119.99,
+    "imagem": "imagens/RAIZ-5566.jpg",
+    "tamanhos": [
+      "41/42",
+      "43/44",
+      "39/40"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788263401969,
     "codigo": "RAIZ-1989",
     "titulo": "Boné",
