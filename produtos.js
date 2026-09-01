@@ -1,5 +1,22 @@
 const listaProdutos = [
   {
+    "id": 1788274661168,
+    "codigo": "RAIZ-5262",
+    "titulo": "Bermuda Masculina Tech",
+    "marca": "Soul",
+    "preco": 387.99,
+    "imagem": "imagens/RAIZ-5262.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788274023665,
     "codigo": "RAIZ-7602",
     "titulo": "Camisa Masculina Slim",
