@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1788263401969,
+    "codigo": "RAIZ-1989",
+    "titulo": "Boné",
+    "marca": "Beagle",
+    "preco": 109.99,
+    "imagem": "imagens/RAIZ-1989.jpg",
+    "tamanhos": [
+      "ÚNICO"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1787673997101,
     "codigo": "BB",
     "titulo": "Boné",
