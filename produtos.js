@@ -1,5 +1,22 @@
 const listaProdutos = [
   {
+    "id": 1788270442229,
+    "codigo": "RAIZ-6165",
+    "titulo": "Camisa Masculina",
+    "marca": "Soul",
+    "preco": 285.99,
+    "imagem": "imagens/RAIZ-6165.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788270285758,
     "codigo": "RAIZ-8341",
     "titulo": "Camisa Masculina Confort",
