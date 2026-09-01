@@ -1,5 +1,22 @@
 const listaProdutos = [
   {
+    "id": 1788267076059,
+    "codigo": "RAIZ-7280",
+    "titulo": "Camisa Masculina Pima",
+    "marca": "Baumgarten",
+    "preco": 335.99,
+    "imagem": "imagens/RAIZ-7280.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788266861827,
     "codigo": "RAIZ-7374",
     "titulo": "Camisa Masculina Elegance",
