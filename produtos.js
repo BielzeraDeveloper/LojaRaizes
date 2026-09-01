@@ -1,5 +1,21 @@
 const listaProdutos = [
-      {
+  {
+    "id": 1788265579356,
+    "codigo": "RAIZ-4736",
+    "titulo": "Camisa Masculina",
+    "marca": "Baumgarten",
+    "preco": 299.99,
+    "imagem": "imagens/RAIZ-4736.jpg",
+    "tamanhos": [
+      "2",
+      "3",
+      "4"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788264006661,
     "codigo": "RAIZ-5454",
     "titulo": "Bermuda Sarja Slim Maculina",
@@ -16,8 +32,8 @@ const listaProdutos = [
     "cores": [
       "Padrão"
     ]
- },
-    {
+  },
+  {
     "id": 1788263702613,
     "codigo": "RAIZ-5566",
     "titulo": "Chinelo Estampado Masculino",
