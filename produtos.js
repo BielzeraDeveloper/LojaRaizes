@@ -1,5 +1,22 @@
 const listaProdutos = [
   {
+    "id": 1788267776255,
+    "codigo": "RAIZ-4101",
+    "titulo": "Camisa Masculina Slim Fit",
+    "marca": "Beagle",
+    "preco": 395.99,
+    "imagem": "imagens/RAIZ-4101.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788267076059,
     "codigo": "RAIZ-7280",
     "titulo": "Camisa Masculina Pima",
