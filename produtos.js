@@ -1,5 +1,22 @@
 const listaProdutos = [
   {
+    "id": 1788275743542,
+    "codigo": "RAIZ-4728",
+    "titulo": "Bermuda Masculina Sarja",
+    "marca": "Soul",
+    "preco": 329.99,
+    "imagem": "imagens/RAIZ-4728.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788275511403,
     "codigo": "RAIZ-1774",
     "titulo": "Calça Jeans Masculina",
