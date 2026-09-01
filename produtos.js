@@ -1,5 +1,22 @@
 const listaProdutos = [
   {
+    "id": 1788275511403,
+    "codigo": "RAIZ-1774",
+    "titulo": "Calça Jeans Masculina",
+    "marca": "Soul",
+    "preco": 294.99,
+    "imagem": "imagens/RAIZ-1774.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788275471156,
     "codigo": "RAIZ-7792",
     "titulo": "Bermuda Masculina Sarja",
