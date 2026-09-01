@@ -1,33 +1,15 @@
 const listaProdutos = [
   {
-    "id": 1788264006661,
-    "codigo": "RAIZ-5454",
-    "titulo": "Bermuda Sarja Slim Maculina",
-    "marca": "Beagle",
-    "preco": 373.99,
-    "imagem": "imagens/RAIZ-5454.jpg",
-    "tamanhos": [
-      "38",
-      "40",
-      "42",
-      "44",
-      "46"
-    ],
-    "cores": [
-      "Padrão"
-    ]
-  },
-  {
-    "id": 1788263702613,
-    "codigo": "RAIZ-5566",
-    "titulo": "Chinelo Estampado Masculino",
+    "id": 1788264201404,
+    "codigo": "RAIZ-1828",
+    "titulo": "Chinelo Básico Masculino",
     "marca": "Beagle",
     "preco": 119.99,
-    "imagem": "imagens/RAIZ-5566.jpg",
+    "imagem": "imagens/RAIZ-1828.jpg",
     "tamanhos": [
+      "39/40",
       "41/42",
-      "43/44",
-      "39/40"
+      "43/44"
     ],
     "cores": [
       "Padrão"
