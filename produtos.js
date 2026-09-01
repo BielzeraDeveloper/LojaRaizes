@@ -1,5 +1,21 @@
 const listaProdutos = [
   {
+    "id": 1788265817855,
+    "codigo": "RAIZ-1547",
+    "titulo": "Camisa Masculina",
+    "marca": "Baumgarten",
+    "preco": 279.99,
+    "imagem": "imagens/RAIZ-1547.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788265692410,
     "codigo": "RAIZ-5199",
     "titulo": "Camisa Masculina",
