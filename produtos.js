@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1788277868664,
+    "codigo": "RAIZ-1846",
+    "titulo": "Teste",
+    "marca": "SlyWear",
+    "preco": 999.99,
+    "imagem": "imagens/RAIZ-1846.jpg",
+    "tamanhos": [
+      "TAMANHO PADRÃO"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788277675328,
     "codigo": "RAIZ-2826",
     "titulo": "Produto Raízes",
