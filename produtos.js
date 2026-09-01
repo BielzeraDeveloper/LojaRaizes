@@ -1,5 +1,22 @@
 const listaProdutos = [
   {
+    "id": 1788266861827,
+    "codigo": "RAIZ-7374",
+    "titulo": "Camisa Masculina Elegance",
+    "marca": "Baumgarten",
+    "preco": 279.99,
+    "imagem": "imagens/RAIZ-7374.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788266742541,
     "codigo": "RAIZ-1168",
     "titulo": "Camisa Masculina Slim",
