@@ -1,5 +1,21 @@
 const listaProdutos = [
   {
+    "id": 1788270634527,
+    "codigo": "RAIZ-9806",
+    "titulo": "Produto Raízes",
+    "marca": "Soul",
+    "preco": 241.99,
+    "imagem": "imagens/RAIZ-9806.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788270442229,
     "codigo": "RAIZ-6165",
     "titulo": "Camisa Masculina",
