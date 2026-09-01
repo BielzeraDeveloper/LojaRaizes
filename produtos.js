@@ -1,5 +1,21 @@
 const listaProdutos = [
   {
+    "id": 1788266216560,
+    "codigo": "RAIZ-2392",
+    "titulo": "Camisa Masculina",
+    "marca": "Soul",
+    "preco": 307.99,
+    "imagem": "imagens/RAIZ-2392.jpg",
+    "tamanhos": [
+      "2",
+      "3",
+      "4"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788266009038,
     "codigo": "RAIZ-5395",
     "titulo": "Camisa Masculina Slim",
