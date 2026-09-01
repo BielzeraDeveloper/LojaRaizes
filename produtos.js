@@ -1,5 +1,21 @@
 const listaProdutos = [
   {
+    "id": 1788277675328,
+    "codigo": "RAIZ-2826",
+    "titulo": "Produto Raízes",
+    "marca": "RAÍZES",
+    "preco": 0,
+    "imagem": "imagens/RAIZ-2826.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788275743542,
     "codigo": "RAIZ-4728",
     "titulo": "Bermuda Masculina Sarja",
