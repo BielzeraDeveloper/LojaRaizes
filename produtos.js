@@ -1,5 +1,22 @@
 const listaProdutos = [
   {
+    "id": 1788270285758,
+    "codigo": "RAIZ-8341",
+    "titulo": "Camisa Masculina Confort",
+    "marca": "Baumgarten",
+    "preco": 339.99,
+    "imagem": "imagens/RAIZ-8341.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788270103581,
     "codigo": "RAIZ-9820",
     "titulo": "Camisa Masculina",
