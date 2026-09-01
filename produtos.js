@@ -1,5 +1,22 @@
 const listaProdutos = [
   {
+    "id": 1788273571362,
+    "codigo": "RAIZ-6396",
+    "titulo": "Camisa Masculina Bambu",
+    "marca": "Soul",
+    "preco": 351.99,
+    "imagem": "imagens/RAIZ-6396.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788270685628,
     "codigo": "RAIZ-7584",
     "titulo": "Camisa Masculina",
