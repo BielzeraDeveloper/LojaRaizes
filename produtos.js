@@ -1,4 +1,22 @@
 const listaProdutos = [
+      {
+    "id": 1788264006661,
+    "codigo": "RAIZ-5454",
+    "titulo": "Bermuda Sarja Slim Maculina",
+    "marca": "Beagle",
+    "preco": 373.99,
+    "imagem": "imagens/RAIZ-5454.jpg",
+    "tamanhos": [
+      "38",
+      "40",
+      "42",
+      "44",
+      "46"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+ },
     {
     "id": 1788263702613,
     "codigo": "RAIZ-5566",
