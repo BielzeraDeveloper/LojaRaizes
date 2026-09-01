@@ -1,5 +1,22 @@
 const listaProdutos = [
   {
+    "id": 1788266539575,
+    "codigo": "RAIZ-2577",
+    "titulo": "Camisa Masculina Confort",
+    "marca": "Beagle",
+    "preco": 373.99,
+    "imagem": "imagens/RAIZ-2577.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788266216560,
     "codigo": "RAIZ-2392",
     "titulo": "Camisa Masculina",
