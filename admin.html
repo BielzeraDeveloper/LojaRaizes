@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NÂO ENCOSTE EM NADA</title>
+  <title>PAINEL ADMIN BLINDADO</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -116,10 +116,16 @@
       text-transform: uppercase;
       font-size: 13px;
       text-align: center;
+      transition: opacity 0.2s;
+    }
+
+    .btn:disabled {
+      background: #555;
+      cursor: not-allowed;
     }
 
     .btn-foto { background: #ffffff; color: #000000; margin-top: 8px; }
-    .btn:hover { opacity: 0.9; }
+    .btn:hover:not(:disabled) { opacity: 0.9; }
 
     .controles-foto {
       display: flex;
@@ -135,7 +141,7 @@
 
   <div id="admin-panel" class="painel-container">
     <div style="margin-bottom: 20px;">
-      <h2>📷 Cadastrar Produto (GitHub)</h2>
+      <h2>📷 Cadastrar Produto (GitHub - Blindado)</h2>
     </div>
 
     <div class="config-github">
@@ -194,7 +200,7 @@
           <input type="text" id="prod-tamanhos" placeholder="P, M, G">
         </div>
         
-        <button class="btn" style="margin-top: 10px;" onclick="cadastrarEEnviarParaGithub()">🚀 Publicar Produto</button>
+        <button id="btn-publicar" class="btn" style="margin-top: 10px;" onclick="cadastrarEEnviarParaGithub()">🚀 Publicar Produto</button>
       </div>
     </div>
   </div>
@@ -271,35 +277,52 @@
       reader.readAsDataURL(file);
     }
 
+    // Função auxiliar genérica para gravação segura no GitHub
     async function salvarArquivoGithub(user, repo, token, caminho, conteudoBase64, mensagemCommit) {
       const url = `https://api.github.com/repos/${user}/${repo}/contents/${caminho}`;
       
       let sha = undefined;
       try {
-        const checagem = await fetch(url, { headers: { 'Authorization': `bearer ${token}` } });
+        const checagem = await fetch(url, { 
+          headers: { 'Authorization': `bearer ${token}`, 'Accept': 'application/vnd.github+json' },
+          cache: 'no-store'
+        });
         if (checagem.ok) {
           const dados = await checagem.json();
           sha = dados.sha;
         }
-      } catch (e) {}
+      } catch (e) {
+        // Ignora caso o arquivo ainda não exista
+      }
 
       const response = await fetch(url, {
         method: 'PUT',
-        headers: { 'Authorization': `bearer ${token}`, 'Content-Type': 'application/json' },
+        headers: { 
+          'Authorization': `bearer ${token}`, 
+          'Content-Type': 'application/json',
+          'Accept': 'application/vnd.github+json'
+        },
         body: JSON.stringify({ message: mensagemCommit, content: conteudoBase64, sha: sha })
       });
 
-      return response.ok;
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(errData.message || `Erro HTTP ${response.status}`);
+      }
+
+      return true;
     }
 
+    // Função principal blindada contra concorrência e perda de dados
     async function cadastrarEEnviarParaGithub() {
+      const btnPublicar = document.getElementById('btn-publicar');
       const user = document.getElementById('gh-user').value.trim();
       const repo = document.getElementById('gh-repo').value.trim();
       const token = document.getElementById('gh-token').value.trim();
 
       const codigo = document.getElementById('prod-codigo').value;
-      const titulo = document.getElementById('prod-titulo').value || 'Produto Raízes';
-      const marca = document.getElementById('prod-marca').value || 'RAÍZES';
+      const titulo = document.getElementById('prod-titulo').value.trim() || 'Produto Raízes';
+      const marca = document.getElementById('prod-marca').value.trim() || 'RAÍZES';
       
       const precoInput = document.getElementById('prod-preco').value.replace(',', '.');
       const preco = parseFloat(precoInput) || 0.00;
@@ -308,7 +331,7 @@
       const tamanhos = tamanhosBrutos ? tamanhosBrutos.split(',').map(t => t.trim()) : ["P", "M", "G"];
 
       if (!user || !repo || !token) {
-        alert('Preencha as credenciais do GitHub!');
+        alert('Preencha todas as credenciais do GitHub!');
         return;
       }
 
@@ -317,48 +340,99 @@
         return;
       }
 
-      alert('Enviando dados para o GitHub...');
+      // Bloqueia o botão para evitar cliques duplicados
+      btnPublicar.disabled = true;
+      btnPublicar.innerText = '⏳ Processando e Publicando...';
 
-      const fotoPura = imagemBase64.replace(/^data:image\/(png|jpeg|jpg);base64,/, "");
-      const caminhoFoto = `imagens/${codigo}.jpg`;
+      try {
+        const fotoPura = imagemBase64.replace(/^data:image\/(png|jpeg|jpg);base64,/, "");
+        const caminhoFoto = `imagens/${codigo}.jpg`;
 
-      const fotoEnviada = await salvarArquivoGithub(user, repo, token, caminhoFoto, fotoPura, `Upload foto ${codigo}`);
+        // Passos 1: Envia a imagem
+        await salvarArquivoGithub(user, repo, token, caminhoFoto, fotoPura, `Upload foto ${codigo}`);
 
-      if (!fotoEnviada) {
-        alert('Erro ao enviar a imagem. Verifique se o Token tem permissão de escrita e se Usuário/Repositório estão corretos.');
-        return;
-      }
+        // Passo 2: Busca a versão MAIS RECENTE do produtos.js direto do repositório remoto (evita cache)
+        let listaAtual = [];
+        let produtosSha = undefined;
+        const urlProdutos = `https://api.github.com/repos/${user}/${repo}/contents/produtos.js`;
 
-      const listaAtual = (typeof listaProdutos !== 'undefined' && Array.isArray(listaProdutos)) ? listaProdutos : [];
-      
-      const novoProduto = {
-        id: Date.now(),
-        codigo: codigo,
-        titulo: titulo,
-        marca: marca,
-        preco: preco,
-        imagem: caminhoFoto,
-        tamanhos: tamanhos,
-        cores: ["Padrão"]
-      };
+        const resProdutos = await fetch(urlProdutos, { 
+          headers: { 'Authorization': `bearer ${token}`, 'Accept': 'application/vnd.github+json' },
+          cache: 'no-store' 
+        });
 
-      listaAtual.unshift(novoProduto);
+        if (resProdutos.ok) {
+          const dadosProdutos = await resProdutos.json();
+          produtosSha = dadosProdutos.sha;
+          const conteudoDecodificado = decodeURIComponent(escape(atob(dadosProdutos.content)));
+          
+          // Regex robusta para capturar o array independente de quebras de linha
+          const match = conteudoDecodificado.match(/const\s+listaProdutos\s*=\s*(\[\s*[\s\S]*\s*]);?/);
+          if (match && match[1]) {
+            listaAtual = JSON.parse(match[1]);
+          }
+        }
 
-      const conteudoProdutosJS = `const listaProdutos = ${JSON.stringify(listaAtual, null, 2)};`;
-      const jsBase64 = btoa(unescape(encodeURIComponent(conteudoProdutosJS)));
+        // Garante fallback se o arquivo remoto estiver vazio ou corrompido
+        if (!Array.isArray(listaAtual)) {
+          listaAtual = (typeof listaProdutos !== 'undefined' && Array.isArray(listaProdutos)) ? listaProdutos : [];
+        }
 
-      const jsEnviado = await salvarArquivoGithub(user, repo, token, 'produtos.js', jsBase64, `Adiciona ${codigo} com preço R$ ${preco}`);
+        // Cria o novo produto no topo da lista
+        const novoProduto = {
+          id: Date.now(),
+          codigo: codigo,
+          titulo: titulo,
+          marca: marca,
+          preco: preco,
+          imagem: caminhoFoto,
+          tamanhos: tamanhos,
+          cores: ["Padrão"]
+        };
 
-      if (jsEnviado) {
-        alert(`Sucesso! O produto ${codigo} (R$ ${preco.toFixed(2)}) foi publicado.`);
+        listaAtual.unshift(novoProduto);
+
+        // Prepara o conteúdo atualizado com formatação limpa
+        const conteudoProdutosJS = `const listaProdutos = ${JSON.stringify(listaAtual, null, 2)};`;
+        const jsBase64 = btoa(unescape(encodeURIComponent(conteudoProdutosJS)));
+
+        // Passo 3: Envia o produtos.js atualizado utilizando o SHA mais recente obtido na hora
+        const responseJs = await fetch(urlProdutos, {
+          method: 'PUT',
+          headers: { 
+            'Authorization': `bearer ${token}`, 
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github+json'
+          },
+          body: JSON.stringify({ 
+            message: `Adiciona ${codigo} com preço R$ ${preco}`, 
+            content: jsBase64,
+            sha: produtosSha 
+          })
+        });
+
+        if (!responseJs.ok) {
+          const errData = await responseJs.json().catch(() => ({}));
+          throw new Error(errData.message || 'Falha ao gravar o arquivo produtos.js no repositório.');
+        }
+
+        alert(`Sucesso! O produto ${codigo} (R$ ${preco.toFixed(2)}) foi publicado sem sobrescrever os anteriores.`);
+        
+        // Limpeza dos campos
         document.getElementById('prod-titulo').value = '';
         document.getElementById('prod-preco').value = '';
         document.getElementById('prod-tamanhos').value = '';
         document.getElementById('foto-preview').src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'><rect width='100%' height='100%' fill='%23111'/><text x='50%' y='50%' fill='%23666' font-size='16' text-anchor='middle'>Aguardando Foto...</text></svg>";
         imagemBase64 = '';
         gerarNovoCodigo();
-      } else {
-        alert('Foto enviada, mas falhou a gravação no produtos.js.');
+
+      } catch (error) {
+        console.error("Erro no processo de publicação:", error);
+        alert(`❌ Erro ao publicar: ${error.message}`);
+      } finally {
+        // Restaura o botão independentemente de sucesso ou erro
+        btnPublicar.disabled = false;
+        btnPublicar.innerText = '🚀 Publicar Produto';
       }
     }
   </script>
