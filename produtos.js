@@ -1,5 +1,22 @@
 const listaProdutos = [
   {
+    "id": 1788365027851,
+    "codigo": "RAIZ-1788",
+    "titulo": "Camiseta Masculina",
+    "marca": "Beagle",
+    "preco": 119.99,
+    "imagem": "imagens/RAIZ-1788.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788364953710,
     "codigo": "RAIZ-8575",
     "titulo": "Camiseta Masculina",
