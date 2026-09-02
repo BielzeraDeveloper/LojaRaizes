@@ -1,5 +1,22 @@
 const listaProdutos = [
   {
+    "id": 1788364175053,
+    "codigo": "RAIZ-1454",
+    "titulo": "Camiseta Masculina Algodão",
+    "marca": "Baumgarten",
+    "preco": 159.99,
+    "imagem": "imagens/RAIZ-1454.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788363163159,
     "codigo": "RAIZ-9946",
     "titulo": "Camisa Polo Poliamida",
