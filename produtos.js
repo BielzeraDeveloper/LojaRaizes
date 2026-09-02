@@ -34,23 +34,6 @@ const listaProdutos = [
     ]
   },
   {
-    "id": 1788364715017,
-    "codigo": "RAIZ-7133",
-    "titulo": "Camiseta Masculina",
-    "marca": "Beagle",
-    "preco": 119.99,
-    "imagem": "imagens/RAIZ-7133.jpg",
-    "tamanhos": [
-      "P",
-      "M",
-      "G",
-      "GG"
-    ],
-    "cores": [
-      "Padrão"
-    ]
-  },
-  {
     "id": 1788364612497,
     "codigo": "RAIZ-1726",
     "titulo": "Camiseta Masculina",
