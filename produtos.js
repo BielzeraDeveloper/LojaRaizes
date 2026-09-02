@@ -1,5 +1,22 @@
 const listaProdutos = [
   {
+    "id": 1788364318099,
+    "codigo": "RAIZ-4067",
+    "titulo": "Camiseta Algodão",
+    "marca": "Baumgarten",
+    "preco": 169.99,
+    "imagem": "imagens/RAIZ-4067.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788364175053,
     "codigo": "RAIZ-1454",
     "titulo": "Camiseta Masculina Algodão",
