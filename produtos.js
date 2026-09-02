@@ -1,13 +1,37 @@
 const listaProdutos = [
   {
+    "id": 1788363163159,
+    "codigo": "RAIZ-9946",
+    "titulo": "Camisa Polo Poliamida",
+    "marca": "Baumgarten",
+    "preco": 199.99,
+    "imagem": "imagens/RAIZ-9946.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788275511403,
     "codigo": "RAIZ-1774",
     "titulo": "Calça Jeans Masculina",
     "marca": "Soul",
     "preco": 294.99,
     "imagem": "imagens/RAIZ-1774.jpg",
-    "tamanhos": ["P", "M", "G", "GG"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788275471156,
@@ -16,8 +40,15 @@ const listaProdutos = [
     "marca": "Soul",
     "preco": 329.99,
     "imagem": "imagens/RAIZ-7792.jpg",
-    "tamanhos": ["P", "M", "G", "GG"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788274661168,
@@ -26,8 +57,15 @@ const listaProdutos = [
     "marca": "Soul",
     "preco": 387.99,
     "imagem": "imagens/RAIZ-5262.jpg",
-    "tamanhos": ["P", "M", "G", "GG"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788274023665,
@@ -36,8 +74,15 @@ const listaProdutos = [
     "marca": "Soul",
     "preco": 351.99,
     "imagem": "imagens/RAIZ-7602.jpg",
-    "tamanhos": ["P", "M", "G", "GG"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788273934274,
@@ -46,8 +91,15 @@ const listaProdutos = [
     "marca": "Soul",
     "preco": 318.99,
     "imagem": "imagens/RAIZ-6142.jpg",
-    "tamanhos": ["P", "M", "G", "GG"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788273571362,
@@ -56,8 +108,15 @@ const listaProdutos = [
     "marca": "Soul",
     "preco": 351.99,
     "imagem": "imagens/RAIZ-6396.jpg",
-    "tamanhos": ["P", "M", "G", "GG"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788270685628,
@@ -66,8 +125,15 @@ const listaProdutos = [
     "marca": "Soul",
     "preco": 241.99,
     "imagem": "imagens/RAIZ-7584.jpg",
-    "tamanhos": ["P", "M", "G", "GG"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788270634527,
@@ -76,8 +142,14 @@ const listaProdutos = [
     "marca": "Soul",
     "preco": 241.99,
     "imagem": "imagens/RAIZ-9806.jpg",
-    "tamanhos": ["P", "M", "G"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788270442229,
@@ -86,8 +158,15 @@ const listaProdutos = [
     "marca": "Soul",
     "preco": 285.99,
     "imagem": "imagens/RAIZ-6165.jpg",
-    "tamanhos": ["P", "M", "G", "GG"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788270285758,
@@ -96,8 +175,15 @@ const listaProdutos = [
     "marca": "Baumgarten",
     "preco": 339.99,
     "imagem": "imagens/RAIZ-8341.jpg",
-    "tamanhos": ["P", "M", "G", "GG"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788270103581,
@@ -106,8 +192,15 @@ const listaProdutos = [
     "marca": "Soul",
     "preco": 373.99,
     "imagem": "imagens/RAIZ-9820.jpg",
-    "tamanhos": ["P", "M", "G", "GG"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788267776255,
@@ -116,8 +209,15 @@ const listaProdutos = [
     "marca": "Beagle",
     "preco": 395.99,
     "imagem": "imagens/RAIZ-4101.jpg",
-    "tamanhos": ["P", "M", "G", "GG"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788267076059,
@@ -126,8 +226,15 @@ const listaProdutos = [
     "marca": "Baumgarten",
     "preco": 335.99,
     "imagem": "imagens/RAIZ-7280.jpg",
-    "tamanhos": ["P", "M", "G", "GG"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788266861827,
@@ -136,8 +243,15 @@ const listaProdutos = [
     "marca": "Baumgarten",
     "preco": 279.99,
     "imagem": "imagens/RAIZ-7374.jpg",
-    "tamanhos": ["P", "M", "G", "GG"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788266742541,
@@ -146,8 +260,15 @@ const listaProdutos = [
     "marca": "Soul",
     "preco": 329.99,
     "imagem": "imagens/RAIZ-1168.jpg",
-    "tamanhos": ["P", "M", "G", "GG"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788266539575,
@@ -156,8 +277,15 @@ const listaProdutos = [
     "marca": "Beagle",
     "preco": 373.99,
     "imagem": "imagens/RAIZ-2577.jpg",
-    "tamanhos": ["P", "M", "G", "GG"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788266216560,
@@ -166,8 +294,14 @@ const listaProdutos = [
     "marca": "Soul",
     "preco": 307.99,
     "imagem": "imagens/RAIZ-2392.jpg",
-    "tamanhos": ["2", "3", "4"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "2",
+      "3",
+      "4"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788266009038,
@@ -176,8 +310,14 @@ const listaProdutos = [
     "marca": "Beagle",
     "preco": 439.99,
     "imagem": "imagens/RAIZ-5395.jpg",
-    "tamanhos": ["P", "M", "G"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788265817855,
@@ -186,8 +326,14 @@ const listaProdutos = [
     "marca": "Baumgarten",
     "preco": 279.99,
     "imagem": "imagens/RAIZ-1547.jpg",
-    "tamanhos": ["P", "M", "G"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788265692410,
@@ -196,8 +342,12 @@ const listaProdutos = [
     "marca": "Beagle",
     "preco": 351.99,
     "imagem": "imagens/RAIZ-5199.jpg",
-    "tamanhos": ["P"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "P"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788265579356,
@@ -206,8 +356,14 @@ const listaProdutos = [
     "marca": "Baumgarten",
     "preco": 299.99,
     "imagem": "imagens/RAIZ-4736.jpg",
-    "tamanhos": ["2", "3", "4"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "2",
+      "3",
+      "4"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788264006661,
@@ -216,8 +372,16 @@ const listaProdutos = [
     "marca": "Beagle",
     "preco": 373.99,
     "imagem": "imagens/RAIZ-5454.jpg",
-    "tamanhos": ["38", "40", "42", "44", "46"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "38",
+      "40",
+      "42",
+      "44",
+      "46"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788263702613,
@@ -226,8 +390,14 @@ const listaProdutos = [
     "marca": "Beagle",
     "preco": 119.99,
     "imagem": "imagens/RAIZ-5566.jpg",
-    "tamanhos": ["41/42", "43/44", "39/40"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "41/42",
+      "43/44",
+      "39/40"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788264201404,
@@ -236,8 +406,14 @@ const listaProdutos = [
     "marca": "Beagle",
     "preco": 119.99,
     "imagem": "imagens/RAIZ-1828.jpg",
-    "tamanhos": ["39/40", "41/42", "43/44"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "39/40",
+      "41/42",
+      "43/44"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1788263401969,
@@ -246,8 +422,12 @@ const listaProdutos = [
     "marca": "Beagle",
     "preco": 109.99,
     "imagem": "imagens/RAIZ-1989.jpg",
-    "tamanhos": ["ÚNICO"],
-    "cores": ["Padrão"]
+    "tamanhos": [
+      "ÚNICO"
+    ],
+    "cores": [
+      "Padrão"
+    ]
   },
   {
     "id": 1787673997101,
@@ -256,8 +436,12 @@ const listaProdutos = [
     "marca": "Beagle",
     "preco": 139.99,
     "imagem": "imagens/bb.jpg",
-    "tamanhos": ["ÚNICO"],
-    "cores": ["Cores"]
+    "tamanhos": [
+      "ÚNICO"
+    ],
+    "cores": [
+      "Cores"
+    ]
   },
   {
     "id": 1787673997102,
@@ -266,8 +450,12 @@ const listaProdutos = [
     "marca": "Beagle",
     "preco": 109.99,
     "imagem": "imagens/bb2.jpg",
-    "tamanhos": ["ÚNICO"],
-    "cores": ["Cores"]
+    "tamanhos": [
+      "ÚNICO"
+    ],
+    "cores": [
+      "Cores"
+    ]
   },
   {
     "id": 1787673997103,
@@ -276,8 +464,14 @@ const listaProdutos = [
     "marca": "Baumgarten",
     "preco": 165.99,
     "imagem": "imagens/cfb.jpg",
-    "tamanhos": ["P", "M", "G"],
-    "cores": ["Cores"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Cores"
+    ]
   },
   {
     "id": 1787673997104,
@@ -286,8 +480,14 @@ const listaProdutos = [
     "marca": "Baumgarten",
     "preco": 119.99,
     "imagem": "imagens/cfb2.jpg",
-    "tamanhos": ["P", "M", "G"],
-    "cores": ["Cores"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Cores"
+    ]
   },
   {
     "id": 1787673997105,
@@ -296,8 +496,14 @@ const listaProdutos = [
     "marca": "Beagle",
     "preco": 329.99,
     "imagem": "imagens/cjmb.jpg",
-    "tamanhos": ["P", "M", "G"],
-    "cores": ["Cores"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Cores"
+    ]
   },
   {
     "id": 1787673997106,
@@ -306,8 +512,14 @@ const listaProdutos = [
     "marca": "Beagle",
     "preco": 219.99,
     "imagem": "imagens/cmb.jpg",
-    "tamanhos": ["P", "M", "G"],
-    "cores": ["Cores"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Cores"
+    ]
   },
   {
     "id": 1787673997107,
@@ -316,8 +528,14 @@ const listaProdutos = [
     "marca": "Baumgarten",
     "preco": 179.99,
     "imagem": "imagens/cmba.jpg",
-    "tamanhos": ["P", "M", "G"],
-    "cores": ["Cores"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Cores"
+    ]
   },
   {
     "id": 1787673997108,
@@ -326,8 +544,14 @@ const listaProdutos = [
     "marca": "Beagle",
     "preco": 329.99,
     "imagem": "imagens/cmbp.jpg",
-    "tamanhos": ["P", "M", "G"],
-    "cores": ["Cores"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Cores"
+    ]
   },
   {
     "id": 1787673997109,
@@ -336,8 +560,14 @@ const listaProdutos = [
     "marca": "Aurochs",
     "preco": 279.99,
     "imagem": "imagens/csam.png",
-    "tamanhos": ["P", "M", "G"],
-    "cores": ["Cores"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Cores"
+    ]
   },
   {
     "id": 1787673997110,
@@ -346,7 +576,13 @@ const listaProdutos = [
     "marca": "Soul",
     "preco": 197.99,
     "imagem": "imagens/cms.jpg",
-    "tamanhos": ["P", "M", "G"],
-    "cores": ["Cores"]
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Cores"
+    ]
   }
 ];
