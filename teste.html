@@ -280,6 +280,7 @@
       aspect-ratio: 3 / 4;
       background: var(--bg-input);
       overflow: hidden;
+      cursor: pointer;
     }
 
     .card-foto-wrapper img {
@@ -321,6 +322,7 @@
       text-transform: uppercase;
       z-index: 2;
       box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      pointer-events: none;
     }
 
     .card-info {
@@ -416,6 +418,70 @@
       transform: translateY(-1px);
     }
 
+    /* Modal de Imagem Ampliada */
+    .modal-imagem {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 20px;
+    }
+
+    .modal-imagem.ativo {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-conteudo {
+      position: relative;
+      max-width: 90%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .modal-conteudo img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: var(--raio-card);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    }
+
+    .modal-fechar {
+      position: absolute;
+      top: -45px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 32px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: var(--transicao);
+      line-height: 1;
+    }
+
+    .modal-fechar:hover {
+      color: var(--dourado-champagne);
+    }
+
+    .modal-legenda {
+      color: #ffffff;
+      margin-top: 12px;
+      font-size: 14px;
+      text-align: center;
+      font-family: var(--font-corpo);
+    }
+
     .btn-whatsapp-flutuante {
       position: fixed;
       bottom: 20px;
@@ -457,6 +523,7 @@
   </style>
 </head>
 <body>
+
   <header>
     <div class="header-top">
       <a href="#" class="logo-container">
@@ -477,8 +544,7 @@
 
   <section class="secao-loja" id="visite-nos">
     <a href="https://www.google.com/maps/search/?api=1&query=Av.+Interventor+Manoel+Ribas,+186,+Pitanga+-+PR" target="_blank" rel="noopener" class="banner-loja" title="Ver localização no Google Maps">
-      <!-- LAZY LOADING E DECODING ASYNC APLICADOS AQUI -->
-      <img src="foto-loja.jpg" alt="Loja Raízes em Pitanga PR" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1000&auto=format&fit=crop'">
+      <img src="foto-loja.jpg" alt="Loja Raízes em Pitanga PR" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1000&auto=format&fit=crop'">
       <div class="banner-conteudo">
         <h2 class="banner-titulo">Nossa Boutique</h2>
         <p class="banner-sub">Av. Interventor Manoel Ribas, 186 — Pitanga / PR 📍</p>
@@ -501,7 +567,16 @@
 
   <main class="grid-produtos" id="grid-vitrine"></main>
 
-  <a href="https://wa.me/5542999839784?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20RA%C3%8DZES%20e%20gostaria%20de%20falar%20com%20o%20atendimento." class="btn-whatsapp-flutuante" target="_blank" rel="noopener" title="Falar no WhatsApp">
+  <!-- Modal para visualização de imagem em tela cheia -->
+  <div class="modal-imagem" id="modalImagem" onclick="fecharModalImagem()">
+    <div class="modal-conteudo" onclick="event.stopPropagation()">
+      <button class="modal-fechar" onclick="fecharModalImagem()">&times;</button>
+      <img id="imgModalAmpliada" src="" alt="Imagem ampliada do produto">
+      <p class="modal-legenda" id="legendaModalAmpliada"></p>
+    </div>
+  </div>
+
+  <a href="https://wa.me/5542999839784?text=Olá!%20Vim%20pelo%20site%20da%20RAÍZES%20e%20gostaria%20de%20falar%20com%20o%20atendimento." class="btn-whatsapp-flutuante" target="_blank" rel="noopener" title="Falar no WhatsApp">
     <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.705 1.758zm6.637-3.935l.391.232c1.363.81 2.932 1.238 4.531 1.239 5.022 0 9.112-4.089 9.113-9.113-.001-2.433-.948-4.722-2.67-6.444-1.722-1.722-4.011-2.668-6.444-2.668-5.021 0-9.11 4.089-9.112 9.112-.001 1.666.448 3.292 1.3 4.707l.254.419-1.003 3.663 3.743-.982z"/></svg>
   </a>
 
@@ -511,6 +586,7 @@
   </footer>
 
   <script src="produtos.js?v=2.1"></script>
+
   <script>
     const NUMERO_WHATSAPP = "5542999839784"; 
     let marcaAtiva = 'TODAS';
@@ -544,6 +620,22 @@
 
     function formatarPreco(valor) {
       return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    // Funções para o modal de imagem
+    function abrirModalImagem(url, titulo) {
+      const modal = document.getElementById('modalImagem');
+      const imgModal = document.getElementById('imgModalAmpliada');
+      const legenda = document.getElementById('legendaModalAmpliada');
+      
+      imgModal.src = url;
+      legenda.textContent = titulo;
+      modal.classList.add('ativo');
+    }
+
+    function fecharModalImagem() {
+      const modal = document.getElementById('modalImagem');
+      modal.classList.remove('ativo');
     }
 
     function enviarWhatsApp(idProduto) {
@@ -591,10 +683,11 @@
         card.className = 'card-produto';
         card.id = `prod-card-${prod.id}`;
 
-        // LAZY LOADING E DECODING ASYNC APLICADOS NO RENDER DOS PRODUTOS
+        // Adiciona evento de clique para abrir a imagem em tela cheia
+        const tituloSeguro = prod.titulo.replace(/'/g, "\\'");
         const imgMarkup = prod.imagem 
-          ? `<img src="${prod.imagem}" alt="${prod.titulo}" loading="lazy" decoding="async">`
-          : `<div class="sem-imagem-placeholder">Sem Imagem</div>`;
+          ? `<img src="${prod.imagem}" alt="${prod.titulo}" loading="lazy" onclick="abrirModalImagem('${prod.imagem}', '${tituloSeguro}')">`
+           : `<div class="sem-imagem-placeholder">Sem Imagem</div>`;
 
         const tamanhosList = prod.tamanhos || ['P', 'M', 'G'];
         const tamanhosMarkup = tamanhosList.map((t, idx) => 
