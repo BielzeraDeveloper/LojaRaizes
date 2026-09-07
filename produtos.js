@@ -1,5 +1,21 @@
 const listaProdutos = [
   {
+    "id": 1788796745996,
+    "codigo": "RAIZ-9637",
+    "titulo": "Tteste",
+    "marca": "Soul",
+    "preco": 9999999,
+    "imagem": "https://i.ibb.co/xKMzw6WT/f6c05e728182.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788795845827,
     "codigo": "RAIZ-1180",
     "titulo": "Teste",
