@@ -1,21 +1,5 @@
 const listaProdutos = [
   {
-    "id": 1788798090006,
-    "codigo": "RAIZ-2536",
-    "titulo": "Teste",
-    "marca": "RAÍZES",
-    "preco": 0,
-    "imagem": "https://i.ibb.co/LXMrc5cS/b0cb9362db4e.jpg",
-    "tamanhos": [
-      "P",
-      "M",
-      "G"
-    ],
-    "cores": [
-      "Padrão"
-    ]
-  },
-  {
     "id": 1788797786900,
     "codigo": "RAIZ-3661",
     "titulo": "Testeee",
