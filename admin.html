@@ -220,7 +220,7 @@
   <div id="admin-panel" class="painel-container">
     <div class="header-painel">
       <h2>📷 Cadastrar Produto</h2>
-      <span class="badge-status">GitHub Auto-Sync</span>
+      <span class="badge-status">GitHub Repositório Direto</span>
     </div>
 
     <div class="config-github">
@@ -297,7 +297,6 @@
   <script>
     let imagemBase64 = '';
     let streamCamera = null;
-    const IMGBB_API_KEY = '58bb89f2c226df64c69556056d14d355';
 
     window.addEventListener('DOMContentLoaded', () => {
       carregarCredenciais();
@@ -365,7 +364,7 @@
       reader.readAsDataURL(file);
     }
 
-    // Função interna para comprimir a imagem no navegador antes do upload
+    // Reduz e comprime a foto antes de enviar ao GitHub para não sobrecarregar o repositório
     function comprimirBase64(base64, maxLargura = 800, qualidade = 0.75) {
       return new Promise((resolve) => {
         const img = new Image();
@@ -392,26 +391,33 @@
       });
     }
 
-    // Função para upload direto da foto no ImgBB (com compressão automática)
-    async function uploadFotoImgBB(base64Data) {
+    // Envia a imagem diretamente para a pasta imagens/ do repositório no GitHub
+    async function uploadFotoGithub(user, repo, token, codigo, base64Data) {
       const base64Comprimido = await comprimirBase64(base64Data, 800, 0.75);
       const fotoPura = base64Comprimido.replace(/^data:image\/(png|jpeg|jpg|webp);base64,/, "");
       
-      const formData = new FormData();
-      formData.append('key', IMGBB_API_KEY);
-      formData.append('image', fotoPura);
+      const caminhoImagem = `imagens/${codigo}.jpg`;
+      const urlImg = `https://api.github.com/repos/${user}/${repo}/contents/${caminhoImagem}`;
 
-      const response = await fetch('https://api.imgbb.com/1/upload', {
-        method: 'POST',
-        body: formData
+      const res = await fetch(urlImg, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `bearer ${token}`,
+          'Content-Type': 'application/json',
+          'Accept': 'application/vnd.github+json'
+        },
+        body: JSON.stringify({
+          message: `Adiciona imagem para produto ${codigo}`,
+          content: fotoPura
+        })
       });
 
-      const data = await response.json();
-      if (!response.ok || !data.success) {
-        throw new Error(data.error?.message || 'Falha ao enviar foto para o servidor de imagem.');
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.message || 'Falha ao salvar a imagem no repositório.');
       }
 
-      return data.data.url;
+      return caminhoImagem;
     }
 
     // Função principal de cadastro
@@ -444,10 +450,12 @@
       btnPublicar.disabled = true;
 
       try {
-        btnPublicar.innerText = '⏳ Comprimindo & Hospedando Foto...';
-        const urlFotoExterna = await uploadFotoImgBB(imagemBase64);
+        // 1. Envia a imagem diretamente para a pasta /imagens do repositório
+        btnPublicar.innerText = '⏳ Comprimindo & Enviando foto ao GitHub...';
+        const caminhoFotoLocal = await uploadFotoGithub(user, repo, token, codigo, imagemBase64);
 
-        btnPublicar.innerText = '⏳ Atualizando catálogo no GitHub...';
+        // 2. Busca a versão mais recente do produtos.js no GitHub
+        btnPublicar.innerText = '⏳ Atualizando produtos.js...';
         let listaAtual = [];
         let produtosSha = undefined;
         const urlProdutos = `https://api.github.com/repos/${user}/${repo}/contents/produtos.js`;
@@ -472,13 +480,14 @@
           listaAtual = (typeof listaProdutos !== 'undefined' && Array.isArray(listaProdutos)) ? listaProdutos : [];
         }
 
+        // 3. Adiciona o produto apontando para a pasta interna imagens/
         const novoProduto = {
           id: Date.now(),
           codigo: codigo,
           titulo: titulo,
           marca: marca,
           preco: preco,
-          imagem: urlFotoExterna,
+          imagem: caminhoFotoLocal, // ex: "imagens/RAIZ-1234.jpg"
           tamanhos: tamanhos,
           cores: ["Padrão"]
         };
@@ -488,6 +497,7 @@
         const conteudoProdutosJS = `const listaProdutos = ${JSON.stringify(listaAtual, null, 2)};`;
         const jsBase64 = btoa(unescape(encodeURIComponent(conteudoProdutosJS)));
 
+        // 4. Salva o arquivo produtos.js atualizado no GitHub
         const responseJs = await fetch(urlProdutos, {
           method: 'PUT',
           headers: { 
@@ -507,8 +517,9 @@
           throw new Error(errData.message || 'Falha ao gravar o arquivo produtos.js no repositório.');
         }
 
-        alert(`Sucesso! O produto ${codigo} foi publicado.`);
+        alert(`Sucesso! O produto ${codigo} foi publicado diretamente no seu repositório.`);
         
+        // Limpeza dos campos
         document.getElementById('prod-titulo').value = '';
         document.getElementById('prod-preco').value = '';
         document.getElementById('prod-tamanhos').value = '';
