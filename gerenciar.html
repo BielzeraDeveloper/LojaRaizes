@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciador de Catálogo — Raízes Boutique</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cor-fundo: #070908;
+      --cor-card: #111513;
+      --cor-card-sub: #161c19;
+      --cor-borda: rgba(255, 255, 255, 0.08);
+      --cor-texto: #f3f5f4;
+      --cor-texto-mutado: #808e86;
+      --cor-verde: #25d366;
+      --cor-vermelho: #ff4d4d;
+      --cor-dourado: #c5a059;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--cor-fundo);
+      color: var(--cor-texto);
+      padding: 24px 16px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .header-painel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--cor-borda);
+    }
+
+    .header-painel h2 {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .btn-recarregar {
+      background: var(--cor-card-sub);
+      color: var(--cor-texto);
+      border: 1px solid var(--cor-borda);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .lista-produtos {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card-item {
+      background: var(--cor-card);
+      border: 1px solid var(--cor-borda);
+      border-radius: 12px;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 70px 1fr auto;
+      gap: 16px;
+      align-items: center;
+    }
+
+    @media (max-width: 600px) {
+      .card-item {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .card-item img { margin: 0 auto; }
+      .acoes-card { flex-direction: column; width: 100%; }
+    }
+
+    .card-item img {
+      width: 70px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #000;
+    }
+
+    .detalhes-produto {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .codigo-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--cor-dourado);
+    }
+
+    .titulo-produto {
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .inputs-inline {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    .inputs-inline label {
+      font-size: 11px;
+      color: var(--cor-texto-mutado);
+    }
+
+    input[type="number"], input[type="text"] {
+      background: var(--cor-card-sub);
+      border: 1px solid var(--cor-borda);
+      color: var(--cor-texto);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      width: 100px;
+    }
+
+    .acoes-card {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-acao {
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    .btn-salvar {
+      background: var(--cor-verde);
+      color: #05140b;
+    }
+
+    .btn-excluir {
+      background: rgba(255, 77, 77, 0.15);
+      color: var(--cor-vermelho);
+      border: 1px solid rgba(255, 77, 77, 0.3);
+    }
+
+    .status-bar {
+      margin-bottom: 20px;
+      padding: 12px;
+      border-radius: 8px;
+      background: var(--cor-card);
+      border: 1px solid var(--cor-borda);
+      font-size: 13px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header-painel">
+      <h2>🛠️ Gerenciar Catálogo</h2>
+      <button class="btn-recarregar" onclick="carregarProdutosGitHub()">🔄 Atualizar Lista</button>
+    </div>
+
+    <div id="status" class="status-bar"></div>
+
+    <div id="lista" class="lista-produtos">
+      <p style="color: var(--cor-texto-mutado);">Carregando produtos do GitHub...</p>
+    </div>
+  </div>
+
+  <script>
+    let listaAtual = [];
+    let produtosSha = null;
+
+    const ghUser = localStorage.getItem('gh_user');
+    const ghRepo = localStorage.getItem('gh_repo');
+    const ghToken = localStorage.getItem('gh_token');
+
+    window.addEventListener('DOMContentLoaded', () => {
+      if (!ghUser || !ghRepo || !ghToken) {
+        alert('Credenciais do GitHub não encontradas! Acesse o admin.html primeiro para salvar seu usuário e token.');
+        return;
+      }
+      carregarProdutosGitHub();
+    });
+
+    function mostrarStatus(mensagem, eErro = false) {
+      const el = document.getElementById('status');
+      el.style.display = 'block';
+      el.style.borderColor = eErro ? 'var(--cor-vermelho)' : 'var(--cor-verde)';
+      el.style.color = eErro ? 'var(--cor-vermelho)' : 'var(--cor-verde)';
+      el.textContent = mensagem;
+    }
+
+    // 1. Busca os produtos diretamente do repositório no GitHub
+    async function carregarProdutosGitHub() {
+      mostrarStatus("⏳ Buscando lista de produtos atualizada...");
+      const url = `https://api.github.com/repos/${ghUser}/${ghRepo}/contents/produtos.js`;
+
+      try {
+        const res = await fetch(url, {
+          headers: { 'Authorization': `bearer ${ghToken}`, 'Accept': 'application/vnd.github+json' },
+          cache: 'no-store'
+        });
+
+        if (!res.ok) throw new Error("Erro ao acessar produtos.js no GitHub.");
+
+        const dados = await res.json();
+        produtosSha = dados.sha;
+        const conteudo = decodeURIComponent(escape(atob(dados.content)));
+        
+        const match = conteudo.match(/const\s+listaProdutos\s*=\s*(\[\s*[\s\S]*\s*]);?/);
+        if (match && match[1]) {
+          listaAtual = JSON.parse(match[1]);
+          renderizarLista();
+          mostrarStatus("✅ Produtos carregados com sucesso!");
+        } else {
+          throw new Error("Formato do arquivo produtos.js inválido.");
+        }
+      } catch (err) {
+        mostrarStatus("❌ " + err.message, true);
+      }
+    }
+
+    // 2. Monta a lista visual na tela
+    function renderizarLista() {
+      const elLista = document.getElementById('lista');
+      if (listaAtual.length === 0) {
+        elLista.innerHTML = '<p style="color: var(--cor-texto-mutado);">Nenhum produto cadastrado.</p>';
+        return;
+      }
+
+      elLista.innerHTML = listaAtual.map((p, index) => `
+        <div class="card-item">
+          <img src="${p.imagem}" alt="${p.titulo}" onerror="this.src='https://via.placeholder.com/70x90?text=Sem+Foto'">
+          <div class="detalhes-produto">
+            <span class="codigo-badge">${p.codigo || 'S/ REF'} — ${p.marca}</span>
+            <span class="titulo-produto">${p.titulo}</span>
+            <div class="inputs-inline">
+              <label>Preço (R$):</label>
+              <input type="number" step="0.01" id="preco-${index}" value="${p.preco}">
+            </div>
+          </div>
+          <div class="acoes-card">
+            <button class="btn-acao btn-salvar" onclick="salvarAlteracao(${index})">Salvar</button>
+            <button class="btn-acao btn-excluir" onclick="excluirProduto(${index})">Excluir</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 3. Atualiza o preço/dados de um produto específico
+    async function salvarAlteracao(index) {
+      const novoPreco = parseFloat(document.getElementById(`preco-${index}`).value);
+      if (isNaN(novoPreco)) {
+        alert("Digite um preço válido.");
+        return;
+      }
+
+      listaAtual[index].preco = novoPreco;
+      await atualizarArquivoGithub(`Atualiza preço do produto ${listaAtual[index].codigo}`);
+    }
+
+    // 4. Remove o produto da lista e apaga o arquivo da foto no GitHub
+    async function excluirProduto(index) {
+      const produto = listaAtual[index];
+      if (!confirm(`Tem certeza que deseja excluir "${produto.titulo}"?`)) return;
+
+      mostrarStatus(`⏳ Excluindo produto e imagem ${produto.codigo}...`);
+
+      // Tenta apagar a imagem do repositório se for um caminho local (ex: imagens/RAIZ-123.jpg)
+      if (produto.imagem && produto.imagem.startsWith('imagens/')) {
+        try {
+          const urlImg = `https://api.github.com/repos/${ghUser}/${ghRepo}/contents/${produto.imagem}`;
+          const resImg = await fetch(urlImg, {
+            headers: { 'Authorization': `bearer ${ghToken}`, 'Accept': 'application/vnd.github+json' }
+          });
+          if (resImg.ok) {
+            const imgData = await resImg.json();
+            await fetch(urlImg, {
+              method: 'DELETE',
+              headers: { 'Authorization': `bearer ${ghToken}`, 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                message: `Apaga imagem do produto ${produto.codigo}`,
+                sha: imgData.sha
+              })
+            });
+          }
+        } catch (e) {
+          console.warn("Aviso: Não foi possível deletar o arquivo da imagem do repositório.", e);
+        }
+      }
+
+      // Remove da lista JS
+      listaAtual.splice(index, 1);
+      await atualizarArquivoGithub(`Exclui produto ${produto.codigo}`);
+    }
+
+    // 5. Envia o produtos.js atualizado de volta ao GitHub
+    async function atualizarArquivoGithub(mensagemCommit) {
+      mostrarStatus("⏳ Gravando alterações no GitHub...");
+      const url = `https://api.github.com/repos/${ghUser}/${ghRepo}/contents/produtos.js`;
+
+      const conteudoNovo = `const listaProdutos = ${JSON.stringify(listaAtual, null, 2)};`;
+      const jsBase64 = btoa(unescape(encodeURIComponent(conteudoNovo)));
+
+      try {
+        const res = await fetch(url, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `bearer ${ghToken}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github+json'
+          },
+          body: JSON.stringify({
+            message: mensagemCommit,
+            content: jsBase64,
+            sha: produtosSha
+          })
+        });
+
+        if (!res.ok) throw new Error("Falha ao atualizar produtos.js no GitHub.");
+
+        const dados = await res.json();
+        produtosSha = dados.content.sha; // Atualiza o SHA atual
+        renderizarLista();
+        mostrarStatus("✅ Catálogo atualizado no GitHub com sucesso!");
+      } catch (err) {
+        mostrarStatus("❌ " + err.message, true);
+      }
+    }
+  </script>
+</body>
+</html>
+
