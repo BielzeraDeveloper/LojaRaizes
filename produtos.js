@@ -1,5 +1,21 @@
 const listaProdutos = [
   {
+    "id": 1788798346357,
+    "codigo": "RAIZ-5468",
+    "titulo": "Jsjdjdjd",
+    "marca": "RAÍZES",
+    "preco": 0,
+    "imagem": "imagens/RAIZ-5468.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788798090006,
     "codigo": "RAIZ-2536",
     "titulo": "Teste",
