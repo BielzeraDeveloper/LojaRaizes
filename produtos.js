@@ -1,21 +1,5 @@
 const listaProdutos = [
   {
-    "id": 1788798389759,
-    "codigo": "RAIZ-9436",
-    "titulo": "Produto Raízes",
-    "marca": "RAÍZES",
-    "preco": 0,
-    "imagem": "imagens/RAIZ-9436.jpg",
-    "tamanhos": [
-      "P",
-      "M",
-      "G"
-    ],
-    "cores": [
-      "Padrão"
-    ]
-  },
-  {
     "id": 1788798346357,
     "codigo": "RAIZ-5468",
     "titulo": "Jsjdjdjd",
