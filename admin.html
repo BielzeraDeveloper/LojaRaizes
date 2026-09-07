@@ -3,129 +3,207 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PAINEL ADMIN BLINDADO</title>
+  <title>Painel Admin — Raízes Boutique</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --cor-fundo: #0a0a0a;
-      --cor-card: #161616;
-      --cor-borda: #2a2a2a;
-      --cor-texto: #ffffff;
+      --cor-fundo: #070908;
+      --cor-card: #111513;
+      --cor-card-sub: #161c19;
+      --cor-borda: rgba(255, 255, 255, 0.08);
+      --cor-borda-foco: #25d366;
+      --cor-texto: #f3f5f4;
+      --cor-texto-mutado: #808e86;
       --cor-verde: #25d366;
+      --cor-verde-hover: #1eb956;
+      --cor-verde-glow: rgba(37, 211, 102, 0.2);
+      --cor-dourado: #c5a059;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: var(--cor-fundo);
       color: var(--cor-texto);
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      padding: 20px;
+      padding: 24px 16px;
+      -webkit-font-smoothing: antialiased;
     }
 
     .painel-container {
-      display: block;
       width: 100%;
-      max-width: 900px;
+      max-width: 920px;
       background: var(--cor-card);
       border: 1px solid var(--cor-borda);
-      border-radius: 16px;
-      padding: 25px;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    }
+
+    .header-painel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--cor-borda);
+    }
+
+    .header-painel h2 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge-status {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--cor-dourado);
+      background: rgba(197, 160, 89, 0.12);
+      border: 1px solid rgba(197, 160, 89, 0.3);
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .config-github {
-      background: #111;
-      border: 1px dashed var(--cor-borda);
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
+      background: var(--cor-card-sub);
+      border: 1px solid var(--cor-borda);
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 28px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
     }
 
     .camera-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 28px;
     }
 
-    @media (max-width: 768px) { .camera-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { 
+      .painel-container { padding: 20px; }
+      .camera-grid { grid-template-columns: 1fr; } 
+    }
+
+    .midia-box {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--cor-borda);
+      background: #000;
+    }
 
     video, canvas, #foto-preview {
       width: 100%;
-      height: 280px;
-      border-radius: 8px;
+      height: 300px;
+      border-radius: 12px;
       background: #000;
       object-fit: cover;
+      display: block;
     }
 
-    .form-grupo { display: flex; flex-direction: column; gap: 10px; }
+    .form-grupo { display: flex; flex-direction: column; gap: 14px; }
+
+    .grid-2-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
 
     .campo-item {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 6px;
     }
 
     .campo-item label {
       font-size: 11px;
-      font-weight: 600;
-      color: #aaa;
+      font-weight: 700;
+      color: var(--cor-texto-mutado);
       text-transform: uppercase;
+      letter-spacing: 0.6px;
     }
 
     input {
-      background: #222;
+      background: var(--cor-card-sub);
       border: 1px solid var(--cor-borda);
-      padding: 10px 12px;
-      color: #fff;
-      border-radius: 6px;
+      padding: 12px 14px;
+      color: var(--cor-texto);
+      border-radius: 8px;
       font-family: inherit;
       font-size: 14px;
       width: 100%;
+      transition: all 0.2s ease;
     }
 
     input:focus {
       outline: none;
-      border-color: var(--cor-verde);
+      border-color: var(--cor-borda-foco);
+      box-shadow: 0 0 12px var(--cor-verde-glow);
+    }
+
+    input[readonly] {
+      opacity: 0.75;
+      cursor: not-allowed;
+      border-style: dashed;
     }
 
     .input-preco {
       font-weight: 700;
       color: #00e676;
-      font-size: 16px;
+      font-size: 15px;
     }
 
     .btn {
       background: var(--cor-verde);
-      color: #fff;
+      color: #05140b;
       border: none;
-      padding: 12px;
-      border-radius: 6px;
-      font-weight: 700;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: 800;
       cursor: pointer;
       text-transform: uppercase;
       font-size: 13px;
+      letter-spacing: 0.5px;
       text-align: center;
-      transition: opacity 0.2s;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px var(--cor-verde-glow);
     }
 
     .btn:disabled {
-      background: #555;
+      background: #2a332d;
+      color: #606d65;
+      box-shadow: none;
       cursor: not-allowed;
     }
 
-    .btn-foto { background: #ffffff; color: #000000; margin-top: 8px; }
-    .btn:hover:not(:disabled) { opacity: 0.9; }
+    .btn-foto { 
+      background: #ffffff; 
+      color: #000000; 
+      margin-top: 10px; 
+      box-shadow: none; 
+      font-weight: 700;
+    }
+
+    .btn:hover:not(:disabled) { 
+      transform: translateY(-1px);
+      filter: brightness(1.08);
+    }
 
     .controles-foto {
       display: flex;
@@ -140,8 +218,9 @@
 <body>
 
   <div id="admin-panel" class="painel-container">
-    <div style="margin-bottom: 20px;">
-      <h2>📷 Cadastrar Produto (GitHub - Blindado)</h2>
+    <div class="header-painel">
+      <h2>📷 Cadastrar Produto</h2>
+      <span class="badge-status">GitHub Auto-Sync</span>
     </div>
 
     <div class="config-github">
@@ -161,7 +240,9 @@
 
     <div class="camera-grid">
       <div>
-        <video id="webcam" autoplay playsinline></video>
+        <div class="midia-box">
+          <video id="webcam" autoplay playsinline></video>
+        </div>
         <div class="controles-foto">
           <button class="btn btn-foto" onclick="tirarFoto()">📸 Câmera</button>
           <label class="btn btn-foto" style="cursor: pointer; display: inline-block;">
@@ -173,34 +254,40 @@
       </div>
 
       <div class="form-grupo">
-        <img id="foto-preview" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'><rect width='100%' height='100%' fill='%23111'/><text x='50%' y='50%' fill='%23666' font-size='16' text-anchor='middle'>Aguardando Foto...</text></svg>" alt="Preview">
+        <div class="midia-box">
+          <img id="foto-preview" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'><rect width='100%' height='100%' fill='%23111'/><text x='50%' y='50%' fill='%23555' font-size='14' text-anchor='middle'>Aguardando Foto...</text></svg>" alt="Preview">
+        </div>
         
-        <div class="campo-item">
-          <label>Código Gerado</label>
-          <input type="text" id="prod-codigo" readonly>
+        <div class="grid-2-col">
+          <div class="campo-item">
+            <label>Código Gerado</label>
+            <input type="text" id="prod-codigo" readonly>
+          </div>
+
+          <div class="campo-item">
+            <label>Marca</label>
+            <input type="text" id="prod-marca" placeholder="Ex: Beagle">
+          </div>
         </div>
 
         <div class="campo-item">
           <label>Nome do Produto</label>
-          <input type="text" id="prod-titulo" placeholder="Ex: Camiseta Linho">
+          <input type="text" id="prod-titulo" placeholder="Ex: Camiseta Linho Casual">
         </div>
 
-        <div class="campo-item">
-          <label>Marca</label>
-          <input type="text" id="prod-marca" placeholder="Ex: Beagle">
-        </div>
+        <div class="grid-2-col">
+          <div class="campo-item">
+            <label>Preço de Venda (R$)</label>
+            <input type="text" id="prod-preco" class="input-preco" placeholder="189,90">
+          </div>
 
-        <div class="campo-item">
-          <label>Preço de Venda (R$)</label>
-          <input type="text" id="prod-preco" class="input-preco" placeholder="189,90">
-        </div>
-
-        <div class="campo-item">
-          <label>Tamanhos Disponíveis</label>
-          <input type="text" id="prod-tamanhos" placeholder="P, M, G">
+          <div class="campo-item">
+            <label>Tamanhos</label>
+            <input type="text" id="prod-tamanhos" placeholder="P, M, G, GG">
+          </div>
         </div>
         
-        <button id="btn-publicar" class="btn" style="margin-top: 10px;" onclick="cadastrarEEnviarParaGithub()">🚀 Publicar Produto</button>
+        <button id="btn-publicar" class="btn" style="margin-top: 6px;" onclick="cadastrarEEnviarParaGithub()">🚀 Publicar Produto</button>
       </div>
     </div>
   </div>
@@ -324,7 +411,7 @@
         throw new Error(data.error?.message || 'Falha ao enviar foto para o servidor de imagem.');
       }
 
-      return data.data.url; // Retorna o link direto
+      return data.data.url;
     }
 
     // Função principal de cadastro
@@ -357,11 +444,9 @@
       btnPublicar.disabled = true;
 
       try {
-        // 1. Envia a imagem para o ImgBB (comprimindo automaticamente)
         btnPublicar.innerText = '⏳ Comprimindo & Hospedando Foto...';
         const urlFotoExterna = await uploadFotoImgBB(imagemBase64);
 
-        // 2. Busca a versão mais recente do produtos.js no GitHub
         btnPublicar.innerText = '⏳ Atualizando catálogo no GitHub...';
         let listaAtual = [];
         let produtosSha = undefined;
@@ -387,7 +472,6 @@
           listaAtual = (typeof listaProdutos !== 'undefined' && Array.isArray(listaProdutos)) ? listaProdutos : [];
         }
 
-        // 3. Adiciona o produto usando a URL externa da imagem
         const novoProduto = {
           id: Date.now(),
           codigo: codigo,
@@ -404,7 +488,6 @@
         const conteudoProdutosJS = `const listaProdutos = ${JSON.stringify(listaAtual, null, 2)};`;
         const jsBase64 = btoa(unescape(encodeURIComponent(conteudoProdutosJS)));
 
-        // 4. Salva apenas o produtos.js no GitHub
         const responseJs = await fetch(urlProdutos, {
           method: 'PUT',
           headers: { 
@@ -426,11 +509,10 @@
 
         alert(`Sucesso! O produto ${codigo} foi publicado.`);
         
-        // Limpeza dos campos
         document.getElementById('prod-titulo').value = '';
         document.getElementById('prod-preco').value = '';
         document.getElementById('prod-tamanhos').value = '';
-        document.getElementById('foto-preview').src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'><rect width='100%' height='100%' fill='%23111'/><text x='50%' y='50%' fill='%23666' font-size='16' text-anchor='middle'>Aguardando Foto...</text></svg>";
+        document.getElementById('foto-preview').src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'><rect width='100%' height='100%' fill='%23111'/><text x='50%' y='50%' fill='%23555' font-size='14' text-anchor='middle'>Aguardando Foto...</text></svg>";
         imagemBase64 = '';
         gerarNovoCodigo();
 
@@ -444,5 +526,4 @@
     }
   </script>
 </body>
-            </html>
-            
+</html>
