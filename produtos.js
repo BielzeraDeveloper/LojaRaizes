@@ -1,5 +1,21 @@
 const listaProdutos = [
   {
+    "id": 1788795845827,
+    "codigo": "RAIZ-1180",
+    "titulo": "Teste",
+    "marca": "Soul",
+    "preco": 0,
+    "imagem": "https://i.ibb.co/hFmbbrZr/d0b3f54d9772.png",
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788365027851,
     "codigo": "RAIZ-1788",
     "titulo": "Camiseta Masculina",
