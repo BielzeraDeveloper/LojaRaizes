@@ -1,5 +1,20 @@
 const listaProdutos = [
   {
+    "id": 1789650846345,
+    "codigo": "RAIZ-4981",
+    "titulo": "Blusa Viscose Feminina - Azul Marinho",
+    "marca": "SlyWear",
+    "preco": 229.99,
+    "imagem": "imagens/RAIZ-4981.jpg",
+    "tamanhos": [
+      "P",
+      "M"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789650241053,
     "codigo": "RAIZ-9661",
     "titulo": "Colete Viscolinho Feminino - OffWhite",
