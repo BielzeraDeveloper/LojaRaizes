@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1789647486328,
+    "codigo": "RAIZ-7185",
+    "titulo": "Calça Viscolinho - Areia",
+    "marca": "SlyWear",
+    "preco": 449.9,
+    "imagem": "imagens/RAIZ-7185.jpg",
+    "tamanhos": [
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789647293969,
     "codigo": "RAIZ-8178",
     "titulo": "Saia Feminina - Amarelo",
