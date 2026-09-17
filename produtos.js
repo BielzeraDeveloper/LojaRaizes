@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1789648138814,
+    "codigo": "RAIZ-9086",
+    "titulo": "Camisa Viscose Feminina - OffWhite",
+    "marca": "SlyWear",
+    "preco": 549.9,
+    "imagem": "imagens/RAIZ-9086.jpg",
+    "tamanhos": [
+      "M"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789647846523,
     "codigo": "RAIZ-8556",
     "titulo": "Calça Viscose Feminina - OffWhite",
