@@ -3,57 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>RAÍZES — Moda Masculina & Feminina — Pitanga/PR</title>
-  <meta name="description" content="Loja Raízes em Pitanga/PR. Moda Masculina & Feminina: Beagle, Baumgarten, Aurochs, Farm Rio, Soul, Sly Wear e Hering.">
+
+  <meta name="description"
+    content="Loja Raízes em Pitanga/PR. Moda Masculina & Feminina: Beagle, Baumgarten, Aurochs, Farm Rio, Soul, Sly Wear e Hering.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
 
   <style>
     :root {
       --esmeralda-profundo: #091712;
       --esmeralda-medio: #143326;
       --esmeralda-vibrante: #1e4a38;
+
       --dourado-champagne: #d4af37;
       --dourado-suave: #c5a059;
-      --dourado-gradiente: linear-gradient(135deg, #ebd47a 0%, #b88e28 100%);
+
+      --dourado-gradiente:
+        linear-gradient(135deg, #ebd47a 0%, #b88e28 100%);
 
       --font-titulo: 'Playfair Display', serif;
       --font-corpo: 'Plus Jakarta Sans', sans-serif;
+
       --transicao: all 0.25s ease;
+
       --raio-card: 12px;
       --raio-btn: 6px;
-    }
 
-    [data-theme="dark"] {
+      /* DARK MODE FIXO */
       --bg-principal: #050806;
       --bg-card: #0d120f;
       --bg-input: #141b16;
+
       --borda-suave: rgba(197, 160, 89, 0.12);
       --borda-forte: rgba(197, 160, 89, 0.3);
+
       --texto-primario: #f5f3ef;
       --texto-secundario: #8e9e94;
-      --sombra-card: 0 8px 24px rgba(0, 0, 0, 0.6);
+
+      --sombra-card:
+        0 8px 24px rgba(0, 0, 0, 0.6);
+
       --badge-bg: rgba(212, 175, 55, 0.15);
       --badge-texto: #ebd47a;
     }
 
-    [data-theme="light"] {
-      --bg-principal: #f9f7f2;
-      --bg-card: #ffffff;
-      --bg-input: #f0ebe1;
-      --borda-suave: rgba(20, 51, 38, 0.12);
-      --borda-forte: rgba(20, 51, 38, 0.25);
-      --texto-primario: #0d1410;
-      --texto-secundario: #546459;
-      --sombra-card: 0 6px 20px rgba(13, 20, 16, 0.07);
-      --badge-bg: #143326;
-      --badge-texto: #f5f3ef;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: var(--font-corpo);
       background-color: var(--bg-principal);
@@ -62,41 +72,56 @@
       padding-bottom: 40px;
     }
 
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--bg-principal);
-      backdrop-filter: blur(10px);
+
+      background: rgba(5, 8, 6, 0.94);
+      backdrop-filter: blur(14px);
+
       border-bottom: 1px solid var(--borda-suave);
+
       padding: 10px 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
     }
 
     .header-top {
       width: 100%;
       max-width: 1200px;
+      margin: auto;
+
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 15px;
     }
 
     .logo-container {
       display: flex;
       align-items: center;
       gap: 10px;
+
       text-decoration: none;
+      flex-shrink: 0;
     }
 
     .logo-img {
       height: 32px;
       width: 32px;
+
       object-fit: contain;
       border-radius: 50%;
-      filter: sepia(1) saturate(3) hue-rotate(5deg) brightness(1.1);
+
+      filter:
+        sepia(1)
+        saturate(3)
+        hue-rotate(5deg)
+        brightness(1.1);
+
       transition: var(--transicao);
     }
 
@@ -106,118 +131,310 @@
       font-weight: 700;
       letter-spacing: 3px;
       text-transform: uppercase;
+
       background: var(--dourado-gradiente);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
+    /* NAVEGAÇÃO */
+
     .header-nav {
       display: flex;
-      gap: 4px;
       align-items: center;
-      margin-left: 20px;
+      gap: 4px;
+
+      flex: 1;
+      justify-content: center;
     }
 
     .btn-nav {
       background: none;
       border: none;
+
       color: var(--texto-secundario);
+
       font-size: 13px;
       font-weight: 600;
+
       cursor: pointer;
-      padding: 4px 6px;
+      padding: 6px 8px;
+
       transition: var(--transicao);
       text-decoration: none;
+
+      white-space: nowrap;
     }
 
-    .btn-nav.ativo, .btn-nav:hover {
+    .btn-nav.ativo,
+    .btn-nav:hover {
       color: var(--dourado-champagne);
     }
 
-    .theme-toggle-btn {
+    /* BUSCA */
+
+    .busca-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .campo-busca {
+      width: 0;
+      opacity: 0;
+
+      background: var(--bg-input);
+      border: 1px solid var(--borda-suave);
+
+      color: var(--texto-primario);
+
+      border-radius: 20px;
+
+      padding: 7px 12px;
+
+      outline: none;
+
+      transition:
+        width 0.25s ease,
+        opacity 0.25s ease;
+    }
+
+    .campo-busca.aberto {
+      width: 190px;
+      opacity: 1;
+    }
+
+    .campo-busca::placeholder {
+      color: var(--texto-secundario);
+    }
+
+    .btn-pesquisa {
       background: transparent;
       border: 1px solid var(--borda-suave);
+
       color: var(--texto-primario);
-      width: 32px;
-      height: 32px;
+
+      width: 34px;
+      height: 34px;
+
       border-radius: 50%;
+
       cursor: pointer;
-      font-size: 13px;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       transition: var(--transicao);
+
+      font-size: 15px;
     }
 
-    .theme-toggle-btn:hover {
+    .btn-pesquisa:hover {
       border-color: var(--dourado-champagne);
-      background: var(--bg-card);
+      color: var(--dourado-champagne);
     }
+
+    /* =====================================================
+       BANNER / SLIDESHOW
+    ===================================================== */
 
     .secao-loja {
       max-width: 1200px;
-      margin: 16px auto 8px auto;
+      margin: 16px auto 8px;
       padding: 0 12px;
     }
 
-    .banner-loja {
+    .slideshow {
       position: relative;
+
       width: 100%;
-      height: 180px;
+      height: 260px;
+
       border-radius: var(--raio-card);
       overflow: hidden;
+
       border: 1px solid var(--borda-suave);
-      display: block;
-      text-decoration: none;
+
+      background: var(--bg-card);
+
+      box-shadow: var(--sombra-card);
     }
 
-    .banner-loja img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(0.6);
-      transition: transform 0.3s ease;
-    }
-
-    .banner-loja:hover img {
-      transform: scale(1.02);
-    }
-
-    .banner-conteudo {
+    .slide {
       position: absolute;
       inset: 0;
+
+      opacity: 0;
+
+      transition: opacity 0.6s ease;
+
+      pointer-events: none;
+    }
+
+    .slide.ativo {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      filter: brightness(0.58);
+    }
+
+    .slide-conteudo {
+      position: absolute;
+      inset: 0;
+
       display: flex;
       flex-direction: column;
+
       justify-content: center;
       align-items: center;
+
       text-align: center;
-      padding: 16px;
-      background: linear-gradient(to top, rgba(5,8,6,0.85), transparent);
+
+      padding: 20px;
+
+      background:
+        linear-gradient(
+          to top,
+          rgba(5, 8, 6, 0.88),
+          rgba(5, 8, 6, 0.05)
+        );
     }
 
-    .banner-titulo {
+    .slide-titulo {
       font-family: var(--font-titulo);
-      font-size: 22px;
+
+      font-size: 30px;
+
       color: #ffffff;
-      margin-bottom: 4px;
+
+      margin-bottom: 5px;
     }
 
-    .banner-sub {
-      font-size: 12px;
+    .slide-sub {
+      font-size: 13px;
+
       color: var(--dourado-suave);
+
       letter-spacing: 1px;
     }
 
+    .slide-controles {
+      position: absolute;
+
+      bottom: 12px;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      display: flex;
+      gap: 6px;
+
+      z-index: 3;
+    }
+
+    .slide-ponto {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: rgba(255,255,255,0.35);
+
+      cursor: pointer;
+
+      transition: var(--transicao);
+    }
+
+    .slide-ponto.ativo {
+      width: 20px;
+
+      border-radius: 10px;
+
+      background: var(--dourado-champagne);
+    }
+
+    /* =====================================================
+       CATEGORIAS
+    ===================================================== */
+
+    .categorias {
+      max-width: 1200px;
+
+      margin: 18px auto 5px;
+
+      padding: 0 12px;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 10px;
+    }
+
+    .categoria-btn {
+      background: var(--bg-card);
+
+      border: 1px solid var(--borda-suave);
+
+      color: var(--texto-secundario);
+
+      padding: 13px 10px;
+
+      border-radius: var(--raio-card);
+
+      font-size: 12px;
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.7px;
+
+      cursor: pointer;
+
+      transition: var(--transicao);
+    }
+
+    .categoria-btn:hover,
+    .categoria-btn.ativo {
+      background: var(--esmeralda-medio);
+
+      color: #ffffff;
+
+      border-color: var(--dourado-champagne);
+
+      transform: translateY(-1px);
+    }
+
+    /* =====================================================
+       FILTROS DE MARCA
+    ===================================================== */
+
     .container-filtros {
       padding: 12px;
+
       max-width: 1200px;
+
       margin: 0 auto;
+
       overflow-x: auto;
+
       white-space: nowrap;
+
       scrollbar-width: none;
     }
 
-    .container-filtros::-webkit-scrollbar { display: none; }
+    .container-filtros::-webkit-scrollbar {
+      display: none;
+    }
 
     .filtros-wrapper {
       display: inline-flex;
@@ -226,520 +443,1000 @@
 
     .btn-filtro {
       background: var(--bg-card);
+
       border: 1px solid var(--borda-suave);
+
       color: var(--texto-secundario);
+
       padding: 6px 14px;
+
       border-radius: 20px;
+
       font-size: 11px;
       font-weight: 600;
+
       letter-spacing: 0.5px;
+
       text-transform: uppercase;
+
       cursor: pointer;
+
       transition: var(--transicao);
     }
 
-    .btn-filtro:hover, .btn-filtro.ativo {
+    .btn-filtro:hover,
+    .btn-filtro.ativo {
       background: var(--esmeralda-medio);
+
       color: #ffffff;
+
       border-color: var(--dourado-champagne);
     }
 
+    /* =====================================================
+       PRODUTOS
+    ===================================================== */
+
     .grid-produtos {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-      gap: 14px;
-      max-width: 1200px;
-      margin: 8px auto;
-      padding: 0 12px;
-    }
 
-    @media (max-width: 600px) {
-      .grid-produtos {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        padding: 0 8px;
-      }
-      .banner-loja { height: 140px; }
+      grid-template-columns:
+        repeat(auto-fill, minmax(210px, 1fr));
+
+      gap: 14px;
+
+      max-width: 1200px;
+
+      margin: 8px auto;
+
+      padding: 0 12px;
     }
 
     .card-produto {
       background: var(--bg-card);
+
       border: 1px solid var(--borda-suave);
+
       border-radius: var(--raio-card);
+
       overflow: hidden;
+
       display: flex;
       flex-direction: column;
+
       position: relative;
+
       box-shadow: var(--sombra-card);
+
       transition: var(--transicao);
+    }
+
+    .card-produto:hover {
+      border-color: var(--borda-forte);
+
+      transform: translateY(-2px);
     }
 
     .card-foto-wrapper {
       position: relative;
+
       width: 100%;
+
       aspect-ratio: 3 / 4;
+
       background: var(--bg-input);
+
       overflow: hidden;
-      cursor: pointer;
     }
 
     .card-foto-wrapper img {
       width: 100%;
       height: 100%;
+
       object-fit: cover;
+
       display: block;
+
       transition: transform 0.4s ease;
     }
 
-    .card-produto:hover .card-foto-wrapper img {
-      transform: scale(1.08);
+    .card-produto:hover
+    .card-foto-wrapper img {
+      transform: scale(1.05);
     }
 
     .sem-imagem-placeholder {
       width: 100%;
       height: 100%;
+
       display: flex;
+
       align-items: center;
       justify-content: center;
+
       color: var(--texto-secundario);
+
       font-size: 11px;
+
       text-transform: uppercase;
     }
 
     .badge-marca {
       position: absolute;
+
       top: 8px;
       left: 8px;
+
       background: rgba(5, 8, 6, 0.85);
+
       color: #ebd47a;
+
       backdrop-filter: blur(6px);
-      border: 1px solid rgba(212, 175, 55, 0.5);
+
+      border:
+        1px solid rgba(212, 175, 55, 0.5);
+
       padding: 4px 8px;
+
       border-radius: 12px;
+
       font-size: 10px;
       font-weight: 700;
+
       letter-spacing: 1px;
+
       text-transform: uppercase;
+
       z-index: 2;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-      pointer-events: none;
+
+      box-shadow:
+        0 2px 6px rgba(0,0,0,0.4);
     }
 
     .card-info {
       padding: 12px;
+
       display: flex;
       flex-direction: column;
+
       flex-grow: 1;
+
       justify-content: space-between;
     }
 
     .produto-titulo {
       font-family: var(--font-corpo);
+
       font-size: 13px;
       font-weight: 600;
+
       color: var(--texto-primario);
+
       margin-bottom: 4px;
+
       line-height: 1.2;
+
       display: -webkit-box;
+
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
+
       overflow: hidden;
     }
 
     .produto-preco {
       font-size: 16px;
+
       font-weight: 700;
+
       color: #25d366;
+
       letter-spacing: 0.3px;
+
       margin-bottom: 8px;
     }
 
     .secao-opcoes {
       margin: 6px 0;
+
       display: flex;
       flex-direction: column;
+
       gap: 6px;
     }
 
     .label-opcao {
       font-size: 9px;
+
       font-weight: 700;
+
       text-transform: uppercase;
+
       letter-spacing: 0.5px;
+
       color: var(--texto-secundario);
     }
 
     .lista-pills {
       display: flex;
+
       flex-wrap: wrap;
+
       gap: 4px;
     }
 
     .pill-opcao {
       background: var(--bg-input);
+
       border: 1px solid var(--borda-suave);
+
       color: var(--texto-primario);
+
       padding: 3px 8px;
+
       border-radius: 4px;
+
       font-size: 10px;
       font-weight: 600;
+
       cursor: pointer;
     }
 
     .pill-opcao.selecionado {
       background: var(--esmeralda-medio);
+
       color: #ffffff;
+
       border-color: var(--dourado-champagne);
     }
 
     .btn-interesse {
       width: 100%;
+
       background: #25d366;
+
       color: #000000;
+
       border: none;
+
       padding: 10px;
+
       border-radius: var(--raio-btn);
+
       font-family: var(--font-corpo);
+
       font-size: 11px;
+
       font-weight: 700;
+
       letter-spacing: 0.5px;
+
       text-transform: uppercase;
+
       cursor: pointer;
+
       display: flex;
+
       align-items: center;
       justify-content: center;
+
       gap: 6px;
+
       margin-top: 8px;
+
       transition: var(--transicao);
     }
 
     .btn-interesse:hover {
       background: #20ba5a;
+
       transform: translateY(-1px);
     }
 
-    /* Modal de Imagem Ampliada */
-    .modal-imagem {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(8px);
-      z-index: 2000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-      padding: 20px;
-    }
-
-    .modal-imagem.ativo {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .modal-conteudo {
-      position: relative;
-      max-width: 90%;
-      max-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .modal-conteudo img {
-      max-width: 100%;
-      max-height: 80vh;
-      object-fit: contain;
-      border-radius: var(--raio-card);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-    }
-
-    .modal-fechar {
-      position: absolute;
-      top: -45px;
-      right: 0;
-      background: none;
-      border: none;
-      color: #ffffff;
-      font-size: 32px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: var(--transicao);
-      line-height: 1;
-    }
-
-    .modal-fechar:hover {
-      color: var(--dourado-champagne);
-    }
-
-    .modal-legenda {
-      color: #ffffff;
-      margin-top: 12px;
-      font-size: 14px;
-      text-align: center;
-      font-family: var(--font-corpo);
-    }
+    /* =====================================================
+       WHATSAPP
+    ===================================================== */
 
     .btn-whatsapp-flutuante {
       position: fixed;
+
       bottom: 20px;
       right: 20px;
+
       background-color: #25d366;
+
       color: #ffffff;
+
       border-radius: 50px;
+
       width: 52px;
       height: 52px;
+
       display: flex;
+
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+
+      box-shadow:
+        0 4px 16px rgba(0,0,0,0.4);
+
       z-index: 1000;
+
       text-decoration: none;
-      transition: transform 0.25s ease, background-color 0.25s ease;
+
+      transition:
+        transform 0.25s ease,
+        background-color 0.25s ease;
     }
 
     .btn-whatsapp-flutuante:hover {
       transform: scale(1.08);
+
       background-color: #20ba5a;
     }
 
     .btn-whatsapp-flutuante svg {
       width: 28px;
       height: 28px;
+
       fill: #ffffff;
     }
 
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
     footer {
       text-align: center;
-      padding: 25px 15px;
+
+      padding: 30px 15px;
+
       background-color: var(--bg-principal);
+
       font-size: 12px;
+
       color: var(--texto-secundario);
+
       border-top: 1px solid var(--borda-suave);
-      margin-top: 20px;
+
+      margin-top: 30px;
+    }
+
+    .instagram-link {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      margin: 12px 0 18px;
+
+      color: var(--dourado-champagne);
+
+      text-decoration: none;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      transition: var(--transicao);
+    }
+
+    .instagram-link:hover {
+      color: #ebd47a;
+
+      transform: translateY(-1px);
+    }
+
+    /* =====================================================
+       RESPONSIVO
+    ===================================================== */
+
+    @media (max-width: 850px) {
+
+      .header-nav .btn-nav:nth-child(2) {
+        display: none;
+      }
+
+      .header-nav {
+        justify-content: flex-end;
+      }
+
+      .campo-busca.aberto {
+        width: 150px;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      header {
+        padding: 9px 10px;
+      }
+
+      .header-top {
+        gap: 8px;
+      }
+
+      .logo-marca {
+        font-size: 17px;
+        letter-spacing: 2px;
+      }
+
+      .logo-img {
+        width: 29px;
+        height: 29px;
+      }
+
+      .header-nav {
+        gap: 0;
+      }
+
+      .header-nav .btn-nav {
+        display: none;
+      }
+
+      .campo-busca.aberto {
+        position: absolute;
+
+        top: 58px;
+        right: 10px;
+
+        width: calc(100vw - 20px);
+      }
+
+      .slideshow {
+        height: 180px;
+      }
+
+      .slide-titulo {
+        font-size: 23px;
+      }
+
+      .slide-sub {
+        font-size: 10px;
+      }
+
+      .categorias {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 8px;
+
+        margin-top: 12px;
+      }
+
+      .categoria-btn {
+        padding: 11px 7px;
+
+        font-size: 10px;
+      }
+
+      .grid-produtos {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 10px;
+
+        padding: 0 8px;
+      }
+
+      .card-info {
+        padding: 9px;
+      }
+
+      .produto-titulo {
+        font-size: 11px;
+      }
+
+      .produto-preco {
+        font-size: 14px;
+      }
+
+      .btn-interesse {
+        padding: 9px 5px;
+
+        font-size: 9px;
+      }
     }
   </style>
 </head>
+
 <body>
 
+  <!-- =====================================================
+       HEADER
+  ===================================================== -->
+
   <header>
+
     <div class="header-top">
+
       <a href="#" class="logo-container">
-        <img src="logo.png" alt="Logo Raízes" class="logo-img">
-        <span class="logo-marca">RAÍZES</span>
+
+        <img
+          src="logo.png"
+          alt="Logo Raízes"
+          class="logo-img">
+
+        <span class="logo-marca">
+          RAÍZES
+        </span>
+
       </a>
 
-      <div class="header-nav">
-        <a href="#vitrine" class="btn-nav ativo">Vitrine</a>
-        <a href="https://www.google.com/maps/search/?api=1&query=Av.+Interventor+Manoel+Ribas,+186,+Pitanga+-+PR" target="_blank" rel="noopener" class="btn-nav">Visite-nos</a>
+      <nav class="header-nav">
+
+        <a
+          href="#vitrine"
+          class="btn-nav ativo">
+          Vitrine
+        </a>
+
+        <a
+          href="#categorias"
+          class="btn-nav">
+          Categorias
+        </a>
+
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=Av.+Interventor+Manoel+Ribas,+186,+Pitanga+-+PR"
+          target="_blank"
+          rel="noopener"
+          class="btn-nav">
+          Visite-nos
+        </a>
+
+      </nav>
+
+      <div class="busca-container">
+
+        <input
+          type="search"
+          id="campo-busca"
+          class="campo-busca"
+          placeholder="Buscar produto..."
+          autocomplete="off">
+
+        <button
+          class="btn-pesquisa"
+          onclick="abrirBusca()"
+          title="Pesquisar">
+          🔎
+        </button>
+
       </div>
 
-      <button class="theme-toggle-btn" id="btn-tema" onclick="alternarTema()" title="Alternar Tema">
-        <span id="icone-tema">☀️</span>
-      </button>
     </div>
+
   </header>
 
-  <section class="secao-loja" id="visite-nos">
-    <a href="https://www.google.com/maps/search/?api=1&query=Av.+Interventor+Manoel+Ribas,+186,+Pitanga+-+PR" target="_blank" rel="noopener" class="banner-loja" title="Ver localização no Google Maps">
-      <img src="foto-loja.jpg" alt="Loja Raízes em Pitanga PR" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1000&auto=format&fit=crop'">
-      <div class="banner-conteudo">
-        <h2 class="banner-titulo">Nossa Boutique</h2>
-        <p class="banner-sub">Av. Interventor Manoel Ribas, 186 — Pitanga / PR 📍</p>
+
+  <!-- =====================================================
+       SLIDESHOW
+  ===================================================== -->
+
+  <section class="secao-loja">
+
+    <div class="slideshow" id="slideshow">
+
+      <a
+        href="https://www.google.com/maps/search/?api=1&query=Av.+Interventor+Manoel+Ribas,+186,+Pitanga+-+PR"
+        target="_blank"
+        rel="noopener"
+        class="slide ativo">
+
+        <img
+          src="foto-loja.jpg"
+          alt="Loja Raízes em Pitanga PR"
+          onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1400&auto=format&fit=crop'">
+
+        <div class="slide-conteudo">
+
+          <h2 class="slide-titulo">
+            Nossa Boutique
+          </h2>
+
+          <p class="slide-sub">
+            Av. Interventor Manoel Ribas, 186 — Pitanga / PR 📍
+          </p>
+
+        </div>
+
+      </a>
+
+
+      <div class="slide">
+
+        <img
+          src="banner-2.jpg"
+          alt="Coleção Raízes"
+          onerror="this.style.display='none'">
+
+        <div class="slide-conteudo">
+
+          <h2 class="slide-titulo">
+            Moda que conecta gerações
+          </h2>
+
+          <p class="slide-sub">
+            ESTILO • QUALIDADE • RAÍZES
+          </p>
+
+        </div>
+
       </div>
-    </a>
+
+
+      <div class="slide">
+
+        <img
+          src="banner-3.jpg"
+          alt="Novidades Raízes"
+          onerror="this.style.display='none'">
+
+        <div class="slide-conteudo">
+
+          <h2 class="slide-titulo">
+            Novidades
+          </h2>
+
+          <p class="slide-sub">
+            DESCUBRA A NOVA COLEÇÃO
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="slide-controles">
+
+        <span
+          class="slide-ponto ativo"
+          onclick="irParaSlide(0)">
+        </span>
+
+        <span
+          class="slide-ponto"
+          onclick="irParaSlide(1)">
+        </span>
+
+        <span
+          class="slide-ponto"
+          onclick="irParaSlide(2)">
+        </span>
+
+      </div>
+
+    </div>
+
   </section>
 
-  <div class="container-filtros" id="vitrine">
-    <div class="filtros-wrapper" id="filtro-marcas">
-      <button class="btn-filtro ativo" onclick="filtrarMarca('TODAS')">Todas</button>
-      <button class="btn-filtro" onclick="filtrarMarca('AUROCHS')">Aurochs</button>
-      <button class="btn-filtro" onclick="filtrarMarca('BAUMGARTEN')">Baumgarten</button>
-      <button class="btn-filtro" onclick="filtrarMarca('BEAGLE')">Beagle</button>
-      <button class="btn-filtro" onclick="filtrarMarca('FARM RIO')">Farm Rio</button>
-      <button class="btn-filtro" onclick="filtrarMarca('SOUL')">Soul</button>
-      <button class="btn-filtro" onclick="filtrarMarca('SLY WEAR')">Sly Wear</button>
-      <button class="btn-filtro" onclick="filtrarMarca('HERING')">Hering</button>
+
+  <!-- =====================================================
+       CATEGORIAS
+  ===================================================== -->
+
+  <section
+    class="categorias"
+    id="categorias">
+
+    <button
+      class="categoria-btn ativo"
+      onclick="filtrarCategoria('TODAS')">
+      ✦ Todas
+    </button>
+
+    <button
+      class="categoria-btn"
+      onclick="filtrarCategoria('FEMININO')">
+      ♀ Feminino
+    </button>
+
+    <button
+      class="categoria-btn"
+      onclick="filtrarCategoria('MASCULINO')">
+      ♂ Masculino
+    </button>
+
+    <button
+      class="categoria-btn"
+      onclick="filtrarCategoria('OFERTAS')">
+      ◇ Ofertas
+    </button>
+
+  </section>
+
+
+  <!-- =====================================================
+       FILTROS DE MARCA
+  ===================================================== -->
+
+  <div
+    class="container-filtros"
+    id="vitrine">
+
+    <div
+      class="filtros-wrapper"
+      id="filtro-marcas">
+
+      <button
+        class="btn-filtro ativo"
+        onclick="filtrarMarca('TODAS')">
+        Todas
+      </button>
+
+      <button
+        class="btn-filtro"
+        onclick="filtrarMarca('AUROCHS')">
+        Aurochs
+      </button>
+
+      <button
+        class="btn-filtro"
+        onclick="filtrarMarca('BAUMGARTEN')">
+        Baumgarten
+      </button>
+
+      <button
+        class="btn-filtro"
+        onclick="filtrarMarca('BEAGLE')">
+        Beagle
+      </button>
+
+      <button
+        class="btn-filtro"
+        onclick="filtrarMarca('FARM RIO')">
+        Farm Rio
+      </button>
+
+      <button
+        class="btn-filtro"
+        onclick="filtrarMarca('SOUL')">
+        Soul
+      </button>
+
+      <button
+        class="btn-filtro"
+        onclick="filtrarMarca('SLY WEAR')">
+        Sly Wear
+      </button>
+
+      <button
+        class="btn-filtro"
+        onclick="filtrarMarca('HERING')">
+        Hering
+      </button>
+
     </div>
+
   </div>
 
-  <main class="grid-produtos" id="grid-vitrine"></main>
 
-  <!-- Modal para visualização de imagem em tela cheia -->
-  <div class="modal-imagem" id="modalImagem" onclick="fecharModalImagem()">
-    <div class="modal-conteudo" onclick="event.stopPropagation()">
-      <button class="modal-fechar" onclick="fecharModalImagem()">&times;</button>
-      <img id="imgModalAmpliada" src="" alt="Imagem ampliada do produto">
-      <p class="modal-legenda" id="legendaModalAmpliada"></p>
-    </div>
-  </div>
+  <!-- =====================================================
+       PRODUTOS
+  ===================================================== -->
 
-  <a href="https://wa.me/5542999839784?text=Olá!%20Vim%20pelo%20site%20da%20RAÍZES%20e%20gostaria%20de%20falar%20com%20o%20atendimento." class="btn-whatsapp-flutuante" target="_blank" rel="noopener" title="Falar no WhatsApp">
-    <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.705 1.758zm6.637-3.935l.391.232c1.363.81 2.932 1.238 4.531 1.239 5.022 0 9.112-4.089 9.113-9.113-.001-2.433-.948-4.722-2.67-6.444-1.722-1.722-4.011-2.668-6.444-2.668-5.021 0-9.11 4.089-9.112 9.112-.001 1.666.448 3.292 1.3 4.707l.254.419-1.003 3.663 3.743-.982z"/></svg>
+  <main
+    class="grid-produtos"
+    id="grid-vitrine">
+  </main>
+
+
+  <!-- =====================================================
+       WHATSAPP
+  ===================================================== -->
+
+  <a
+    href="https://wa.me/5542999839784?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20RA%C3%8DZES%20e%20gostaria%20de%20falar%20com%20o%20atendimento."
+    class="btn-whatsapp-flutuante"
+    target="_blank"
+    rel="noopener"
+    title="Falar no WhatsApp">
+
+    <svg viewBox="0 0 24 24">
+
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.705 1.758zm6.637-3.935l.391.232c1.363.81 2.932 1.238 4.531 1.239 5.022 0 9.112-4.089 9.113-9.113-.001-2.433-.948-4.722-2.67-6.444-1.722-1.722-4.011-2.668-6.444-2.668-5.021 0-9.11 4.089-9.112 9.112-.001 1.666.448 3.292 1.3 4.707l.254.419-1.003 3.663 3.743-.982z"/>
+
+    </svg>
+
   </a>
 
+
+  <!-- =====================================================
+       FOOTER
+  ===================================================== -->
+
   <footer>
-    <p><strong>© RAÍZES — Moda Masculina & Feminina</strong></p>
-    <p style="margin-top: 4px;">MALDANER & MAZETTO LTDA | CNPJ: 64.860.761/0001-64</p>
+
+    <p>
+      <strong>
+        © RAÍZES — Moda Masculina & Feminina
+      </strong>
+    </p>
+
+    <a
+      href="https://www.instagram.com/maisraizesoficial/"
+      target="_blank"
+      rel="noopener"
+      class="instagram-link">
+
+      📸 @maisraizesoficial
+
+    </a>
+
+    <p>
+      MALDANER & MAZETTO LTDA |
+      CNPJ: 64.860.761/0001-64
+    </p>
+
+    <p style="margin-top: 5px;">
+      Av. Interventor Manoel Ribas, 186 —
+      Pitanga / PR
+    </p>
+
   </footer>
 
-  <script src="produtos.js?v=2.1"></script>
+
+  <script src="produtos.js"></script>
+  <script src="script.js"></script>
+
 
   <script>
-    const NUMERO_WHATSAPP = "5542999839784"; 
-    let marcaAtiva = 'TODAS';
 
-    function alternarTema() {
-      const html = document.documentElement;
-      const icone = document.getElementById('icone-tema');
-      
-      if (html.getAttribute('data-theme') === 'dark') {
-        html.setAttribute('data-theme', 'light');
-        icone.textContent = '🌙';
+    /* =====================================================
+       BUSCA
+    ===================================================== */
+
+    function abrirBusca() {
+
+      const campo =
+        document.getElementById("campo-busca");
+
+      campo.classList.toggle("aberto");
+
+      if (campo.classList.contains("aberto")) {
+        campo.focus();
       } else {
-        html.setAttribute('data-theme', 'dark');
-        icone.textContent = '☀️';
+        campo.value = "";
+
+        if (typeof renderizarProdutos === "function") {
+          renderizarProdutos();
+        }
       }
     }
 
-    function filtrarMarca(marca) {
-      marcaAtiva = marca;
-      document.querySelectorAll('.btn-filtro').forEach(btn => {
-        btn.classList.toggle('ativo', btn.innerText.toUpperCase() === marca.toUpperCase() || (marca === 'TODAS' && btn.innerText === 'Todas'));
-      });
-      renderizarVitrine();
+
+    /* =====================================================
+       SLIDESHOW
+    ===================================================== */
+
+    let slideAtual = 0;
+
+    const slides =
+      document.querySelectorAll(".slide");
+
+    const pontos =
+      document.querySelectorAll(".slide-ponto");
+
+
+    function irParaSlide(indice) {
+
+      slides.forEach(slide =>
+        slide.classList.remove("ativo")
+      );
+
+      pontos.forEach(ponto =>
+        ponto.classList.remove("ativo")
+      );
+
+      slideAtual = indice;
+
+      slides[slideAtual]
+        .classList.add("ativo");
+
+      pontos[slideAtual]
+        .classList.add("ativo");
     }
 
-    function selecionarOpcao(btn, classeGrupo) {
-      const parent = btn.closest('.' + classeGrupo);
-      parent.querySelectorAll('.pill-opcao').forEach(b => b.classList.remove('selecionado'));
-      btn.classList.add('selecionado');
+
+    function proximoSlide() {
+
+      slideAtual =
+        (slideAtual + 1) % slides.length;
+
+      irParaSlide(slideAtual);
     }
 
-    function formatarPreco(valor) {
-      return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    }
 
-    // Funções para o modal de imagem
-    function abrirModalImagem(url, titulo) {
-      const modal = document.getElementById('modalImagem');
-      const imgModal = document.getElementById('imgModalAmpliada');
-      const legenda = document.getElementById('legendaModalAmpliada');
-      
-      imgModal.src = url;
-      legenda.textContent = titulo;
-      modal.classList.add('ativo');
-    }
+    setInterval(proximoSlide, 5000);
 
-    function fecharModalImagem() {
-      const modal = document.getElementById('modalImagem');
-      modal.classList.remove('ativo');
-    }
 
-    function enviarWhatsApp(idProduto) {
-      const card = document.getElementById(`prod-card-${idProduto}`);
-      const produto = listaProdutos.find(p => p.id === idProduto);
+    /* =====================================================
+       CATEGORIAS
+    ===================================================== */
 
-      if (!produto) return;
+    function filtrarCategoria(categoria) {
 
-      const tamEl = card.querySelector('.grupo-tamanhos .pill-opcao.selecionado');
-      const corEl = card.querySelector('.grupo-cores .pill-opcao.selecionado');
+      document
+        .querySelectorAll(".categoria-btn")
+        .forEach(btn =>
+          btn.classList.remove("ativo")
+        );
 
-      const tamanho = tamEl ? tamEl.innerText : 'Não informado';
-      const cor = corEl ? corEl.innerText : 'Padrão';
+      event.currentTarget
+        .classList.add("ativo");
 
-      const textoMsg = `Olá! Tenho interesse na peça da *RAÍZES*:\n\n` +
-                       `📌 *${produto.titulo}*${produto.codigo ? ` (${produto.codigo})` : ''}\n` +
-                       `🏷️ Marca: ${produto.marca}\n` +
-                       `💰 Valor: ${formatarPreco(produto.preco)}\n` +
-                       `📏 Tamanho: ${tamanho}\n` +
-                       `🎨 Cor: ${cor}\n\n` +
-                       `Ainda está disponível na loja física?`;
 
-      const url = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(textoMsg)}`;
-      window.open(url, '_blank');
-    }
+      /*
+       * Se o seu script.js já possuir uma função
+       * de filtro por categoria, ela será utilizada.
+       */
 
-    function renderizarVitrine() {
-      const grid = document.getElementById('grid-vitrine');
-      grid.innerHTML = '';
+      if (
+        typeof window.filtrarPorCategoria ===
+        "function"
+      ) {
 
-      const produtosExibidos = (typeof listaProdutos !== 'undefined' && Array.isArray(listaProdutos)) ? listaProdutos : [];
+        window.filtrarPorCategoria(categoria);
 
-      const filtrados = produtosExibidos.filter(p => {
-        if (marcaAtiva === 'TODAS') return true;
-        return p.marca && p.marca.toUpperCase() === marcaAtiva.toUpperCase();
-      });
+      } else {
 
-      if (filtrados.length === 0) {
-        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--texto-secundario); padding: 30px 0; font-size: 13px;">Nenhum produto nesta categoria.</p>`;
-        return;
+        /*
+         * Compatibilidade:
+         * guarda a categoria para o script.js
+         * poder utilizar posteriormente.
+         */
+
+        window.categoriaSelecionada =
+          categoria;
+
+        if (
+          typeof renderizarProdutos ===
+          "function"
+        ) {
+          renderizarProdutos();
+        }
       }
-
-      filtrados.forEach(prod => {
-        const card = document.createElement('article');
-        card.className = 'card-produto';
-        card.id = `prod-card-${prod.id}`;
-
-        // Adiciona evento de clique para abrir a imagem em tela cheia
-        const tituloSeguro = prod.titulo.replace(/'/g, "\\'");
-        const imgMarkup = prod.imagem 
-          ? `<img src="${prod.imagem}" alt="${prod.titulo}" loading="lazy" onclick="abrirModalImagem('${prod.imagem}', '${tituloSeguro}')">`
-           : `<div class="sem-imagem-placeholder">Sem Imagem</div>`;
-
-        const tamanhosList = prod.tamanhos || ['P', 'M', 'G'];
-        const tamanhosMarkup = tamanhosList.map((t, idx) => 
-          `<button class="pill-opcao ${idx === 0 ? 'selecionado' : ''}" onclick="selecionarOpcao(this, 'grupo-tamanhos')">${t}</button>`
-        ).join('');
-
-        const coresList = prod.cores || ['Padrão'];
-        const coresMarkup = coresList.map((c, idx) => 
-          `<button class="pill-opcao ${idx === 0 ? 'selecionado' : ''}" onclick="selecionarOpcao(this, 'grupo-cores')">${c}</button>`
-        ).join('');
-
-        card.innerHTML = `
-          <div class="card-foto-wrapper">
-            <span class="badge-marca">${prod.marca || 'RAÍZES'}</span>
-            ${imgMarkup}
-          </div>
-
-          <div class="card-info">
-            <div>
-              <h3 class="produto-titulo">${prod.titulo}</h3>
-              <div class="produto-preco">${formatarPreco(prod.preco)}</div>
-            </div>
-
-            <div class="secao-opcoes">
-              <div>
-                <span class="label-opcao">Tamanho:</span>
-                <div class="lista-pills grupo-tamanhos">
-                  ${tamanhosMarkup}
-                </div>
-              </div>
-
-              <div>
-                <span class="label-opcao">Cor:</span>
-                <div class="lista-pills grupo-cores">
-                  ${coresMarkup}
-                </div>
-              </div>
-            </div>
-
-            <button class="btn-interesse" onclick="enviarWhatsApp(${prod.id})">
-              Tenho Interesse
-            </button>
-          </div>
-        `;
-
-        grid.appendChild(card);
-      });
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      renderizarVitrine();
-    });
+
+    /* =====================================================
+       PESQUISA EM TEMPO REAL
+    ===================================================== */
+
+    document
+      .getElementById("campo-busca")
+      .addEventListener("input", function () {
+
+        const termo =
+          this.value
+            .trim()
+            .toLowerCase();
+
+
+        /*
+         * Se o script.js tiver uma função
+         * pesquisarProdutos(), usa ela.
+         */
+
+        if (
+          typeof window.pesquisarProdutos ===
+          "function"
+        ) {
+
+          window.pesquisarProdutos(termo);
+
+        } else if (
+          typeof renderizarProdutos ===
+          "function"
+        ) {
+
+          renderizarProdutos(termo);
+
+        }
+
+      });
+
   </script>
+
 </body>
 </html>
