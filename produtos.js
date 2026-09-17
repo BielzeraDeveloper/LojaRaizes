@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1789651114010,
+    "codigo": "RAIZ-7620",
+    "titulo": "Vestido Feminino - Azul Marinho",
+    "marca": "SlyWear",
+    "preco": 459.9,
+    "imagem": "imagens/RAIZ-7620.jpg",
+    "tamanhos": [
+      "P"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789650951822,
     "codigo": "RAIZ-7545",
     "titulo": "Colete Feminino - Azul Marinho",
