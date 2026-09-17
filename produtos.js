@@ -1,25 +1,5 @@
 const listaProdutos = [
   {
-    "id": 1789644744783,
-    "codigo": "RAIZ-4174",
-    "titulo": "Blusa  Feminina Básica",
-    "marca": "Hering",
-    "preco": 79.99,
-    "imagem": "https://www.hering.com.br/_next/image?url=https%3A%2F%2Fhering.vtexassets.com%2Farquivos%2Fids%2F6721400%2F0241-HNJEN-C1.jpg%3Fv%3D639225984352130000&w=1280&q=75",
-    "tamanhos": [
-      "XP",
-      "P",
-      "M",
-      "G",
-      "XG",
-      "XXG",
-      "EXG"
-    ],
-    "cores": [
-      "Padrão"
-    ]
-  },
-  {
     "id": 1788365027851,
     "codigo": "RAIZ-1788",
     "titulo": "Camiseta Masculina",
