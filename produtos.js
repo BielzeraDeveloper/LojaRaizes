@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1789646519929,
+    "codigo": "RAIZ-8139",
+    "titulo": "Blusa Feminina Bordô",
+    "marca": "SlyWear",
+    "preco": 263.78,
+    "imagem": "imagens/RAIZ-8139.jpg",
+    "tamanhos": [
+      "P"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1788365027851,
     "codigo": "RAIZ-1788",
     "titulo": "Camiseta Masculina",
