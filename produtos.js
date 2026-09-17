@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1789650241053,
+    "codigo": "RAIZ-9661",
+    "titulo": "Colete Viscolinho Feminino - OffWhite",
+    "marca": "SlyWear",
+    "preco": 339.9,
+    "imagem": "imagens/RAIZ-9661.jpg",
+    "tamanhos": [
+      "G"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789650021291,
     "codigo": "RAIZ-9982",
     "titulo": "Calça Viscolinho Feminina - OffWhite",
