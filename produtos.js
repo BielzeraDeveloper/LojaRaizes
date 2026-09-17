@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1789647263023,
+    "codigo": "RAIZ-7817",
+    "titulo": "Blusa Feminina - Amarelo",
+    "marca": "SlyWear",
+    "preco": 399.9,
+    "imagem": "imagens/RAIZ-7817.jpg",
+    "tamanhos": [
+      "M"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789646519929,
     "codigo": "RAIZ-8139",
     "titulo": "Blusa Feminina Bordô",
