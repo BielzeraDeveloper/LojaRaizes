@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1789647293969,
+    "codigo": "RAIZ-8178",
+    "titulo": "Saia Feminina - Amarelo",
+    "marca": "SlyWear",
+    "preco": 729.9,
+    "imagem": "imagens/RAIZ-8178.jpg",
+    "tamanhos": [
+      "M"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789647263023,
     "codigo": "RAIZ-7817",
     "titulo": "Blusa Feminina - Amarelo",
