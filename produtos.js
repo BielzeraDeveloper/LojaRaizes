@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1789650951822,
+    "codigo": "RAIZ-7545",
+    "titulo": "Colete Feminino - Azul Marinho",
+    "marca": "SlyWear",
+    "preco": 249.9,
+    "imagem": "imagens/RAIZ-7545.jpg",
+    "tamanhos": [
+      "P"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789650846345,
     "codigo": "RAIZ-4981",
     "titulo": "Blusa Viscose Feminina - Azul Marinho",
