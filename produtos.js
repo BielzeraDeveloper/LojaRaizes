@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1789647846523,
+    "codigo": "RAIZ-8556",
+    "titulo": "Calça Viscose Feminina - OffWhite",
+    "marca": "SlyWear",
+    "preco": 549.9,
+    "imagem": "imagens/RAIZ-8556.jpg",
+    "tamanhos": [
+      "M"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789647486328,
     "codigo": "RAIZ-7185",
     "titulo": "Calça Viscolinho - Areia",
