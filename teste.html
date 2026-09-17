@@ -1,76 +1,141 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>RAÍZES — Moda Masculina & Feminina — Pitanga/PR</title>
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    RAÍZES — Moda Masculina & Feminina — Pitanga/PR
+  </title>
 
   <meta
     name="description"
     content="Loja Raízes em Pitanga/PR. Moda Masculina & Feminina: Beagle, Baumgarten, Aurochs, Farm Rio, Soul, SlyWear e Hering."
   >
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
 
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   >
 
+
   <style>
 
+    /* =====================================================
+       CORES
+    ===================================================== */
+
     :root {
+
       --esmeralda-profundo: #091712;
+
       --esmeralda-medio: #143326;
+
       --esmeralda-vibrante: #1e4a38;
 
       --dourado-champagne: #d4af37;
+
       --dourado-suave: #c5a059;
 
       --dourado-gradiente:
-        linear-gradient(135deg, #ebd47a 0%, #b88e28 100%);
+        linear-gradient(
+          135deg,
+          #ebd47a 0%,
+          #b88e28 100%
+        );
 
-      --font-titulo: 'Playfair Display', serif;
-      --font-corpo: 'Plus Jakarta Sans', sans-serif;
+      --font-titulo:
+        'Playfair Display',
+        serif;
 
-      --transicao: all 0.25s ease;
+      --font-corpo:
+        'Plus Jakarta Sans',
+        sans-serif;
+
+      --transicao:
+        all 0.25s ease;
 
       --raio-card: 12px;
+
       --raio-btn: 6px;
 
-      /* DARK MODE FIXO */
+
       --bg-principal: #050806;
+
       --bg-card: #0d120f;
+
       --bg-input: #141b16;
 
-      --borda-suave: rgba(197, 160, 89, 0.12);
-      --borda-forte: rgba(197, 160, 89, 0.3);
+      --borda-suave:
+        rgba(197, 160, 89, 0.12);
+
+      --borda-forte:
+        rgba(197, 160, 89, 0.3);
 
       --texto-primario: #f5f3ef;
+
       --texto-secundario: #8e9e94;
 
       --sombra-card:
         0 8px 24px rgba(0, 0, 0, 0.6);
+
     }
+
+
+    /* =====================================================
+       BASE
+    ===================================================== */
 
     * {
+
       box-sizing: border-box;
+
       margin: 0;
+
       padding: 0;
+
     }
+
 
     html {
+
       scroll-behavior: smooth;
+
     }
 
+
     body {
-      font-family: var(--font-corpo);
-      background-color: var(--bg-principal);
-      color: var(--texto-primario);
+
+      font-family:
+        var(--font-corpo);
+
+      background:
+        var(--bg-principal);
+
+      color:
+        var(--texto-primario);
+
       line-height: 1.4;
+
       padding-bottom: 40px;
+
     }
 
 
@@ -79,33 +144,51 @@
     ===================================================== */
 
     header {
+
       position: sticky;
+
       top: 0;
+
       z-index: 100;
 
-      background: rgba(5, 8, 6, 0.94);
-      backdrop-filter: blur(14px);
+      background:
+        rgba(5, 8, 6, 0.94);
 
-      border-bottom: 1px solid var(--borda-suave);
+      backdrop-filter:
+        blur(14px);
 
-      padding: 10px 16px;
+      border-bottom:
+        1px solid var(--borda-suave);
+
+      padding:
+        10px 16px;
+
     }
 
+
     .header-top {
+
       width: 100%;
+
       max-width: 1200px;
 
       margin: auto;
 
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
 
       gap: 15px;
+
     }
 
+
     .logo-container {
+
       display: flex;
+
       align-items: center;
 
       gap: 10px;
@@ -113,10 +196,14 @@
       text-decoration: none;
 
       flex-shrink: 0;
+
     }
 
+
     .logo-img {
+
       width: 32px;
+
       height: 32px;
 
       object-fit: contain;
@@ -129,32 +216,40 @@
         hue-rotate(5deg)
         brightness(1.1);
 
-      transition: var(--transicao);
     }
 
+
     .logo-marca {
-      font-family: var(--font-titulo);
+
+      font-family:
+        var(--font-titulo);
 
       font-size: 20px;
+
       font-weight: 700;
 
       letter-spacing: 3px;
 
       text-transform: uppercase;
 
-      background: var(--dourado-gradiente);
+      background:
+        var(--dourado-gradiente);
 
       -webkit-background-clip: text;
+
       -webkit-text-fill-color: transparent;
+
     }
 
 
     /* =====================================================
-       NAVEGAÇÃO
+       MENU
     ===================================================== */
 
     .header-nav {
+
       display: flex;
+
       align-items: center;
 
       justify-content: center;
@@ -162,104 +257,148 @@
       gap: 4px;
 
       flex: 1;
+
     }
 
+
     .btn-nav {
+
       background: none;
+
       border: none;
 
-      color: var(--texto-secundario);
+      color:
+        var(--texto-secundario);
 
       font-size: 13px;
+
       font-weight: 600;
 
       cursor: pointer;
 
-      padding: 6px 8px;
+      padding:
+        6px 8px;
 
-      transition: var(--transicao);
+      transition:
+        var(--transicao);
 
       text-decoration: none;
 
       white-space: nowrap;
+
     }
+
 
     .btn-nav:hover,
     .btn-nav.ativo {
-      color: var(--dourado-champagne);
+
+      color:
+        var(--dourado-champagne);
+
     }
 
 
     /* =====================================================
-       PESQUISA
+       BUSCA
     ===================================================== */
 
     .busca-container {
-      display: flex;
-      align-items: center;
 
       position: relative;
+
+      display: flex;
+
+      align-items: center;
+
     }
 
+
     .campo-busca {
+
       width: 0;
 
       opacity: 0;
 
-      background: var(--bg-input);
+      background:
+        var(--bg-input);
 
-      border: 1px solid var(--borda-suave);
+      border:
+        1px solid var(--borda-suave);
 
-      color: var(--texto-primario);
+      color:
+        var(--texto-primario);
 
       border-radius: 20px;
 
-      padding: 7px 12px;
+      padding:
+        7px 12px;
 
       outline: none;
 
       transition:
         width 0.25s ease,
         opacity 0.25s ease;
+
     }
 
+
     .campo-busca.aberto {
+
       width: 190px;
 
       opacity: 1;
+
     }
+
 
     .campo-busca::placeholder {
-      color: var(--texto-secundario);
+
+      color:
+        var(--texto-secundario);
+
     }
 
+
     .btn-pesquisa {
+
       width: 34px;
+
       height: 34px;
 
       border-radius: 50%;
 
       background: transparent;
 
-      border: 1px solid var(--borda-suave);
+      border:
+        1px solid var(--borda-suave);
 
-      color: var(--texto-primario);
+      color:
+        var(--texto-primario);
 
       cursor: pointer;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
-      transition: var(--transicao);
+      transition:
+        var(--transicao);
 
       font-size: 14px;
+
     }
 
-    .btn-pesquisa:hover {
-      border-color: var(--dourado-champagne);
 
-      color: var(--dourado-champagne);
+    .btn-pesquisa:hover {
+
+      border-color:
+        var(--dourado-champagne);
+
+      color:
+        var(--dourado-champagne);
+
     }
 
 
@@ -268,58 +407,84 @@
     ===================================================== */
 
     .secao-loja {
+
       max-width: 1200px;
 
-      margin: 16px auto 8px;
+      margin:
+        16px auto 8px;
 
-      padding: 0 12px;
+      padding:
+        0 12px;
+
     }
 
+
     .slideshow {
+
       position: relative;
 
       width: 100%;
+
       height: 260px;
 
       overflow: hidden;
 
-      border-radius: var(--raio-card);
+      border-radius:
+        var(--raio-card);
 
-      border: 1px solid var(--borda-suave);
+      border:
+        1px solid var(--borda-suave);
 
-      background: var(--bg-card);
+      background:
+        var(--bg-card);
 
-      box-shadow: var(--sombra-card);
+      box-shadow:
+        var(--sombra-card);
+
     }
 
+
     .slide {
+
       position: absolute;
 
       inset: 0;
 
       opacity: 0;
 
-      transition: opacity 0.6s ease;
+      transition:
+        opacity 0.6s ease;
 
       pointer-events: none;
+
     }
 
+
     .slide.ativo {
+
       opacity: 1;
 
       pointer-events: auto;
+
     }
 
+
     .slide img {
+
       width: 100%;
+
       height: 100%;
 
       object-fit: cover;
 
-      filter: brightness(0.58);
+      filter:
+        brightness(0.58);
+
     }
 
+
     .slide-conteudo {
+
       position: absolute;
 
       inset: 0;
@@ -329,6 +494,7 @@
       flex-direction: column;
 
       align-items: center;
+
       justify-content: center;
 
       text-align: center;
@@ -341,61 +507,84 @@
           rgba(5, 8, 6, 0.88),
           rgba(5, 8, 6, 0.05)
         );
+
     }
 
+
     .slide-titulo {
-      font-family: var(--font-titulo);
+
+      font-family:
+        var(--font-titulo);
 
       font-size: 30px;
 
       color: #ffffff;
 
       margin-bottom: 5px;
+
     }
+
 
     .slide-sub {
+
       font-size: 13px;
 
-      color: var(--dourado-suave);
+      color:
+        var(--dourado-suave);
 
       letter-spacing: 1px;
+
     }
 
+
     .slide-controles {
+
       position: absolute;
 
       bottom: 12px;
 
       left: 50%;
 
-      transform: translateX(-50%);
+      transform:
+        translateX(-50%);
 
       display: flex;
 
       gap: 6px;
 
       z-index: 3;
+
     }
 
+
     .slide-ponto {
+
       width: 7px;
+
       height: 7px;
 
       border-radius: 50%;
 
-      background: rgba(255,255,255,0.35);
+      background:
+        rgba(255,255,255,0.35);
 
       cursor: pointer;
 
-      transition: var(--transicao);
+      transition:
+        var(--transicao);
+
     }
 
+
     .slide-ponto.ativo {
+
       width: 20px;
 
       border-radius: 10px;
 
-      background: var(--dourado-champagne);
+      background:
+        var(--dourado-champagne);
+
     }
 
 
@@ -404,11 +593,14 @@
     ===================================================== */
 
     .categorias {
+
       max-width: 1200px;
 
-      margin: 18px auto 5px;
+      margin:
+        18px auto 5px;
 
-      padding: 0 12px;
+      padding:
+        0 12px;
 
       display: grid;
 
@@ -416,18 +608,26 @@
         repeat(4, 1fr);
 
       gap: 10px;
+
     }
 
+
     .categoria-btn {
-      background: var(--bg-card);
 
-      border: 1px solid var(--borda-suave);
+      background:
+        var(--bg-card);
 
-      color: var(--texto-secundario);
+      border:
+        1px solid var(--borda-suave);
 
-      padding: 13px 10px;
+      color:
+        var(--texto-secundario);
 
-      border-radius: var(--raio-card);
+      padding:
+        13px 10px;
+
+      border-radius:
+        var(--raio-card);
 
       font-size: 12px;
 
@@ -439,29 +639,38 @@
 
       cursor: pointer;
 
-      transition: var(--transicao);
+      transition:
+        var(--transicao);
+
     }
+
 
     .categoria-btn:hover,
     .categoria-btn.ativo {
-      background: var(--esmeralda-medio);
+
+      background:
+        var(--esmeralda-medio);
 
       color: #ffffff;
 
-      border-color: var(--dourado-champagne);
+      border-color:
+        var(--dourado-champagne);
 
-      transform: translateY(-1px);
+      transform:
+        translateY(-1px);
+
     }
 
 
     /* =====================================================
-       FILTROS DE MARCA
+       FILTROS
     ===================================================== */
 
     .container-filtros {
+
       max-width: 1200px;
 
-      margin: 0 auto;
+      margin: auto;
 
       padding: 12px;
 
@@ -470,26 +679,39 @@
       white-space: nowrap;
 
       scrollbar-width: none;
+
     }
+
 
     .container-filtros::-webkit-scrollbar {
+
       display: none;
+
     }
 
+
     .filtros-wrapper {
+
       display: inline-flex;
 
       gap: 8px;
+
     }
 
+
     .btn-filtro {
-      background: var(--bg-card);
 
-      border: 1px solid var(--borda-suave);
+      background:
+        var(--bg-card);
 
-      color: var(--texto-secundario);
+      border:
+        1px solid var(--borda-suave);
 
-      padding: 6px 14px;
+      color:
+        var(--texto-secundario);
+
+      padding:
+        6px 14px;
 
       border-radius: 20px;
 
@@ -503,16 +725,23 @@
 
       cursor: pointer;
 
-      transition: var(--transicao);
+      transition:
+        var(--transicao);
+
     }
+
 
     .btn-filtro:hover,
     .btn-filtro.ativo {
-      background: var(--esmeralda-medio);
+
+      background:
+        var(--esmeralda-medio);
 
       color: #ffffff;
 
-      border-color: var(--dourado-champagne);
+      border-color:
+        var(--dourado-champagne);
+
     }
 
 
@@ -521,105 +750,152 @@
     ===================================================== */
 
     .grid-produtos {
+
       display: grid;
 
       grid-template-columns:
-        repeat(auto-fill, minmax(210px, 1fr));
+        repeat(
+          auto-fill,
+          minmax(210px, 1fr)
+        );
 
       gap: 14px;
 
       max-width: 1200px;
 
-      margin: 8px auto;
+      margin:
+        8px auto;
 
-      padding: 0 12px;
+      padding:
+        0 12px;
+
     }
 
+
     .card-produto {
-      background: var(--bg-card);
 
-      border: 1px solid var(--borda-suave);
+      background:
+        var(--bg-card);
 
-      border-radius: var(--raio-card);
+      border:
+        1px solid var(--borda-suave);
+
+      border-radius:
+        var(--raio-card);
 
       overflow: hidden;
 
       display: flex;
+
       flex-direction: column;
 
       position: relative;
 
-      box-shadow: var(--sombra-card);
+      box-shadow:
+        var(--sombra-card);
 
-      transition: var(--transicao);
+      transition:
+        var(--transicao);
+
     }
+
 
     .card-produto:hover {
-      border-color: var(--borda-forte);
 
-      transform: translateY(-2px);
+      border-color:
+        var(--borda-forte);
+
+      transform:
+        translateY(-2px);
+
     }
 
+
     .card-foto-wrapper {
+
       position: relative;
 
       width: 100%;
 
       aspect-ratio: 3 / 4;
 
-      background: var(--bg-input);
+      background:
+        var(--bg-input);
 
       overflow: hidden;
+
     }
 
+
     .card-foto-wrapper img {
+
       width: 100%;
+
       height: 100%;
 
       object-fit: cover;
 
       display: block;
 
-      transition: transform 0.4s ease;
+      transition:
+        transform 0.4s ease;
+
     }
+
 
     .card-produto:hover
     .card-foto-wrapper img {
-      transform: scale(1.05);
+
+      transform:
+        scale(1.05);
+
     }
 
+
     .sem-imagem-placeholder {
+
       width: 100%;
+
       height: 100%;
 
       display: flex;
 
       align-items: center;
+
       justify-content: center;
 
-      color: var(--texto-secundario);
+      color:
+        var(--texto-secundario);
 
       font-size: 11px;
 
       text-transform: uppercase;
+
     }
 
+
     .badge-marca {
+
       position: absolute;
 
       top: 8px;
+
       left: 8px;
 
-      background: rgba(5, 8, 6, 0.85);
+      background:
+        rgba(5, 8, 6, 0.85);
 
       color: #ebd47a;
 
-      backdrop-filter: blur(6px);
+      backdrop-filter:
+        blur(6px);
 
       border:
-        1px solid rgba(212, 175, 55, 0.5);
+        1px solid
+        rgba(212, 175, 55, 0.5);
 
-      padding: 4px 8px;
+      padding:
+        4px 8px;
 
       border-radius: 12px;
 
@@ -633,11 +909,11 @@
 
       z-index: 2;
 
-      box-shadow:
-        0 2px 6px rgba(0,0,0,0.4);
     }
 
+
     .card-info {
+
       padding: 12px;
 
       display: flex;
@@ -647,16 +923,18 @@
       flex-grow: 1;
 
       justify-content: space-between;
+
     }
 
+
     .produto-titulo {
-      font-family: var(--font-corpo);
 
       font-size: 13px;
 
       font-weight: 600;
 
-      color: var(--texto-primario);
+      color:
+        var(--texto-primario);
 
       margin-bottom: 4px;
 
@@ -669,9 +947,12 @@
       -webkit-box-orient: vertical;
 
       overflow: hidden;
+
     }
 
+
     .produto-preco {
+
       font-size: 16px;
 
       font-weight: 700;
@@ -681,9 +962,12 @@
       letter-spacing: 0.3px;
 
       margin-bottom: 8px;
+
     }
 
+
     .secao-opcoes {
+
       margin: 6px 0;
 
       display: flex;
@@ -691,9 +975,12 @@
       flex-direction: column;
 
       gap: 6px;
+
     }
 
+
     .label-opcao {
+
       font-size: 9px;
 
       font-weight: 700;
@@ -702,25 +989,36 @@
 
       letter-spacing: 0.5px;
 
-      color: var(--texto-secundario);
+      color:
+        var(--texto-secundario);
+
     }
 
+
     .lista-pills {
+
       display: flex;
 
       flex-wrap: wrap;
 
       gap: 4px;
+
     }
 
+
     .pill-opcao {
-      background: var(--bg-input);
 
-      border: 1px solid var(--borda-suave);
+      background:
+        var(--bg-input);
 
-      color: var(--texto-primario);
+      border:
+        1px solid var(--borda-suave);
 
-      padding: 3px 8px;
+      color:
+        var(--texto-primario);
+
+      padding:
+        3px 8px;
 
       border-radius: 4px;
 
@@ -729,17 +1027,25 @@
       font-weight: 600;
 
       cursor: pointer;
+
     }
 
+
     .pill-opcao.selecionado {
-      background: var(--esmeralda-medio);
+
+      background:
+        var(--esmeralda-medio);
 
       color: #ffffff;
 
-      border-color: var(--dourado-champagne);
+      border-color:
+        var(--dourado-champagne);
+
     }
 
+
     .btn-interesse {
+
       width: 100%;
 
       background: #25d366;
@@ -750,9 +1056,11 @@
 
       padding: 10px;
 
-      border-radius: var(--raio-btn);
+      border-radius:
+        var(--raio-btn);
 
-      font-family: var(--font-corpo);
+      font-family:
+        var(--font-corpo);
 
       font-size: 11px;
 
@@ -767,19 +1075,26 @@
       display: flex;
 
       align-items: center;
+
       justify-content: center;
 
       gap: 6px;
 
       margin-top: 8px;
 
-      transition: var(--transicao);
+      transition:
+        var(--transicao);
+
     }
 
+
     .btn-interesse:hover {
+
       background: #20ba5a;
 
-      transform: translateY(-1px);
+      transform:
+        translateY(-1px);
+
     }
 
 
@@ -788,9 +1103,11 @@
     ===================================================== */
 
     .btn-whatsapp-flutuante {
+
       position: fixed;
 
       bottom: 20px;
+
       right: 20px;
 
       background-color: #25d366;
@@ -800,15 +1117,18 @@
       border-radius: 50px;
 
       width: 52px;
+
       height: 52px;
 
       display: flex;
 
       align-items: center;
+
       justify-content: center;
 
       box-shadow:
-        0 4px 16px rgba(0,0,0,0.4);
+        0 4px 16px
+        rgba(0,0,0,0.4);
 
       z-index: 1000;
 
@@ -817,19 +1137,28 @@
       transition:
         transform 0.25s ease,
         background-color 0.25s ease;
+
     }
+
 
     .btn-whatsapp-flutuante:hover {
-      transform: scale(1.08);
+
+      transform:
+        scale(1.08);
 
       background-color: #20ba5a;
+
     }
 
+
     .btn-whatsapp-flutuante svg {
+
       width: 28px;
+
       height: 28px;
 
       fill: #ffffff;
+
     }
 
 
@@ -838,31 +1167,41 @@
     ===================================================== */
 
     footer {
+
       text-align: center;
 
-      padding: 30px 15px;
+      padding:
+        30px 15px;
 
-      background-color: var(--bg-principal);
+      background:
+        var(--bg-principal);
 
       font-size: 12px;
 
-      color: var(--texto-secundario);
+      color:
+        var(--texto-secundario);
 
-      border-top: 1px solid var(--borda-suave);
+      border-top:
+        1px solid var(--borda-suave);
 
       margin-top: 30px;
+
     }
 
+
     .instagram-link {
+
       display: inline-flex;
 
       align-items: center;
 
       gap: 7px;
 
-      margin: 12px 0 18px;
+      margin:
+        12px 0 18px;
 
-      color: var(--dourado-champagne);
+      color:
+        var(--dourado-champagne);
 
       text-decoration: none;
 
@@ -870,22 +1209,32 @@
 
       font-weight: 700;
 
-      transition: var(--transicao);
+      transition:
+        var(--transicao);
+
     }
+
 
     .instagram-link:hover {
+
       color: #ebd47a;
 
-      transform: translateY(-1px);
+      transform:
+        translateY(-1px);
+
     }
 
+
     .instagram-icon {
+
       width: 18px;
+
       height: 18px;
 
       fill: currentColor;
 
       flex-shrink: 0;
+
     }
 
 
@@ -895,114 +1244,160 @@
 
     @media (max-width: 850px) {
 
-      .header-nav .btn-nav:nth-child(2) {
+      .header-nav
+      .btn-nav:nth-child(2) {
+
         display: none;
+
       }
 
       .header-nav {
+
         justify-content: flex-end;
+
       }
 
       .campo-busca.aberto {
+
         width: 150px;
+
       }
+
     }
 
 
     @media (max-width: 600px) {
 
       header {
-        padding: 9px 10px;
+
+        padding:
+          9px 10px;
+
       }
 
       .header-top {
+
         gap: 8px;
+
       }
 
       .logo-marca {
+
         font-size: 17px;
 
         letter-spacing: 2px;
+
       }
 
       .logo-img {
+
         width: 29px;
+
         height: 29px;
+
       }
 
-      .header-nav {
-        gap: 0;
-      }
+      .header-nav
+      .btn-nav {
 
-      .header-nav .btn-nav {
         display: none;
+
       }
 
       .campo-busca.aberto {
+
         position: absolute;
 
         top: 58px;
+
         right: 10px;
 
-        width: calc(100vw - 20px);
+        width:
+          calc(100vw - 20px);
+
       }
 
       .slideshow {
+
         height: 180px;
+
       }
 
       .slide-titulo {
+
         font-size: 23px;
+
       }
 
       .slide-sub {
+
         font-size: 10px;
+
       }
 
       .categorias {
+
         grid-template-columns:
           repeat(2, 1fr);
 
         gap: 8px;
 
         margin-top: 12px;
+
       }
 
       .categoria-btn {
-        padding: 11px 7px;
+
+        padding:
+          11px 7px;
 
         font-size: 10px;
+
       }
 
       .grid-produtos {
+
         grid-template-columns:
           repeat(2, 1fr);
 
         gap: 10px;
 
-        padding: 0 8px;
+        padding:
+          0 8px;
+
       }
 
       .card-info {
+
         padding: 9px;
+
       }
 
       .produto-titulo {
+
         font-size: 11px;
+
       }
 
       .produto-preco {
+
         font-size: 14px;
+
       }
 
       .btn-interesse {
-        padding: 9px 5px;
+
+        padding:
+          9px 5px;
 
         font-size: 9px;
+
       }
+
     }
 
   </style>
+
 </head>
 
 
@@ -1020,7 +1415,8 @@
 
       <a
         href="#"
-        class="logo-container">
+        class="logo-container"
+      >
 
         <img
           src="logo.png"
@@ -1039,21 +1435,26 @@
 
         <a
           href="#vitrine"
-          class="btn-nav ativo">
+          class="btn-nav ativo"
+        >
           Vitrine
         </a>
 
+
         <a
           href="#categorias"
-          class="btn-nav">
+          class="btn-nav"
+        >
           Categorias
         </a>
+
 
         <a
           href="https://www.google.com/maps/search/?api=1&query=Av.+Interventor+Manoel+Ribas,+186,+Pitanga+-+PR"
           target="_blank"
           rel="noopener"
-          class="btn-nav">
+          class="btn-nav"
+        >
           Visite-nos
         </a>
 
@@ -1070,14 +1471,14 @@
           autocomplete="off"
         >
 
+
         <button
           type="button"
           class="btn-pesquisa"
           onclick="abrirBusca()"
-          title="Pesquisar">
-
+          title="Pesquisar"
+        >
           🔎
-
         </button>
 
       </div>
@@ -1097,20 +1498,20 @@
 
     <div
       class="slideshow"
-      id="slideshow">
+      id="slideshow"
+    >
 
 
       <a
         href="https://www.google.com/maps/search/?api=1&query=Av.+Interventor+Manoel+Ribas,+186,+Pitanga+-+PR"
         target="_blank"
         rel="noopener"
-        class="slide ativo">
-
+        class="slide ativo"
+      >
 
         <img
           src="foto-loja.jpg"
           alt="Loja Raízes em Pitanga PR"
-
           onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1400&auto=format&fit=crop'"
         >
 
@@ -1126,7 +1527,6 @@
           </p>
 
         </div>
-
 
       </a>
 
@@ -1184,18 +1584,18 @@
 
         <span
           class="slide-ponto ativo"
-          onclick="irParaSlide(0)">
-        </span>
+          onclick="irParaSlide(0)"
+        ></span>
 
         <span
           class="slide-ponto"
-          onclick="irParaSlide(1)">
-        </span>
+          onclick="irParaSlide(1)"
+        ></span>
 
         <span
           class="slide-ponto"
-          onclick="irParaSlide(2)">
-        </span>
+          onclick="irParaSlide(2)"
+        ></span>
 
       </div>
 
@@ -1212,42 +1612,39 @@
 
   <section
     class="categorias"
-    id="categorias">
+    id="categorias"
+  >
 
 
     <button
       class="categoria-btn ativo"
-      onclick="filtrarCategoria('TODAS', this)">
-
+      onclick="filtrarCategoria('TODAS', this)"
+    >
       ✦ Todas
-
     </button>
 
 
     <button
       class="categoria-btn"
-      onclick="filtrarCategoria('FEMININO', this)">
-
-      ♀ Feminino
-
-    </button>
-
-
-    <button
-      class="categoria-btn"
-      onclick="filtrarCategoria('MASCULINO', this)">
-
+      onclick="filtrarCategoria('MASC', this)"
+    >
       ♂ Masculino
-
     </button>
 
 
     <button
       class="categoria-btn"
-      onclick="filtrarCategoria('OFERTAS', this)">
+      onclick="filtrarCategoria('FEMI', this)"
+    >
+      ♀ Feminino
+    </button>
 
+
+    <button
+      class="categoria-btn"
+      onclick="filtrarCategoria('OFERTAS', this)"
+    >
       ◇ Ofertas
-
     </button>
 
 
@@ -1256,89 +1653,81 @@
 
 
   <!-- =====================================================
-       FILTROS DE MARCA
+       MARCAS
   ===================================================== -->
 
   <div
     class="container-filtros"
-    id="vitrine">
-
+    id="vitrine"
+  >
 
     <div
       class="filtros-wrapper"
-      id="filtro-marcas">
+      id="filtro-marcas"
+    >
 
 
       <button
         class="btn-filtro ativo"
-        onclick="filtrarMarca('TODAS')">
-
+        onclick="filtrarMarca('TODAS')"
+      >
         Todas
-
       </button>
 
 
       <button
         class="btn-filtro"
-        onclick="filtrarMarca('AUROCHS')">
-
+        onclick="filtrarMarca('AUROCHS')"
+      >
         Aurochs
-
       </button>
 
 
       <button
         class="btn-filtro"
-        onclick="filtrarMarca('BAUMGARTEN')">
-
+        onclick="filtrarMarca('BAUMGARTEN')"
+      >
         Baumgarten
-
       </button>
 
 
       <button
         class="btn-filtro"
-        onclick="filtrarMarca('BEAGLE')">
-
+        onclick="filtrarMarca('BEAGLE')"
+      >
         Beagle
-
       </button>
 
 
       <button
         class="btn-filtro"
-        onclick="filtrarMarca('FARM RIO')">
-
+        onclick="filtrarMarca('FARM RIO')"
+      >
         Farm Rio
-
       </button>
 
 
       <button
         class="btn-filtro"
-        onclick="filtrarMarca('SOUL')">
-
+        onclick="filtrarMarca('SOUL')"
+      >
         Soul
-
       </button>
 
 
-      <!-- SLYWEAR -->
       <button
         class="btn-filtro"
-        onclick="filtrarMarca('SlyWear')">
-
+        onclick="filtrarMarca('SlyWear')"
+      >
         SlyWear
-
       </button>
 
 
       <button
         class="btn-filtro"
-        onclick="filtrarMarca('HERING')">
-
+        onclick="filtrarMarca('HERING')"
+      >
         Hering
-
       </button>
 
 
@@ -1354,8 +1743,8 @@
 
   <main
     class="grid-produtos"
-    id="grid-vitrine">
-  </main>
+    id="grid-vitrine"
+  ></main>
 
 
 
@@ -1368,15 +1757,14 @@
     class="btn-whatsapp-flutuante"
     target="_blank"
     rel="noopener"
-    title="Falar no WhatsApp">
-
+    title="Falar no WhatsApp"
+  >
 
     <svg viewBox="0 0 24 24">
 
       <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.705 1.758zm6.637-3.935l.391.232c1.363.81 2.932 1.238 4.531 1.239 5.022 0 9.112-4.089 9.113-9.113-.001-2.433-.948-4.722-2.67-6.444-1.722-1.722-4.011-2.668-6.444-2.668-5.021 0-9.11 4.089-9.112 9.112-.001 1.666.448 3.292 1.3 4.707l.254.419-1.003 3.663 3.743-.982z"/>
 
     </svg>
-
 
   </a>
 
@@ -1390,29 +1778,27 @@
 
 
     <p>
-
       <strong>
         © RAÍZES — Moda Masculina & Feminina
       </strong>
-
     </p>
 
-
-    <!-- INSTAGRAM -->
 
     <a
       href="https://www.instagram.com/maisraizesoficial/"
       target="_blank"
       rel="noopener"
-      class="instagram-link">
+      class="instagram-link"
+    >
 
 
       <svg
         class="instagram-icon"
         viewBox="0 0 24 24"
-        aria-hidden="true">
+        aria-hidden="true"
+      >
 
-        <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9Zm9.75 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0-6 0 3 3 0 0 0 3-3Z"/>
+        <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9Zm9.75 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/>
 
       </svg>
 
@@ -1440,33 +1826,93 @@
 
 
   <!-- =====================================================
-       SEUS SCRIPTS
+       SEUS ARQUIVOS
   ===================================================== -->
 
   <script src="produtos.js"></script>
+
   <script src="script.js"></script>
 
 
 
   <!-- =====================================================
-       FUNÇÕES EXTRAS
+       SISTEMA DE FILTROS
   ===================================================== -->
 
   <script>
 
+    let termoBusca = "";
+
+    let categoriaAtual = "TODAS";
+
+    let marcaAtual = "TODAS";
+
 
     /* =====================================================
-       BUSCA
+       NORMALIZA TEXTO
+    ===================================================== */
+
+    function normalizarTexto(texto) {
+
+      return String(texto || "")
+
+        .normalize("NFD")
+
+        .replace(
+          /[\u0300-\u036f]/g,
+          ""
+        )
+
+        .toLowerCase()
+
+        .replace(
+          /\s+/g,
+          " "
+        )
+
+        .trim();
+
+    }
+
+
+    /* =====================================================
+       NORMALIZA MARCA
+    ===================================================== */
+
+    function normalizarMarca(texto) {
+
+      return normalizarTexto(texto)
+
+        .replace(
+          /\s+/g,
+          ""
+        );
+
+    }
+
+
+    /* =====================================================
+       ABRIR PESQUISA
     ===================================================== */
 
     function abrirBusca() {
 
       const campo =
-        document.getElementById("campo-busca");
+        document.getElementById(
+          "campo-busca"
+        );
 
-      campo.classList.toggle("aberto");
 
-      if (campo.classList.contains("aberto")) {
+      campo.classList.toggle(
+        "aberto"
+      );
+
+
+      if (
+        campo.classList.contains(
+          "aberto"
+        )
+      ) {
 
         campo.focus();
 
@@ -1474,60 +1920,351 @@
 
         campo.value = "";
 
-        aplicarBusca("");
+        termoBusca = "";
+
+        aplicarFiltros();
 
       }
 
     }
 
 
-    function aplicarBusca(termo) {
+    /* =====================================================
+       DIGITAÇÃO DA PESQUISA
+    ===================================================== */
+
+    document
+      .getElementById(
+        "campo-busca"
+      )
+      .addEventListener(
+        "input",
+        function () {
+
+          termoBusca =
+            normalizarTexto(
+              this.value
+            );
+
+
+          aplicarFiltros();
+
+        }
+      );
+
+
+    /* =====================================================
+       CATEGORIA
+    ===================================================== */
+
+    function verificarCategoria(
+      texto,
+      categoria
+    ) {
+
+      if (
+        categoria === "TODAS"
+      ) {
+
+        return true;
+
+      }
+
+
+      if (
+        categoria === "MASC"
+      ) {
+
+        return (
+          texto.includes("masculino") ||
+          texto.includes("masc") ||
+          texto.includes("homem") ||
+          texto.includes("menino") ||
+          texto.includes("men")
+        );
+
+      }
+
+
+      if (
+        categoria === "FEMI"
+      ) {
+
+        return (
+          texto.includes("feminino") ||
+          texto.includes("femi") ||
+          texto.includes("fem") ||
+          texto.includes("mulher") ||
+          texto.includes("menina") ||
+          texto.includes("women")
+        );
+
+      }
+
+
+      if (
+        categoria === "OFERTAS"
+      ) {
+
+        return (
+          texto.includes("oferta") ||
+          texto.includes("ofertas") ||
+          texto.includes("promo") ||
+          texto.includes("promocao") ||
+          texto.includes("desconto") ||
+          texto.includes("liquidacao")
+        );
+
+      }
+
+
+      return true;
+
+    }
+
+
+    /* =====================================================
+       MARCA
+    ===================================================== */
+
+    function verificarMarca(
+      texto,
+      marca
+    ) {
+
+      if (
+        marca === "TODAS"
+      ) {
+
+        return true;
+
+      }
+
+
+      const textoMarca =
+        normalizarMarca(
+          marca
+        );
+
+
+      const textoCard =
+        normalizarMarca(
+          texto
+        );
+
+
+      return textoCard.includes(
+        textoMarca
+      );
+
+    }
+
+
+    /* =====================================================
+       APLICAR TODOS OS FILTROS
+    ===================================================== */
+
+    function aplicarFiltros() {
 
       const cards =
         document.querySelectorAll(
           "#grid-vitrine .card-produto"
         );
 
-      termo =
-        termo
-          .trim()
-          .toLowerCase();
-
 
       cards.forEach(card => {
 
         const texto =
-          card.innerText.toLowerCase();
+          normalizarTexto(
+            card.innerText
+          );
+
+
+        const passouBusca =
+          termoBusca === "" ||
+          texto.includes(
+            termoBusca
+          );
+
+
+        const passouCategoria =
+          verificarCategoria(
+            texto,
+            categoriaAtual
+          );
+
+
+        const passouMarca =
+          verificarMarca(
+            texto,
+            marcaAtual
+          );
+
 
         if (
-          termo === "" ||
-          texto.includes(termo)
+          passouBusca &&
+          passouCategoria &&
+          passouMarca
         ) {
 
           card.style.display = "";
 
         } else {
 
-          card.style.display = "none";
+          card.style.display =
+            "none";
 
         }
 
       });
 
+
     }
 
 
-    document
-      .getElementById("campo-busca")
-      .addEventListener(
-        "input",
-        function () {
+    /* =====================================================
+       BOTÃO CATEGORIA
+    ===================================================== */
 
-          aplicarBusca(this.value);
+    function filtrarCategoria(
+      categoria,
+      botao
+    ) {
 
-        }
+      categoriaAtual =
+        categoria;
+
+
+      document
+        .querySelectorAll(
+          ".categoria-btn"
+        )
+        .forEach(btn => {
+
+          btn.classList.remove(
+            "ativo"
+          );
+
+        });
+
+
+      if (botao) {
+
+        botao.classList.add(
+          "ativo"
+        );
+
+      }
+
+
+      /*
+       * Ao escolher categoria,
+       * volta para todas as marcas.
+       */
+
+      marcaAtual =
+        "TODAS";
+
+
+      document
+        .querySelectorAll(
+          ".btn-filtro"
+        )
+        .forEach(btn => {
+
+          btn.classList.remove(
+            "ativo"
+          );
+
+        });
+
+
+      const todas =
+        document.querySelector(
+          ".btn-filtro"
+        );
+
+
+      if (todas) {
+
+        todas.classList.add(
+          "ativo"
+        );
+
+      }
+
+
+      setTimeout(
+        aplicarFiltros,
+        30
       );
 
+    }
+
+
+    /* =====================================================
+       BOTÃO MARCA
+    ===================================================== */
+
+    function filtrarMarca(
+      marca
+    ) {
+
+      marcaAtual =
+        marca;
+
+
+      document
+        .querySelectorAll(
+          ".btn-filtro"
+        )
+        .forEach(btn => {
+
+          btn.classList.remove(
+            "ativo"
+          );
+
+        });
+
+
+      const marcaNormalizada =
+        normalizarMarca(
+          marca
+        );
+
+
+      document
+        .querySelectorAll(
+          ".btn-filtro"
+        )
+        .forEach(btn => {
+
+          const textoBotao =
+            normalizarMarca(
+              btn.innerText
+            );
+
+
+          if (
+            textoBotao ===
+            marcaNormalizada
+          ) {
+
+            btn.classList.add(
+              "ativo"
+            );
+
+          }
+
+        });
+
+
+      setTimeout(
+        aplicarFiltros,
+        30
+      );
+
+    }
 
 
     /* =====================================================
@@ -1536,252 +2273,155 @@
 
     let slideAtual = 0;
 
+
     const slides =
-      document.querySelectorAll(".slide");
+      document.querySelectorAll(
+        ".slide"
+      );
+
 
     const pontos =
-      document.querySelectorAll(".slide-ponto");
+      document.querySelectorAll(
+        ".slide-ponto"
+      );
 
 
-    function irParaSlide(indice) {
-
-      slides.forEach(slide => {
-
-        slide.classList.remove("ativo");
-
-      });
-
-
-      pontos.forEach(ponto => {
-
-        ponto.classList.remove("ativo");
-
-      });
-
-
-      slideAtual = indice;
-
-
-      slides[slideAtual]
-        .classList.add("ativo");
-
-
-      pontos[slideAtual]
-        .classList.add("ativo");
-
-    }
-
-
-    function proximoSlide() {
-
-      slideAtual =
-        (slideAtual + 1) %
-        slides.length;
-
-      irParaSlide(slideAtual);
-
-    }
-
-
-    setInterval(
-      proximoSlide,
-      5000
-    );
-
-
-
-    /* =====================================================
-       CATEGORIAS
-    ===================================================== */
-
-    function filtrarCategoria(
-      categoria,
-      botao
+    function irParaSlide(
+      indice
     ) {
 
-      document
-        .querySelectorAll(".categoria-btn")
-        .forEach(btn => {
+      slides.forEach(
+        slide => {
 
-          btn.classList.remove("ativo");
+          slide.classList.remove(
+            "ativo"
+          );
 
-        });
-
-
-      botao.classList.add("ativo");
-
-
-      window.categoriaSelecionada =
-        categoria;
+        }
+      );
 
 
-      /*
-       * Se o seu script.js possuir
-       * uma função própria para categoria,
-       * ela será usada.
-       */
+      pontos.forEach(
+        ponto => {
+
+          ponto.classList.remove(
+            "ativo"
+          );
+
+        }
+      );
+
+
+      slideAtual =
+        indice;
+
 
       if (
-        typeof window.filtrarPorCategoria ===
-        "function"
+        slides[slideAtual]
       ) {
 
-        window.filtrarPorCategoria(
-          categoria
-        );
+        slides[slideAtual]
+          .classList.add(
+            "ativo"
+          );
+
+      }
+
+
+      if (
+        pontos[slideAtual]
+      ) {
+
+        pontos[slideAtual]
+          .classList.add(
+            "ativo"
+          );
 
       }
 
     }
 
 
+    function proximoSlide() {
 
-    /* =====================================================
-       MELHORIA DO FILTRO DE MARCAS
-    ===================================================== */
+      if (
+        slides.length <= 1
+      ) {
 
-    /*
-     * Normaliza o texto para que:
-     *
-     * SlyWear
-     * SLYWEAR
-     * slywear
-     *
-     * sejam tratados como a mesma marca.
-     */
+        return;
 
-    function normalizarMarca(texto) {
+      }
 
-      return String(texto || "")
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/\s+/g, "")
-        .toLowerCase();
+
+      slideAtual =
+        (slideAtual + 1) %
+        slides.length;
+
+
+      irParaSlide(
+        slideAtual
+      );
 
     }
 
 
-    /*
-     * Guarda a função original do seu script.js.
-     */
+    if (
+      slides.length > 1
+    ) {
 
-    const filtrarMarcaOriginal =
-      window.filtrarMarca;
+      setInterval(
+        proximoSlide,
+        5000
+      );
 
-
-    window.filtrarMarca =
-      function(marca) {
-
-
-        /*
-         * SlyWear é o nome usado
-         * no cadastro dos produtos.
-         */
-
-        const marcaNormalizada =
-          normalizarMarca(marca);
+    }
 
 
-        /*
-         * Atualiza visual dos botões.
-         */
+    /* =====================================================
+       OBSERVA QUANDO script.js CRIA OS CARDS
+    ===================================================== */
 
-        document
-          .querySelectorAll(".btn-filtro")
-          .forEach(btn => {
-
-            btn.classList.remove("ativo");
-
-          });
+    const grid =
+      document.getElementById(
+        "grid-vitrine"
+      );
 
 
-        const botoes =
-          document.querySelectorAll(
-            ".btn-filtro"
-          );
+    if (grid) {
 
+      const observador =
+        new MutationObserver(
+          function () {
 
-        botoes.forEach(btn => {
-
-          const texto =
-            normalizarMarca(
-              btn.textContent
-            );
-
-
-          if (
-            texto === marcaNormalizada
-          ) {
-
-            btn.classList.add("ativo");
+            aplicarFiltros();
 
           }
+        );
 
-        });
 
-
-        /*
-         * Chama a função original,
-         * se ela existir.
-         */
-
-        if (
-          typeof filtrarMarcaOriginal ===
-          "function"
-        ) {
-
-          /*
-           * Para SlyWear usamos
-           * exatamente o valor cadastrado.
-           */
-
-          if (
-            marcaNormalizada === "slywear"
-          ) {
-
-            filtrarMarcaOriginal(
-              "SlyWear"
-            );
-
-          } else {
-
-            filtrarMarcaOriginal(
-              marca
-            );
-
-          }
-
+      observador.observe(
+        grid,
+        {
+          childList: true,
+          subtree: true
         }
+      );
+
+    }
 
 
-        /*
-         * Reaplica a pesquisa depois
-         * do filtro de marca.
-         */
+    /* =====================================================
+       PRIMEIRA APLICAÇÃO
+    ===================================================== */
 
-        setTimeout(() => {
-
-          const campo =
-            document.getElementById(
-              "campo-busca"
-            );
-
-
-          if (campo) {
-
-            aplicarBusca(
-              campo.value
-            );
-
-          }
-
-        }, 50);
-
-      };
-
+    setTimeout(
+      aplicarFiltros,
+      100
+    );
 
   </script>
 
 
 </body>
+
 </html>
