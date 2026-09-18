@@ -2,2153 +2,2966 @@
 <html lang="pt-BR" data-theme="dark">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="theme-color" content="#091712">
+  <meta charset="UTF-8">
 
-    <title>Raízes — Moda que conecta gerações</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <style>
-
-        /* =========================================================
-           BASE
-        ========================================================= */
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            background: #091712;
-        }
-
-        body {
-            width: 100%;
-            max-width: 100%;
-            min-height: 100vh;
-
-            overflow-x: hidden;
-
-            background: #091712;
-            color: #f5f1e8;
-
-            font-family: "Plus Jakarta Sans", sans-serif;
-        }
-
-        img {
-            display: block;
-            max-width: 100%;
-        }
-
-        button,
-        input {
-            font-family: inherit;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-
-        /* =========================================================
-           VARIÁVEIS
-        ========================================================= */
-
-        :root {
-            --esmeralda-profundo: #091712;
-            --esmeralda-medio: #143326;
-            --esmeralda-vibrante: #1e4a38;
-
-            --dourado-champagne: #d4af37;
-            --dourado-suave: #c5a059;
-
-            --dourado-gradiente:
-                linear-gradient(
-                    135deg,
-                    #ebd47a 0%,
-                    #b88e28 100%
-                );
-        }
-
-
-        /* =========================================================
-           HEADER
-        ========================================================= */
-
-        header {
-            width: 100%;
-            background: rgba(9, 23, 18, 0.96);
-
-            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
-
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-
-            backdrop-filter: blur(12px);
-        }
-
-        .header-container {
-            width: min(1200px, calc(100% - 32px));
-            min-height: clamp(64px, 7vw, 82px);
-
-            margin: auto;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            gap: clamp(12px, 3vw, 30px);
-        }
-
-        .logo-area {
-            min-width: 0;
-
-            display: flex;
-            align-items: center;
-
-            gap: clamp(8px, 1.5vw, 14px);
-        }
-
-        .logo-area img {
-            width: clamp(38px, 5vw, 52px);
-            height: clamp(38px, 5vw, 52px);
-
-            object-fit: contain;
-            flex-shrink: 0;
-        }
-
-        .logo-text {
-            font-family: "Playfair Display", serif;
-
-            color: #d4af37;
-
-            font-size: clamp(18px, 2.5vw, 26px);
-            font-weight: 700;
-
-            letter-spacing: 2px;
-            white-space: nowrap;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-
-            flex-wrap: wrap;
-
-            gap: clamp(10px, 2vw, 26px);
-        }
-
-        nav a {
-            color: #e9e3d6;
-
-            font-size: clamp(11px, 1.3vw, 14px);
-            font-weight: 500;
-
-            white-space: nowrap;
-
-            transition: 0.25s ease;
-        }
-
-        nav a:hover {
-            color: #d4af37;
-        }
-
-
-        /* =========================================================
-           HERO / SLIDESHOW
-        ========================================================= */
-
-        .hero {
-            width: min(1200px, calc(100% - 32px));
-
-            margin: clamp(18px, 4vw, 32px) auto 0;
-        }
-
-        .slideshow {
-            width: 100%;
-
-            aspect-ratio: 16 / 6;
-
-            min-height: 220px;
-            max-height: 480px;
-
-            position: relative;
-
-            overflow: hidden;
-
-            border-radius: 12px;
-
-            background: #143326;
-        }
-
-        .slide {
-            position: absolute;
-
-            inset: 0;
-
-            opacity: 0;
-
-            transition: opacity 0.8s ease;
-        }
-
-        .slide.ativo {
-            opacity: 1;
-        }
-
-        .slide img {
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-        }
-
-        .hero-overlay {
-            position: absolute;
-
-            inset: 0;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    rgba(0, 0, 0, 0.68),
-                    rgba(0, 0, 0, 0.15),
-                    rgba(0, 0, 0, 0.05)
-                );
-        }
-
-        .hero-texto {
-            position: absolute;
-
-            left: clamp(20px, 7vw, 80px);
-            right: clamp(20px, 7vw, 80px);
-
-            top: 50%;
-            transform: translateY(-50%);
-
-            max-width: clamp(300px, 48vw, 600px);
-        }
-
-        .hero-texto h1 {
-            font-family: "Playfair Display", serif;
-
-            color: white;
-
-            font-size: clamp(32px, 6vw, 64px);
-
-            line-height: 1.05;
-
-            margin-bottom: 10px;
-        }
-
-        .hero-texto p {
-            color: #eee7d9;
-
-            font-size: clamp(12px, 1.6vw, 17px);
-
-            line-height: 1.5;
-        }
-
-
-        /* =========================================================
-           BUSCA
-        ========================================================= */
-
-        .area-busca {
-            width: min(900px, calc(100% - 32px));
-
-            margin: clamp(20px, 4vw, 32px) auto 0;
-        }
-
-        #campoBusca {
-            width: 100%;
-            height: clamp(44px, 5vw, 54px);
-
-            padding: 0 18px;
-
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 8px;
-
-            outline: none;
-
-            background: #143326;
-            color: white;
-
-            font-size: clamp(12px, 1.5vw, 14px);
-
-            transition: 0.25s ease;
-        }
-
-        #campoBusca::placeholder {
-            color: #a9aaa3;
-        }
-
-        #campoBusca:focus {
-            border-color: #d4af37;
-
-            box-shadow:
-                0 0 0 2px rgba(212, 175, 55, 0.08);
-        }
-
-
-        /* =========================================================
-           CATEGORIAS
-        ========================================================= */
-
-        .categorias {
-            width: min(1200px, calc(100% - 32px));
-
-            margin: clamp(14px, 3vw, 22px) auto 0;
-
-            display: flex;
-
-            justify-content: center;
-            align-items: center;
-
-            flex-wrap: wrap;
-
-            gap: clamp(6px, 1vw, 10px);
-        }
-
-        .categoria-btn {
-            border: 1px solid rgba(212, 175, 55, 0.28);
-
-            background: transparent;
-            color: #d8d4c9;
-
-            padding:
-                clamp(8px, 1.3vw, 11px)
-                clamp(12px, 2vw, 20px);
-
-            border-radius: 999px;
-
-            font-size: clamp(10px, 1.2vw, 13px);
-
-            cursor: pointer;
-
-            white-space: nowrap;
-
-            transition: 0.25s ease;
-        }
-
-        .categoria-btn:hover,
-        .categoria-btn.ativo {
-            background: #d4af37;
-            color: #091712;
-
-            border-color: #d4af37;
-        }
-
-
-        /* =========================================================
-           MARCAS
-        ========================================================= */
-
-        .marcas {
-            width: min(1200px, calc(100% - 32px));
-
-            margin: clamp(12px, 2vw, 20px) auto 0;
-
-            display: flex;
-
-            justify-content: center;
-            align-items: center;
-
-            flex-wrap: wrap;
-
-            gap: clamp(5px, 0.8vw, 9px);
-        }
-
-        .marca-btn {
-            padding:
-                clamp(6px, 1vw, 9px)
-                clamp(9px, 1.5vw, 15px);
-
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 6px;
-
-            background: #10271d;
-            color: #c9c7bd;
-
-            font-size: clamp(9px, 1.1vw, 12px);
-
-            cursor: pointer;
-
-            white-space: nowrap;
-
-            transition: 0.25s ease;
-        }
-
-        .marca-btn:hover,
-        .marca-btn.ativo {
-            background: #1e4a38;
-            color: #d4af37;
-
-            border-color: rgba(212, 175, 55, 0.35);
-        }
-
-
-        /* =========================================================
-           VITRINE
-        ========================================================= */
-
-        .vitrine {
-            width: min(1200px, calc(100% - 32px));
-
-            margin:
-                clamp(25px, 5vw, 45px)
-                auto
-                clamp(40px, 7vw, 70px);
-        }
-
-        .titulo-vitrine {
-            margin-bottom: clamp(18px, 3vw, 28px);
-        }
-
-        .titulo-vitrine h2 {
-            font-family: "Playfair Display", serif;
-
-            color: #d4af37;
-
-            font-size: clamp(24px, 4vw, 34px);
-        }
-
-        .titulo-vitrine p {
-            margin-top: 5px;
-
-            color: #92978f;
-
-            font-size: clamp(11px, 1.3vw, 13px);
-        }
-
-
-        /* =========================================================
-           GRID DE PRODUTOS
-        ========================================================= */
-
-        #grid-vitrine {
-            display: grid;
-
-            grid-template-columns:
-                repeat(
-                    auto-fit,
-                    minmax(
-                        min(100%, 210px),
-                        1fr
-                    )
-                );
-
-            gap: clamp(10px, 2vw, 22px);
-        }
-
-        .produto-card {
-            width: 100%;
-            min-width: 0;
-
-            overflow: hidden;
-
-            border: 1px solid rgba(212, 175, 55, 0.10);
-            border-radius: 10px;
-
-            background: #10271d;
-
-            transition:
-                transform 0.25s ease,
-                border-color 0.25s ease;
-        }
-
-        .produto-card:hover {
-            transform: translateY(-3px);
-
-            border-color:
-                rgba(212, 175, 55, 0.35);
-        }
-
-        .produto-imagem {
-            width: 100%;
-
-            aspect-ratio: 1 / 1.15;
-
-            overflow: hidden;
-
-            background: #0c1e16;
-        }
-
-        .produto-imagem img {
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-
-            transition: transform 0.4s ease;
-        }
-
-        .produto-card:hover .produto-imagem img {
-            transform: scale(1.03);
-        }
-
-        .produto-conteudo {
-            padding: clamp(10px, 1.5vw, 17px);
-        }
-
-        .produto-marca {
-            color: #d4af37;
-
-            font-size: clamp(8px, 1vw, 10px);
-
-            font-weight: 700;
-
-            letter-spacing: 1px;
-
-            text-transform: uppercase;
-        }
-
-        .produto-titulo {
-            margin-top: 6px;
-
-            color: #f2eee5;
-
-            font-size: clamp(10px, 1.3vw, 14px);
-
-            line-height: 1.35;
-
-            overflow-wrap: anywhere;
-        }
-
-        .produto-preco {
-            margin-top: 10px;
-
-            color: #d4af37;
-
-            font-size: clamp(15px, 2vw, 21px);
-
-            font-weight: 700;
-        }
-
-        .produto-info {
-            display: flex;
-
-            flex-wrap: wrap;
-
-            gap: 6px;
-
-            margin-top: 8px;
-        }
-
-        .tamanho,
-        .cor {
-            padding: 4px 7px;
-
-            border-radius: 4px;
-
-            background: #17382a;
-
-            color: #c7c8bf;
-
-            font-size: 9px;
-        }
-
-        .produto-whatsapp {
-            width: 100%;
-
-            height: clamp(36px, 4vw, 43px);
-
-            margin-top: 12px;
-
-            border: 0;
-            border-radius: 6px;
-
-            background: #1e4a38;
-            color: #eee;
-
-            font-size: clamp(9px, 1.1vw, 12px);
-
-            font-weight: 600;
-
-            cursor: pointer;
-
-            transition: 0.25s ease;
-        }
-
-        .produto-whatsapp:hover {
-            background: #286347;
-        }
-
-
-        /* =========================================================
-           LOOKS — VISTA SEU LOOK COM RAÍZES
-        ========================================================= */
-
-        .looks-raizes {
-            width: min(1200px, calc(100% - 32px));
-
-            margin:
-                clamp(35px, 6vw, 65px)
-                auto
-                clamp(45px, 7vw, 75px);
-        }
-
-        .looks-cabecalho {
-            display: flex;
-
-            align-items: flex-end;
-            justify-content: space-between;
-
-            gap: 20px;
-
-            margin-bottom: clamp(18px, 3vw, 28px);
-        }
-
-        .looks-titulo h2 {
-            font-family: "Playfair Display", serif;
-
-            color: #d4af37;
-
-            font-size: clamp(24px, 4vw, 36px);
-
-            line-height: 1.1;
-        }
-
-        .looks-titulo p {
-            margin-top: 7px;
-
-            color: #92978f;
-
-            font-size: clamp(10px, 1.3vw, 13px);
-        }
-
-        .looks-controles {
-            display: flex;
-
-            gap: 8px;
-
-            flex-shrink: 0;
-        }
-
-        .look-btn {
-            width: clamp(36px, 4vw, 44px);
-            height: clamp(36px, 4vw, 44px);
-
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 50%;
-
-            background: #10271d;
-            color: #d4af37;
-
-            font-size: 20px;
-
-            cursor: pointer;
-
-            transition: 0.25s ease;
-        }
-
-        .look-btn:hover {
-            background: #d4af37;
-            color: #091712;
-        }
-
-        .looks-carrossel {
-            width: 100%;
-
-            display: flex;
-
-            gap: clamp(10px, 1.5vw, 18px);
-
-            overflow-x: auto;
-            overflow-y: hidden;
-
-            padding:
-                4px 2px 14px;
-
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-
-            scrollbar-width: thin;
-            scrollbar-color:
-                #d4af37
-                #10271d;
-        }
-
-        .looks-carrossel::-webkit-scrollbar {
-            height: 5px;
-        }
-
-        .looks-carrossel::-webkit-scrollbar-track {
-            background: #10271d;
-        }
-
-        .looks-carrossel::-webkit-scrollbar-thumb {
-            background: #d4af37;
-
-            border-radius: 999px;
-        }
-
-        .look-item {
-            flex:
-                0 0
-                clamp(
-                    150px,
-                    20vw,
-                    240px
-                );
-
-            aspect-ratio: 3 / 4;
-
-            overflow: hidden;
-
-            border-radius: 9px;
-
-            background: #10271d;
-
-            scroll-snap-align: start;
-
-            border: 1px solid rgba(212, 175, 55, 0.12);
-
-            cursor: pointer;
-        }
-
-        .look-item img {
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-
-            transition:
-                transform 0.45s ease;
-        }
-
-        .look-item:hover img {
-            transform: scale(1.04);
-        }
-
-
-        /* =========================================================
-           INSTAGRAM
-        ========================================================= */
-
-        .instagram-area {
-            width: min(1200px, calc(100% - 32px));
-
-            margin:
-                0 auto
-                clamp(35px, 6vw, 60px);
-
-            display: flex;
-
-            justify-content: center;
-        }
-
-        .instagram-btn {
-            display: inline-flex;
-
-            align-items: center;
-            justify-content: center;
-
-            max-width: 100%;
-
-            padding:
-                clamp(10px, 1.5vw, 13px)
-                clamp(15px, 2.5vw, 23px);
-
-            border: 1px solid #d4af37;
-            border-radius: 999px;
-
-            color: #d4af37;
-
-            font-size: clamp(10px, 1.3vw, 13px);
-
-            font-weight: 600;
-
-            white-space: nowrap;
-
-            transition: 0.25s ease;
-        }
-
-        .instagram-btn:hover {
-            background: #d4af37;
-            color: #091712;
-        }
-
-
-        /* =========================================================
-           WHATSAPP FLUTUANTE
-        ========================================================= */
-
-        .whatsapp-flutuante {
-            position: fixed;
-
-            width: clamp(48px, 5vw, 58px);
-            height: clamp(48px, 5vw, 58px);
-
-            right: clamp(12px, 2vw, 22px);
-            bottom: clamp(12px, 2vw, 22px);
-
-            z-index: 999;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 50%;
-
-            background: #25d366;
-
-            box-shadow:
-                0 6px 25px rgba(0, 0, 0, 0.35);
-        }
-
-        .whatsapp-flutuante svg {
-            width: clamp(24px, 3vw, 30px);
-            height: clamp(24px, 3vw, 30px);
-
-            fill: white;
-        }
-
-
-        /* =========================================================
-           FOOTER
-        ========================================================= */
-
-        footer {
-            width: 100%;
-
-            padding:
-                clamp(28px, 5vw, 45px)
-                16px;
-
-            background: #06110d;
-
-            border-top:
-                1px solid rgba(212, 175, 55, 0.12);
-        }
-
-        .footer-container {
-            width: min(1200px, calc(100% - 32px));
-
-            margin: auto;
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(
-                    auto-fit,
-                    minmax(
-                        min(100%, 220px),
-                        1fr
-                    )
-                );
-
-            gap: clamp(20px, 4vw, 35px);
-        }
-
-        .footer-col h3 {
-            margin-bottom: 10px;
-
-            color: #d4af37;
-
-            font-family: "Playfair Display", serif;
-
-            font-size: clamp(17px, 2vw, 20px);
-        }
-
-        .footer-col p {
-            color: #898f89;
-
-            font-size: clamp(11px, 1.2vw, 13px);
-
-            line-height: 1.7;
-        }
-
-        .footer-bottom {
-            width: min(1200px, calc(100% - 32px));
-
-            margin:
-                30px auto 0;
-
-            padding-top: 18px;
-
-            border-top:
-                1px solid rgba(255, 255, 255, 0.06);
-
-            text-align: center;
-
-            color: #626a63;
-
-            font-size: 10px;
-        }
-
-
-        /* =========================================================
-           PRODUTO NÃO ENCONTRADO
-        ========================================================= */
-
-        .nenhum-produto {
-            grid-column: 1 / -1;
-
-            padding: 50px 20px;
-
-            text-align: center;
-
-            color: #898f89;
-        }
-
-
-        /* =========================================================
-           CELULARES PEQUENOS
-        ========================================================= */
-
-        @media (max-width: 420px) {
-
-            .header-container {
-                width: calc(100% - 24px);
-            }
-
-            nav {
-                gap: 8px;
-            }
-
-            nav a {
-                font-size: 10px;
-            }
-
-            .hero,
-            .vitrine,
-            .categorias,
-            .marcas,
-            .instagram-area,
-            .looks-raizes {
-                width: calc(100% - 24px);
-            }
-
-            #grid-vitrine {
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
-
-                gap: 8px;
-            }
-
-            .produto-conteudo {
-                padding: 8px;
-            }
-
-            .produto-titulo {
-                min-height: 38px;
-            }
-
-            .produto-info {
-                gap: 5px;
-            }
-
-            .tamanho,
-            .cor {
-                padding: 3px 6px;
-
-                font-size: 8px;
-            }
-
-            .looks-cabecalho {
-                align-items: center;
-            }
-
-            .look-item {
-                flex-basis: 155px;
-            }
-        }
-
-
-        /* =========================================================
-           CELULARES MUITO ESTREITOS
-        ========================================================= */
-
-        @media (max-width: 340px) {
-
-            #grid-vitrine {
-                grid-template-columns: 1fr;
-            }
-
-            .produto-imagem {
-                aspect-ratio: 1 / 1;
-            }
-
-            .logo-text {
-                font-size: 17px;
-            }
-
-            .hero-texto h1 {
-                font-size: 29px;
-            }
-
-            .looks-controles {
-                display: none;
-            }
-
-            .look-item {
-                flex-basis: 170px;
-            }
-        }
-
-
-        /* =========================================================
-           TELAS GRANDES / TV
-        ========================================================= */
-
-        @media (min-width: 1600px) {
-
-            .header-container,
-            .hero,
-            .categorias,
-            .marcas,
-            .vitrine,
-            .looks-raizes,
-            .instagram-area,
-            .footer-container,
-            .footer-bottom {
-                width: min(
-                    1400px,
-                    calc(100% - 80px)
-                );
-            }
-
-            #grid-vitrine {
-                grid-template-columns:
-                    repeat(
-                        auto-fit,
-                        minmax(250px, 1fr)
-                    );
-            }
-
-            .look-item {
-                flex-basis: 270px;
-            }
-        }
-
-
-        /* =========================================================
-           4K / MUITO GRANDE
-        ========================================================= */
-
-        @media (min-width: 2000px) {
-
-            body {
-                font-size: 18px;
-            }
-
-            .slideshow {
-                max-height: 600px;
-            }
-
-            #grid-vitrine {
-                grid-template-columns:
-                    repeat(
-                        auto-fit,
-                        minmax(280px, 1fr)
-                    );
-            }
-
-            .look-item {
-                flex-basis: 310px;
-            }
-        }
-
-    </style>
-</head>
-
-
-<body>
-
-
-    <!-- =========================================================
-         HEADER
-    ========================================================= -->
-
-    <header>
-
-        <div class="header-container">
-
-            <a href="#" class="logo-area">
-
-                <img
-                    src="logo.png"
-                    alt="Logo Raízes"
-                >
-
-                <span class="logo-text">
-                    RAÍZES
-                </span>
-
-            </a>
-
-
-            <nav>
-
-                <a href="#vitrine">
-                    Vitrine
-                </a>
-
-                <a href="#looks">
-                    Looks
-                </a>
-
-                <a href="#visite-nos">
-                    Visite-nos
-                </a>
-
-            </nav>
-
-        </div>
-
-    </header>
-
-
-    <!-- =========================================================
-         HERO
-    ========================================================= -->
-
-    <main>
-
-        <section class="hero">
-
-            <div class="slideshow">
-
-                <div class="slide ativo">
-
-                    <img
-                        src="foto-loja.jpg"
-                        alt="Loja Raízes"
-                    >
-
-                    <div class="hero-overlay"></div>
-
-                    <div class="hero-texto">
-
-                        <h1>
-                            Moda que conecta gerações.
-                        </h1>
-
-                        <p>
-                            Estilo, qualidade e personalidade
-                            para todas as ocasiões.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             BUSCA
-        ====================================================== -->
-
-        <div class="area-busca">
-
-            <input
-                type="search"
-                id="campoBusca"
-                placeholder="Buscar produto, marca ou código..."
-                autocomplete="off"
-            >
-
-        </div>
-
-
-        <!-- =====================================================
-             CATEGORIAS
-        ====================================================== -->
-
-        <section
-            class="categorias"
-            id="categorias"
-        >
-
-            <button
-                class="categoria-btn ativo"
-                onclick="filtrarCategoria('TODAS', this)"
-            >
-                ✦ Todas
-            </button>
-
-            <button
-                class="categoria-btn"
-                onclick="filtrarCategoria('MASC', this)"
-            >
-                ♂ Masculino
-            </button>
-
-            <button
-                class="categoria-btn"
-                onclick="filtrarCategoria('FEMI', this)"
-            >
-                ♀ Feminino
-            </button>
-
-            <button
-                class="categoria-btn"
-                onclick="filtrarCategoria('OFERTAS', this)"
-            >
-                ◇ Ofertas
-            </button>
-
-        </section>
-
-
-        <!-- =====================================================
-             MARCAS
-        ====================================================== -->
-
-        <section class="marcas">
-
-            <button
-                class="marca-btn ativo"
-                onclick="filtrarMarca('TODAS')"
-            >
-                Todas
-            </button>
-
-            <button
-                class="marca-btn"
-                onclick="filtrarMarca('Aurochs')"
-            >
-                Aurochs
-            </button>
-
-            <button
-                class="marca-btn"
-                onclick="filtrarMarca('Baumgarten')"
-            >
-                Baumgarten
-            </button>
-
-            <button
-                class="marca-btn"
-                onclick="filtrarMarca('Beagle')"
-            >
-                Beagle
-            </button>
-
-            <button
-                class="marca-btn"
-                onclick="filtrarMarca('Farm Rio')"
-            >
-                Farm Rio
-            </button>
-
-            <button
-                class="marca-btn"
-                onclick="filtrarMarca('Soul')"
-            >
-                Soul
-            </button>
-
-            <button
-                class="marca-btn"
-                onclick="filtrarMarca('SlyWear')"
-            >
-                SlyWear
-            </button>
-
-            <button
-                class="marca-btn"
-                onclick="filtrarMarca('Hering')"
-            >
-                Hering
-            </button>
-
-        </section>
-
-
-        <!-- =====================================================
-             VITRINE
-        ====================================================== -->
-
-        <section
-            class="vitrine"
-            id="vitrine"
-        >
-
-            <div class="titulo-vitrine">
-
-                <h2>
-                    Nossa Vitrine
-                </h2>
-
-                <p>
-                    Encontre seu próximo estilo.
-                </p>
-
-            </div>
-
-
-            <!--
-                IMPORTANTE:
-
-                O JavaScript vai colocar os produtos aqui.
-
-                A cada 8 produtos, ele insere automaticamente
-                a seção de looks.
-            -->
-
-            <div id="grid-vitrine"></div>
-
-        </section>
-
-
-        <!-- =====================================================
-             LOOKS RAÍZES
-        ====================================================== -->
-
-        <section
-            class="looks-raizes"
-            id="looks"
-        >
-
-            <div class="looks-cabecalho">
-
-                <div class="looks-titulo">
-
-                    <h2>
-                        Vista seu look com Raízes
-                    </h2>
-
-                    <p>
-                        Inspirações para completar seu estilo.
-                    </p>
-
-                </div>
-
-
-                <div class="looks-controles">
-
-                    <button
-                        class="look-btn"
-                        type="button"
-                        aria-label="Ver looks anteriores"
-                        onclick="moverLooks(-1)"
-                    >
-                        ‹
-                    </button>
-
-                    <button
-                        class="look-btn"
-                        type="button"
-                        aria-label="Ver próximos looks"
-                        onclick="moverLooks(1)"
-                    >
-                        ›
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div
-                class="looks-carrossel"
-                id="looksCarrossel"
-            >
-
-                <!--
-                    O JavaScript cria as imagens automaticamente
-                    usando a pasta /looks/
-                -->
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             INSTAGRAM
-        ====================================================== -->
-
-        <section class="instagram-area">
-
-            <a
-                class="instagram-btn"
-                href="https://instagram.com/maisraizesoficial"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                @maisraizesoficial
-            </a>
-
-        </section>
-
-    </main>
-
-
-    <!-- =========================================================
-         WHATSAPP
-    ========================================================= -->
-
-    <a
-        class="whatsapp-flutuante"
-        href="https://wa.me/5542999839784"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Falar com a Raízes pelo WhatsApp"
-    >
-
-        <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-        >
-
-            <path d="M20.52 3.48A11.78 11.78 0 0 0 12.06 0C5.54 0 .23 5.31.23 11.83c0 2.08.54 4.11 1.56 5.9L.13 24l6.42-1.68a11.82 11.82 0 0 0 5.51 1.4h.01c6.52 0 11.83-5.31 11.83-11.83 0-3.16-1.23-6.13-3.38-8.41ZM12.07 21.7h-.01a9.82 9.82 0 0 1-5.01-1.37l-.36-.21-3.81 1 1.02-3.71-.23-.38a9.82 9.82 0 0 1-1.51-5.2C2.16 6.4 6.6 1.96 12.06 1.96c2.65 0 5.14 1.03 7.01 2.91a9.84 9.84 0 0 1 2.91 7.02c0 5.46-4.44 9.81-9.91 9.81Zm5.39-7.35c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.49-.9-.8-1.51-1.78-1.69-2.08-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.21 5.09 4.5.71.31 1.27.5 1.7.64.72.23 1.37.2 1.88.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/>
-
-        </svg>
-
-    </a>
-
-
-    <!-- =========================================================
-         FOOTER
-    ========================================================= -->
-
-    <footer id="visite-nos">
-
-        <div class="footer-container">
-
-            <div class="footer-col">
-
-                <h3>
-                    RAÍZES
-                </h3>
-
-                <p>
-                    Moda que conecta gerações.
-                </p>
-
-            </div>
-
-
-            <div class="footer-col">
-
-                <h3>
-                    Visite-nos
-                </h3>
-
-                <p>
-                    Av. Interventor Manoel Ribas, 186
-                    <br>
-                    Pitanga — PR
-                </p>
-
-            </div>
-
-
-            <div class="footer-col">
-
-                <h3>
-                    Contato
-                </h3>
-
-                <p>
-                    WhatsApp:
-                    (42) 99983-9784
-                    <br>
-                    Instagram:
-                    @maisraizesoficial
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="footer-bottom">
-
-            © 2026 Loja Raízes — Todos os direitos reservados.
-
-        </div>
-
-    </footer>
-
-
-    <!-- =========================================================
-         SCRIPTS
-    ========================================================= -->
-
-    <script src="produtos.js"></script>
-    <script src="script.js"></script>
-
-
-    <!-- =========================================================
-         SCRIPT DOS LOOKS
-    ========================================================= -->
-
-    <script>
-
-        /*
-         * ========================================================
-         * LOOKS DA RAÍZES
-         * ========================================================
-         *
-         * Para adicionar um novo look:
-         *
-         * 1. Coloque a imagem dentro da pasta "looks"
-         * 2. Adicione o nome abaixo.
-         *
-         * Exemplo:
-         *
-         * "looks/look06.jpg"
-         *
-         * Recomendo imagens verticais 3:4.
-         */
-
-        const looksRaizes = [
-
-            "looks/look01.jpg",
-            "looks/look02.jpg",
-            "looks/look03.jpg",
-            "looks/look04.jpg",
-            "looks/look05.jpg",
-            "looks/look06.jpg",
-            "looks/look07.jpg",
-            "looks/look08.jpg"
-
-        ];
-
-
-        function carregarLooks() {
-
-            const carrossel =
-                document.getElementById(
-                    "looksCarrossel"
-                );
-
-            if (!carrossel) {
-                return;
-            }
-
-            carrossel.innerHTML = "";
-
-
-            looksRaizes.forEach(
-                (imagem, indice) => {
-
-                    const item =
-                        document.createElement("div");
-
-                    item.className =
-                        "look-item";
-
-
-                    const img =
-                        document.createElement("img");
-
-                    img.src = imagem;
-
-                    img.alt =
-                        `Look Raízes ${indice + 1}`;
-
-                    img.loading = "lazy";
-
-
-                    /*
-                     * Se uma imagem não existir,
-                     * ela simplesmente fica escondida.
-                     */
-
-                    img.onerror = function () {
-
-                        item.remove();
-
-                    };
-
-
-                    item.appendChild(img);
-
-                    carrossel.appendChild(item);
-
-                }
-            );
-
-        }
-
-
-        function moverLooks(direcao) {
-
-            const carrossel =
-                document.getElementById(
-                    "looksCarrossel"
-                );
-
-            if (!carrossel) {
-                return;
-            }
-
-            const largura =
-                carrossel.clientWidth * 0.75;
-
-
-            carrossel.scrollBy({
-
-                left: largura * direcao,
-
-                behavior: "smooth"
-
-            });
-
-        }
-
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            carregarLooks
-        );
-
-    </script>
-
-</body>
-
-</html>
-⚠️ Um detalhe importante
-
-Nesse HTML, a seção de looks fica depois da vitrine, não literalmente entre o produto 8 e o produto 9.
-
-Como seu script.js atual monta os cards dinamicamente, o jeito correto de fazer exatamente depois do 8º produto é alterar o renderizarProdutos() para inserir a seção no meio da lista. Isso também evita que ela desapareça ou fique no lugar errado quando o usuário filtrar por Masculino, Feminino, marca ou busca.
-
-Se quiser que seja 8 produtos → looks → resto dos produtos, eu faria essa parte diretamente no script.js, mantendo o HTML acima mais limpo.
-
-Texto colado(1).txt
-Documento
-salvando esse em  caso de erros 
-
-Sim 👍 Vou considerar esse HTML que você enviou como a versão de segurança, para a gente poder voltar para ele se alguma alteração quebrar o site.
-
-Ele é o arquivo que contém a estrutura atual da Raízes, incluindo filtros, vitrine, slideshow, busca e rodapé.
-
-Para o próximo update, então, a regra fica:
-
-não redesenhar o site
-manter cores, fontes e estrutura atuais
-adicionar o “Vista seu look com Raízes”
-aparecer depois de aproximadamente 8 produtos
-imagens em uma pasta separada looks/
-carrossel vertical e responsivo
-preservar os filtros e a busca
-se der erro, usamos esse HTML enviado agora como base.
-
-E sim: melhor trabalhar em cima desse, porque ele é mais completo que aquele HTML que eu tinha mandado antes.
-
-se baseie nesse que enviei, coloque buscar igual o  q  vc mandou, a seçao Ideias de Look corrigida
-
-Sim. Baseei diretamente no HTML que você enviou, sem refazer o visual da loja.
-
-Fiz estas alterações:
-
-🔎 Busca no cabeçalho mantida no estilo do seu site, com ícone mais limpo.
-🔍 A busca continua filtrando os produtos conforme você digita.
-👕 IDEIAS DE LOOK aparece depois do 8º produto visível.
-↔️ Carrossel horizontal com botões ‹ ›.
-📱 Funciona no celular com arrastar para os lados.
-
-🖼️ As imagens ficam separadas na pasta:
-
-looks/
-├── look01.jpg
-├── look02.jpg
-├── look03.jpg
-├── look04.jpg
-├── look05.jpg
-└── look06.jpg
-🔄 Se aplicar categoria, marca ou busca, a seção se reposiciona automaticamente depois do 8º produto que ficou visível.
-🎨 Mantive as cores, fontes, cards e estrutura que você já tinha.
-
-Arquivo completo atualizado:
-
-📄 Baixar index_raizes_atualizado.html
-
-Você só precisa criar a pasta looks no mesmo lugar do index.html e colocar as fotos verticais nela. 
-
-index_raizes_atualizado.html
-HTML
-não, fontes bugadas, tudo bugado e nao quero o preview
-
-Entendi. O problema foi eu ter mexido demais no arquivo e acabado quebrando a estrutura que já estava funcionando.
-
-Vamos fazer do jeito certo: voltar exatamente para o HTML que você enviou como base e alterar somente:
-
-🔎 a busca;
-👕 a seção “IDEIAS DE LOOK” depois do 8º produto;
-🎨 sem mexer nas fontes, cores, header, cards ou responsividade que já estavam funcionando;
-📁 imagens somente em looks/;
-sem preview.
-
-Vou usar o arquivo original que você enviou como base, não o arquivo que eu gerei anteriormente.
-
-<!DOCTYPE html>
-
-<html lang="pt-BR" data-theme="dark">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
-
-
-
-
-<title> RAÍZES — Moda Masculina & Feminina — Pitanga/PR </title>
-
-<meta
-name="description"
-content="Loja Raízes em Pitanga/PR. Moda Masculina & Feminina: Beagle, Baumgarten, Aurochs, Farm Rio, Soul, SlyWear e Hering."
-
-
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com" >
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" >
-
-<style> /* ===================================================== CORES ===================================================== */ :root { --esmeralda-profundo: #091712; --esmeralda-medio: #143326; --esmeralda-vibrante: #1e4a38; --dourado-champagne: #d4af37; --dourado-suave: #c5a059; --dourado-gradiente: linear-gradient( 135deg, #ebd47a 0%, #b88e28 100% ); --font-titulo: 'Playfair Display', serif; --font-corpo: 'Plus Jakarta Sans', sans-serif; --transicao: all 0.25s ease; --raio-card: 12px; --raio-btn: 6px; --bg-principal: #050806; --bg-card: #0d120f; --bg-input: #141b16; --borda-suave: rgba(197, 160, 89, 0.12); --borda-forte: rgba(197, 160, 89, 0.3); --texto-primario: #f5f3ef; --texto-secundario: #8e9e94; --sombra-card: 0 8px 24px rgba(0, 0, 0, 0.6); } /* ===================================================== BASE ===================================================== */ * { box-sizing: border-box; margin: 0; padding: 0; } html { scroll-behavior: smooth; } body { font-family: var(--font-corpo); background: var(--bg-principal); color: var(--texto-primario); line-height: 1.4; padding-bottom: 40px; } /* ===================================================== HEADER ===================================================== */ header { position: sticky; top: 0; z-index: 100; background: rgba(5, 8, 6, 0.94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--borda-suave); padding: 10px 16px; } .header-top { width: 100%; max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 15px; } .logo-container { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; } .logo-img { width: 32px; height: 32px; object-fit: contain; border-radius: 50%; filter: sepia(1) saturate(3) hue-rotate(5deg) brightness(1.1); } .logo-marca { font-family: var(--font-titulo); font-size: 20px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; background: var(--dourado-gradiente); -webkit-background-clip: text; -webkit-text-fill-color: transparent; } /* ===================================================== MENU ===================================================== */ .header-nav { display: flex; align-items: center; justify-content: center; gap: 4px; flex: 1; } .btn-nav { background: none; border: none; color: var(--texto-secundario); font-size: 13px; font-weight: 600; cursor: pointer; padding: 6px 8px; transition: var(--transicao); text-decoration: none; white-space: nowrap; } .btn-nav:hover, .btn-nav.ativo { color: var(--dourado-champagne); } /* ===================================================== BUSCA ===================================================== */ .busca-container { position: relative; display: flex; align-items: center; } .campo-busca { width: 0; opacity: 0; background: var(--bg-input); border: 1px solid var(--borda-suave); color: var(--texto-primario); border-radius: 20px; padding: 7px 12px; outline: none; transition: width 0.25s ease, opacity 0.25s ease; } .campo-busca.aberto { width: 190px; opacity: 1; } .campo-busca::placeholder { color: var(--texto-secundario); } .btn-pesquisa { width: 34px; height: 34px; border-radius: 50%; background: transparent; border: 1px solid var(--borda-suave); color: var(--texto-primario); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transicao); font-size: 14px; } .btn-pesquisa:hover { border-color: var(--dourado-champagne); color: var(--dourado-champagne); } /* ===================================================== SLIDESHOW ===================================================== */ .secao-loja { max-width: 1200px; margin: 16px auto 8px; padding: 0 12px; } .slideshow { position: relative; width: 100%; height: 260px; overflow: hidden; border-radius: var(--raio-card); border: 1px solid var(--borda-suave); background: var(--bg-card); box-shadow: var(--sombra-card); } .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.6s ease; pointer-events: none; } .slide.ativo { opacity: 1; pointer-events: auto; } .slide img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.58); } .slide-conteudo { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; background: linear-gradient( to top, rgba(5, 8, 6, 0.88), rgba(5, 8, 6, 0.05) ); } .slide-titulo { font-family: var(--font-titulo); font-size: 30px; color: #ffffff; margin-bottom: 5px; } .slide-sub { font-size: 13px; color: var(--dourado-suave); letter-spacing: 1px; } .slide-controles { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 3; } .slide-ponto { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.35); cursor: pointer; transition: var(--transicao); } .slide-ponto.ativo { width: 20px; border-radius: 10px; background: var(--dourado-champagne); } /* ===================================================== CATEGORIAS ===================================================== */ .categorias { max-width: 1200px; margin: 18px auto 5px; padding: 0 12px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; } .categoria-btn { background: var(--bg-card); border: 1px solid var(--borda-suave); color: var(--texto-secundario); padding: 13px 10px; border-radius: var(--raio-card); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; cursor: pointer; transition: var(--transicao); } .categoria-btn:hover, .categoria-btn.ativo { background: var(--esmeralda-medio); color: #ffffff; border-color: var(--dourado-champagne); transform: translateY(-1px); } /* ===================================================== FILTROS ===================================================== */ .container-filtros { max-width: 1200px; margin: auto; padding: 12px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; } .container-filtros::-webkit-scrollbar { display: none; } .filtros-wrapper { display: inline-flex; gap: 8px; } .btn-filtro { background: var(--bg-card); border: 1px solid var(--borda-suave); color: var(--texto-secundario); padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; cursor: pointer; transition: var(--transicao); } .btn-filtro:hover, .btn-filtro.ativo { background: var(--esmeralda-medio); color: #ffffff; border-color: var(--dourado-champagne); } /* ===================================================== PRODUTOS ===================================================== */ .grid-produtos { display: grid; grid-template-columns: repeat( auto-fill, minmax(210px, 1fr) ); gap: 14px; max-width: 1200px; margin: 8px auto; padding: 0 12px; } .card-produto { background: var(--bg-card); border: 1px solid var(--borda-suave); border-radius: var(--raio-card); overflow: hidden; display: flex; flex-direction: column; position: relative; box-shadow: var(--sombra-card); transition: var(--transicao); } .card-produto:hover { border-color: var(--borda-forte); transform: translateY(-2px); } .card-foto-wrapper { position: relative; width: 100%; aspect-ratio: 3 / 4; background: var(--bg-input); overflow: hidden; } .card-foto-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; } .card-produto:hover .card-foto-wrapper img { transform: scale(1.05); } .sem-imagem-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--texto-secundario); font-size: 11px; text-transform: uppercase; } .badge-marca { position: absolute; top: 8px; left: 8px; background: rgba(5, 8, 6, 0.85); color: #ebd47a; backdrop-filter: blur(6px); border: 1px solid rgba(212, 175, 55, 0.5); padding: 4px 8px; border-radius: 12px; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; z-index: 2; } .card-info { padding: 12px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; } .produto-titulo { font-size: 13px; font-weight: 600; color: var(--texto-primario); margin-bottom: 4px; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; } .produto-preco { font-size: 16px; font-weight: 700; color: #25d366; letter-spacing: 0.3px; margin-bottom: 8px; } .secao-opcoes { margin: 6px 0; display: flex; flex-direction: column; gap: 6px; } .label-opcao { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--texto-secundario); } .lista-pills { display: flex; flex-wrap: wrap; gap: 4px; } .pill-opcao { background: var(--bg-input); border: 1px solid var(--borda-suave); color: var(--texto-primario); padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; cursor: pointer; } .pill-opcao.selecionado { background: var(--esmeralda-medio); color: #ffffff; border-color: var(--dourado-champagne); } .btn-interesse { width: 100%; background: #25d366; color: #000000; border: none; padding: 10px; border-radius: var(--raio-btn); font-family: var(--font-corpo); font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 8px; transition: var(--transicao); } .btn-interesse:hover { background: #20ba5a; transform: translateY(-1px); } /* ===================================================== WHATSAPP ===================================================== */ .btn-whatsapp-flutuante { position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: #ffffff; border-radius: 50px; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(0,0,0,0.4); z-index: 1000; text-decoration: none; transition: transform 0.25s ease, background-color 0.25s ease; } .btn-whatsapp-flutuante:hover { transform: scale(1.08); background-color: #20ba5a; } .btn-whatsapp-flutuante svg { width: 28px; height: 28px; fill: #ffffff; } /* ===================================================== FOOTER ===================================================== */ footer { text-align: center; padding: 30px 15px; background: var(--bg-principal); font-size: 12px; color: var(--texto-secundario); border-top: 1px solid var(--borda-suave); margin-top: 30px; } .instagram-link { display: inline-flex; align-items: center; gap: 7px; margin: 12px 0 18px; color: var(--dourado-champagne); text-decoration: none; font-size: 13px; font-weight: 700; transition: var(--transicao); } .instagram-link:hover { color: #ebd47a; transform: translateY(-1px); } .instagram-icon { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; } /* ===================================================== RESPONSIVO ===================================================== */ @media (max-width: 850px) { .header-nav .btn-nav:nth-child(2) { display: none; } .header-nav { justify-content: flex-end; } .campo-busca.aberto { width: 150px; } } @media (max-width: 600px) { header { padding: 9px 10px; } .header-top { gap: 8px; } .logo-marca { font-size: 17px; letter-spacing: 2px; } .logo-img { width: 29px; height: 29px; } .header-nav .btn-nav { display: none; } .campo-busca.aberto { position: absolute; top: 58px; right: 10px; width: calc(100vw - 20px); } .slideshow { height: 180px; } .slide-titulo { font-size: 23px; } .slide-sub { font-size: 10px; } .categorias { grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 12px; } .categoria-btn { padding: 11px 7px; font-size: 10px; } .grid-produtos { grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 0 8px; } .card-info { padding: 9px; } .produto-titulo { font-size: 11px; } .produto-preco { font-size: 14px; } .btn-interesse { padding: 9px 5px; font-size: 9px; } } </style>
-
-</head>
-
-<body>
-
-<!-- ===================================================== HEADER ===================================================== -->
-
-<header>
-
-<div class="header-top">
-
-
-  <a
-    href="#"
-    class="logo-container"
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
   >
 
-    <img
-      src="logo.png"
-      alt="Logo Raízes"
-      class="logo-img"
+  <title>
+    RAÍZES — Moda Masculina & Feminina — Pitanga/PR
+  </title>
+
+  <meta
+    name="description"
+    content="Loja Raízes em Pitanga/PR. Moda Masculina & Feminina: Beagle, Baumgarten, Aurochs, Farm Rio, Soul, SlyWear e Hering."
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <style>
+
+    /* =====================================================
+       CORES
+    ===================================================== */
+
+    :root {
+
+      --esmeralda-profundo: #091712;
+
+      --esmeralda-medio: #143326;
+
+      --esmeralda-vibrante: #1e4a38;
+
+      --dourado-champagne: #d4af37;
+
+      --dourado-suave: #c5a059;
+
+      --dourado-gradiente:
+        linear-gradient(
+          135deg,
+          #ebd47a 0%,
+          #b88e28 100%
+        );
+
+      --font-titulo:
+        'Playfair Display',
+        serif;
+
+      --font-corpo:
+        'Plus Jakarta Sans',
+        sans-serif;
+
+      --transicao:
+        all 0.25s ease;
+
+      --raio-card: 12px;
+
+      --raio-btn: 6px;
+
+
+      --bg-principal: #050806;
+
+      --bg-card: #0d120f;
+
+      --bg-input: #141b16;
+
+      --borda-suave:
+        rgba(197, 160, 89, 0.12);
+
+      --borda-forte:
+        rgba(197, 160, 89, 0.3);
+
+      --texto-primario: #f5f3ef;
+
+      --texto-secundario: #8e9e94;
+
+      --sombra-card:
+        0 8px 24px rgba(0, 0, 0, 0.6);
+
+    }
+
+
+    /* =====================================================
+       BASE
+    ===================================================== */
+
+    * {
+
+      box-sizing: border-box;
+
+      margin: 0;
+
+      padding: 0;
+
+    }
+
+
+    html {
+
+      scroll-behavior: smooth;
+
+    }
+
+
+    body {
+
+      font-family:
+        var(--font-corpo);
+
+      background:
+        var(--bg-principal);
+
+      color:
+        var(--texto-primario);
+
+      line-height: 1.4;
+
+      padding-bottom: 40px;
+
+    }
+
+
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
+    header {
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 100;
+
+      background:
+        rgba(5, 8, 6, 0.94);
+
+      backdrop-filter:
+        blur(14px);
+
+      border-bottom:
+        1px solid var(--borda-suave);
+
+      padding:
+        10px 16px;
+
+    }
+
+
+    .header-top {
+
+      width: 100%;
+
+      max-width: 1200px;
+
+      margin: auto;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 15px;
+
+    }
+
+
+    .logo-container {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      text-decoration: none;
+
+      flex-shrink: 0;
+
+    }
+
+
+    .logo-img {
+
+      width: 32px;
+
+      height: 32px;
+
+      object-fit: contain;
+
+      border-radius: 50%;
+
+      filter:
+        sepia(1)
+        saturate(3)
+        hue-rotate(5deg)
+        brightness(1.1);
+
+    }
+
+
+    .logo-marca {
+
+      font-family:
+        var(--font-titulo);
+
+      font-size: 20px;
+
+      font-weight: 700;
+
+      letter-spacing: 3px;
+
+      text-transform: uppercase;
+
+      background:
+        var(--dourado-gradiente);
+
+      -webkit-background-clip: text;
+
+      -webkit-text-fill-color: transparent;
+
+    }
+
+
+    /* =====================================================
+       MENU
+    ===================================================== */
+
+    .header-nav {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 4px;
+
+      flex: 1;
+
+    }
+
+
+    .btn-nav {
+
+      background: none;
+
+      border: none;
+
+      color:
+        var(--texto-secundario);
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+      cursor: pointer;
+
+      padding:
+        6px 8px;
+
+      transition:
+        var(--transicao);
+
+      text-decoration: none;
+
+      white-space: nowrap;
+
+    }
+
+
+    .btn-nav:hover,
+    .btn-nav.ativo {
+
+      color:
+        var(--dourado-champagne);
+
+    }
+
+
+    /* =====================================================
+       BUSCA
+    ===================================================== */
+
+    .busca-container {
+
+      position: relative;
+
+      display: flex;
+
+      align-items: center;
+
+    }
+
+
+    .campo-busca {
+
+      width: 0;
+
+      opacity: 0;
+
+      background:
+        var(--bg-input);
+
+      border:
+        1px solid var(--borda-suave);
+
+      color:
+        var(--texto-primario);
+
+      border-radius: 20px;
+
+      padding:
+        7px 12px;
+
+      outline: none;
+
+      transition:
+        width 0.25s ease,
+        opacity 0.25s ease;
+
+    }
+
+
+    .campo-busca.aberto {
+
+      width: 190px;
+
+      opacity: 1;
+
+    }
+
+
+    .campo-busca::placeholder {
+
+      color:
+        var(--texto-secundario);
+
+    }
+
+
+    .btn-pesquisa {
+
+      width: 34px;
+
+      height: 34px;
+
+      border-radius: 50%;
+
+      background: transparent;
+
+      border:
+        1px solid var(--borda-suave);
+
+      color:
+        var(--texto-primario);
+
+      cursor: pointer;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      transition:
+        var(--transicao);
+
+      font-size: 14px;
+
+    }
+
+
+    .btn-pesquisa:hover {
+
+      border-color:
+        var(--dourado-champagne);
+
+      color:
+        var(--dourado-champagne);
+
+    }
+
+
+    /* =====================================================
+       SLIDESHOW
+    ===================================================== */
+
+    .secao-loja {
+
+      max-width: 1200px;
+
+      margin:
+        16px auto 8px;
+
+      padding:
+        0 12px;
+
+    }
+
+
+    .slideshow {
+
+      position: relative;
+
+      width: 100%;
+
+      height: 260px;
+
+      overflow: hidden;
+
+      border-radius:
+        var(--raio-card);
+
+      border:
+        1px solid var(--borda-suave);
+
+      background:
+        var(--bg-card);
+
+      box-shadow:
+        var(--sombra-card);
+
+    }
+
+
+    .slide {
+
+      position: absolute;
+
+      inset: 0;
+
+      opacity: 0;
+
+      transition:
+        opacity 0.6s ease;
+
+      pointer-events: none;
+
+    }
+
+
+    .slide.ativo {
+
+      opacity: 1;
+
+      pointer-events: auto;
+
+    }
+
+
+    .slide img {
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+      filter:
+        brightness(0.58);
+
+    }
+
+
+    .slide-conteudo {
+
+      position: absolute;
+
+      inset: 0;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-align: center;
+
+      padding: 20px;
+
+      background:
+        linear-gradient(
+          to top,
+          rgba(5, 8, 6, 0.88),
+          rgba(5, 8, 6, 0.05)
+        );
+
+    }
+
+
+    .slide-titulo {
+
+      font-family:
+        var(--font-titulo);
+
+      font-size: 30px;
+
+      color: #ffffff;
+
+      margin-bottom: 5px;
+
+    }
+
+
+    .slide-sub {
+
+      font-size: 13px;
+
+      color:
+        var(--dourado-suave);
+
+      letter-spacing: 1px;
+
+    }
+
+
+    .slide-controles {
+
+      position: absolute;
+
+      bottom: 12px;
+
+      left: 50%;
+
+      transform:
+        translateX(-50%);
+
+      display: flex;
+
+      gap: 6px;
+
+      z-index: 3;
+
+    }
+
+
+    .slide-ponto {
+
+      width: 7px;
+
+      height: 7px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,0.35);
+
+      cursor: pointer;
+
+      transition:
+        var(--transicao);
+
+    }
+
+
+    .slide-ponto.ativo {
+
+      width: 20px;
+
+      border-radius: 10px;
+
+      background:
+        var(--dourado-champagne);
+
+    }
+
+
+    /* =====================================================
+       CATEGORIAS
+    ===================================================== */
+
+    .categorias {
+
+      max-width: 1200px;
+
+      margin:
+        18px auto 5px;
+
+      padding:
+        0 12px;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 10px;
+
+    }
+
+
+    .categoria-btn {
+
+      background:
+        var(--bg-card);
+
+      border:
+        1px solid var(--borda-suave);
+
+      color:
+        var(--texto-secundario);
+
+      padding:
+        13px 10px;
+
+      border-radius:
+        var(--raio-card);
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.7px;
+
+      cursor: pointer;
+
+      transition:
+        var(--transicao);
+
+    }
+
+
+    .categoria-btn:hover,
+    .categoria-btn.ativo {
+
+      background:
+        var(--esmeralda-medio);
+
+      color: #ffffff;
+
+      border-color:
+        var(--dourado-champagne);
+
+      transform:
+        translateY(-1px);
+
+    }
+
+
+    /* =====================================================
+       FILTROS
+    ===================================================== */
+
+    .container-filtros {
+
+      max-width: 1200px;
+
+      margin: auto;
+
+      padding: 12px;
+
+      overflow-x: auto;
+
+      white-space: nowrap;
+
+      scrollbar-width: none;
+
+    }
+
+
+    .container-filtros::-webkit-scrollbar {
+
+      display: none;
+
+    }
+
+
+    .filtros-wrapper {
+
+      display: inline-flex;
+
+      gap: 8px;
+
+    }
+
+
+    .btn-filtro {
+
+      background:
+        var(--bg-card);
+
+      border:
+        1px solid var(--borda-suave);
+
+      color:
+        var(--texto-secundario);
+
+      padding:
+        6px 14px;
+
+      border-radius: 20px;
+
+      font-size: 11px;
+
+      font-weight: 600;
+
+      letter-spacing: 0.5px;
+
+      text-transform: uppercase;
+
+      cursor: pointer;
+
+      transition:
+        var(--transicao);
+
+    }
+
+
+    .btn-filtro:hover,
+    .btn-filtro.ativo {
+
+      background:
+        var(--esmeralda-medio);
+
+      color: #ffffff;
+
+      border-color:
+        var(--dourado-champagne);
+
+    }
+
+
+    /* =====================================================
+       PRODUTOS
+    ===================================================== */
+
+    .grid-produtos {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          auto-fill,
+          minmax(210px, 1fr)
+        );
+
+      gap: 14px;
+
+      max-width: 1200px;
+
+      margin:
+        8px auto;
+
+      padding:
+        0 12px;
+
+    }
+
+
+    .card-produto {
+
+      background:
+        var(--bg-card);
+
+      border:
+        1px solid var(--borda-suave);
+
+      border-radius:
+        var(--raio-card);
+
+      overflow: hidden;
+
+      display: flex;
+
+      flex-direction: column;
+
+      position: relative;
+
+      box-shadow:
+        var(--sombra-card);
+
+      transition:
+        var(--transicao);
+
+    }
+
+
+    .card-produto:hover {
+
+      border-color:
+        var(--borda-forte);
+
+      transform:
+        translateY(-2px);
+
+    }
+
+
+    .card-foto-wrapper {
+
+      position: relative;
+
+      width: 100%;
+
+      aspect-ratio: 3 / 4;
+
+      background:
+        var(--bg-input);
+
+      overflow: hidden;
+
+    }
+
+
+    .card-foto-wrapper img {
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+      display: block;
+
+      transition:
+        transform 0.4s ease;
+
+    }
+
+
+    .card-produto:hover
+    .card-foto-wrapper img {
+
+      transform:
+        scale(1.05);
+
+    }
+
+
+    .sem-imagem-placeholder {
+
+      width: 100%;
+
+      height: 100%;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color:
+        var(--texto-secundario);
+
+      font-size: 11px;
+
+      text-transform: uppercase;
+
+    }
+
+
+    .badge-marca {
+
+      position: absolute;
+
+      top: 8px;
+
+      left: 8px;
+
+      background:
+        rgba(5, 8, 6, 0.85);
+
+      color: #ebd47a;
+
+      backdrop-filter:
+        blur(6px);
+
+      border:
+        1px solid
+        rgba(212, 175, 55, 0.5);
+
+      padding:
+        4px 8px;
+
+      border-radius: 12px;
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      letter-spacing: 1px;
+
+      text-transform: uppercase;
+
+      z-index: 2;
+
+    }
+
+
+    .card-info {
+
+      padding: 12px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      flex-grow: 1;
+
+      justify-content: space-between;
+
+    }
+
+
+    .produto-titulo {
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+      color:
+        var(--texto-primario);
+
+      margin-bottom: 4px;
+
+      line-height: 1.2;
+
+      display: -webkit-box;
+
+      -webkit-line-clamp: 2;
+
+      -webkit-box-orient: vertical;
+
+      overflow: hidden;
+
+    }
+
+
+    .produto-preco {
+
+      font-size: 16px;
+
+      font-weight: 700;
+
+      color: #25d366;
+
+      letter-spacing: 0.3px;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .secao-opcoes {
+
+      margin: 6px 0;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 6px;
+
+    }
+
+
+    .label-opcao {
+
+      font-size: 9px;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.5px;
+
+      color:
+        var(--texto-secundario);
+
+    }
+
+
+    .lista-pills {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 4px;
+
+    }
+
+
+    .pill-opcao {
+
+      background:
+        var(--bg-input);
+
+      border:
+        1px solid var(--borda-suave);
+
+      color:
+        var(--texto-primario);
+
+      padding:
+        3px 8px;
+
+      border-radius: 4px;
+
+      font-size: 10px;
+
+      font-weight: 600;
+
+      cursor: pointer;
+
+    }
+
+
+    .pill-opcao.selecionado {
+
+      background:
+        var(--esmeralda-medio);
+
+      color: #ffffff;
+
+      border-color:
+        var(--dourado-champagne);
+
+    }
+
+
+    .btn-interesse {
+
+      width: 100%;
+
+      background: #25d366;
+
+      color: #000000;
+
+      border: none;
+
+      padding: 10px;
+
+      border-radius:
+        var(--raio-btn);
+
+      font-family:
+        var(--font-corpo);
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      letter-spacing: 0.5px;
+
+      text-transform: uppercase;
+
+      cursor: pointer;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 6px;
+
+      margin-top: 8px;
+
+      transition:
+        var(--transicao);
+
+    }
+
+
+    .btn-interesse:hover {
+
+      background: #20ba5a;
+
+      transform:
+        translateY(-1px);
+
+    }
+
+
+    /* =====================================================
+       WHATSAPP
+    ===================================================== */
+
+    .btn-whatsapp-flutuante {
+
+      position: fixed;
+
+      bottom: 20px;
+
+      right: 20px;
+
+      background-color: #25d366;
+
+      color: #ffffff;
+
+      border-radius: 50px;
+
+      width: 52px;
+
+      height: 52px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      box-shadow:
+        0 4px 16px
+        rgba(0,0,0,0.4);
+
+      z-index: 1000;
+
+      text-decoration: none;
+
+      transition:
+        transform 0.25s ease,
+        background-color 0.25s ease;
+
+    }
+
+
+    .btn-whatsapp-flutuante:hover {
+
+      transform:
+        scale(1.08);
+
+      background-color: #20ba5a;
+
+    }
+
+
+    .btn-whatsapp-flutuante svg {
+
+      width: 28px;
+
+      height: 28px;
+
+      fill: #ffffff;
+
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    footer {
+
+      text-align: center;
+
+      padding:
+        30px 15px;
+
+      background:
+        var(--bg-principal);
+
+      font-size: 12px;
+
+      color:
+        var(--texto-secundario);
+
+      border-top:
+        1px solid var(--borda-suave);
+
+      margin-top: 30px;
+
+    }
+
+
+    .instagram-link {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      margin:
+        12px 0 18px;
+
+      color:
+        var(--dourado-champagne);
+
+      text-decoration: none;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      transition:
+        var(--transicao);
+
+    }
+
+
+    .instagram-link:hover {
+
+      color: #ebd47a;
+
+      transform:
+        translateY(-1px);
+
+    }
+
+
+    .instagram-icon {
+
+      width: 18px;
+
+      height: 18px;
+
+      fill: currentColor;
+
+      flex-shrink: 0;
+
+    }
+
+
+
+    /* =====================================================
+       ÍCONE DA BUSCA
+       (isolado: não altera fontes ou estilos globais)
+    ===================================================== */
+
+    .icone-pesquisa {
+
+      width: 16px;
+
+      height: 16px;
+
+      fill: none;
+
+      stroke: currentColor;
+
+      stroke-width: 1.8;
+
+      stroke-linecap: round;
+
+      stroke-linejoin: round;
+
+      pointer-events: none;
+
+    }
+
+
+    /* =====================================================
+       IDEIAS DE LOOK
+       Inserido pelo JavaScript depois do 8º produto visível.
+    ===================================================== */
+
+    .bloco-ideias-look {
+
+      grid-column: 1 / -1;
+
+      width: 100%;
+
+      margin:
+        28px 0
+        12px;
+
+      padding: 0;
+
+    }
+
+
+    .bloco-ideias-look .ideias-look-cabecalho {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 12px;
+
+      margin-bottom: 14px;
+
+    }
+
+
+    .bloco-ideias-look .ideias-look-titulo {
+
+      min-width: 0;
+
+    }
+
+
+    .bloco-ideias-look h2 {
+
+      margin: 0;
+
+      font-family: var(--font-titulo);
+
+      font-size: clamp(20px, 3vw, 30px);
+
+      line-height: 1.15;
+
+      color: var(--dourado-champagne);
+
+    }
+
+
+    .bloco-ideias-look p {
+
+      margin: 5px 0 0;
+
+      color: var(--texto-secundario);
+
+      font-size: clamp(10px, 1.2vw, 12px);
+
+    }
+
+
+    .bloco-ideias-look .ideias-look-controles {
+
+      display: flex;
+
+      gap: 6px;
+
+      flex-shrink: 0;
+
+    }
+
+
+    .bloco-ideias-look .ideia-look-btn {
+
+      width: 34px;
+
+      height: 34px;
+
+      padding: 0;
+
+      border: 1px solid var(--borda-suave);
+
+      border-radius: 50%;
+
+      background: var(--bg-card);
+
+      color: var(--dourado-champagne);
+
+      font-family: inherit;
+
+      font-size: 20px;
+
+      line-height: 1;
+
+      cursor: pointer;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      transition: var(--transicao);
+
+    }
+
+
+    .bloco-ideias-look .ideia-look-btn:hover {
+
+      border-color: var(--borda-forte);
+
+      background: var(--esmeralda-medio);
+
+    }
+
+
+    .bloco-ideias-look .ideias-look-carrossel {
+
+      width: 100%;
+
+      display: flex;
+
+      gap: 12px;
+
+      overflow-x: auto;
+
+      overflow-y: hidden;
+
+      padding: 2px 1px 10px;
+
+      scroll-snap-type: x mandatory;
+
+      scroll-behavior: smooth;
+
+      scrollbar-width: thin;
+
+      scrollbar-color:
+        var(--dourado-champagne)
+        var(--bg-card);
+
+    }
+
+
+    .bloco-ideias-look .ideias-look-carrossel::-webkit-scrollbar {
+
+      height: 5px;
+
+    }
+
+
+    .bloco-ideias-look .ideias-look-carrossel::-webkit-scrollbar-track {
+
+      background: var(--bg-card);
+
+    }
+
+
+    .bloco-ideias-look .ideias-look-carrossel::-webkit-scrollbar-thumb {
+
+      background: var(--dourado-champagne);
+
+      border-radius: 999px;
+
+    }
+
+
+    .bloco-ideias-look .ideia-look-item {
+
+      flex:
+        0 0
+        clamp(145px, 19vw, 225px);
+
+      aspect-ratio: 3 / 4;
+
+      overflow: hidden;
+
+      border:
+        1px solid var(--borda-suave);
+
+      border-radius: var(--raio-card);
+
+      background: var(--bg-card);
+
+      scroll-snap-align: start;
+
+    }
+
+
+    .bloco-ideias-look .ideia-look-item img {
+
+      display: block;
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+      transition: transform 0.35s ease;
+
+    }
+
+
+    .bloco-ideias-look .ideia-look-item:hover img {
+
+      transform: scale(1.03);
+
+    }
+
+
+    @media (max-width: 600px) {
+
+      .bloco-ideias-look {
+
+        margin-top: 22px;
+
+      }
+
+      .bloco-ideias-look .ideias-look-cabecalho {
+
+        align-items: center;
+
+      }
+
+      .bloco-ideias-look .ideia-look-item {
+
+        flex-basis: 155px;
+
+      }
+
+    }
+
+
+    /* =====================================================
+       RESPONSIVO
+    ===================================================== */
+
+    @media (max-width: 850px) {
+
+      .header-nav
+      .btn-nav:nth-child(2) {
+
+        display: none;
+
+      }
+
+      .header-nav {
+
+        justify-content: flex-end;
+
+      }
+
+      .campo-busca.aberto {
+
+        width: 150px;
+
+      }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+      header {
+
+        padding:
+          9px 10px;
+
+      }
+
+      .header-top {
+
+        gap: 8px;
+
+      }
+
+      .logo-marca {
+
+        font-size: 17px;
+
+        letter-spacing: 2px;
+
+      }
+
+      .logo-img {
+
+        width: 29px;
+
+        height: 29px;
+
+      }
+
+      .header-nav
+      .btn-nav {
+
+        display: none;
+
+      }
+
+      .campo-busca.aberto {
+
+        position: absolute;
+
+        top: 58px;
+
+        right: 10px;
+
+        width:
+          calc(100vw - 20px);
+
+      }
+
+      .slideshow {
+
+        height: 180px;
+
+      }
+
+      .slide-titulo {
+
+        font-size: 23px;
+
+      }
+
+      .slide-sub {
+
+        font-size: 10px;
+
+      }
+
+      .categorias {
+
+        grid-template-columns:
+          repeat(2, 1fr);
+
+        gap: 8px;
+
+        margin-top: 12px;
+
+      }
+
+      .categoria-btn {
+
+        padding:
+          11px 7px;
+
+        font-size: 10px;
+
+      }
+
+      .grid-produtos {
+
+        grid-template-columns:
+          repeat(2, 1fr);
+
+        gap: 10px;
+
+        padding:
+          0 8px;
+
+      }
+
+      .card-info {
+
+        padding: 9px;
+
+      }
+
+      .produto-titulo {
+
+        font-size: 11px;
+
+      }
+
+      .produto-preco {
+
+        font-size: 14px;
+
+      }
+
+      .btn-interesse {
+
+        padding:
+          9px 5px;
+
+        font-size: 9px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+       HEADER
+  ===================================================== -->
+
+  <header>
+
+    <div class="header-top">
+
+
+      <a
+        href="#"
+        class="logo-container"
+      >
+
+        <img
+          src="logo.png"
+          alt="Logo Raízes"
+          class="logo-img"
+        >
+
+        <span class="logo-marca">
+          RAÍZES
+        </span>
+
+      </a>
+
+
+      <nav class="header-nav">
+
+        <a
+          href="#vitrine"
+          class="btn-nav ativo"
+        >
+          Vitrine
+        </a>
+
+
+        <a
+          href="#categorias"
+          class="btn-nav"
+        >
+          Categorias
+        </a>
+
+
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=Av.+Interventor+Manoel+Ribas,+186,+Pitanga+-+PR"
+          target="_blank"
+          rel="noopener"
+          class="btn-nav"
+        >
+          Visite-nos
+        </a>
+
+      </nav>
+
+
+      <div class="busca-container">
+
+        <input
+          type="search"
+          id="campo-busca"
+          class="campo-busca"
+          placeholder="Buscar produto..."
+          autocomplete="off"
+        >
+
+
+        <button
+          type="button"
+          class="btn-pesquisa"
+          onclick="abrirBusca()"
+          title="Pesquisar"
+        >
+          <svg
+            class="icone-pesquisa"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="6.5"></circle>
+            <path d="M16 16l5 5"></path>
+          </svg>
+        </button>
+
+      </div>
+
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =====================================================
+       SLIDESHOW
+  ===================================================== -->
+
+  <section class="secao-loja">
+
+    <div
+      class="slideshow"
+      id="slideshow"
     >
 
-    <span class="logo-marca">
-      RAÍZES
-    </span>
 
-  </a>
+      <a
+        href="https://www.google.com/maps/search/?api=1&query=Av.+Interventor+Manoel+Ribas,+186,+Pitanga+-+PR"
+        target="_blank"
+        rel="noopener"
+        class="slide ativo"
+      >
 
-
-  <nav class="header-nav">
-
-    <a
-      href="#vitrine"
-      class="btn-nav ativo"
-    >
-      Vitrine
-    </a>
+        <img
+          src="foto-loja.jpg"
+          alt="Loja Raízes em Pitanga PR"
+          onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1400&auto=format&fit=crop'"
+        >
 
 
-    <a
-      href="#categorias"
-      class="btn-nav"
-    >
-      Categorias
-    </a>
+        <div class="slide-conteudo">
+
+          <h2 class="slide-titulo">
+            Nossa Boutique
+          </h2>
+
+          <p class="slide-sub">
+            Av. Interventor Manoel Ribas, 186 — Pitanga / PR 📍
+          </p>
+
+        </div>
+
+      </a>
 
 
-    <a
-      href="https://www.google.com/maps/search/?api=1&query=Av.+Interventor+Manoel+Ribas,+186,+Pitanga+-+PR"
-      target="_blank"
-      rel="noopener"
-      class="btn-nav"
-    >
-      Visite-nos
-    </a>
 
-  </nav>
+      <div class="slide">
+
+        <img
+          src="banner-2.jpg"
+          alt="Coleção Raízes"
+          onerror="this.style.display='none'"
+        >
+
+        <div class="slide-conteudo">
+
+          <h2 class="slide-titulo">
+            Moda que conecta gerações
+          </h2>
+
+          <p class="slide-sub">
+            ESTILO • QUALIDADE • RAÍZES
+          </p>
+
+        </div>
+
+      </div>
 
 
-  <div class="busca-container">
 
-    <input
-      type="search"
-      id="campo-busca"
-      class="campo-busca"
-      placeholder="Buscar produto..."
-      autocomplete="off"
-    >
+      <div class="slide">
+
+        <img
+          src="banner-3.jpg"
+          alt="Novidades Raízes"
+          onerror="this.style.display='none'"
+        >
+
+        <div class="slide-conteudo">
+
+          <h2 class="slide-titulo">
+            Novidades
+          </h2>
+
+          <p class="slide-sub">
+            DESCUBRA A NOVA COLEÇÃO
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="slide-controles">
+
+        <span
+          class="slide-ponto ativo"
+          onclick="irParaSlide(0)"
+        ></span>
+
+        <span
+          class="slide-ponto"
+          onclick="irParaSlide(1)"
+        ></span>
+
+        <span
+          class="slide-ponto"
+          onclick="irParaSlide(2)"
+        ></span>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       CATEGORIAS
+  ===================================================== -->
+
+  <section
+    class="categorias"
+    id="categorias"
+  >
 
 
     <button
-      type="button"
-      class="btn-pesquisa"
-      onclick="abrirBusca()"
-      title="Pesquisar"
+      class="categoria-btn ativo"
+      onclick="filtrarCategoria('TODAS', this)"
     >
-      🔎
+      ✦ Todas
     </button>
+
+
+    <button
+      class="categoria-btn"
+      onclick="filtrarCategoria('MASC', this)"
+    >
+      ♂ Masculino
+    </button>
+
+
+    <button
+      class="categoria-btn"
+      onclick="filtrarCategoria('FEMI', this)"
+    >
+      ♀ Feminino
+    </button>
+
+
+    <button
+      class="categoria-btn"
+      onclick="filtrarCategoria('OFERTAS', this)"
+    >
+      ◇ Ofertas
+    </button>
+
+
+  </section>
+
+
+
+  <!-- =====================================================
+       MARCAS
+  ===================================================== -->
+
+  <div
+    class="container-filtros"
+    id="vitrine"
+  >
+
+    <div
+      class="filtros-wrapper"
+      id="filtro-marcas"
+    >
+
+
+      <button
+        class="btn-filtro ativo"
+        onclick="filtrarMarca('TODAS')"
+      >
+        Todas
+      </button>
+
+
+      <button
+        class="btn-filtro"
+        onclick="filtrarMarca('AUROCHS')"
+      >
+        Aurochs
+      </button>
+
+
+      <button
+        class="btn-filtro"
+        onclick="filtrarMarca('BAUMGARTEN')"
+      >
+        Baumgarten
+      </button>
+
+
+      <button
+        class="btn-filtro"
+        onclick="filtrarMarca('BEAGLE')"
+      >
+        Beagle
+      </button>
+
+
+      <button
+        class="btn-filtro"
+        onclick="filtrarMarca('FARM RIO')"
+      >
+        Farm Rio
+      </button>
+
+
+      <button
+        class="btn-filtro"
+        onclick="filtrarMarca('SOUL')"
+      >
+        Soul
+      </button>
+
+
+      <button
+        class="btn-filtro"
+        onclick="filtrarMarca('SlyWear')"
+      >
+        SlyWear
+      </button>
+
+
+      <button
+        class="btn-filtro"
+        onclick="filtrarMarca('HERING')"
+      >
+        Hering
+      </button>
+
+
+    </div>
 
   </div>
 
 
-</div>
 
-</header>
+  <!-- =====================================================
+       PRODUTOS
+  ===================================================== -->
+
+  <main
+    class="grid-produtos"
+    id="grid-vitrine"
+  ></main>
 
 
 
-
-<!-- ===================================================== SLIDESHOW ===================================================== -->
-
-<section class="secao-loja">
-
-<div
-  class="slideshow"
-  id="slideshow"
->
-
+  <!-- =====================================================
+       WHATSAPP
+  ===================================================== -->
 
   <a
-    href="https://www.google.com/maps/search/?api=1&query=Av.+Interventor+Manoel+Ribas,+186,+Pitanga+-+PR"
+    href="https://wa.me/5542999839784?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20RA%C3%8DZES%20e%20gostaria%20de%20falar%20com%20o%20atendimento."
+    class="btn-whatsapp-flutuante"
     target="_blank"
     rel="noopener"
-    class="slide ativo"
+    title="Falar no WhatsApp"
   >
 
-    <img
-      src="foto-loja.jpg"
-      alt="Loja Raízes em Pitanga PR"
-      onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1400&auto=format&fit=crop'"
-    >
+    <svg viewBox="0 0 24 24">
 
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.705 1.758zm6.637-3.935l.391.232c1.363.81 2.932 1.238 4.531 1.239 5.022 0 9.112-4.089 9.113-9.113-.001-2.433-.948-4.722-2.67-6.444-1.722-1.722-4.011-2.668-6.444-2.668-5.021 0-9.11 4.089-9.112 9.112-.001 1.666.448 3.292 1.3 4.707l.254.419-1.003 3.663 3.743-.982z"/>
 
-    <div class="slide-conteudo">
-
-      <h2 class="slide-titulo">
-        Nossa Boutique
-      </h2>
-
-      <p class="slide-sub">
-        Av. Interventor Manoel Ribas, 186 — Pitanga / PR 📍
-      </p>
-
-    </div>
+    </svg>
 
   </a>
 
 
 
-  <div class="slide">
+  <!-- =====================================================
+       FOOTER
+  ===================================================== -->
 
-    <img
-      src="banner-2.jpg"
-      alt="Coleção Raízes"
-      onerror="this.style.display='none'"
+  <footer>
+
+
+    <p>
+      <strong>
+        © RAÍZES — Moda Masculina & Feminina
+      </strong>
+    </p>
+
+
+    <a
+      href="https://www.instagram.com/maisraizesoficial/"
+      target="_blank"
+      rel="noopener"
+      class="instagram-link"
     >
 
-    <div class="slide-conteudo">
 
-      <h2 class="slide-titulo">
-        Moda que conecta gerações
-      </h2>
+      <svg
+        class="instagram-icon"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
 
-      <p class="slide-sub">
-        ESTILO • QUALIDADE • RAÍZES
-      </p>
+        <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9Zm9.75 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/>
 
-    </div>
+      </svg>
 
-  </div>
 
+      @maisraizesoficial
 
 
-  <div class="slide">
+    </a>
 
-    <img
-      src="banner-3.jpg"
-      alt="Novidades Raízes"
-      onerror="this.style.display='none'"
-    >
 
-    <div class="slide-conteudo">
+    <p>
+      MALDANER & MAZETTO LTDA |
+      CNPJ: 64.860.761/0001-64
+    </p>
 
-      <h2 class="slide-titulo">
-        Novidades
-      </h2>
 
-      <p class="slide-sub">
-        DESCUBRA A NOVA COLEÇÃO
-      </p>
+    <p style="margin-top: 5px;">
+      Av. Interventor Manoel Ribas, 186 —
+      Pitanga / PR
+    </p>
 
-    </div>
 
-  </div>
+  </footer>
 
 
 
-  <div class="slide-controles">
+  <!-- =====================================================
+       SEUS ARQUIVOS
+  ===================================================== -->
 
-    <span
-      class="slide-ponto ativo"
-      onclick="irParaSlide(0)"
-    ></span>
+  <script src="produtos.js"></script>
 
-    <span
-      class="slide-ponto"
-      onclick="irParaSlide(1)"
-    ></span>
+  <script src="script.js"></script>
 
-    <span
-      class="slide-ponto"
-      onclick="irParaSlide(2)"
-    ></span>
 
-  </div>
 
+  <!-- =====================================================
+       SISTEMA DE FILTROS
+  ===================================================== -->
 
-</div>
+  <script>
 
-</section>
+    let termoBusca = "";
 
+    let categoriaAtual = "TODAS";
 
+    let marcaAtual = "TODAS";
 
 
-<!-- ===================================================== CATEGORIAS ===================================================== -->
+    /* =====================================================
+       NORMALIZA TEXTO
+    ===================================================== */
 
-<section class="categorias" id="categorias" >
+    function normalizarTexto(texto) {
 
-<button
-  class="categoria-btn ativo"
-  onclick="filtrarCategoria('TODAS', this)"
->
-  ✦ Todas
-</button>
+      return String(texto || "")
 
+        .normalize("NFD")
 
-<button
-  class="categoria-btn"
-  onclick="filtrarCategoria('MASC', this)"
->
-  ♂ Masculino
-</button>
+        .replace(
+          /[\u0300-\u036f]/g,
+          ""
+        )
 
+        .toLowerCase()
 
-<button
-  class="categoria-btn"
-  onclick="filtrarCategoria('FEMI', this)"
->
-  ♀ Feminino
-</button>
+        .replace(
+          /\s+/g,
+          " "
+        )
 
+        .trim();
 
-<button
-  class="categoria-btn"
-  onclick="filtrarCategoria('OFERTAS', this)"
->
-  ◇ Ofertas
-</button>
+    }
 
-</section>
 
+    /* =====================================================
+       NORMALIZA MARCA
+    ===================================================== */
 
+    function normalizarMarca(texto) {
 
+      return normalizarTexto(texto)
 
-<!-- ===================================================== MARCAS ===================================================== -->
+        .replace(
+          /\s+/g,
+          ""
+        );
 
-<div class="container-filtros" id="vitrine" >
+    }
 
-<div
-  class="filtros-wrapper"
-  id="filtro-marcas"
->
 
+    /* =====================================================
+       ABRIR PESQUISA
+    ===================================================== */
 
-  <button
-    class="btn-filtro ativo"
-    onclick="filtrarMarca('TODAS')"
-  >
-    Todas
-  </button>
+    function abrirBusca() {
 
+      const campo =
+        document.getElementById(
+          "campo-busca"
+        );
 
-  <button
-    class="btn-filtro"
-    onclick="filtrarMarca('AUROCHS')"
-  >
-    Aurochs
-  </button>
 
+      campo.classList.toggle(
+        "aberto"
+      );
 
-  <button
-    class="btn-filtro"
-    onclick="filtrarMarca('BAUMGARTEN')"
-  >
-    Baumgarten
-  </button>
 
+      if (
+        campo.classList.contains(
+          "aberto"
+        )
+      ) {
 
-  <button
-    class="btn-filtro"
-    onclick="filtrarMarca('BEAGLE')"
-  >
-    Beagle
-  </button>
+        campo.focus();
 
+      } else {
 
-  <button
-    class="btn-filtro"
-    onclick="filtrarMarca('FARM RIO')"
-  >
-    Farm Rio
-  </button>
+        campo.value = "";
 
+        termoBusca = "";
 
-  <button
-    class="btn-filtro"
-    onclick="filtrarMarca('SOUL')"
-  >
-    Soul
-  </button>
+        aplicarFiltros();
 
+      }
 
-  <button
-    class="btn-filtro"
-    onclick="filtrarMarca('SlyWear')"
-  >
-    SlyWear
-  </button>
+    }
 
 
-  <button
-    class="btn-filtro"
-    onclick="filtrarMarca('HERING')"
-  >
-    Hering
-  </button>
+    /* =====================================================
+       DIGITAÇÃO DA PESQUISA
+    ===================================================== */
 
+    document
+      .getElementById(
+        "campo-busca"
+      )
+      .addEventListener(
+        "input",
+        function () {
 
-</div>
+          termoBusca =
+            normalizarTexto(
+              this.value
+            );
 
-</div>
 
+          aplicarFiltros();
 
+        }
+      );
 
 
-<!-- ===================================================== PRODUTOS ===================================================== -->
+    /* =====================================================
+       CATEGORIA
+    ===================================================== */
 
-<main class="grid-produtos" id="grid-vitrine" ></main>
+    function verificarCategoria(
+      texto,
+      categoria
+    ) {
 
+      if (
+        categoria === "TODAS"
+      ) {
 
+        return true;
 
+      }
 
-<!-- ===================================================== WHATSAPP ===================================================== -->
 
-<a
-href="https://wa.me/5542999839784?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20RA%C3%8DZES%20e%20gostaria%20de%20falar%20com%20o%20atendimento."
-class="btn-whatsapp-flutuante"
-target="_blank"
-rel="noopener"
-title="Falar no WhatsApp"
+      if (
+        categoria === "MASC"
+      ) {
 
+        return (
+          texto.includes("masculino") ||
+          texto.includes("masc") ||
+          texto.includes("homem") ||
+          texto.includes("menino") ||
+          texto.includes("men")
+        );
 
+      }
 
 
-<svg viewBox="0 0 24 24">
+      if (
+        categoria === "FEMI"
+      ) {
 
-  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.705 1.758zm6.637-3.935l.391.232c1.363.81 2.932 1.238 4.531 1.239 5.022 0 9.112-4.089 9.113-9.113-.001-2.433-.948-4.722-2.67-6.444-1.722-1.722-4.011-2.668-6.444-2.668-5.021 0-9.11 4.089-9.112 9.112-.001 1.666.448 3.292 1.3 4.707l.254.419-1.003 3.663 3.743-.982z"/>
+        return (
+          texto.includes("feminino") ||
+          texto.includes("femi") ||
+          texto.includes("fem") ||
+          texto.includes("mulher") ||
+          texto.includes("menina") ||
+          texto.includes("women")
+        );
 
-</svg>
+      }
 
-</a>
 
+      if (
+        categoria === "OFERTAS"
+      ) {
 
+        return (
+          texto.includes("oferta") ||
+          texto.includes("ofertas") ||
+          texto.includes("promo") ||
+          texto.includes("promocao") ||
+          texto.includes("desconto") ||
+          texto.includes("liquidacao")
+        );
 
+      }
 
-<!-- ===================================================== FOOTER ===================================================== -->
 
-<footer>
+      return true;
 
-<p>
-  <strong>
-    © RAÍZES — Moda Masculina & Feminina
-  </strong>
-</p>
+    }
 
 
-<a
-  href="https://www.instagram.com/maisraizesoficial/"
-  target="_blank"
-  rel="noopener"
-  class="instagram-link"
->
+    /* =====================================================
+       MARCA
+    ===================================================== */
 
+    function verificarMarca(
+      texto,
+      marca
+    ) {
 
-  <svg
-    class="instagram-icon"
-    viewBox="0 0 24 24"
-    aria-hidden="true"
-  >
+      if (
+        marca === "TODAS"
+      ) {
 
-    <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9Zm9.75 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/>
+        return true;
 
-  </svg>
+      }
 
 
-  @maisraizesoficial
+      const textoMarca =
+        normalizarMarca(
+          marca
+        );
 
 
-</a>
+      const textoCard =
+        normalizarMarca(
+          texto
+        );
 
 
-<p>
-  MALDANER & MAZETTO LTDA |
-  CNPJ: 64.860.761/0001-64
-</p>
+      return textoCard.includes(
+        textoMarca
+      );
 
+    }
 
-<p style="margin-top: 5px;">
-  Av. Interventor Manoel Ribas, 186 —
-  Pitanga / PR
-</p>
 
-</footer>
+    /* =====================================================
+       APLICAR TODOS OS FILTROS
+    ===================================================== */
 
+    /* =====================================================
+       IDEIAS DE LOOK
+       - imagens ficam na pasta /looks/
+       - a seção entra depois do 8º produto visível
+       - filtros e busca reposicionam a seção automaticamente
+    ===================================================== */
 
+    const imagensIdeiasLook = [
 
+      "looks/look01.jpg",
+      "looks/look02.jpg",
+      "looks/look03.jpg",
+      "looks/look04.jpg",
+      "looks/look05.jpg",
+      "looks/look06.jpg",
+      "looks/look07.jpg",
+      "looks/look08.jpg"
 
-<!-- ===================================================== SEUS ARQUIVOS ===================================================== -->
+    ];
 
-<script src="produtos.js"></script>
 
-<script src="script.js"></script>
+    function criarIdeiasLook() {
 
+      const bloco =
+        document.createElement("section");
 
+      bloco.className =
+        "bloco-ideias-look";
 
+      bloco.id =
+        "ideias-look";
 
-<!-- ===================================================== SISTEMA DE FILTROS ===================================================== -->
 
-<script> let termoBusca = ""; let categoriaAtual = "TODAS"; let marcaAtual = "TODAS"; /* ===================================================== NORMALIZA TEXTO ===================================================== */ function normalizarTexto(texto) { return String(texto || "") .normalize("NFD") .replace( /[\u0300-\u036f]/g, "" ) .toLowerCase() .replace( /\s+/g, " " ) .trim(); } /* ===================================================== NORMALIZA MARCA ===================================================== */ function normalizarMarca(texto) { return normalizarTexto(texto) .replace( /\s+/g, "" ); } /* ===================================================== ABRIR PESQUISA ===================================================== */ function abrirBusca() { const campo = document.getElementById( "campo-busca" ); campo.classList.toggle( "aberto" ); if ( campo.classList.contains( "aberto" ) ) { campo.focus(); } else { campo.value = ""; termoBusca = ""; aplicarFiltros(); } } /* ===================================================== DIGITAÇÃO DA PESQUISA ===================================================== */ document .getElementById( "campo-busca" ) .addEventListener( "input", function () { termoBusca = normalizarTexto( this.value ); aplicarFiltros(); } ); /* ===================================================== CATEGORIA ===================================================== */ function verificarCategoria( texto, categoria ) { if ( categoria === "TODAS" ) { return true; } if ( categoria === "MASC" ) { return ( texto.includes("masculino") || texto.includes("masc") || texto.includes("homem") || texto.includes("menino") || texto.includes("men") ); } if ( categoria === "FEMI" ) { return ( texto.includes("feminino") || texto.includes("femi") || texto.includes("fem") || texto.includes("mulher") || texto.includes("menina") || texto.includes("women") ); } if ( categoria === "OFERTAS" ) { return ( texto.includes("oferta") || texto.includes("ofertas") || texto.includes("promo") || texto.includes("promocao") || texto.includes("desconto") || texto.includes("liquidacao") ); } return true; } /* ===================================================== MARCA ===================================================== */ function verificarMarca( texto, marca ) { if ( marca === "TODAS" ) { return true; } const textoMarca = normalizarMarca( marca ); const textoCard = normalizarMarca( texto ); return textoCard.includes( textoMarca ); } /* ===================================================== APLICAR TODOS OS FILTROS ===================================================== */ function aplicarFiltros() { const cards = document.querySelectorAll( "#grid-vitrine .card-produto" ); cards.forEach(card => { const texto = normalizarTexto( card.innerText ); const passouBusca = termoBusca === "" || texto.includes( termoBusca ); const passouCategoria = verificarCategoria( texto, categoriaAtual ); const passouMarca = verificarMarca( texto, marcaAtual ); if ( passouBusca && passouCategoria && passouMarca ) { card.style.display = ""; } else { card.style.display = "none"; } }); } /* ===================================================== BOTÃO CATEGORIA ===================================================== */ function filtrarCategoria( categoria, botao ) { categoriaAtual = categoria; document .querySelectorAll( ".categoria-btn" ) .forEach(btn => { btn.classList.remove( "ativo" ); }); if (botao) { botao.classList.add( "ativo" ); } /* * Ao escolher categoria, * volta para todas as marcas. */ marcaAtual = "TODAS"; document .querySelectorAll( ".btn-filtro" ) .forEach(btn => { btn.classList.remove( "ativo" ); }); const todas = document.querySelector( ".btn-filtro" ); if (todas) { todas.classList.add( "ativo" ); } setTimeout( aplicarFiltros, 30 ); } /* ===================================================== BOTÃO MARCA ===================================================== */ function filtrarMarca( marca ) { marcaAtual = marca; document .querySelectorAll( ".btn-filtro" ) .forEach(btn => { btn.classList.remove( "ativo" ); }); const marcaNormalizada = normalizarMarca( marca ); document .querySelectorAll( ".btn-filtro" ) .forEach(btn => { const textoBotao = normalizarMarca( btn.innerText ); if ( textoBotao === marcaNormalizada ) { btn.classList.add( "ativo" ); } }); setTimeout( aplicarFiltros, 30 ); } /* ===================================================== SLIDESHOW ===================================================== */ let slideAtual = 0; const slides = document.querySelectorAll( ".slide" ); const pontos = document.querySelectorAll( ".slide-ponto" ); function irParaSlide( indice ) { slides.forEach( slide => { slide.classList.remove( "ativo" ); } ); pontos.forEach( ponto => { ponto.classList.remove( "ativo" ); } ); slideAtual = indice; if ( slides[slideAtual] ) { slides[slideAtual] .classList.add( "ativo" ); } if ( pontos[slideAtual] ) { pontos[slideAtual] .classList.add( "ativo" ); } } function proximoSlide() { if ( slides.length <= 1 ) { return; } slideAtual = (slideAtual + 1) % slides.length; irParaSlide( slideAtual ); } if ( slides.length > 1 ) { setInterval( proximoSlide, 5000 ); } /* ===================================================== OBSERVA QUANDO script.js CRIA OS CARDS ===================================================== */ const grid = document.getElementById( "grid-vitrine" ); if (grid) { const observador = new MutationObserver( function () { aplicarFiltros(); } ); observador.observe( grid, { childList: true, subtree: true } ); } /* ===================================================== PRIMEIRA APLICAÇÃO ===================================================== */ setTimeout( aplicarFiltros, 100 ); </script>
+      bloco.innerHTML = `
+
+        <div class="ideias-look-cabecalho">
+
+          <div class="ideias-look-titulo">
+
+            <h2>Vista seu look com Raízes</h2>
+
+            <p>Inspirações para completar seu estilo.</p>
+
+          </div>
+
+
+          <div class="ideias-look-controles">
+
+            <button
+              type="button"
+              class="ideia-look-btn"
+              aria-label="Ver looks anteriores"
+              data-direcao="-1"
+            >
+              ‹
+            </button>
+
+            <button
+              type="button"
+              class="ideia-look-btn"
+              aria-label="Ver próximos looks"
+              data-direcao="1"
+            >
+              ›
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="ideias-look-carrossel"
+          id="ideiasLookCarrossel"
+        ></div>
+
+      `;
+
+
+      const carrossel =
+        bloco.querySelector(
+          "#ideiasLookCarrossel"
+        );
+
+
+      imagensIdeiasLook.forEach(
+        (imagem, indice) => {
+
+          const item =
+            document.createElement("div");
+
+          item.className =
+            "ideia-look-item";
+
+
+          const img =
+            document.createElement("img");
+
+          img.src =
+            imagem;
+
+          img.alt =
+            `Ideia de look Raízes ${indice + 1}`;
+
+          img.loading =
+            "lazy";
+
+
+          img.onerror =
+            function () {
+
+              item.remove();
+
+            };
+
+
+          item.appendChild(img);
+
+          carrossel.appendChild(item);
+
+        }
+      );
+
+
+      bloco
+        .querySelectorAll(".ideia-look-btn")
+        .forEach(botao => {
+
+          botao.addEventListener(
+            "click",
+            function () {
+
+              const largura =
+                carrossel.clientWidth * 0.75;
+
+              const direcao =
+                Number(
+                  this.dataset.direcao
+                );
+
+
+              carrossel.scrollBy({
+
+                left:
+                  largura * direcao,
+
+                behavior:
+                  "smooth"
+
+              });
+
+            }
+          );
+
+        });
+
+
+      return bloco;
+
+    }
+
+
+    function atualizarIdeiasLook() {
+
+      const grid =
+        document.getElementById(
+          "grid-vitrine"
+        );
+
+
+      if (!grid) {
+
+        return;
+
+      }
+
+
+      const blocoAtual =
+        grid.querySelector(
+          ":scope > .bloco-ideias-look"
+        );
+
+
+      if (blocoAtual) {
+
+        blocoAtual.remove();
+
+      }
+
+
+      const cardsVisiveis =
+        Array.from(
+          grid.querySelectorAll(
+            ":scope > .card-produto"
+          )
+        ).filter(
+          card =>
+            getComputedStyle(card).display !== "none"
+        );
+
+
+      if (
+        cardsVisiveis.length < 8
+      ) {
+
+        return;
+
+      }
+
+
+      const oitavo =
+        cardsVisiveis[7];
+
+
+      const bloco =
+        criarIdeiasLook();
+
+
+      oitavo.insertAdjacentElement(
+        "afterend",
+        bloco
+      );
+
+    }
+
+
+    function aplicarFiltros() {
+
+      const cards =
+        document.querySelectorAll(
+          "#grid-vitrine .card-produto"
+        );
+
+
+      cards.forEach(card => {
+
+        const texto =
+          normalizarTexto(
+            card.innerText
+          );
+
+
+        const passouBusca =
+          termoBusca === "" ||
+          texto.includes(
+            termoBusca
+          );
+
+
+        const passouCategoria =
+          verificarCategoria(
+            texto,
+            categoriaAtual
+          );
+
+
+        const passouMarca =
+          verificarMarca(
+            texto,
+            marcaAtual
+          );
+
+
+        if (
+          passouBusca &&
+          passouCategoria &&
+          passouMarca
+        ) {
+
+          card.style.display = "";
+
+        } else {
+
+          card.style.display =
+            "none";
+
+        }
+
+      });
+
+
+      atualizarIdeiasLook();
+
+    }
+
+
+    /* =====================================================
+       BOTÃO CATEGORIA
+    ===================================================== */
+
+    function filtrarCategoria(
+      categoria,
+      botao
+    ) {
+
+      categoriaAtual =
+        categoria;
+
+
+      document
+        .querySelectorAll(
+          ".categoria-btn"
+        )
+        .forEach(btn => {
+
+          btn.classList.remove(
+            "ativo"
+          );
+
+        });
+
+
+      if (botao) {
+
+        botao.classList.add(
+          "ativo"
+        );
+
+      }
+
+
+      /*
+       * Ao escolher categoria,
+       * volta para todas as marcas.
+       */
+
+      marcaAtual =
+        "TODAS";
+
+
+      document
+        .querySelectorAll(
+          ".btn-filtro"
+        )
+        .forEach(btn => {
+
+          btn.classList.remove(
+            "ativo"
+          );
+
+        });
+
+
+      const todas =
+        document.querySelector(
+          ".btn-filtro"
+        );
+
+
+      if (todas) {
+
+        todas.classList.add(
+          "ativo"
+        );
+
+      }
+
+
+      setTimeout(
+        aplicarFiltros,
+        30
+      );
+
+    }
+
+
+    /* =====================================================
+       BOTÃO MARCA
+    ===================================================== */
+
+    function filtrarMarca(
+      marca
+    ) {
+
+      marcaAtual =
+        marca;
+
+
+      document
+        .querySelectorAll(
+          ".btn-filtro"
+        )
+        .forEach(btn => {
+
+          btn.classList.remove(
+            "ativo"
+          );
+
+        });
+
+
+      const marcaNormalizada =
+        normalizarMarca(
+          marca
+        );
+
+
+      document
+        .querySelectorAll(
+          ".btn-filtro"
+        )
+        .forEach(btn => {
+
+          const textoBotao =
+            normalizarMarca(
+              btn.innerText
+            );
+
+
+          if (
+            textoBotao ===
+            marcaNormalizada
+          ) {
+
+            btn.classList.add(
+              "ativo"
+            );
+
+          }
+
+        });
+
+
+      setTimeout(
+        aplicarFiltros,
+        30
+      );
+
+    }
+
+
+    /* =====================================================
+       SLIDESHOW
+    ===================================================== */
+
+    let slideAtual = 0;
+
+
+    const slides =
+      document.querySelectorAll(
+        ".slide"
+      );
+
+
+    const pontos =
+      document.querySelectorAll(
+        ".slide-ponto"
+      );
+
+
+    function irParaSlide(
+      indice
+    ) {
+
+      slides.forEach(
+        slide => {
+
+          slide.classList.remove(
+            "ativo"
+          );
+
+        }
+      );
+
+
+      pontos.forEach(
+        ponto => {
+
+          ponto.classList.remove(
+            "ativo"
+          );
+
+        }
+      );
+
+
+      slideAtual =
+        indice;
+
+
+      if (
+        slides[slideAtual]
+      ) {
+
+        slides[slideAtual]
+          .classList.add(
+            "ativo"
+          );
+
+      }
+
+
+      if (
+        pontos[slideAtual]
+      ) {
+
+        pontos[slideAtual]
+          .classList.add(
+            "ativo"
+          );
+
+      }
+
+    }
+
+
+    function proximoSlide() {
+
+      if (
+        slides.length <= 1
+      ) {
+
+        return;
+
+      }
+
+
+      slideAtual =
+        (slideAtual + 1) %
+        slides.length;
+
+
+      irParaSlide(
+        slideAtual
+      );
+
+    }
+
+
+    if (
+      slides.length > 1
+    ) {
+
+      setInterval(
+        proximoSlide,
+        5000
+      );
+
+    }
+
+
+    /* =====================================================
+       OBSERVA QUANDO script.js CRIA OS CARDS
+    ===================================================== */
+
+    const grid =
+      document.getElementById(
+        "grid-vitrine"
+      );
+
+
+    if (grid) {
+
+      const observador =
+        new MutationObserver(
+          function (mutacoes) {
+
+            const mudouProdutos =
+              mutacoes.some(
+                mutacao =>
+                  Array.from(
+                    mutacao.addedNodes
+                  ).some(
+                    node =>
+                      node.nodeType === 1 &&
+                      (
+                        node.classList?.contains(
+                          "card-produto"
+                        ) ||
+                        node.querySelector?.(
+                          ".card-produto"
+                        )
+                      )
+                  ) ||
+                  Array.from(
+                    mutacao.removedNodes
+                  ).some(
+                    node =>
+                      node.nodeType === 1 &&
+                      (
+                        node.classList?.contains(
+                          "card-produto"
+                        ) ||
+                        node.querySelector?.(
+                          ".card-produto"
+                        )
+                      )
+                  )
+              );
+
+
+            if (mudouProdutos) {
+
+              aplicarFiltros();
+
+            }
+
+          }
+        );
+
+
+      observador.observe(
+        grid,
+        {
+          childList: true,
+          subtree: true
+        }
+      );
+
+    }
+
+
+    /* =====================================================
+       PRIMEIRA APLICAÇÃO
+    ===================================================== */
+
+    setTimeout(
+      aplicarFiltros,
+      100
+    );
+
+  </script>
+
 
 </body>
 
 </html>
-
-Fechar
