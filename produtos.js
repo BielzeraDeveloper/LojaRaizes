@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1789822471288,
+    "codigo": "RAIZ-4562",
+    "titulo": "Vestido Longo Rio Vintage",
+    "marca": "FarmRio",
+    "preco": 498,
+    "imagem": "imagens/RAIZ-4562.jpg",
+    "tamanhos": [
+      "P"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789822387308,
     "codigo": "RAIZ-7901",
     "titulo": "Short Feminino",
