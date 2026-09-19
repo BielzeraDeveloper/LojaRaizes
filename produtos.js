@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1789822717456,
+    "codigo": "RAIZ-2974",
+    "titulo": "Jaqueta Jeans Feminino",
+    "marca": "SlyWear",
+    "preco": 439.9,
+    "imagem": "imagens/RAIZ-2974.jpg",
+    "tamanhos": [
+      "P"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789822617324,
     "codigo": "RAIZ-5184",
     "titulo": "Vestido Ombro So Concha",
