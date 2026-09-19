@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1789822387308,
+    "codigo": "RAIZ-7901",
+    "titulo": "Short Feminino",
+    "marca": "SlyWear",
+    "preco": 191.99,
+    "imagem": "imagens/RAIZ-7901.jpg",
+    "tamanhos": [
+      "36"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789822311445,
     "codigo": "RAIZ-5594",
     "titulo": "Camiseta Feminina Bordada",
