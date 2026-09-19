@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1789822159365,
+    "codigo": "RAIZ-2798",
+    "titulo": "Regata Casual",
+    "marca": "SlyWear",
+    "preco": 279.9,
+    "imagem": "imagens/RAIZ-2798.jpg",
+    "tamanhos": [
+      "G"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789651114010,
     "codigo": "RAIZ-7620",
     "titulo": "Vestido Feminino - Azul Marinho",
