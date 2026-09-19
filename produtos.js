@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1789822184746,
+    "codigo": "RAIZ-4536",
+    "titulo": "Regata Feminina",
+    "marca": "SlyWear",
+    "preco": 279.9,
+    "imagem": "imagens/RAIZ-4536.jpg",
+    "tamanhos": [
+      "G"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789822159365,
     "codigo": "RAIZ-2798",
     "titulo": "Regata Casual",
