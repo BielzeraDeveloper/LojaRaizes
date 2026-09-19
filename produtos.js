@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1789822558215,
+    "codigo": "RAIZ-5885",
+    "titulo": "Vestido Curto Boho de Mar",
+    "marca": "FarmRio",
+    "preco": 398,
+    "imagem": "imagens/RAIZ-5885.jpg",
+    "tamanhos": [
+      "P"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789822514140,
     "codigo": "RAIZ-7762",
     "titulo": "Vestido Longo Bibelo",
