@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1789822514140,
+    "codigo": "RAIZ-7762",
+    "titulo": "Vestido Longo Bibelo",
+    "marca": "FarmRio",
+    "preco": 498,
+    "imagem": "imagens/RAIZ-7762.jpg",
+    "tamanhos": [
+      "P"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789822471288,
     "codigo": "RAIZ-4562",
     "titulo": "Vestido Longo Rio Vintage",
