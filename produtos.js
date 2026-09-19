@@ -30,7 +30,7 @@ const listaProdutos = [
   {
     "id": 1789822558215,
     "codigo": "RAIZ-5885",
-    "titulo": "Vestido Curto Boho de Mar",
+    "titulo": "Vestido Curto Boho de Mar Fem",
     "marca": "FarmRio",
     "preco": 398,
     "imagem": "imagens/RAIZ-5885.jpg",
