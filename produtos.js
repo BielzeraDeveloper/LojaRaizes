@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1789822617324,
+    "codigo": "RAIZ-5184",
+    "titulo": "Vestido Ombro So Concha",
+    "marca": "FarmRio",
+    "preco": 398,
+    "imagem": "imagens/RAIZ-5184.jpg",
+    "tamanhos": [
+      "PP"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789822558215,
     "codigo": "RAIZ-5885",
     "titulo": "Vestido Curto Boho de Mar",
