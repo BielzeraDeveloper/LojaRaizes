@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1789826146253,
+    "codigo": "RAIZ-1354",
+    "titulo": "Camiseta Feminina com Estampa",
+    "marca": "SlyWear",
+    "preco": 199.9,
+    "imagem": "imagens/RAIZ-1354.jpg",
+    "tamanhos": [
+      "M"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789822717456,
     "codigo": "RAIZ-2974",
     "titulo": "Jaqueta Jeans Feminino",
