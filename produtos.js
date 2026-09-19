@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1789822311445,
+    "codigo": "RAIZ-5594",
+    "titulo": "Camiseta Feminina Bordada",
+    "marca": "SlyWear",
+    "preco": 215.99,
+    "imagem": "imagens/RAIZ-5594.jpg",
+    "tamanhos": [
+      "M"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789822266483,
     "codigo": "RAIZ-1703",
     "titulo": "Regata Feminina",
