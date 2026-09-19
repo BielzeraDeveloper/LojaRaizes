@@ -44,7 +44,7 @@ const listaProdutos = [
   {
     "id": 1789822514140,
     "codigo": "RAIZ-7762",
-    "titulo": "Vestido Longo Bibelo",
+    "titulo": "Vestido Longo Bibelo Feminino",
     "marca": "FarmRio",
     "preco": 498,
     "imagem": "imagens/RAIZ-7762.jpg",
