@@ -86,8 +86,13 @@
         grid-template-columns: 1fr;
         text-align: center;
       }
+
       .card-item img { margin: 0 auto; }
-      .acoes-card { flex-direction: column; width: 100%; }
+
+      .acoes-card {
+        flex-direction: column;
+        width: 100%;
+      }
     }
 
     .card-item img {
@@ -174,9 +179,11 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="container">
+
     <div class="header-painel">
       <h2>🛠️ Gerenciar Catálogo</h2>
       <button class="btn-recarregar" onclick="carregarProdutosGitHub()">🔄 Atualizar Lista</button>
@@ -185,11 +192,15 @@
     <div id="status" class="status-bar"></div>
 
     <div id="lista" class="lista-produtos">
-      <p style="color: var(--cor-texto-mutado);">Carregando produtos do GitHub...</p>
+      <p style="color: var(--cor-texto-mutado);">
+        Carregando produtos do GitHub...
+      </p>
     </div>
+
   </div>
 
   <script>
+
     let listaAtual = [];
     let produtosSha = null;
 
@@ -198,159 +209,337 @@
     const ghToken = localStorage.getItem('gh_token');
 
     window.addEventListener('DOMContentLoaded', () => {
+
       if (!ghUser || !ghRepo || !ghToken) {
         alert('Credenciais do GitHub não encontradas! Acesse o admin.html primeiro para salvar seu usuário e token.');
         return;
       }
+
       carregarProdutosGitHub();
+
     });
 
+
     function mostrarStatus(mensagem, eErro = false) {
+
       const el = document.getElementById('status');
+
       el.style.display = 'block';
       el.style.borderColor = eErro ? 'var(--cor-vermelho)' : 'var(--cor-verde)';
       el.style.color = eErro ? 'var(--cor-vermelho)' : 'var(--cor-verde)';
       el.textContent = mensagem;
+
     }
+
 
     // 1. Busca os produtos diretamente do repositório no GitHub
     async function carregarProdutosGitHub() {
+
       mostrarStatus("⏳ Buscando lista de produtos atualizada...");
+
       const url = `https://api.github.com/repos/${ghUser}/${ghRepo}/contents/produtos.js`;
 
       try {
+
         const res = await fetch(url, {
-          headers: { 'Authorization': `bearer ${ghToken}`, 'Accept': 'application/vnd.github+json' },
+          headers: {
+            'Authorization': `bearer ${ghToken}`,
+            'Accept': 'application/vnd.github+json'
+          },
           cache: 'no-store'
         });
 
         if (!res.ok) throw new Error("Erro ao acessar produtos.js no GitHub.");
 
         const dados = await res.json();
+
         produtosSha = dados.sha;
+
         const conteudo = decodeURIComponent(escape(atob(dados.content)));
-        
+
         const match = conteudo.match(/const\s+listaProdutos\s*=\s*(\[\s*[\s\S]*\s*]);?/);
+
         if (match && match[1]) {
+
           listaAtual = JSON.parse(match[1]);
+
           renderizarLista();
+
           mostrarStatus("✅ Produtos carregados com sucesso!");
+
         } else {
+
           throw new Error("Formato do arquivo produtos.js inválido.");
+
         }
+
       } catch (err) {
+
         mostrarStatus("❌ " + err.message, true);
+
       }
+
     }
+
 
     // 2. Monta a lista visual na tela
     function renderizarLista() {
+
       const elLista = document.getElementById('lista');
+
       if (listaAtual.length === 0) {
-        elLista.innerHTML = '<p style="color: var(--cor-texto-mutado);">Nenhum produto cadastrado.</p>';
+
+        elLista.innerHTML =
+          '<p style="color: var(--cor-texto-mutado);">Nenhum produto cadastrado.</p>';
+
         return;
       }
 
       elLista.innerHTML = listaAtual.map((p, index) => `
+
         <div class="card-item">
-          <img src="${p.imagem}" alt="${p.titulo}" onerror="this.src='https://via.placeholder.com/70x90?text=Sem+Foto'">
+
+          <img
+            src="${p.imagem}"
+            alt="${p.titulo}"
+            onerror="this.src='https://via.placeholder.com/70x90?text=Sem+Foto'"
+          >
+
           <div class="detalhes-produto">
-            <span class="codigo-badge">${p.codigo || 'S/ REF'} — ${p.marca}</span>
-            <span class="titulo-produto">${p.titulo}</span>
+
+            <span class="codigo-badge">
+              ${p.codigo || 'S/ REF'} — ${p.marca}
+            </span>
+
+            <!-- NOME DO PRODUTO EDITÁVEL -->
             <div class="inputs-inline">
-              <label>Preço (R$):</label>
-              <input type="number" step="0.01" id="preco-${index}" value="${p.preco}">
+              <label>Nome:</label>
+
+              <input
+                type="text"
+                id="titulo-${index}"
+                value="${p.titulo || ''}"
+              >
             </div>
+
+            <!-- PREÇO -->
+            <div class="inputs-inline">
+
+              <label>Preço (R$):</label>
+
+              <input
+                type="number"
+                step="0.01"
+                id="preco-${index}"
+                value="${p.preco}"
+              >
+
+            </div>
+
           </div>
+
           <div class="acoes-card">
-            <button class="btn-acao btn-salvar" onclick="salvarAlteracao(${index})">Salvar</button>
-            <button class="btn-acao btn-excluir" onclick="excluirProduto(${index})">Excluir</button>
+
+            <button
+              class="btn-acao btn-salvar"
+              onclick="salvarAlteracao(${index})"
+            >
+              Salvar
+            </button>
+
+            <button
+              class="btn-acao btn-excluir"
+              onclick="excluirProduto(${index})"
+            >
+              Excluir
+            </button>
+
           </div>
+
         </div>
+
       `).join('');
+
     }
 
-    // 3. Atualiza o preço/dados de um produto específico
+
+    // 3. Atualiza o nome e o preço de um produto específico
     async function salvarAlteracao(index) {
-      const novoPreco = parseFloat(document.getElementById(`preco-${index}`).value);
-      if (isNaN(novoPreco)) {
-        alert("Digite um preço válido.");
+
+      const novoTitulo =
+        document.getElementById(`titulo-${index}`).value.trim();
+
+      const novoPreco =
+        parseFloat(document.getElementById(`preco-${index}`).value);
+
+      if (!novoTitulo) {
+
+        alert("Digite um nome válido.");
+
         return;
+
       }
 
+      if (isNaN(novoPreco)) {
+
+        alert("Digite um preço válido.");
+
+        return;
+
+      }
+
+      listaAtual[index].titulo = novoTitulo;
       listaAtual[index].preco = novoPreco;
-      await atualizarArquivoGithub(`Atualiza preço do produto ${listaAtual[index].codigo}`);
+
+      await atualizarArquivoGithub(
+        `Atualiza produto ${listaAtual[index].codigo}`
+      );
+
     }
+
 
     // 4. Remove o produto da lista e apaga o arquivo da foto no GitHub
     async function excluirProduto(index) {
+
       const produto = listaAtual[index];
-      if (!confirm(`Tem certeza que deseja excluir "${produto.titulo}"?`)) return;
 
-      mostrarStatus(`⏳ Excluindo produto e imagem ${produto.codigo}...`);
+      if (!confirm(`Tem certeza que deseja excluir "${produto.titulo}"?`))
+        return;
 
-      // Tenta apagar a imagem do repositório se for um caminho local (ex: imagens/RAIZ-123.jpg)
+      mostrarStatus(
+        `⏳ Excluindo produto e imagem ${produto.codigo}...`
+      );
+
+
+      // Tenta apagar a imagem do repositório se for um caminho local
+      // (ex: imagens/RAIZ-123.jpg)
       if (produto.imagem && produto.imagem.startsWith('imagens/')) {
+
         try {
-          const urlImg = `https://api.github.com/repos/${ghUser}/${ghRepo}/contents/${produto.imagem}`;
+
+          const urlImg =
+            `https://api.github.com/repos/${ghUser}/${ghRepo}/contents/${produto.imagem}`;
+
           const resImg = await fetch(urlImg, {
-            headers: { 'Authorization': `bearer ${ghToken}`, 'Accept': 'application/vnd.github+json' }
+
+            headers: {
+              'Authorization': `bearer ${ghToken}`,
+              'Accept': 'application/vnd.github+json'
+            }
+
           });
+
           if (resImg.ok) {
+
             const imgData = await resImg.json();
+
             await fetch(urlImg, {
+
               method: 'DELETE',
-              headers: { 'Authorization': `bearer ${ghToken}`, 'Content-Type': 'application/json' },
+
+              headers: {
+                'Authorization': `bearer ${ghToken}`,
+                'Content-Type': 'application/json'
+              },
+
               body: JSON.stringify({
+
                 message: `Apaga imagem do produto ${produto.codigo}`,
+
                 sha: imgData.sha
+
               })
+
             });
+
           }
+
         } catch (e) {
-          console.warn("Aviso: Não foi possível deletar o arquivo da imagem do repositório.", e);
+
+          console.warn(
+            "Aviso: Não foi possível deletar o arquivo da imagem do repositório.",
+            e
+          );
+
         }
+
       }
+
 
       // Remove da lista JS
       listaAtual.splice(index, 1);
-      await atualizarArquivoGithub(`Exclui produto ${produto.codigo}`);
+
+      await atualizarArquivoGithub(
+        `Exclui produto ${produto.codigo}`
+      );
+
     }
+
 
     // 5. Envia o produtos.js atualizado de volta ao GitHub
     async function atualizarArquivoGithub(mensagemCommit) {
-      mostrarStatus("⏳ Gravando alterações no GitHub...");
-      const url = `https://api.github.com/repos/${ghUser}/${ghRepo}/contents/produtos.js`;
 
-      const conteudoNovo = `const listaProdutos = ${JSON.stringify(listaAtual, null, 2)};`;
-      const jsBase64 = btoa(unescape(encodeURIComponent(conteudoNovo)));
+      mostrarStatus("⏳ Gravando alterações no GitHub...");
+
+      const url =
+        `https://api.github.com/repos/${ghUser}/${ghRepo}/contents/produtos.js`;
+
+      const conteudoNovo =
+        `const listaProdutos = ${JSON.stringify(listaAtual, null, 2)};`;
+
+      const jsBase64 =
+        btoa(unescape(encodeURIComponent(conteudoNovo)));
 
       try {
+
         const res = await fetch(url, {
+
           method: 'PUT',
+
           headers: {
+
             'Authorization': `bearer ${ghToken}`,
+
             'Content-Type': 'application/json',
+
             'Accept': 'application/vnd.github+json'
+
           },
+
           body: JSON.stringify({
+
             message: mensagemCommit,
+
             content: jsBase64,
+
             sha: produtosSha
+
           })
+
         });
 
-        if (!res.ok) throw new Error("Falha ao atualizar produtos.js no GitHub.");
+        if (!res.ok)
+          throw new Error("Falha ao atualizar produtos.js no GitHub.");
 
         const dados = await res.json();
-        produtosSha = dados.content.sha; // Atualiza o SHA atual
+
+        produtosSha = dados.content.sha;
+
         renderizarLista();
-        mostrarStatus("✅ Catálogo atualizado no GitHub com sucesso!");
+
+        mostrarStatus(
+          "✅ Catálogo atualizado no GitHub com sucesso!"
+        );
+
       } catch (err) {
+
         mostrarStatus("❌ " + err.message, true);
+
       }
+
     }
+
   </script>
+
 </body>
 </html>
-
