@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790095932003,
+    "codigo": "RAIZ-8065",
+    "titulo": "Calça Feminina Wide Leg",
+    "marca": "SlyWear",
+    "preco": 545.38,
+    "imagem": "imagens/RAIZ-8065.jpg",
+    "tamanhos": [
+      "38"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790090774623,
     "codigo": "RAIZ-9445",
     "titulo": "Blusa Feminina Manga Curta c/ Barra em Renda",
