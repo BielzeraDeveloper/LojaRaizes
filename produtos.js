@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790106152573,
+    "codigo": "RAIZ-8800",
+    "titulo": "Vestido ombro so recanto dos pássaros",
+    "marca": "Farm rio",
+    "preco": 449.99,
+    "imagem": "imagens/RAIZ-8800.jpg",
+    "tamanhos": [
+      "P"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790105889173,
     "codigo": "RAIZ-3951",
     "titulo": "T-shirt capri",
