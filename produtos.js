@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790090482186,
+    "codigo": "RAIZ-2303",
+    "titulo": "Short Saia Feminino c/ Fivela Lateral",
+    "marca": "SlyWear",
+    "preco": 389.9,
+    "imagem": "imagens/RAIZ-2303.jpg",
+    "tamanhos": [
+      "P"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790090343105,
     "codigo": "RAIZ-8647",
     "titulo": "Cropped Feminino c/ Fivela Lateral",
