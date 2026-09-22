@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790105889173,
+    "codigo": "RAIZ-3951",
+    "titulo": "T-shirt capri",
+    "marca": "Farm rio",
+    "preco": 298,
+    "imagem": "imagens/RAIZ-3951.jpg",
+    "tamanhos": [
+      "M"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790105780071,
     "codigo": "RAIZ-1647",
     "titulo": "Bata bohoflor",
