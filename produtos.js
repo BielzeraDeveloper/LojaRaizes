@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790096030497,
+    "codigo": "RAIZ-9126",
+    "titulo": "Calça Feminina Wide Leg",
+    "marca": "SlyWear",
+    "preco": 389.9,
+    "imagem": "imagens/RAIZ-9126.jpg",
+    "tamanhos": [
+      "38"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790095932003,
     "codigo": "RAIZ-8065",
     "titulo": "Calça Feminina Wide Leg",
