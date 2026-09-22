@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790089794989,
+    "codigo": "RAIZ-6732",
+    "titulo": "Regata Feminina em Chiffon",
+    "marca": "SlyWear",
+    "preco": 319.9,
+    "imagem": "imagens/RAIZ-6732.jpg",
+    "tamanhos": [
+      "M"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1789826146253,
     "codigo": "RAIZ-1354",
     "titulo": "Camiseta Feminina com Estampa",
