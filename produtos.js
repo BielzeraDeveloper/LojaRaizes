@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790099794145,
+    "codigo": "RAIZ-6485",
+    "titulo": "Camisa Feminina",
+    "marca": "Baugarten",
+    "preco": 339.9,
+    "imagem": "imagens/RAIZ-6485.jpg",
+    "tamanhos": [
+      "40"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790098295619,
     "codigo": "RAIZ-2711",
     "titulo": "Shorts jeans Feminino",
