@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790090774623,
+    "codigo": "RAIZ-9445",
+    "titulo": "Blusa Feminina Manga Curta c/ Barra em Renda",
+    "marca": "SlyWear",
+    "preco": 299.9,
+    "imagem": "imagens/RAIZ-9445.jpg",
+    "tamanhos": [
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790090482186,
     "codigo": "RAIZ-2303",
     "titulo": "Short Saia Feminino c/ Fivela Lateral",
