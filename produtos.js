@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790090035157,
+    "codigo": "RAIZ-8854",
+    "titulo": "Calça Feminina em Malha Plissada",
+    "marca": "SlyWear",
+    "preco": 293.99,
+    "imagem": "imagens/RAIZ-8854.jpg",
+    "tamanhos": [
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790089794989,
     "codigo": "RAIZ-6732",
     "titulo": "Regata Feminina em Chiffon",
