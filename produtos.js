@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790090343105,
+    "codigo": "RAIZ-8647",
+    "titulo": "Cropped Feminino c/ Fivela Lateral",
+    "marca": "SlyWear",
+    "preco": 279.9,
+    "imagem": "imagens/RAIZ-8647.jpg",
+    "tamanhos": [
+      "P"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790090035157,
     "codigo": "RAIZ-8854",
     "titulo": "Calça Feminina em Malha Plissada",
