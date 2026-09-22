@@ -2,7 +2,7 @@ const listaProdutos = [
   {
     "id": 1790098295619,
     "codigo": "RAIZ-2711",
-    "titulo": "Shorts jeans",
+    "titulo": "Shorts jeans Feminino",
     "marca": "SlyWear",
     "preco": 399.9,
     "imagem": "imagens/RAIZ-2711.jpg",
