@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790098295619,
+    "codigo": "RAIZ-2711",
+    "titulo": "Shorts jeans",
+    "marca": "SlyWear",
+    "preco": 399.9,
+    "imagem": "imagens/RAIZ-2711.jpg",
+    "tamanhos": [
+      "38"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790096403952,
     "codigo": "RAIZ-8253",
     "titulo": "Calça Feminina Wide Leg",
