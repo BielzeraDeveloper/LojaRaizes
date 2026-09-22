@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790106830688,
+    "codigo": "RAIZ-4154",
+    "titulo": "Vestido cropped floral",
+    "marca": "Farm rio",
+    "preco": 498,
+    "imagem": "imagens/RAIZ-4154.jpg",
+    "tamanhos": [
+      "G"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790106485256,
     "codigo": "RAIZ-2896",
     "titulo": "Vestido longo recanto dos pássaros",
