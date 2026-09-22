@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790105517112,
+    "codigo": "RAIZ-9631",
+    "titulo": "Short sarja garden",
+    "marca": "Farm rio",
+    "preco": 549,
+    "imagem": "imagens/RAIZ-9631.jpg",
+    "tamanhos": [
+      "38"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790105176814,
     "codigo": "RAIZ-3805",
     "titulo": "Calça Jacquard brocado",
