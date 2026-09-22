@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790104892877,
+    "codigo": "RAIZ-4174",
+    "titulo": "Vestido curto tomara que caia de veludo",
+    "marca": "Slywear",
+    "preco": 347.38,
+    "imagem": "imagens/RAIZ-4174.jpg",
+    "tamanhos": [
+      "P"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790104632884,
     "codigo": "RAIZ-4234",
     "titulo": "Vestido longo estampado",
