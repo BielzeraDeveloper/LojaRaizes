@@ -1,19 +1,5 @@
 const listaProdutos = [
   {
-    "id": 1790100862700,
-    "codigo": "RAIZ-7607",
-    "titulo": "Jaqueta de couro",
-    "marca": "Slywear",
-    "preco": 1.109,
-    "imagem": "imagens/RAIZ-7607.jpg",
-    "tamanhos": [
-      "M"
-    ],
-    "cores": [
-      "Padrão"
-    ]
-  },
-  {
     "id": 1790100628417,
     "codigo": "RAIZ-1762",
     "titulo": "Camisa feminina",
