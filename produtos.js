@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790104632884,
+    "codigo": "RAIZ-4234",
+    "titulo": "Vestido longo estampado",
+    "marca": "Slywear",
+    "preco": 369.9,
+    "imagem": "imagens/RAIZ-4234.jpg",
+    "tamanhos": [
+      "M"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790100628417,
     "codigo": "RAIZ-1762",
     "titulo": "Camisa feminina",
