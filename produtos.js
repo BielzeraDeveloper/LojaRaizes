@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790180267028,
+    "codigo": "RAIZ-7863",
+    "titulo": "Blusa Feminina Envelope",
+    "marca": "SlyWear",
+    "preco": 289.9,
+    "imagem": "imagens/RAIZ-7863.jpg",
+    "tamanhos": [
+      "G"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790179814066,
     "codigo": "RAIZ-1400",
     "titulo": "Blusa Feminina com Renda",
