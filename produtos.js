@@ -170,7 +170,7 @@ const listaProdutos = [
   {
     "id": 1790100628417,
     "codigo": "RAIZ-1762",
-    "titulo": "Camisa feminina",
+    "titulo": "Camisa Feminina",
     "marca": "Baumgarten",
     "preco": 339.9,
     "imagem": "imagens/RAIZ-1762.jpg",
