@@ -2,7 +2,7 @@ const listaProdutos = [
   {
     "id": 1790109236375,
     "codigo": "RAIZ-2667",
-    "titulo": "Vestido curto concha surreal",
+    "titulo": "Vestido Curto Concha Surreal",
     "marca": "Farm rio",
     "preco": 398,
     "imagem": "imagens/RAIZ-2667.jpg",
