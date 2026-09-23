@@ -1,5 +1,20 @@
 const listaProdutos = [
   {
+    "id": 1790179814066,
+    "codigo": "RAIZ-1400",
+    "titulo": "Blusa Feminina com Renda",
+    "marca": "SlyWear",
+    "preco": 263.99,
+    "imagem": "imagens/RAIZ-1400.jpg",
+    "tamanhos": [
+      "P",
+      "M"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790109236375,
     "codigo": "RAIZ-2667",
     "titulo": "Vestido Curto Concha Surreal Fem",
