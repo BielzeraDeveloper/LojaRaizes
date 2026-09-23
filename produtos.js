@@ -16,7 +16,7 @@ const listaProdutos = [
   {
     "id": 1790109088071,
     "codigo": "RAIZ-7831",
-    "titulo": "Vestido longo céu de arara",
+    "titulo": "Vestido Longo Céu de Arara",
     "marca": "Farm rio",
     "preco": 598,
     "imagem": "imagens/RAIZ-7831.jpg",
