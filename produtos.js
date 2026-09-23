@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790181727515,
+    "codigo": "RAIZ-3516",
+    "titulo": "Blusa com Detalhe Dourado",
+    "marca": "SlyWear",
+    "preco": 319.9,
+    "imagem": "imagens/RAIZ-3516.jpg",
+    "tamanhos": [
+      "M"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790181074056,
     "codigo": "RAIZ-2029",
     "titulo": "Vestido Maxi um Ombro em Crepe alfaiataria Fem",
