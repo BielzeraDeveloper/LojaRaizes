@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790181074056,
+    "codigo": "RAIZ-2029",
+    "titulo": "Vestido Maxi um Ombro em Crepe alfaiataria Fem",
+    "marca": "Slywear",
+    "preco": 899.9,
+    "imagem": "imagens/RAIZ-2029.jpg",
+    "tamanhos": [
+      "M"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790180267028,
     "codigo": "RAIZ-7863",
     "titulo": "Blusa Feminina Envelope",
