@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790181308429,
+    "codigo": "RAIZ-4353",
+    "titulo": "Blusa de Alça em Chiffon  Fem",
+    "marca": "Slywear",
+    "preco": 389.9,
+    "imagem": "imagens/RAIZ-4353.jpg",
+    "tamanhos": [
+      "M"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790181727515,
     "codigo": "RAIZ-3516",
     "titulo": "Blusa com Detalhe Dourado",
