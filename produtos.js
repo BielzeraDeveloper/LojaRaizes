@@ -128,7 +128,7 @@ const listaProdutos = [
   {
     "id": 1790105176814,
     "codigo": "RAIZ-3805",
-    "titulo": "Calça Jacquard brocado",
+    "titulo": "Calça Jacquard Brocado",
     "marca": "Slywear",
     "preco": 389.9,
     "imagem": "imagens/RAIZ-3805.jpg",
