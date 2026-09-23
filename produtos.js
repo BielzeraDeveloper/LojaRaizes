@@ -142,7 +142,7 @@ const listaProdutos = [
   {
     "id": 1790104981033,
     "codigo": "RAIZ-6909",
-    "titulo": "Vestido longo jacquard brocado",
+    "titulo": "Vestido Longo Jacquard Brocado Fem",
     "marca": "Slywear",
     "preco": 369.9,
     "imagem": "imagens/RAIZ-6909.jpg",
