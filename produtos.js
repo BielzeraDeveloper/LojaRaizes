@@ -114,7 +114,7 @@ const listaProdutos = [
   {
     "id": 1790105517112,
     "codigo": "RAIZ-9631",
-    "titulo": "Short sarja garden",
+    "titulo": "Short Sarja Garden Fem",
     "marca": "Farm rio",
     "preco": 549,
     "imagem": "imagens/RAIZ-9631.jpg",
