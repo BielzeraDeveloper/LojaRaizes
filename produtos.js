@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790185381799,
+    "codigo": "RAIZ-5564",
+    "titulo": "Camisa Masculina Manga Longa Com Bolso",
+    "marca": "Aurochs",
+    "preco": 279.99,
+    "imagem": "imagens/RAIZ-5564.jpg",
+    "tamanhos": [
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790185120672,
     "codigo": "RAIZ-3826",
     "titulo": "Camisa Xadrez Masculina Manga Longa",
