@@ -86,7 +86,7 @@ const listaProdutos = [
   {
     "id": 1790105780071,
     "codigo": "RAIZ-1647",
-    "titulo": "Bata bohoflor",
+    "titulo": "Bata Bohoflor",
     "marca": "Farm rio",
     "preco": 429,
     "imagem": "imagens/RAIZ-1647.jpg",
