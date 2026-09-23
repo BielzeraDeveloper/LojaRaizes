@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790188753438,
+    "codigo": "RAIZ-7511",
+    "titulo": "Camisa Masculina Manga Longa",
+    "marca": "Aurochs",
+    "preco": 279.99,
+    "imagem": "imagens/RAIZ-7511.jpg",
+    "tamanhos": [
+      "M"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790188628106,
     "codigo": "RAIZ-9481",
     "titulo": "Camisa Masculina Manga Longa",
