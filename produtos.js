@@ -30,7 +30,7 @@ const listaProdutos = [
   {
     "id": 1790108880830,
     "codigo": "RAIZ-7478",
-    "titulo": "Vestido Cropped Floral",
+    "titulo": "Vestido Cropped Floral Fem",
     "marca": "Farm rio",
     "preco": 498,
     "imagem": "imagens/RAIZ-7478.jpg",
