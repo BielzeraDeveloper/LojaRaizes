@@ -1,5 +1,21 @@
 const listaProdutos = [
   {
+    "id": 1790184801624,
+    "codigo": "RAIZ-9563",
+    "titulo": "Camisa Xadrez Masculina",
+    "marca": "Aurochs",
+    "preco": 279.99,
+    "imagem": "imagens/RAIZ-9563.jpg",
+    "tamanhos": [
+      "M",
+      "G",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790183582950,
     "codigo": "RAIZ-4755",
     "titulo": "Camisa Xadrez Feminina Manga Curta",
