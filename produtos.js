@@ -1,5 +1,21 @@
 const listaProdutos = [
   {
+    "id": 1790184914451,
+    "codigo": "RAIZ-3243",
+    "titulo": "Camisa Xadrez Masculina  Manga Longa",
+    "marca": "Aurochs",
+    "preco": 279.99,
+    "imagem": "imagens/RAIZ-3243.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790184801624,
     "codigo": "RAIZ-9563",
     "titulo": "Camisa Xadrez Masculina",
