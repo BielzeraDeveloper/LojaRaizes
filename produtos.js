@@ -100,7 +100,7 @@ const listaProdutos = [
   {
     "id": 1790105644858,
     "codigo": "RAIZ-9199",
-    "titulo": "Calça andorinha",
+    "titulo": "Calça Feminina Andorinha",
     "marca": "Farm rio",
     "preco": 379,
     "imagem": "imagens/RAIZ-9199.jpg",
