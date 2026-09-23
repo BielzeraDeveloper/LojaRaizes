@@ -1,5 +1,20 @@
 const listaProdutos = [
   {
+    "id": 1790183396786,
+    "codigo": "RAIZ-3284",
+    "titulo": "Camisa Xadrez Feminina",
+    "marca": "Aurochs",
+    "preco": 249.99,
+    "imagem": "imagens/RAIZ-3284.jpg",
+    "tamanhos": [
+      "M",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790181308429,
     "codigo": "RAIZ-4353",
     "titulo": "Blusa de Alça em Chiffon  Fem",
