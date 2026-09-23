@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790183582950,
+    "codigo": "RAIZ-4755",
+    "titulo": "Camisa Xadrez Feminina Manga Curta",
+    "marca": "Aurochs",
+    "preco": 239.99,
+    "imagem": "imagens/RAIZ-4755.jpg",
+    "tamanhos": [
+      "G"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790183396786,
     "codigo": "RAIZ-3284",
     "titulo": "Camisa Xadrez Feminina",
