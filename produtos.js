@@ -44,7 +44,7 @@ const listaProdutos = [
   {
     "id": 1790106485256,
     "codigo": "RAIZ-2896",
-    "titulo": "Vestido longo recanto dos pássaros",
+    "titulo": "Vestido Longo Recanto dos Pássaros",
     "marca": "Farm rio",
     "preco": 479,
     "imagem": "imagens/RAIZ-2896.jpg",
