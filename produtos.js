@@ -72,7 +72,7 @@ const listaProdutos = [
   {
     "id": 1790105889173,
     "codigo": "RAIZ-3951",
-    "titulo": "T-shirt capri",
+    "titulo": "T-shirt Fem Capri",
     "marca": "Farm rio",
     "preco": 298,
     "imagem": "imagens/RAIZ-3951.jpg",
