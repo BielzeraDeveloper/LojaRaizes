@@ -1,5 +1,20 @@
 const listaProdutos = [
   {
+    "id": 1790187758221,
+    "codigo": "RAIZ-2232",
+    "titulo": "Camisa Masculina Manga Curta",
+    "marca": "Aurochs",
+    "preco": 259.99,
+    "imagem": "imagens/RAIZ-2232.jpg",
+    "tamanhos": [
+      "M",
+      "GG"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790187568989,
     "codigo": "RAIZ-2153",
     "titulo": "Camisa Masculina Manga Curta",
