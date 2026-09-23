@@ -1663,6 +1663,84 @@
 
     }
 
+
+    /* =====================================================
+       POPUP DE IMAGEM
+    ===================================================== */
+
+    .popup-imagem {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .popup-imagem.aberto {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .popup-imagem img {
+      max-width: min(95vw, 1000px);
+      max-height: 90vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7);
+      transform: scale(0.94);
+      transition: transform 0.25s ease;
+      cursor: zoom-out;
+    }
+
+    .popup-imagem.aberto img {
+      transform: scale(1);
+    }
+
+    .popup-fechar {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 50%;
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      font-size: 27px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: 0.2s ease;
+    }
+
+    .popup-fechar:hover {
+      background: var(--esmeralda-medio);
+      border-color: var(--dourado-champagne);
+      color: var(--dourado-champagne);
+    }
+
+    .card-foto-wrapper img,
+    .ideia-look-item img {
+      cursor: zoom-in;
+    }
+
+    body.popup-aberto {
+      overflow: hidden;
+    }
+
   </style>
 
 </head>
@@ -2097,6 +2175,34 @@
   </footer>
 
 
+
+
+  <!-- =====================================================
+       POPUP DE IMAGEM
+  ===================================================== -->
+
+  <div
+    class="popup-imagem"
+    id="popupImagem"
+    aria-hidden="true"
+  >
+
+    <button
+      type="button"
+      class="popup-fechar"
+      id="popupFechar"
+      aria-label="Fechar imagem"
+    >
+      ×
+    </button>
+
+    <img
+      id="popupImagemGrande"
+      src=""
+      alt="Imagem ampliada"
+    >
+
+  </div>
 
   <!-- =====================================================
        SEUS ARQUIVOS
@@ -2960,6 +3066,116 @@
 
   </script>
 
+
+
+  <script>
+
+    /* =====================================================
+       POPUP / LIGHTBOX DE IMAGENS
+    ===================================================== */
+
+    const popupImagem =
+      document.getElementById("popupImagem");
+
+    const popupImagemGrande =
+      document.getElementById("popupImagemGrande");
+
+    const popupFechar =
+      document.getElementById("popupFechar");
+
+
+    function abrirPopupImagem(src, alt = "Imagem ampliada") {
+
+      if (!src) return;
+
+      popupImagemGrande.src = src;
+      popupImagemGrande.alt = alt;
+
+      popupImagem.classList.add("aberto");
+      popupImagem.setAttribute("aria-hidden", "false");
+
+      document.body.classList.add("popup-aberto");
+
+    }
+
+
+    function fecharPopupImagem() {
+
+      popupImagem.classList.remove("aberto");
+      popupImagem.setAttribute("aria-hidden", "true");
+
+      document.body.classList.remove("popup-aberto");
+
+      setTimeout(() => {
+        popupImagemGrande.src = "";
+      }, 250);
+
+    }
+
+
+    /* Clique nas imagens dos produtos e nos looks */
+
+    document.addEventListener("click", function (event) {
+
+      const imagem = event.target.closest(
+        ".card-foto-wrapper img, .ideia-look-item img"
+      );
+
+      if (!imagem) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      abrirPopupImagem(
+        imagem.currentSrc || imagem.src,
+        imagem.alt
+      );
+
+    });
+
+
+    /* Fechar no X */
+
+    popupFechar.addEventListener(
+      "click",
+      fecharPopupImagem
+    );
+
+
+    /* Fechar clicando no fundo */
+
+    popupImagem.addEventListener(
+      "click",
+      function (event) {
+
+        if (
+          event.target === popupImagem ||
+          event.target === popupImagemGrande
+        ) {
+          fecharPopupImagem();
+        }
+
+      }
+    );
+
+
+    /* Fechar com ESC */
+
+    document.addEventListener(
+      "keydown",
+      function (event) {
+
+        if (
+          event.key === "Escape" &&
+          popupImagem.classList.contains("aberto")
+        ) {
+          fecharPopupImagem();
+        }
+
+      }
+    );
+
+  </script>
 
 </body>
 
