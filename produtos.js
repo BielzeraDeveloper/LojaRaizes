@@ -2,7 +2,7 @@ const listaProdutos = [
   {
     "id": 1790252421664,
     "codigo": "RAIZ-8271",
-    "titulo": "Blusa Estampada Azulejo Bordô",
+    "titulo": "Blusa Feminina Estampada Azulejo Bordô",
     "marca": "SlyWear",
     "preco": 149.9,
     "imagem": "imagens/RAIZ-8271.jpg",
