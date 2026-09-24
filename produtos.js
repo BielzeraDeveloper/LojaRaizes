@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790253095994,
+    "codigo": "RAIZ-6367",
+    "titulo": "Cropped Verde Estampado Fem",
+    "marca": "SlyWear",
+    "preco": 239.9,
+    "imagem": "imagens/RAIZ-6367.jpg",
+    "tamanhos": [
+      "P"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790252421664,
     "codigo": "RAIZ-8271",
     "titulo": "Blusa Feminina Estampada Azulejo Bordô",
