@@ -1,5 +1,19 @@
 const listaProdutos = [
   {
+    "id": 1790354603831,
+    "codigo": "RAIZ-4334",
+    "titulo": "Boné",
+    "marca": "Beagle",
+    "preco": 109.99,
+    "imagem": "imagens/RAIZ-4334.jpg",
+    "tamanhos": [
+      "ÚNICO"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790253095994,
     "codigo": "RAIZ-6367",
     "titulo": "Cropped Verde Estampado Fem",
