@@ -1696,7 +1696,7 @@ const listaProdutos = [
     "codigo": "CMS",
     "titulo": "Camiseta Masculina",
     "marca": "Soul",
-    "preco": 19799000,
+    "preco": 197.99,
     "imagem": "imagens/cms.jpg",
     "tamanhos": [
       "P",
