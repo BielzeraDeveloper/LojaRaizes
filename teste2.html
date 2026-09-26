@@ -2185,6 +2185,126 @@
 }
 </style>
 
+
+<style>
+/* Refinamento visual do carrinho e dos controles */
+.carrinho-botao {
+  width: 54px !important;
+  min-width: 54px !important;
+  height: 54px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  gap: 0 !important;
+  position: fixed;
+  right: 20px;
+  bottom: 92px;
+  box-shadow: 0 10px 26px rgba(0,0,0,.25), 0 0 0 1px rgba(216,184,106,.16);
+}
+.carrinho-icone { font-size: 20px !important; line-height: 1; }
+.carrinho-contador {
+  position: absolute !important;
+  top: -4px;
+  right: -4px;
+  min-width: 20px !important;
+  height: 20px !important;
+  padding: 0 5px !important;
+  border: 2px solid var(--bg-card, #111) !important;
+  border-radius: 999px !important;
+  background: #25d366 !important;
+  color: #fff !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  box-sizing: border-box;
+}
+.carrinho-cabecalho {
+  min-height: 62px;
+  padding: 12px 14px !important;
+  background: linear-gradient(180deg, rgba(216,184,106,.07), transparent);
+}
+.carrinho-cabecalho-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.carrinho-cabecalho-icone {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(216,184,106,.45);
+  border-radius: 50%;
+  font-size: 15px;
+  background: rgba(216,184,106,.08);
+}
+.carrinho-cabecalho-texto {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  color: var(--texto-secundario);
+}
+.carrinho-fechar {
+  width: 32px !important;
+  height: 32px !important;
+  font-size: 18px !important;
+  border-radius: 50% !important;
+  transition: .2s ease;
+}
+.carrinho-fechar:hover {
+  background: rgba(255,255,255,.07);
+  border-color: rgba(216,184,106,.5);
+  transform: rotate(90deg);
+}
+.carrinho-lista { padding: 10px 14px !important; }
+.carrinho-item {
+  padding: 11px 0 !important;
+  gap: 11px !important;
+}
+.carrinho-item img {
+  width: 58px !important;
+  height: 72px !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(216,184,106,.12);
+}
+.carrinho-item-nome { font-size: 12px !important; }
+.carrinho-item-opcao { font-size: 10px !important; line-height: 1.35; }
+.carrinho-item-preco { font-size: 11px !important; }
+.carrinho-rodape {
+  padding: 13px 14px !important;
+  box-shadow: 0 -8px 22px rgba(0,0,0,.10);
+}
+.carrinho-whatsapp {
+  border-radius: 10px !important;
+  min-height: 43px;
+  font-weight: 800 !important;
+  letter-spacing: .2px;
+}
+.carrinho-limpar {
+  border-radius: 9px !important;
+  margin-top: 7px !important;
+}
+.card-info .btn-interesse {
+  min-height: 40px !important;
+  border-radius: 10px !important;
+  letter-spacing: .25px;
+}
+.btn-carrinho-produto {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+}
+.btn-carrinho-produto.tem-item {
+  border-color: #25d366 !important;
+  background: rgba(37,211,102,.12) !important;
+  color: #25d366 !important;
+}
+@media (max-width: 600px) {
+  .carrinho-botao { right: 14px !important; bottom: 86px !important; }
+  .carrinho-painel { width: min(420px, 94vw) !important; }
+}
+</style>
 </head>
 
 
@@ -2557,7 +2677,10 @@
 
   <aside class="carrinho-painel" id="carrinhoPainel" aria-hidden="true">
     <div class="carrinho-cabecalho">
-      <h2>Meu carrinho</h2>
+      <div class="carrinho-cabecalho-info">
+        <span class="carrinho-cabecalho-icone" aria-hidden="true">🛒</span>
+        <span class="carrinho-cabecalho-texto">Selecionados</span>
+      </div>
       <button type="button" class="carrinho-fechar" onclick="fecharCarrinho()" aria-label="Fechar carrinho">×</button>
     </div>
     <div class="carrinho-lista" id="carrinhoLista"></div>
