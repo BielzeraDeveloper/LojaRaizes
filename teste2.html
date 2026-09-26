@@ -2071,7 +2071,119 @@
       }
     }
 
-  </style>
+  
+/* =====================================================
+   CARRINHO — ÍCONE INDIVIDUAL DO PRODUTO
+===================================================== */
+.btn-carrinho-produto {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 50% !important;
+  border: 1px solid var(--dourado-champagne, #d8b86a) !important;
+  background: rgba(216, 184, 106, 0.10) !important;
+  color: var(--dourado-champagne, #d8b86a) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  flex: 0 0 auto !important;
+  cursor: pointer !important;
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease !important;
+}
+
+.btn-carrinho-produto:hover {
+  transform: translateY(-2px) scale(1.05);
+  background: rgba(216, 184, 106, 0.20) !important;
+  box-shadow: 0 5px 16px rgba(0,0,0,.18);
+}
+
+.btn-carrinho-produto svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.btn-carrinho-produto.tem-item {
+  background: rgba(216, 184, 106, 0.24) !important;
+  box-shadow: 0 0 0 2px rgba(216,184,106,.12);
+}
+
+.btn-carrinho-produto.tem-item::after {
+  content: "✓";
+  position: absolute;
+  right: -3px;
+  top: -4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 16px;
+  text-align: center;
+  border: 2px solid var(--bg-card, #111);
+}
+
+@keyframes carrinhoAviso {
+  0%, 100% { transform: scale(1); }
+  35% { transform: scale(1.12); }
+  70% { transform: scale(.96); }
+}
+
+.btn-carrinho-produto.aviso {
+  animation: carrinhoAviso .55s ease;
+}
+
+.carrinho-flutuante.tem-itens {
+  animation: carrinhoAviso .65s ease;
+}
+
+.carrinho-flutuante .carrinho-contador {
+  display: none;
+}
+
+.carrinho-flutuante.tem-itens .carrinho-contador {
+  display: flex;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+  border-radius: 999px;
+  align-items: center;
+  justify-content: center;
+  background: #25d366;
+  color: #fff;
+  border: 2px solid var(--bg-principal, #111);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+</style>
+
+
+<style>
+.card-info .btn-interesse {
+  flex: 1 1 auto;
+  width: auto !important;
+  min-width: 0;
+  margin-top: 8px;
+}
+.card-info .btn-carrinho-produto {
+  margin-top: 8px !important;
+}
+</style>
 
 </head>
 
@@ -3590,6 +3702,158 @@
   </script>
 
 
+  
+<script>
+(function () {
+  const CHAVE = "raizes_carrinho_v2";
+
+  function textoNormalizado(v) {
+    return String(v || "").replace(/\s+/g, " ").trim();
+  }
+
+  function extrairCodigoDoCard(card) {
+    if (!card) return "";
+
+    // 1) atributos comuns já usados pelo cadastro
+    const candidatos = [
+      card.dataset.codigo,
+      card.dataset.code,
+      card.dataset.id,
+      card.getAttribute("data-codigo"),
+      card.getAttribute("data-code"),
+      card.getAttribute("data-id")
+    ].filter(Boolean);
+
+    // 2) procura um código RAIZ-xxxx no HTML/onclick do card
+    const htmlCard = card.outerHTML;
+    const encontrado = htmlCard.match(/\bRAIZ-\d+\b/i);
+    if (encontrado) return encontrado[0].toUpperCase();
+
+    // 3) procura no onclick da função de disponibilidade
+    const botoes = card.querySelectorAll(".btn-interesse, [onclick]");
+    for (const botao of botoes) {
+      const onclick = botao.getAttribute("onclick") || "";
+      const m = onclick.match(/\bRAIZ-\d+\b/i);
+      if (m) return m[0].toUpperCase();
+    }
+
+    return textoNormalizado(candidatos[0] || "");
+  }
+
+  function extrairDados(card) {
+    const imagem = card.querySelector(".card-foto-wrapper img");
+    const titulo = card.querySelector(".produto-titulo");
+    const preco = card.querySelector(".produto-preco");
+    const marca = card.querySelector(".badge-marca");
+    const codigo = extrairCodigoDoCard(card);
+
+    return {
+      codigo,
+      nome: textoNormalizado(titulo?.textContent),
+      marca: textoNormalizado(marca?.textContent),
+      valor: textoNormalizado(preco?.textContent),
+      imagem: imagem?.currentSrc || imagem?.src || "",
+      cardId: card.dataset.id || codigo || textoNormalizado(titulo?.textContent)
+    };
+  }
+
+  function lerCarrinho() {
+    try {
+      return JSON.parse(localStorage.getItem(CHAVE) || "[]");
+    } catch {
+      return [];
+    }
+  }
+
+  function salvarCarrinho(itens) {
+    localStorage.setItem(CHAVE, JSON.stringify(itens));
+    window.dispatchEvent(new CustomEvent("raizes:carrinho-atualizado"));
+  }
+
+  function adicionar(card) {
+    const produto = extrairDados(card);
+    if (!produto.nome && !produto.codigo) return;
+
+    const itens = lerCarrinho();
+    const chave = produto.codigo || produto.cardId;
+
+    const existente = itens.find(i => (i.codigo || i.cardId) === chave);
+
+    if (existente) {
+      existente.quantidade = Number(existente.quantidade || 1) + 1;
+    } else {
+      produto.quantidade = 1;
+      produto.tamanho = card.querySelector(".pill-opcao.selecionado")?.textContent.trim() || "";
+      produto.cor = "";
+      itens.push(produto);
+    }
+
+    salvarCarrinho(itens);
+
+    const botao = card.querySelector(".btn-carrinho-produto");
+    if (botao) {
+      botao.classList.add("tem-item", "aviso");
+      setTimeout(() => botao.classList.remove("aviso"), 600);
+    }
+  }
+
+  function prepararBotoes() {
+    document.querySelectorAll("#grid-vitrine .card-produto").forEach(card => {
+      if (card.querySelector(".btn-carrinho-produto")) return;
+
+      const btnInteresse = card.querySelector(".btn-interesse");
+      if (!btnInteresse) return;
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "btn-carrinho-produto";
+      btn.title = "Adicionar ao carrinho";
+      btn.setAttribute("aria-label", "Adicionar ao carrinho");
+      btn.innerHTML = `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H6"></path>
+          <circle cx="10" cy="20" r="1.2"></circle>
+          <circle cx="18" cy="20" r="1.2"></circle>
+        </svg>
+      `;
+
+      btn.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        adicionar(card);
+      });
+
+      // Mantém a consulta original e coloca o carrinho junto dela.
+      btnInteresse.parentNode.insertBefore(btn, btnInteresse);
+
+      const pai = btnInteresse.parentNode;
+      if (pai) {
+        pai.style.display = "flex";
+        pai.style.alignItems = "center";
+        pai.style.gap = "8px";
+      }
+
+      const itens = lerCarrinho();
+      const dados = extrairDados(card);
+      if (itens.some(i => (i.codigo || i.cardId) === (dados.codigo || dados.cardId))) {
+        btn.classList.add("tem-item");
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", prepararBotoes);
+
+  const grid = document.getElementById("grid-vitrine");
+  if (grid) {
+    new MutationObserver(() => setTimeout(prepararBotoes, 20))
+      .observe(grid, { childList: true, subtree: true });
+  }
+
+  window.addEventListener("raizes:carrinho-atualizado", prepararBotoes);
+})();
+</script>
+
+
   <!-- =====================================================
        POPUP / LIGHTBOX DE IMAGENS
   ===================================================== -->
@@ -3642,6 +3906,87 @@
 
   </script>
 
+
+
+<script>
+(function () {
+  const STORAGE_KEYS = [
+    "raizes_carrinho",
+    "carrinhoRaizes",
+    "carrinho"
+  ];
+
+  function obterCarrinho() {
+    for (const key of STORAGE_KEYS) {
+      try {
+        const valor = localStorage.getItem(key);
+        if (valor) {
+          const dados = JSON.parse(valor);
+          if (Array.isArray(dados)) return dados;
+          if (dados && Array.isArray(dados.itens)) return dados.itens;
+          if (dados && Array.isArray(dados.items)) return dados.items;
+        }
+      } catch (e) {}
+    }
+    return [];
+  }
+
+  function textoItem(item) {
+    return [
+      item?.id, item?.codigo, item?.code,
+      item?.nome, item?.name, item?.titulo,
+      item?.produto, item?.descricao
+    ].filter(Boolean).join(" ").toLowerCase();
+  }
+
+  function atualizarIndicadoresCarrinho() {
+    const itens = obterCarrinho();
+    const quantidade = itens.reduce((total, item) => {
+      const q = Number(item?.quantidade ?? item?.qty ?? item?.quantity ?? 1);
+      return total + (Number.isFinite(q) && q > 0 ? q : 1);
+    }, 0);
+
+    document.querySelectorAll(".carrinho-flutuante").forEach(botao => {
+      botao.classList.toggle("tem-itens", quantidade > 0);
+      const contador = botao.querySelector(".carrinho-contador");
+      if (contador) contador.textContent = quantidade;
+    });
+
+    document.querySelectorAll(".btn-carrinho-produto").forEach(botao => {
+      const chave = (botao.dataset.produto || botao.dataset.id || "").toLowerCase();
+      const tem = chave && itens.some(item => textoItem(item).includes(chave));
+      botao.classList.toggle("tem-item", !!tem);
+    });
+  }
+
+  // Atualiza ao carregar e depois que o catálogo for montado.
+  document.addEventListener("DOMContentLoaded", () => {
+    atualizarIndicadoresCarrinho();
+
+    const grid = document.getElementById("grid-vitrine");
+    if (grid) {
+      new MutationObserver(() => {
+        setTimeout(atualizarIndicadoresCarrinho, 30);
+      }).observe(grid, { childList: true, subtree: true });
+    }
+
+    setInterval(atualizarIndicadoresCarrinho, 500);
+  });
+
+  // Intercepta alterações no localStorage feitas pela própria página.
+  const originalSetItem = localStorage.setItem;
+  localStorage.setItem = function (key, value) {
+    originalSetItem.call(this, key, value);
+    setTimeout(atualizarIndicadoresCarrinho, 20);
+  };
+
+  const originalRemoveItem = localStorage.removeItem;
+  localStorage.removeItem = function (key) {
+    originalRemoveItem.call(this, key);
+    setTimeout(atualizarIndicadoresCarrinho, 20);
+  };
+})();
+</script>
 
 </body>
 
