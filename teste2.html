@@ -2307,10 +2307,17 @@
 </style>
 
 <style>
-.card-info{padding:8px 9px 10px!important;align-items:stretch!important}.secao-opcoes,.lista-pills{align-items:flex-start!important;text-align:left!important}.lista-pills{justify-content:flex-start!important}
-.acoes-produto{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:stretch!important;justify-content:flex-start!important;gap:4px!important;width:100%!important;margin-top:8px!important}
-.acoes-produto .btn-interesse{flex:1 1 auto!important;width:auto!important;min-width:0!important;margin-top:0!important}.acoes-produto .btn-carrinho-produto{flex:0 0 42px!important;margin:0!important}
-.btn-carrinho-produto{width:42px!important;height:42px!important;min-width:42px!important;padding:0!important;margin:0!important;border-radius:50%!important;border:1px solid rgba(212,175,55,.65)!important;background:rgba(212,175,55,.08)!important;color:var(--dourado-champagne)!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;cursor:pointer!important;flex:0 0 42px!important;position:relative!important;transition:.2s ease!important}
+/* Layout dos controles do produto: cada ação mantém seu espaço */
+.card-info{padding:8px 9px 10px!important;align-items:stretch!important}
+.secao-opcoes,.lista-pills{align-items:flex-start!important;text-align:left!important}
+.lista-pills{justify-content:flex-start!important}
+
+/* O botão de disponibilidade e o carrinho ficam juntos, sem esmagar outros controles */
+.acoes-disponibilidade{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-start!important;gap:4px!important;width:100%!important;margin-top:8px!important}
+.acoes-disponibilidade .btn-interesse{flex:1 1 auto!important;width:auto!important;min-width:0!important;margin:0!important}
+.acoes-disponibilidade .btn-carrinho-produto{flex:0 0 42px!important;margin:0!important}
+
+.btn-carrinho-produto{width:42px!important;height:42px!important;min-width:42px!important;padding:0!important;margin:0!important;border-radius:50%!important;border:1px solid rgba(212,175,55,.65)!important;background:rgba(212,175,55,.08)!important;color:var(--dourado-champagne)!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;cursor:pointer!important;position:relative!important;transition:.2s ease!important}
 .btn-carrinho-produto:hover{transform:translateY(-1px);background:rgba(212,175,55,.16)!important;box-shadow:0 6px 16px rgba(0,0,0,.22)}
 .btn-carrinho-produto svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .btn-carrinho-produto.tem-item{border-color:#25d366!important;color:#25d366!important;background:rgba(37,211,102,.10)!important}
@@ -2320,9 +2327,13 @@
 .carrinho-botao .carrinho-icone svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .carrinho-cabecalho-icone{display:none!important}
 .carrinho-cabecalho-texto{font-size:13px!important;letter-spacing:.4px!important}
-/* elimina qualquer botão retangular antigo que tenha sobrado */
 .btn-adicionar-carrinho{display:none!important}
-@media(max-width:600px){.acoes-produto{gap:6px!important}.btn-carrinho-produto{width:38px!important;height:38px!important;min-width:38px!important;flex-basis:38px!important}.acoes-produto .btn-interesse{font-size:9px!important}}
+
+@media(max-width:600px){
+  .acoes-disponibilidade{gap:4px!important}
+  .acoes-disponibilidade .btn-interesse{font-size:9px!important;padding-left:5px!important;padding-right:5px!important}
+  .btn-carrinho-produto{width:38px!important;height:38px!important;min-width:38px!important;flex-basis:38px!important}
+}
 </style>
 </head>
 
@@ -2968,8 +2979,15 @@
           btn.classList.add("aviso", "tem-item");
           setTimeout(() => btn.classList.remove("aviso"), 600);
         });
-        consulta.parentNode.insertBefore(btn, consulta);
-        consulta.parentNode.classList.add("acoes-produto");
+        /* Cria um grupo exclusivo para disponibilidade + carrinho, sem mexer nos outros botões do card. */
+        let grupo = consulta.closest(".acoes-disponibilidade");
+        if (!grupo) {
+          grupo = document.createElement("div");
+          grupo.className = "acoes-disponibilidade";
+          consulta.parentNode.insertBefore(grupo, consulta);
+          grupo.appendChild(consulta);
+        }
+        grupo.appendChild(btn);
       });
       atualizarBotoes();
     }
