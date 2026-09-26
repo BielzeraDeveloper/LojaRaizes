@@ -2305,6 +2305,24 @@
   .carrinho-painel { width: min(420px, 94vw) !important; }
 }
 </style>
+
+<style>
+.acoes-produto{display:flex!important;align-items:center!important;gap:8px!important;width:100%!important;margin-top:8px!important}
+.acoes-produto .btn-interesse{flex:1 1 auto!important;width:auto!important;margin-top:0!important}
+.btn-carrinho-produto{width:42px!important;height:42px!important;min-width:42px!important;padding:0!important;margin:0!important;border-radius:50%!important;border:1px solid rgba(212,175,55,.65)!important;background:rgba(212,175,55,.08)!important;color:var(--dourado-champagne)!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;cursor:pointer!important;flex:0 0 42px!important;position:relative!important;transition:.2s ease!important}
+.btn-carrinho-produto:hover{transform:translateY(-1px);background:rgba(212,175,55,.16)!important;box-shadow:0 6px 16px rgba(0,0,0,.22)}
+.btn-carrinho-produto svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.btn-carrinho-produto.tem-item{border-color:#25d366!important;color:#25d366!important;background:rgba(37,211,102,.10)!important}
+.btn-carrinho-produto.tem-item:after{content:'✓';position:absolute;right:-4px;top:-4px;width:16px;height:16px;border-radius:50%;background:#25d366;color:#fff;border:2px solid var(--bg-card);font-size:9px;font-weight:800;line-height:12px;text-align:center}
+@keyframes raizesCartPulse{35%{transform:scale(1.12)}70%{transform:scale(.96)}}
+.btn-carrinho-produto.aviso{animation:raizesCartPulse .55s ease}
+.carrinho-botao .carrinho-icone svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.carrinho-cabecalho-icone{display:none!important}
+.carrinho-cabecalho-texto{font-size:13px!important;letter-spacing:.4px!important}
+/* elimina qualquer botão retangular antigo que tenha sobrado */
+.btn-adicionar-carrinho{display:none!important}
+@media(max-width:600px){.acoes-produto{gap:6px!important}.btn-carrinho-produto{width:38px!important;height:38px!important;min-width:38px!important;flex-basis:38px!important}.acoes-produto .btn-interesse{font-size:9px!important}}
+</style>
 </head>
 
 
@@ -2671,14 +2689,13 @@
 
   <button type="button" class="carrinho-botao" id="carrinhoBotao"
           onclick="abrirCarrinho()" aria-label="Abrir carrinho">
-    <span class="carrinho-icone">🛒</span>
+    <span class="carrinho-icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H6"></path><circle cx="10" cy="20" r="1.2"></circle><circle cx="18" cy="20" r="1.2"></circle></svg></span>
     <span class="carrinho-contador" id="carrinhoContador">0</span>
   </button>
 
   <aside class="carrinho-painel" id="carrinhoPainel" aria-hidden="true">
     <div class="carrinho-cabecalho">
       <div class="carrinho-cabecalho-info">
-        <span class="carrinho-cabecalho-icone" aria-hidden="true">🛒</span>
         <span class="carrinho-cabecalho-texto">Selecionados</span>
       </div>
       <button type="button" class="carrinho-fechar" onclick="fecharCarrinho()" aria-label="Fechar carrinho">×</button>
@@ -2806,202 +2823,178 @@
 
 
   <script>
-    /* =====================================================
-       CARRINHO RAÍZES — LOCALSTORAGE + WHATSAPP
-    ===================================================== */
-    (() => {
-      const CHAVE = "raizes_carrinho_v2";
-      const WHATSAPP = "5542999839784";
-      let carrinho = [];
+  /* =====================================================
+     CARRINHO RAÍZES — UMA ÚNICA LÓGICA
+  ===================================================== */
+  (() => {
+    const CHAVE = "raizes_carrinho_v3";
+    const WHATSAPP = "5542999839784";
+    const $ = id => document.getElementById(id);
+    let carrinho = [];
 
-      const $ = (id) => document.getElementById(id);
-      const texto = (el) => el ? el.textContent.replace(/\s+/g, " ").trim() : "";
+    const txt = el => el ? String(el.textContent || "").replace(/\s+/g, " ").trim() : "";
 
-      function carregar() {
-        try {
-          const salvo = localStorage.getItem(CHAVE);
-          const dados = salvo ? JSON.parse(salvo) : [];
-          carrinho = Array.isArray(dados) ? dados : [];
-        } catch (e) {
-          carrinho = [];
-        }
-        renderizar();
+    function codigoDoCard(card) {
+      if (!card) return "";
+      const fontes = [card.outerHTML];
+      card.querySelectorAll("button,a,[onclick],[data-codigo],[data-id]").forEach(el => {
+        fontes.push(el.getAttribute("onclick") || "", el.getAttribute("data-codigo") || "", el.getAttribute("data-id") || "", el.textContent || "");
+      });
+      for (const fonte of fontes) {
+        const m = String(fonte).match(/\bRAIZ[-_ ]?\d+\b/i);
+        if (m) return m[0].replace(/[-_ ]+/g, "-").toUpperCase();
       }
+      return "";
+    }
 
-      function salvar() {
-        try { localStorage.setItem(CHAVE, JSON.stringify(carrinho)); } catch (e) {}
-        renderizar();
+    function dadosDoCard(card) {
+      const titulo = txt(card.querySelector(".produto-titulo"));
+      const preco = txt(card.querySelector(".produto-preco"));
+      const marca = txt(card.querySelector(".badge-marca"));
+      const img = card.querySelector(".card-foto-wrapper img");
+      const selecionadas = [...card.querySelectorAll(".pill-opcao.selecionado")].map(txt).filter(Boolean);
+      const codigo = codigoDoCard(card);
+
+      // Se algum campo ainda não apareceu, não grava lixo no carrinho.
+      if (!titulo || titulo === "undefined" || !preco || preco === "undefined") return null;
+
+      return {
+        id: (codigo || titulo) + "|" + (selecionadas.join(" / ") || "A definir"),
+        codigo,
+        titulo,
+        marca,
+        preco,
+        imagem: img?.currentSrc || img?.src || "",
+        opcao: selecionadas.join(" / ") || "A definir",
+        quantidade: 1
+      };
+    }
+
+    function normalizarItem(item) {
+      if (!item || typeof item !== "object") return null;
+      const titulo = item.titulo || item.nome || item.name || "";
+      const preco = item.preco || item.valor || item.price || "";
+      const codigo = item.codigo || item.code || "";
+      if (!titulo || titulo === "undefined" || !preco || preco === "undefined") return null;
+      return {
+        id: item.id || ((codigo || titulo) + "|" + (item.opcao || item.tamanho || "A definir")),
+        codigo,
+        titulo,
+        marca: item.marca || "",
+        preco,
+        imagem: item.imagem || item.image || "",
+        opcao: item.opcao || item.tamanho || item.cor || "A definir",
+        quantidade: Math.max(1, Number(item.quantidade || item.qty || item.quantity || 1))
+      };
+    }
+
+    function carregar() {
+      try {
+        const raw = localStorage.getItem(CHAVE);
+        const arr = raw ? JSON.parse(raw) : [];
+        carrinho = Array.isArray(arr) ? arr.map(normalizarItem).filter(Boolean) : [];
+      } catch (_) { carrinho = []; }
+      renderizar();
+    }
+
+    function salvar() {
+      localStorage.setItem(CHAVE, JSON.stringify(carrinho));
+      renderizar();
+    }
+
+    function renderizar() {
+      const lista = $("carrinhoLista"), contador = $("carrinhoContador"), total = $("carrinhoTotalItens");
+      if (!lista || !contador || !total) return;
+      const qtd = carrinho.reduce((s, x) => s + x.quantidade, 0);
+      contador.textContent = qtd;
+      total.textContent = qtd;
+      contador.style.display = qtd ? "flex" : "none";
+
+      if (!carrinho.length) {
+        lista.innerHTML = '<div class="carrinho-vazio">Seu carrinho está vazio.<br>Adicione as peças que deseja consultar.</div>';
+        return;
       }
+      lista.innerHTML = carrinho.map(item => `
+        <div class="carrinho-item">
+          ${item.imagem ? `<img src="${String(item.imagem).replace(/"/g,'&quot;')}" alt="">` : ""}
+          <div class="carrinho-item-info">
+            <div class="carrinho-item-nome">${item.titulo}${item.codigo ? ` <small>(${item.codigo})</small>` : ""}</div>
+            ${item.marca ? `<div class="carrinho-item-opcao">${item.marca}</div>` : ""}
+            <div class="carrinho-item-opcao">${item.opcao}</div>
+            <div class="carrinho-item-preco">${item.preco}</div>
+          </div>
+          <div class="carrinho-item-acoes">
+            <div class="carrinho-qtd">
+              <button type="button" onclick='window.raizesQtd(${JSON.stringify(item.id)},-1)'>−</button>
+              <span>${item.quantidade}</span>
+              <button type="button" onclick='window.raizesQtd(${JSON.stringify(item.id)},1)'>+</button>
+            </div>
+            <button type="button" class="carrinho-remover" onclick='window.raizesRemover(${JSON.stringify(item.id)})'>Remover</button>
+          </div>
+        </div>`).join("");
+    }
 
-      function extrairCodigoProduto(card) {
-        if (!card) return "";
+    function atualizarBotoes() {
+      document.querySelectorAll("#grid-vitrine .card-produto").forEach(card => {
+        const btn = card.querySelector(".btn-carrinho-produto");
+        if (!btn) return;
+        const dados = dadosDoCard(card);
+        const tem = dados && carrinho.some(i => (dados.codigo && i.codigo === dados.codigo) || i.id === dados.id);
+        btn.classList.toggle("tem-item", !!tem);
+      });
+    }
 
-        const atributos = [
-          card.dataset.codigo,
-          card.dataset.produtoCodigo,
-          card.getAttribute("data-codigo"),
-          card.getAttribute("data-produto-codigo"),
-          card.dataset.id
-        ].filter(Boolean);
+    function instalarBotoes() {
+      document.querySelectorAll("#grid-vitrine .card-produto").forEach(card => {
+        if (card.querySelector(".btn-carrinho-produto")) return;
+        const consulta = card.querySelector(".btn-interesse");
+        if (!consulta) return;
 
-        const fontes = [
-          card.outerHTML,
-          ...[...card.attributes].map(a => a.value),
-          ...[...card.querySelectorAll("button, a, [onclick]")].flatMap(el => [
-            el.getAttribute("onclick") || "",
-            el.getAttribute("data-codigo") || "",
-            el.getAttribute("data-produto-codigo") || "",
-            el.getAttribute("data-id") || ""
-          ])
-        ];
-
-        // Usa exatamente o padrão de código utilizado pela consulta original.
-        for (const fonte of fontes) {
-          const m = String(fonte || "").match(/\bRAIZ[-_ ]?\d+\b/i);
-          if (m) return m[0].replace(/[-_ ]+/g, "-").toUpperCase();
-        }
-
-        return String(atributos[0] || "").trim();
-      }
-
-      function produtoDoCard(card) {
-        const img = card.querySelector(".card-foto-wrapper img");
-        const titulo = texto(card.querySelector(".produto-titulo")) || "Produto Raízes";
-        const preco = texto(card.querySelector(".produto-preco")) || "Consultar disponibilidade";
-        const imagem = img?.currentSrc || img?.src || "";
-        const selecionadas = [...card.querySelectorAll(".pill-opcao.selecionado")].map(texto).filter(Boolean);
-        const opcao = selecionadas.join(" / ") || "A definir";
-        const codigo = extrairCodigoProduto(card);
-        const idBase = card.dataset.produtoId || codigo || titulo + "|" + imagem;
-        return { id: idBase + "|" + opcao, codigo, titulo, preco, imagem, opcao, quantidade: 1 };
-      }
-
-      window.adicionarAoCarrinho = function(card) {
-        const produto = produtoDoCard(card);
-        const existente = carrinho.find(x => x.id === produto.id);
-        if (existente) existente.quantidade++;
-        else carrinho.push(produto);
-        salvar();
-        const botao = card.querySelector(".btn-adicionar-carrinho");
-        if (botao) {
-          const original = botao.innerHTML;
-          botao.innerHTML = "✓ Adicionado";
-          botao.classList.add("adicionado");
-          setTimeout(() => { botao.innerHTML = original; botao.classList.remove("adicionado"); }, 900);
-        }
-      };
-
-      window.abrirCarrinho = function() {
-        $("carrinhoPainel")?.classList.add("aberto");
-        $("carrinhoOverlay")?.classList.add("aberto");
-        $("carrinhoPainel")?.setAttribute("aria-hidden", "false");
-      };
-
-      window.fecharCarrinho = function() {
-        $("carrinhoPainel")?.classList.remove("aberto");
-        $("carrinhoOverlay")?.classList.remove("aberto");
-        $("carrinhoPainel")?.setAttribute("aria-hidden", "true");
-      };
-
-      window.alterarQuantidade = function(id, delta) {
-        const item = carrinho.find(x => x.id === id);
-        if (!item) return;
-        item.quantidade += delta;
-        if (item.quantidade <= 0) carrinho = carrinho.filter(x => x.id !== id);
-        salvar();
-      };
-
-      window.removerDoCarrinho = function(id) {
-        carrinho = carrinho.filter(x => x.id !== id);
-        salvar();
-      };
-
-      window.limparCarrinho = function() {
-        carrinho = [];
-        salvar();
-      };
-
-      window.enviarCarrinhoWhatsApp = function() {
-        if (!carrinho.length) {
-          abrirCarrinho();
-          return;
-        }
-        const linhas = carrinho.map((x, i) =>
-          `${i + 1}. ${x.titulo}${x.codigo ? ` (${x.codigo})` : ""} — ${x.opcao} — ${x.quantidade} un. — ${x.preco}`
-        );
-        const mensagem = `Olá! Vim pelo site da RAÍZES e gostaria de consultar a disponibilidade destes produtos:\n\n${linhas.join("\n")}\n\nPoderiam verificar a disponibilidade, por favor?`;
-        window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensagem)}`, "_blank", "noopener");
-      };
-
-      function instalarBotoes() {
-        document.querySelectorAll("#grid-vitrine .card-produto").forEach(card => {
-          if (card.querySelector(":scope > .btn-adicionar-carrinho, .card-info > .btn-adicionar-carrinho")) return;
-
-          const botao = document.createElement("button");
-          botao.type = "button";
-          botao.className = "btn-adicionar-carrinho";
-          botao.innerHTML = "🛒";
-          botao.setAttribute("aria-label", "Adicionar este produto ao carrinho");
-          botao.addEventListener("click", (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            window.adicionarAoCarrinho(card);
-          });
-
-          const info = card.querySelector(".card-info");
-          const consulta = info?.querySelector(".btn-interesse");
-          if (consulta) {
-            consulta.insertAdjacentElement("beforebegin", botao);
-          } else {
-            (info || card).appendChild(botao);
-          }
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "btn-carrinho-produto";
+        btn.title = "Adicionar ao carrinho";
+        btn.setAttribute("aria-label", "Adicionar ao carrinho");
+        btn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H6"></path><circle cx="10" cy="20" r="1.2"></circle><circle cx="18" cy="20" r="1.2"></circle></svg>';
+        btn.addEventListener("click", e => {
+          e.preventDefault(); e.stopPropagation();
+          const dados = dadosDoCard(card);
+          if (!dados) return;
+          const existente = carrinho.find(i => (dados.codigo && i.codigo === dados.codigo) || i.id === dados.id);
+          if (existente) existente.quantidade += 1;
+          else carrinho.push(dados);
+          salvar();
+          btn.classList.add("aviso", "tem-item");
+          setTimeout(() => btn.classList.remove("aviso"), 600);
         });
-      }
+        consulta.parentNode.insertBefore(btn, consulta);
+        consulta.parentNode.classList.add("acoes-produto");
+      });
+      atualizarBotoes();
+    }
 
-      function renderizar() {
-        const lista = $("carrinhoLista");
-        const contador = $("carrinhoContador");
-        const total = $("carrinhoTotalItens");
-        if (!lista || !contador || !total) return;
-        const qtd = carrinho.reduce((s, x) => s + Number(x.quantidade || 0), 0);
-        contador.textContent = qtd;
-        total.textContent = qtd;
-        if (!carrinho.length) {
-          lista.innerHTML = '<div class="carrinho-vazio">Seu carrinho está vazio.<br>Adicione as peças que deseja consultar.</div>';
-          return;
-        }
-        lista.innerHTML = carrinho.map(item => `
-          <div class="carrinho-item">
-            ${item.imagem ? `<img src="${String(item.imagem).replace(/"/g, '&quot;')}" alt="">` : ""}
-            <div class="carrinho-item-info">
-              <div class="carrinho-item-nome">${item.titulo}</div>
-              <div class="carrinho-item-opcao">Opção: ${item.opcao}</div>
-              <div class="carrinho-item-preco">${item.preco}</div>
-            </div>
-            <div class="carrinho-item-acoes">
-              <div class="carrinho-qtd">
-                <button type="button" onclick='alterarQuantidade(${JSON.stringify(item.id)},-1)'>−</button>
-                <span>${item.quantidade}</span>
-                <button type="button" onclick='alterarQuantidade(${JSON.stringify(item.id)},1)'>+</button>
-              </div>
-              <button type="button" class="carrinho-remover" onclick='removerDoCarrinho(${JSON.stringify(item.id)})'>Remover</button>
-            </div>
-          </div>`).join("");
-      }
+    window.abrirCarrinho = () => { $("carrinhoPainel")?.classList.add("aberto"); $("carrinhoOverlay")?.classList.add("aberto"); };
+    window.fecharCarrinho = () => { $("carrinhoPainel")?.classList.remove("aberto"); $("carrinhoOverlay")?.classList.remove("aberto"); };
+    window.raizesQtd = (id, delta) => { const i=carrinho.find(x=>x.id===id); if(!i)return; i.quantidade+=delta; if(i.quantidade<=0)carrinho=carrinho.filter(x=>x.id!==id); salvar(); };
+    window.raizesRemover = id => { carrinho=carrinho.filter(x=>x.id!==id); salvar(); };
+    window.limparCarrinho = () => { carrinho=[]; salvar(); };
+    window.enviarCarrinhoWhatsApp = () => {
+      if (!carrinho.length) { window.abrirCarrinho(); return; }
+      const linhas = carrinho.map((x,i) => `${i+1}. ${x.titulo}${x.codigo ? ` (${x.codigo})` : ""}${x.marca ? ` — ${x.marca}` : ""} — ${x.opcao} — ${x.quantidade} un. — ${x.preco}`);
+      const mensagem = `Olá! Vim pelo site da RAÍZES e gostaria de consultar a disponibilidade destes produtos:\n\n${linhas.join("\n")}\n\nPoderiam verificar a disponibilidade, por favor?`;
+      window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensagem)}`, "_blank");
+    };
 
-      function iniciar() {
-        carregar();
-        instalarBotoes();
-        const grid = $("grid-vitrine");
-        if (grid) new MutationObserver(() => instalarBotoes()).observe(grid, { childList: true, subtree: true });
-      }
-
-      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", iniciar);
-      else iniciar();
-    })();
+    function iniciar() {
+      carregar();
+      instalarBotoes();
+      const grid=$("grid-vitrine");
+      if(grid) new MutationObserver(()=>setTimeout(instalarBotoes,50)).observe(grid,{childList:true,subtree:true});
+      window.addEventListener("storage", carregar);
+    }
+    if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", iniciar); else iniciar();
+  })();
   </script>
-
-
 
   <!-- =====================================================
        SISTEMA DE FILTROS
@@ -3857,155 +3850,6 @@
 
 
   
-<script>
-(function () {
-  const CHAVE = "raizes_carrinho_v2";
-
-  function textoNormalizado(v) {
-    return String(v || "").replace(/\s+/g, " ").trim();
-  }
-
-  function extrairCodigoDoCard(card) {
-    if (!card) return "";
-
-    // 1) atributos comuns já usados pelo cadastro
-    const candidatos = [
-      card.dataset.codigo,
-      card.dataset.code,
-      card.dataset.id,
-      card.getAttribute("data-codigo"),
-      card.getAttribute("data-code"),
-      card.getAttribute("data-id")
-    ].filter(Boolean);
-
-    // 2) procura um código RAIZ-xxxx no HTML/onclick do card
-    const htmlCard = card.outerHTML;
-    const encontrado = htmlCard.match(/\bRAIZ-\d+\b/i);
-    if (encontrado) return encontrado[0].toUpperCase();
-
-    // 3) procura no onclick da função de disponibilidade
-    const botoes = card.querySelectorAll(".btn-interesse, [onclick]");
-    for (const botao of botoes) {
-      const onclick = botao.getAttribute("onclick") || "";
-      const m = onclick.match(/\bRAIZ-\d+\b/i);
-      if (m) return m[0].toUpperCase();
-    }
-
-    return textoNormalizado(candidatos[0] || "");
-  }
-
-  function extrairDados(card) {
-    const imagem = card.querySelector(".card-foto-wrapper img");
-    const titulo = card.querySelector(".produto-titulo");
-    const preco = card.querySelector(".produto-preco");
-    const marca = card.querySelector(".badge-marca");
-    const codigo = extrairCodigoDoCard(card);
-
-    return {
-      codigo,
-      nome: textoNormalizado(titulo?.textContent),
-      marca: textoNormalizado(marca?.textContent),
-      valor: textoNormalizado(preco?.textContent),
-      imagem: imagem?.currentSrc || imagem?.src || "",
-      cardId: card.dataset.id || codigo || textoNormalizado(titulo?.textContent)
-    };
-  }
-
-  function lerCarrinho() {
-    try {
-      return JSON.parse(localStorage.getItem(CHAVE) || "[]");
-    } catch {
-      return [];
-    }
-  }
-
-  function salvarCarrinho(itens) {
-    localStorage.setItem(CHAVE, JSON.stringify(itens));
-    window.dispatchEvent(new CustomEvent("raizes:carrinho-atualizado"));
-  }
-
-  function adicionar(card) {
-    const produto = extrairDados(card);
-    if (!produto.nome && !produto.codigo) return;
-
-    const itens = lerCarrinho();
-    const chave = produto.codigo || produto.cardId;
-
-    const existente = itens.find(i => (i.codigo || i.cardId) === chave);
-
-    if (existente) {
-      existente.quantidade = Number(existente.quantidade || 1) + 1;
-    } else {
-      produto.quantidade = 1;
-      produto.tamanho = card.querySelector(".pill-opcao.selecionado")?.textContent.trim() || "";
-      produto.cor = "";
-      itens.push(produto);
-    }
-
-    salvarCarrinho(itens);
-
-    const botao = card.querySelector(".btn-carrinho-produto");
-    if (botao) {
-      botao.classList.add("tem-item", "aviso");
-      setTimeout(() => botao.classList.remove("aviso"), 600);
-    }
-  }
-
-  function prepararBotoes() {
-    document.querySelectorAll("#grid-vitrine .card-produto").forEach(card => {
-      if (card.querySelector(".btn-carrinho-produto")) return;
-
-      const btnInteresse = card.querySelector(".btn-interesse");
-      if (!btnInteresse) return;
-
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "btn-carrinho-produto";
-      btn.title = "Adicionar ao carrinho";
-      btn.setAttribute("aria-label", "Adicionar ao carrinho");
-      btn.innerHTML = `
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H6"></path>
-          <circle cx="10" cy="20" r="1.2"></circle>
-          <circle cx="18" cy="20" r="1.2"></circle>
-        </svg>
-      `;
-
-      btn.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        adicionar(card);
-      });
-
-      // Mantém a consulta original e coloca o carrinho junto dela.
-      btnInteresse.parentNode.insertBefore(btn, btnInteresse);
-
-      const pai = btnInteresse.parentNode;
-      if (pai) {
-        pai.style.display = "flex";
-        pai.style.alignItems = "center";
-        pai.style.gap = "8px";
-      }
-
-      const itens = lerCarrinho();
-      const dados = extrairDados(card);
-      if (itens.some(i => (i.codigo || i.cardId) === (dados.codigo || dados.cardId))) {
-        btn.classList.add("tem-item");
-      }
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", prepararBotoes);
-
-  const grid = document.getElementById("grid-vitrine");
-  if (grid) {
-    new MutationObserver(() => setTimeout(prepararBotoes, 20))
-      .observe(grid, { childList: true, subtree: true });
-  }
-
-  window.addEventListener("raizes:carrinho-atualizado", prepararBotoes);
-})();
-</script>
 
 
   <!-- =====================================================
@@ -4062,85 +3906,6 @@
 
 
 
-<script>
-(function () {
-  const STORAGE_KEYS = [
-    "raizes_carrinho",
-    "carrinhoRaizes",
-    "carrinho"
-  ];
-
-  function obterCarrinho() {
-    for (const key of STORAGE_KEYS) {
-      try {
-        const valor = localStorage.getItem(key);
-        if (valor) {
-          const dados = JSON.parse(valor);
-          if (Array.isArray(dados)) return dados;
-          if (dados && Array.isArray(dados.itens)) return dados.itens;
-          if (dados && Array.isArray(dados.items)) return dados.items;
-        }
-      } catch (e) {}
-    }
-    return [];
-  }
-
-  function textoItem(item) {
-    return [
-      item?.id, item?.codigo, item?.code,
-      item?.nome, item?.name, item?.titulo,
-      item?.produto, item?.descricao
-    ].filter(Boolean).join(" ").toLowerCase();
-  }
-
-  function atualizarIndicadoresCarrinho() {
-    const itens = obterCarrinho();
-    const quantidade = itens.reduce((total, item) => {
-      const q = Number(item?.quantidade ?? item?.qty ?? item?.quantity ?? 1);
-      return total + (Number.isFinite(q) && q > 0 ? q : 1);
-    }, 0);
-
-    document.querySelectorAll(".carrinho-flutuante").forEach(botao => {
-      botao.classList.toggle("tem-itens", quantidade > 0);
-      const contador = botao.querySelector(".carrinho-contador");
-      if (contador) contador.textContent = quantidade;
-    });
-
-    document.querySelectorAll(".btn-carrinho-produto").forEach(botao => {
-      const chave = (botao.dataset.produto || botao.dataset.id || "").toLowerCase();
-      const tem = chave && itens.some(item => textoItem(item).includes(chave));
-      botao.classList.toggle("tem-item", !!tem);
-    });
-  }
-
-  // Atualiza ao carregar e depois que o catálogo for montado.
-  document.addEventListener("DOMContentLoaded", () => {
-    atualizarIndicadoresCarrinho();
-
-    const grid = document.getElementById("grid-vitrine");
-    if (grid) {
-      new MutationObserver(() => {
-        setTimeout(atualizarIndicadoresCarrinho, 30);
-      }).observe(grid, { childList: true, subtree: true });
-    }
-
-    setInterval(atualizarIndicadoresCarrinho, 500);
-  });
-
-  // Intercepta alterações no localStorage feitas pela própria página.
-  const originalSetItem = localStorage.setItem;
-  localStorage.setItem = function (key, value) {
-    originalSetItem.call(this, key, value);
-    setTimeout(atualizarIndicadoresCarrinho, 20);
-  };
-
-  const originalRemoveItem = localStorage.removeItem;
-  localStorage.removeItem = function (key) {
-    originalRemoveItem.call(this, key);
-    setTimeout(atualizarIndicadoresCarrinho, 20);
-  };
-})();
-</script>
 
 </body>
 
