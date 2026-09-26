@@ -2605,8 +2605,9 @@
         const imagem = img?.currentSrc || img?.src || "";
         const selecionadas = [...card.querySelectorAll(".pill-opcao.selecionado")].map(texto).filter(Boolean);
         const opcao = selecionadas.join(" / ") || "A definir";
-        const idBase = card.dataset.produtoId || titulo + "|" + imagem;
-        return { id: idBase + "|" + opcao, titulo, preco, imagem, opcao, quantidade: 1 };
+        const codigo = card.dataset.codigo || card.dataset.produtoCodigo || card.getAttribute("data-codigo") || "";
+        const idBase = card.dataset.produtoId || codigo || titulo + "|" + imagem;
+        return { id: idBase + "|" + opcao, codigo, titulo, preco, imagem, opcao, quantidade: 1 };
       }
 
       window.adicionarAoCarrinho = function(card) {
@@ -2669,18 +2670,25 @@
       function instalarBotoes() {
         document.querySelectorAll("#grid-vitrine .card-produto").forEach(card => {
           if (card.querySelector(":scope > .btn-adicionar-carrinho, .card-info > .btn-adicionar-carrinho")) return;
+
           const botao = document.createElement("button");
           botao.type = "button";
           botao.className = "btn-adicionar-carrinho";
-          botao.innerHTML = "🛒 Adicionar ao carrinho";
+          botao.innerHTML = "🛒";
           botao.setAttribute("aria-label", "Adicionar este produto ao carrinho");
           botao.addEventListener("click", (event) => {
             event.preventDefault();
             event.stopPropagation();
             window.adicionarAoCarrinho(card);
           });
+
           const info = card.querySelector(".card-info");
-          (info || card).appendChild(botao);
+          const consulta = info?.querySelector(".btn-interesse");
+          if (consulta) {
+            consulta.insertAdjacentElement("beforebegin", botao);
+          } else {
+            (info || card).appendChild(botao);
+          }
         });
       }
 
