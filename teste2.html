@@ -1808,7 +1808,7 @@
     .carrinho-botao {
       position: fixed;
       right: 20px;
-      bottom: 88px;
+      bottom: 92px;
       z-index: 1000;
       border: 1px solid var(--dourado-champagne);
       background: var(--esmeralda-escuro);
@@ -2052,7 +2052,8 @@
       transition: .2s ease;
     }
 
-    .btn-adicionar-carrinho:hover {
+    .btn-adicionar-carrinho:hover,
+    .btn-adicionar-carrinho.adicionado {
       background: var(--esmeralda-medio);
       color: #fff;
     }
@@ -2060,7 +2061,7 @@
     @media (max-width: 600px) {
       .carrinho-botao {
         right: 14px;
-        bottom: 82px;
+        bottom: 86px;
         height: 50px;
         min-width: 50px;
       }
@@ -2571,137 +2572,133 @@
 
   <script>
     /* =====================================================
-       CARRINHO — LOCALSTORAGE + WHATSAPP
+       CARRINHO RAÍZES — LOCALSTORAGE + WHATSAPP
     ===================================================== */
-    const CHAVE_CARRINHO = "raizes_carrinho_v1";
-    const NUMERO_WHATSAPP = "5542999839784";
+    (() => {
+      const CHAVE = "raizes_carrinho_v2";
+      const WHATSAPP = "5542999839784";
+      let carrinho = [];
 
-    let carrinho = [];
+      const $ = (id) => document.getElementById(id);
+      const texto = (el) => el ? el.textContent.replace(/\s+/g, " ").trim() : "";
 
-    function carregarCarrinho() {
-      try {
-        const salvo = localStorage.getItem(CHAVE_CARRINHO);
-        carrinho = salvo ? JSON.parse(salvo) : [];
-        if (!Array.isArray(carrinho)) carrinho = [];
-      } catch (erro) {
-        carrinho = [];
+      function carregar() {
+        try {
+          const salvo = localStorage.getItem(CHAVE);
+          const dados = salvo ? JSON.parse(salvo) : [];
+          carrinho = Array.isArray(dados) ? dados : [];
+        } catch (e) {
+          carrinho = [];
+        }
+        renderizar();
       }
-      renderizarCarrinho();
-    }
 
-    function salvarCarrinho() {
-      localStorage.setItem(CHAVE_CARRINHO, JSON.stringify(carrinho));
-      renderizarCarrinho();
-    }
+      function salvar() {
+        try { localStorage.setItem(CHAVE, JSON.stringify(carrinho)); } catch (e) {}
+        renderizar();
+      }
 
-    function textoLimpo(el) {
-      return el ? el.textContent.replace(/\s+/g, " ").trim() : "";
-    }
+      function produtoDoCard(card) {
+        const img = card.querySelector(".card-foto-wrapper img");
+        const titulo = texto(card.querySelector(".produto-titulo")) || "Produto Raízes";
+        const preco = texto(card.querySelector(".produto-preco")) || "Consultar disponibilidade";
+        const imagem = img?.currentSrc || img?.src || "";
+        const selecionadas = [...card.querySelectorAll(".pill-opcao.selecionado")].map(texto).filter(Boolean);
+        const opcao = selecionadas.join(" / ") || "A definir";
+        const idBase = card.dataset.produtoId || titulo + "|" + imagem;
+        return { id: idBase + "|" + opcao, titulo, preco, imagem, opcao, quantidade: 1 };
+      }
 
-    function extrairProdutoDoCard(card) {
-      const titulo = textoLimpo(card.querySelector(".produto-titulo")) || "Produto Raízes";
-      const preco = textoLimpo(card.querySelector(".produto-preco")) || "Consultar";
-      const imagemEl = card.querySelector(".card-foto-wrapper img");
-      const imagem = imagemEl ? imagemEl.getAttribute("src") : "";
-      const opcoes = Array.from(card.querySelectorAll(".pill-opcao.selecionado"))
-        .map(textoLimpo)
-        .filter(Boolean);
-
-      const opcao = opcoes.length ? opcoes.join(" / ") : "A definir";
-
-      return {
-        id: [titulo, imagem, opcao].join("|"),
-        titulo,
-        preco,
-        imagem,
-        opcao
+      window.adicionarAoCarrinho = function(card) {
+        const produto = produtoDoCard(card);
+        const existente = carrinho.find(x => x.id === produto.id);
+        if (existente) existente.quantidade++;
+        else carrinho.push(produto);
+        salvar();
+        const botao = card.querySelector(".btn-adicionar-carrinho");
+        if (botao) {
+          const original = botao.innerHTML;
+          botao.innerHTML = "✓ Adicionado";
+          botao.classList.add("adicionado");
+          setTimeout(() => { botao.innerHTML = original; botao.classList.remove("adicionado"); }, 900);
+        }
       };
-    }
 
-    function adicionarAoCarrinho(card) {
-      const produto = extrairProdutoDoCard(card);
-      const existente = carrinho.find(item => item.id === produto.id);
+      window.abrirCarrinho = function() {
+        $("carrinhoPainel")?.classList.add("aberto");
+        $("carrinhoOverlay")?.classList.add("aberto");
+        $("carrinhoPainel")?.setAttribute("aria-hidden", "false");
+      };
 
-      if (existente) {
-        existente.quantidade += 1;
-      } else {
-        produto.quantidade = 1;
-        carrinho.push(produto);
+      window.fecharCarrinho = function() {
+        $("carrinhoPainel")?.classList.remove("aberto");
+        $("carrinhoOverlay")?.classList.remove("aberto");
+        $("carrinhoPainel")?.setAttribute("aria-hidden", "true");
+      };
+
+      window.alterarQuantidade = function(id, delta) {
+        const item = carrinho.find(x => x.id === id);
+        if (!item) return;
+        item.quantidade += delta;
+        if (item.quantidade <= 0) carrinho = carrinho.filter(x => x.id !== id);
+        salvar();
+      };
+
+      window.removerDoCarrinho = function(id) {
+        carrinho = carrinho.filter(x => x.id !== id);
+        salvar();
+      };
+
+      window.limparCarrinho = function() {
+        carrinho = [];
+        salvar();
+      };
+
+      window.enviarCarrinhoWhatsApp = function() {
+        if (!carrinho.length) {
+          abrirCarrinho();
+          return;
+        }
+        const linhas = carrinho.map((x, i) =>
+          `${i + 1}. ${x.titulo} — ${x.opcao} — ${x.quantidade} un. — ${x.preco}`
+        );
+        const mensagem = `Olá! Vim pelo site da RAÍZES e gostaria de consultar a disponibilidade destes produtos:\n\n${linhas.join("\n")}\n\nPoderiam verificar a disponibilidade, por favor?`;
+        window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensagem)}`, "_blank", "noopener");
+      };
+
+      function instalarBotoes() {
+        document.querySelectorAll("#grid-vitrine .card-produto").forEach(card => {
+          if (card.querySelector(":scope > .btn-adicionar-carrinho, .card-info > .btn-adicionar-carrinho")) return;
+          const botao = document.createElement("button");
+          botao.type = "button";
+          botao.className = "btn-adicionar-carrinho";
+          botao.innerHTML = "🛒 Adicionar ao carrinho";
+          botao.setAttribute("aria-label", "Adicionar este produto ao carrinho");
+          botao.addEventListener("click", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            window.adicionarAoCarrinho(card);
+          });
+          const info = card.querySelector(".card-info");
+          (info || card).appendChild(botao);
+        });
       }
 
-      salvarCarrinho();
-      mostrarConfirmacaoCarrinho();
-    }
-
-    function mostrarConfirmacaoCarrinho() {
-      const botao = document.getElementById("carrinhoBotao");
-      if (!botao) return;
-      botao.animate([
-        { transform: "scale(1)" },
-        { transform: "scale(1.12)" },
-        { transform: "scale(1)" }
-      ], { duration: 320 });
-    }
-
-    function alterarQuantidade(id, delta) {
-      const item = carrinho.find(produto => produto.id === id);
-      if (!item) return;
-
-      item.quantidade += delta;
-
-      if (item.quantidade <= 0) {
-        carrinho = carrinho.filter(produto => produto.id !== id);
-      }
-
-      salvarCarrinho();
-    }
-
-    function removerDoCarrinho(id) {
-      carrinho = carrinho.filter(item => item.id !== id);
-      salvarCarrinho();
-    }
-
-    function limparCarrinho() {
-      carrinho = [];
-      salvarCarrinho();
-    }
-
-    function abrirCarrinho() {
-      document.getElementById("carrinhoPainel").classList.add("aberto");
-      document.getElementById("carrinhoOverlay").classList.add("aberto");
-      document.getElementById("carrinhoPainel").setAttribute("aria-hidden", "false");
-    }
-
-    function fecharCarrinho() {
-      document.getElementById("carrinhoPainel").classList.remove("aberto");
-      document.getElementById("carrinhoOverlay").classList.remove("aberto");
-      document.getElementById("carrinhoPainel").setAttribute("aria-hidden", "true");
-    }
-
-    function renderizarCarrinho() {
-      const lista = document.getElementById("carrinhoLista");
-      const contador = document.getElementById("carrinhoContador");
-      const totalItens = document.getElementById("carrinhoTotalItens");
-
-      if (!lista || !contador || !totalItens) return;
-
-      const quantidadeTotal = carrinho.reduce((soma, item) => soma + item.quantidade, 0);
-      contador.textContent = quantidadeTotal;
-      totalItens.textContent = quantidadeTotal;
-
-      if (!carrinho.length) {
-        lista.innerHTML = '<div class="carrinho-vazio">Seu carrinho está vazio.<br>Adicione os produtos que deseja consultar.</div>';
-        return;
-      }
-
-      lista.innerHTML = carrinho.map(item => {
-        const imagem = item.imagem
-          ? `<img src="${item.imagem.replace(/"/g, "&quot;")}" alt="">`
-          : `<div></div>`;
-
-        return `
+      function renderizar() {
+        const lista = $("carrinhoLista");
+        const contador = $("carrinhoContador");
+        const total = $("carrinhoTotalItens");
+        if (!lista || !contador || !total) return;
+        const qtd = carrinho.reduce((s, x) => s + Number(x.quantidade || 0), 0);
+        contador.textContent = qtd;
+        total.textContent = qtd;
+        if (!carrinho.length) {
+          lista.innerHTML = '<div class="carrinho-vazio">Seu carrinho está vazio.<br>Adicione as peças que deseja consultar.</div>';
+          return;
+        }
+        lista.innerHTML = carrinho.map(item => `
           <div class="carrinho-item">
-            ${imagem}
+            ${item.imagem ? `<img src="${String(item.imagem).replace(/"/g, '&quot;')}" alt="">` : ""}
             <div class="carrinho-item-info">
               <div class="carrinho-item-nome">${item.titulo}</div>
               <div class="carrinho-item-opcao">Opção: ${item.opcao}</div>
@@ -2709,82 +2706,25 @@
             </div>
             <div class="carrinho-item-acoes">
               <div class="carrinho-qtd">
-                <button type="button" onclick='alterarQuantidade(${JSON.stringify(item.id)}, -1)'>−</button>
+                <button type="button" onclick='alterarQuantidade(${JSON.stringify(item.id)},-1)'>−</button>
                 <span>${item.quantidade}</span>
-                <button type="button" onclick='alterarQuantidade(${JSON.stringify(item.id)}, 1)'>+</button>
+                <button type="button" onclick='alterarQuantidade(${JSON.stringify(item.id)},1)'>+</button>
               </div>
               <button type="button" class="carrinho-remover" onclick='removerDoCarrinho(${JSON.stringify(item.id)})'>Remover</button>
             </div>
-          </div>
-        `;
-      }).join("");
-    }
-
-    function enviarCarrinhoWhatsApp() {
-      if (!carrinho.length) {
-        abrirCarrinho();
-        return;
+          </div>`).join("");
       }
 
-      const linhas = carrinho.map((item, index) =>
-        `${index + 1}. ${item.titulo} — ${item.opcao} — ${item.quantidade} un. — ${item.preco}`
-      );
+      function iniciar() {
+        carregar();
+        instalarBotoes();
+        const grid = $("grid-vitrine");
+        if (grid) new MutationObserver(() => instalarBotoes()).observe(grid, { childList: true, subtree: true });
+      }
 
-      const mensagem =
-        "Olá! Vim pelo site da RAÍZES e gostaria de consultar a disponibilidade destes produtos:%0A%0A" +
-        encodeURIComponent(linhas.join("\n")) +
-        "%0A%0APoderiam verificar a disponibilidade, por favor?";
-
-      window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${mensagem}`, "_blank", "noopener");
-    }
-
-    function instalarBotoesCarrinho() {
-      document.querySelectorAll("#grid-vitrine .card-produto").forEach(card => {
-        if (card.querySelector(".btn-adicionar-carrinho")) return;
-
-        const botao = document.createElement("button");
-        botao.type = "button";
-        botao.className = "btn-adicionar-carrinho";
-        botao.innerHTML = "🛒 Adicionar ao carrinho";
-        botao.setAttribute("aria-label", "Adicionar este produto ao carrinho");
-
-        botao.addEventListener("click", function(event) {
-          event.preventDefault();
-          event.stopPropagation();
-          adicionarAoCarrinho(card);
-        });
-
-        const info = card.querySelector(".card-info");
-        if (info) {
-          info.appendChild(botao);
-        } else {
-          card.appendChild(botao);
-        }
-      });
-    }
-
-    function iniciarCarrinho() {
-      carregarCarrinho();
-      instalarBotoesCarrinho();
-
-      const gridCarrinho = document.getElementById("grid-vitrine");
-      if (!gridCarrinho) return;
-
-      const observadorCarrinho = new MutationObserver(function() {
-        instalarBotoesCarrinho();
-      });
-
-      observadorCarrinho.observe(gridCarrinho, {
-        childList: true,
-        subtree: true
-      });
-    }
-
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", iniciarCarrinho);
-    } else {
-      iniciarCarrinho();
-    }
+      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", iniciar);
+      else iniciar();
+    })();
   </script>
 
 
