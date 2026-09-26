@@ -1,5 +1,21 @@
 const listaProdutos = [
   {
+    "id": 1790441386387,
+    "codigo": "RAIZ-7816",
+    "titulo": "Camiseta Feminina",
+    "marca": "Baumgarten",
+    "preco": 165.99,
+    "imagem": "imagens/RAIZ-7816.jpg",
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "cores": [
+      "Padrão"
+    ]
+  },
+  {
     "id": 1790354603831,
     "codigo": "RAIZ-4334",
     "titulo": "Boné",
