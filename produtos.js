@@ -1610,22 +1610,6 @@ const listaProdutos = [
     ]
   },
   {
-    "id": 1787673997103,
-    "codigo": "CFB",
-    "titulo": "Camiseta Feminina",
-    "marca": "Baumgarten",
-    "preco": 165.99,
-    "imagem": "imagens/cfb.jpg",
-    "tamanhos": [
-      "P",
-      "M",
-      "G"
-    ],
-    "cores": [
-      "Cores"
-    ]
-  },
-  {
     "id": 1787673997104,
     "codigo": "CFB2",
     "titulo": "Camiseta Feminina",
