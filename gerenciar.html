@@ -177,6 +177,35 @@
       font-size: 13px;
       display: none;
     }
+
+    .btn-admin-final {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(17, 21, 19, 0.92);
+      color: var(--cor-dourado);
+      border: 1px solid rgba(197, 160, 89, 0.45);
+      box-shadow: 0 8px 24px rgba(0,0,0,.35);
+      backdrop-filter: blur(10px);
+      text-decoration: none;
+      transition: .2s ease;
+      z-index: 1000;
+    }
+    .btn-admin-final:hover {
+      transform: translateY(-2px);
+      border-color: var(--cor-dourado);
+      box-shadow: 0 10px 28px rgba(197,160,89,.22);
+    }
+    .btn-admin-final svg { width: 20px; height: 20px; }
+    @media (max-width: 600px) {
+      .btn-admin-final { right: 13px; bottom: 13px; width: 40px; height: 40px; }
+    }
   </style>
 </head>
 
@@ -198,6 +227,13 @@
     </div>
 
   </div>
+
+  <a class="btn-admin-final" href="https://bielzeradeveloper.github.io/LojaRaizes/admin" aria-label="Abrir Admin" title="Abrir Admin">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+      <circle cx="12" cy="12" r="4"/>
+    </svg>
+  </a>
 
   <script>
 
