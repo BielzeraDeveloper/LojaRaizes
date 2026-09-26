@@ -2833,6 +2833,37 @@
         renderizar();
       }
 
+      function extrairCodigoProduto(card) {
+        if (!card) return "";
+
+        const atributos = [
+          card.dataset.codigo,
+          card.dataset.produtoCodigo,
+          card.getAttribute("data-codigo"),
+          card.getAttribute("data-produto-codigo"),
+          card.dataset.id
+        ].filter(Boolean);
+
+        const fontes = [
+          card.outerHTML,
+          ...[...card.attributes].map(a => a.value),
+          ...[...card.querySelectorAll("button, a, [onclick]")].flatMap(el => [
+            el.getAttribute("onclick") || "",
+            el.getAttribute("data-codigo") || "",
+            el.getAttribute("data-produto-codigo") || "",
+            el.getAttribute("data-id") || ""
+          ])
+        ];
+
+        // Usa exatamente o padrão de código utilizado pela consulta original.
+        for (const fonte of fontes) {
+          const m = String(fonte || "").match(/\bRAIZ[-_ ]?\d+\b/i);
+          if (m) return m[0].replace(/[-_ ]+/g, "-").toUpperCase();
+        }
+
+        return String(atributos[0] || "").trim();
+      }
+
       function produtoDoCard(card) {
         const img = card.querySelector(".card-foto-wrapper img");
         const titulo = texto(card.querySelector(".produto-titulo")) || "Produto Raízes";
@@ -2840,7 +2871,7 @@
         const imagem = img?.currentSrc || img?.src || "";
         const selecionadas = [...card.querySelectorAll(".pill-opcao.selecionado")].map(texto).filter(Boolean);
         const opcao = selecionadas.join(" / ") || "A definir";
-        const codigo = card.dataset.codigo || card.dataset.produtoCodigo || card.getAttribute("data-codigo") || "";
+        const codigo = extrairCodigoProduto(card);
         const idBase = card.dataset.produtoId || codigo || titulo + "|" + imagem;
         return { id: idBase + "|" + opcao, codigo, titulo, preco, imagem, opcao, quantidade: 1 };
       }
@@ -2896,7 +2927,7 @@
           return;
         }
         const linhas = carrinho.map((x, i) =>
-          `${i + 1}. ${x.titulo} — ${x.opcao} — ${x.quantidade} un. — ${x.preco}`
+          `${i + 1}. ${x.titulo}${x.codigo ? ` (${x.codigo})` : ""} — ${x.opcao} — ${x.quantidade} un. — ${x.preco}`
         );
         const mensagem = `Olá! Vim pelo site da RAÍZES e gostaria de consultar a disponibilidade destes produtos:\n\n${linhas.join("\n")}\n\nPoderiam verificar a disponibilidade, por favor?`;
         window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensagem)}`, "_blank", "noopener");
