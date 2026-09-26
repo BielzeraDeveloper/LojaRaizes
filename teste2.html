@@ -1807,8 +1807,8 @@
     ===================================================== */
     .carrinho-botao {
       position: fixed;
-      right: 22px;
-      bottom: 22px;
+      right: 20px;
+      bottom: 88px;
       z-index: 1000;
       border: 1px solid var(--dourado-champagne);
       background: var(--esmeralda-escuro);
@@ -2060,7 +2060,7 @@
     @media (max-width: 600px) {
       .carrinho-botao {
         right: 14px;
-        bottom: 14px;
+        bottom: 82px;
         height: 50px;
         min-width: 50px;
       }
@@ -2630,7 +2630,17 @@
       }
 
       salvarCarrinho();
-      abrirCarrinho();
+      mostrarConfirmacaoCarrinho();
+    }
+
+    function mostrarConfirmacaoCarrinho() {
+      const botao = document.getElementById("carrinhoBotao");
+      if (!botao) return;
+      botao.animate([
+        { transform: "scale(1)" },
+        { transform: "scale(1.12)" },
+        { transform: "scale(1)" }
+      ], { duration: 320 });
     }
 
     function alterarQuantidade(id, delta) {
@@ -2735,41 +2745,46 @@
         const botao = document.createElement("button");
         botao.type = "button";
         botao.className = "btn-adicionar-carrinho";
-        botao.textContent = "🛒 Adicionar ao carrinho";
+        botao.innerHTML = "🛒 Adicionar ao carrinho";
+        botao.setAttribute("aria-label", "Adicionar este produto ao carrinho");
+
         botao.addEventListener("click", function(event) {
           event.preventDefault();
           event.stopPropagation();
           adicionarAoCarrinho(card);
         });
 
-        const botaoInteresse = card.querySelector(".btn-interesse");
-        if (botaoInteresse) {
-          botaoInteresse.insertAdjacentElement("afterend", botao);
-        } else {
-          const info = card.querySelector(".card-info") || card;
+        const info = card.querySelector(".card-info");
+        if (info) {
           info.appendChild(botao);
+        } else {
+          card.appendChild(botao);
         }
       });
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
+    function iniciarCarrinho() {
       carregarCarrinho();
+      instalarBotoesCarrinho();
 
       const gridCarrinho = document.getElementById("grid-vitrine");
+      if (!gridCarrinho) return;
 
-      if (gridCarrinho) {
+      const observadorCarrinho = new MutationObserver(function() {
         instalarBotoesCarrinho();
+      });
 
-        const observadorCarrinho = new MutationObserver(function() {
-          instalarBotoesCarrinho();
-        });
+      observadorCarrinho.observe(gridCarrinho, {
+        childList: true,
+        subtree: true
+      });
+    }
 
-        observadorCarrinho.observe(gridCarrinho, {
-          childList: true,
-          subtree: true
-        });
-      }
-    });
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", iniciarCarrinho);
+    } else {
+      iniciarCarrinho();
+    }
   </script>
 
 
