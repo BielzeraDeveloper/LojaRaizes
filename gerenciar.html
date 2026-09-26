@@ -206,6 +206,36 @@
     @media (max-width: 600px) {
       .btn-admin-final { right: 13px; bottom: 13px; width: 40px; height: 40px; }
     }
+
+    .busca-codigo {
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .busca-codigo input {
+      width: 100%;
+      background: var(--cor-card);
+      border: 1px solid var(--cor-borda);
+      color: var(--cor-texto);
+      padding: 12px 14px 12px 42px;
+      border-radius: 10px;
+      font-size: 14px;
+      outline: none;
+      transition: .2s;
+    }
+    .busca-codigo input:focus {
+      border-color: var(--cor-dourado);
+      box-shadow: 0 0 0 3px rgba(197,160,89,.10);
+    }
+    .busca-codigo::before {
+      content: '⌕';
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-52%);
+      color: var(--cor-dourado);
+      font-size: 21px;
+      z-index: 1;
+    }
   </style>
 </head>
 
@@ -216,6 +246,18 @@
     <div class="header-painel">
       <h2>🛠️ Gerenciar Catálogo</h2>
       <button class="btn-recarregar" onclick="carregarProdutosGitHub()">🔄 Atualizar Lista</button>
+    </div>
+
+    <div class="busca-codigo">
+      <input
+        type="number"
+        id="buscaCodigo"
+        inputmode="numeric"
+        min="0"
+        step="1"
+        placeholder="Buscar produto pelo código (ex.: 7511)"
+        oninput="filtrarPorCodigo()"
+      >
     </div>
 
     <div id="status" class="status-bar"></div>
@@ -318,12 +360,29 @@
     }
 
 
-    // 2. Monta a lista visual na tela
-    function renderizarLista() {
+    // 2. Filtra a lista pelo número do código
+    function filtrarPorCodigo() {
+      const valor = document.getElementById('buscaCodigo').value.trim();
+
+      if (!valor) {
+        renderizarLista();
+        return;
+      }
+
+      const filtrados = listaAtual.filter(p => {
+        const codigo = String(p.codigo || '').replace(/\D/g, '');
+        return codigo.includes(valor);
+      });
+
+      renderizarLista(filtrados);
+    }
+
+    // 3. Monta a lista visual na tela
+    function renderizarLista(produtos = listaAtual) {
 
       const elLista = document.getElementById('lista');
 
-      if (listaAtual.length === 0) {
+      if (produtos.length === 0) {
 
         elLista.innerHTML =
           '<p style="color: var(--cor-texto-mutado);">Nenhum produto cadastrado.</p>';
@@ -331,7 +390,7 @@
         return;
       }
 
-      elLista.innerHTML = listaAtual.map((p, index) => `
+      elLista.innerHTML = produtos.map((p, index) => `
 
         <div class="card-item">
 
