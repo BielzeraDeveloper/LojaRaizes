@@ -1244,32 +1244,15 @@
 
   </script>
 
-  <!-- Código do Botão -->
-<a href="https://bielzeradeveloper.github.io/LojaRaizes/gerenciar" class="botao-gerenciar">
-  Gerenciar Loja
+  <!-- Acesso discreto ao gerenciamento -->
+<a href="https://bielzeradeveloper.github.io/LojaRaizes/gerenciar" class="botao-gerenciar" aria-label="Gerenciar Loja" title="Gerenciar Loja">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.41 1.41-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V20h-2v-.49a1.7 1.7 0 0 0-1.03-1.56 1.7 1.7 0 0 0-1.88.34l-.06.06-1.41-1.41.06-.06A1.7 1.7 0 0 0 9.4 15a1.7 1.7 0 0 0-1.56-1.03H7.35v-2h.49A1.7 1.7 0 0 0 9.4 10.4a1.7 1.7 0 0 0-.34-1.88L9 8.46l1.41-1.41.06.06a1.7 1.7 0 0 0 1.88.34A1.7 1.7 0 0 0 13.38 5.9V5.4h2v.5a1.7 1.7 0 0 0 1.03 1.55 1.7 1.7 0 0 0 1.88-.34l.06-.06 1.41 1.41-.06.06A1.7 1.7 0 0 0 19.36 10a1.7 1.7 0 0 0 1.56 1.03h.49v2h-.49A1.7 1.7 0 0 0 19.4 15Z"/></svg>
 </a>
-
-<!-- Estilo do Botão (Cole dentro da sua tag <style> ou arquivo CSS) -->
 <style>
-  .botao-gerenciar {
-    display: inline-block;
-    padding: 12px 24px;
-    background-color: #2ea44f; /* Cor verde (você pode alterar o código hexadecimal) */
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    font-size: 16px;
-    transition: background 0.2s;
-    text-align: center;
-  }
-
-  /* Efeito ao passar o mouse por cima */
-  .botao-gerenciar:hover {
-    background-color: #2c974b;
-    cursor: pointer;
-  }
+.botao-gerenciar{position:fixed;right:18px;bottom:18px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:rgba(197,160,89,.82);background:rgba(17,21,19,.92);border:1px solid rgba(197,160,89,.28);border-radius:50%;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:transform .22s ease,color .22s ease,border-color .22s ease,background .22s ease,box-shadow .22s ease;z-index:20}
+.botao-gerenciar svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round}
+.botao-gerenciar:hover{color:#e2c27d;background:rgba(28,39,32,.98);border-color:rgba(197,160,89,.58);transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.5),0 0 16px rgba(197,160,89,.08)}
+@media(max-width:480px){.botao-gerenciar{right:13px;bottom:13px;width:40px;height:40px}.botao-gerenciar svg{width:18px;height:18px}}
 </style>
 
 
